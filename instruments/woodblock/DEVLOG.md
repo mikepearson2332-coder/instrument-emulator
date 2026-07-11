@@ -50,9 +50,11 @@ the single block; extra round robins are the null set.
 | 2 | — | amp caps (t0-extrapolation exploded: synth peak 3.97 vs ref 0.256), 1.5 ms partial onset ramp (instant-on sines splattered −57 dB broadband into every band), ≥2-bin thump bands (40–115 Hz bands have only 2 STFT bins → were dropped) |
 | 3 | 1.582 | + mode-cluster merge (min sep 10%: a tau=8 ms mode is ~100 Hz wide; 6% picking split one resonance into 2–3 sines that double-counted, coherent sum 0.62 vs real 0.26), late-slope bed t60 |
 | 4 | 1.211 | + per-band click decay `thump_tau_bands` (reference broadband decays 5–10× slower than the fixed 10 ms thump — early room reflections at 60–150 ms were 20 dB undershot) |
-| 5 | **1.012** | benchmark floor −35 dB (stop scoring tape hiss). Below the take null (1.315). CURRENT |
+| 5 | 1.012 | benchmark floor −35 dB (stop scoring tape hiss). Below the take null (1.315). |
+| 6 | **1.362** (rust 1.290) | ✓-by-ear, ✗-by-score: user-ear finding — the model read as a "toy snare". Root cause: the noise model faithfully reproduced the **VCSL room's early reflections** (noise only 3–5 dB under the modes from 20–200 ms, taus 40–100 ms). Fix: per-mode skirt guards in the thump/bed measurement, click taus capped at 20 ms, bed dropped entirely. The score WORSENS because the benchmark compares against the roomy recording — fidelity-to-instrument beat fidelity-to-recording (same call as the piano's hum lines). CURRENT |
 
-Seeds 1234/4321/777 → 1.012 / 1.034 / 1.139.
+Seeds at iter 5: 1234/4321/777 → 1.012 / 1.034 / 1.139. Iter 6 sits at the
+take-null (1.32); the residual gap to the reference is the room itself.
 
 ## What failed / lessons
 

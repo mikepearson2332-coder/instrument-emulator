@@ -102,13 +102,19 @@ def bed_thump_profile(x: np.ndarray, sr: int,
     A = np.abs(Z)
     binw = f[1] - f[0]
 
+    # per-mode guard: a tau=8 ms mode's Lorentzian skirt is audible well
+    # past +-50 Hz; a narrow guard lets the "non-mode" median absorb the
+    # skirt and its slow tail, inflating the click level AND stretching
+    # its measured decay into a snare-like rattle (user-ear finding)
     pf = np.asarray(mode_freqs, float)
     if len(pf):
-        dist = np.min(np.abs(f[:, None] - pf[None, :]), axis=1)
+        guards = np.maximum(60.0, 0.06 * pf)
+        non_mode = np.all(
+            np.abs(f[:, None] - pf[None, :]) > guards[None, :], axis=1)
+        non_mode &= np.full(len(f), True)
     else:
-        dist = np.full(len(f), 1e9)
-    guard = np.maximum(1.5 * binw, 0.05 * np.where(len(pf) > 0, pf.min(), 1e9))
-    non_mode = dist > guard
+        non_mode = np.full(len(f), True)
+    non_mode &= (np.arange(len(f)) > 0)  # drop DC bin
 
     thump_sel = t < THUMP_WIN_S
     bed_sel = (t >= BED_LO_S) & (t <= BED_HI_S)

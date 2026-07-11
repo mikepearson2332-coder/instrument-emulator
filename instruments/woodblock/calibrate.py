@@ -93,8 +93,12 @@ def build_table(analysis_dir: str, out_path: str) -> dict:
                 "rms": a["rms_max"],
                 "centroid": a["centroid_60ms"],
                 "thump_db": a.get("thump_db"),
-                "bed_db": a.get("bed_db"),
-                "bed_t60": a.get("bed_t60"),
+                # bed deliberately dropped: it is the VCSL room's early
+                # reflections, not the instrument — modeled faithfully it
+                # reads as a snare rattle when played dry (ears > score;
+                # same class of call as the piano's hum lines)
+                "bed_db": None,
+                "bed_t60": None,
                 "bed_anchor_s": a.get("bed_anchor_s", 0.2),
                 "partials": partials,
             })
@@ -113,7 +117,10 @@ def build_table(analysis_dir: str, out_path: str) -> dict:
             taus.append([t if t is not None else np.nan for t in a["thump_tau"]])
     if taus:
         med = np.nanmedian(np.array(taus, float), axis=0)
-        thump_tau_bands = [round(float(v), 4) if v == v else 0.01 for v in med]
+        # cap at 20 ms: the stick-contact click is 5-15 ms; anything
+        # longer in the band medians is early room response (see bed note)
+        thump_tau_bands = [round(min(float(v), 0.02), 4) if v == v else 0.01
+                           for v in med]
     else:
         thump_tau_bands = None
 

@@ -20,8 +20,10 @@ A woodblock hit is over in ~300 ms and decomposes into:
   time (`config.thump_tau_bands`, ~5 ms treble to ~50 ms mids) measured
   from the reference — the click's tail is early room response and decays
   5–10× slower than the piano's fixed 20 ms thump.
-- **Short room bed** per band (median level over 0.10–0.30 s, t60 from the
-  late slope).
+- **No room bed**: the VCSL room's early reflections measured into the
+  noise model made the block read as a "toy snare" when played dry
+  (user-ear finding). The bed is dropped and click decays are capped at
+  20 ms — the model ships the instrument, not the room.
 - **1.5 ms onset ramp** on all modes (contact time) — without it the
   discontinuous sine onsets splatter −57 dB of broadband into every band.
 - **No dampers** (`release_fade_s: null`): note-off is a no-op, like the
@@ -53,8 +55,10 @@ ratio. Composite lower = better.
 - **Take-vs-take null** (round robins vs primary takes): mean 1.315,
   std 0.65 — strike-to-strike variability is large (dominant mode wanders
   ~1%, pp attack up to 26 dB between takes).
-- **Python model**: 1.012 / 1.034 / 1.139 across seeds — below the null.
-- **Rust engine**: 1.022 — inside the seed null.
+- **Python model**: 1.362 (Rust 1.290) — at the take null. The roomy
+  variant of the model scored 1.012, but the score is measured against
+  the roomy recording; the shipped dry model deliberately trades score
+  for instrument realism (see DEVLOG iter 6).
 - note_params parity Python↔Rust: ≤ 1.9e-16 relative.
 
 ## Quality

@@ -27,6 +27,8 @@ DEFAULT_TABLE = os.path.join(os.path.dirname(__file__), "params", "grand.json")
 
 BAND_EDGES = np.geomspace(40.0, 8000.0, 11)
 THUMP_TAU = 0.02  # s, attack-noise decay
+ATTACK_S = 0.0015  # partial onset ramp: random start phases otherwise sum
+                   # to a step discontinuity at t=0 (audible click live)
 
 
 class Piano:
@@ -243,6 +245,7 @@ class Piano:
         dets = [d * det_scale for d in det_sets[n_strings]]
 
         nyq = sr * 0.5 * 0.95
+        attack_ramp = np.minimum(t / ATTACK_S, 1.0)
         for prt in p["partials"]:
             n = prt["n"]
             fn = n * f0 * math.sqrt(1 + B * n * n)
@@ -252,6 +255,7 @@ class Piano:
             if a1 + a2 <= 0:
                 continue
             env = a1 * np.exp(-t / max(t1, 1e-3)) + a2 * np.exp(-t / max(t2, 1e-3))
+            env = env * attack_ramp
             if midi < 76 and n_strings > 1:
                 # The measured envelope already contains the unison strings'
                 # decoherence — splitting it across detuned copies would

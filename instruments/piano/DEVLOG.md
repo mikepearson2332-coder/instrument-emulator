@@ -19,6 +19,7 @@ Composite weighting in `pianomodel/benchmark.py::composite_score`.
 | 8 | 1.206 | reverted refinement — recovered iter-5 state exactly |
 | 9 | 1.215 | multiplicative beating (mid up, top down — mixed) |
 | 10 | **1.192** | kept multiplicative beating, reverted weight norm. CURRENT |
+| 11 | 1.189/1.190 (py/rust) | + 1.5 ms partial onset ramp — user-ear finding from live testbed playing: random start phases (±0.25 rad) sum to a step of 6–14% of peak at t=0, an audible click the benchmark never flagged (the reference has a hammer attack in the same place). Scores unchanged within null. |
 
 Register means at iter 10: bass A0–A1 0.92 · C2–A2 1.11 · C3–A3 1.05 ·
 C4–A4 1.06 · C5–A5 1.12 · C6–A6 1.36 · C7–C8 1.68.

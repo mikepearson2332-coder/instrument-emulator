@@ -50,9 +50,11 @@ pub struct VoiceStyle {
 }
 
 impl VoiceStyle {
+    /// 1.5 ms onset ramp: random start phases otherwise sum to a step
+    /// discontinuity at t=0 — an audible click when played live.
     pub const PIANO: VoiceStyle = VoiceStyle {
         piano_unison: true,
-        attack_s: 0.0,
+        attack_s: 0.0015,
         release: ReleaseStyle::Piano,
     };
 }
@@ -508,7 +510,24 @@ impl Voice {
                     beat_a,
                     beat_b,
                 } => {
-                    if let Some(bb) = beat_b {
+                    if ramp_inc > 0.0 && ramp0 < 1.0 {
+                        let mut rl = ramp0;
+                        if let Some(bb) = beat_b {
+                            for s in scratch.iter_mut() {
+                                let r = if rl < 1.0 { rl } else { 1.0 };
+                                rl += ramp_inc;
+                                let beat = 1.0 + beat_a.step_cos() + bb.step_cos();
+                                *s += ps.env.step() * r * beat * osc.step_sin();
+                            }
+                        } else {
+                            for s in scratch.iter_mut() {
+                                let r = if rl < 1.0 { rl } else { 1.0 };
+                                rl += ramp_inc;
+                                let beat = 1.0 + beat_a.step_cos();
+                                *s += ps.env.step() * r * beat * osc.step_sin();
+                            }
+                        }
+                    } else if let Some(bb) = beat_b {
                         for s in scratch.iter_mut() {
                             let beat = 1.0 + beat_a.step_cos() + bb.step_cos();
                             *s += ps.env.step() * beat * osc.step_sin();
@@ -521,12 +540,25 @@ impl Voice {
                     }
                 }
                 PartialKind::Strings { oscs } => {
-                    for s in scratch.iter_mut() {
-                        let mut acc = 0.0;
-                        for o in oscs.iter_mut() {
-                            acc += o.step_sin();
+                    if ramp_inc > 0.0 && ramp0 < 1.0 {
+                        let mut rl = ramp0;
+                        for s in scratch.iter_mut() {
+                            let r = if rl < 1.0 { rl } else { 1.0 };
+                            rl += ramp_inc;
+                            let mut acc = 0.0;
+                            for o in oscs.iter_mut() {
+                                acc += o.step_sin();
+                            }
+                            *s += ps.env.step() * r * acc;
                         }
-                        *s += ps.env.step() * acc;
+                    } else {
+                        for s in scratch.iter_mut() {
+                            let mut acc = 0.0;
+                            for o in oscs.iter_mut() {
+                                acc += o.step_sin();
+                            }
+                            *s += ps.env.step() * acc;
+                        }
                     }
                 }
             }
@@ -663,7 +695,8 @@ mod tests {
             let beat = 1.0
                 + 0.35 * (2.0 * PI * dfl * t + ph1).cos()
                 + 0.18 * (2.0 * PI * dfl * 0.55 * t + ph2).cos();
-            let want = env * beat * (2.0 * PI * f * t + ph3).sin();
+            let ramp = (i as f64 / (VoiceStyle::PIANO.attack_s * sr)).min(1.0);
+            let want = env * ramp * beat * (2.0 * PI * f * t + ph3).sin();
             max_err = max_err.max((out[i] - want).abs());
         }
         assert!(max_err < 1e-9, "max err {max_err:e}");
