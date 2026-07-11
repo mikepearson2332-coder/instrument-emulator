@@ -25,9 +25,9 @@ reference/<name>/samples (gitignored; provenance in instruments/<name>/SOURCES.m
 
 | module | contents |
 |---|---|
-| `params` | serde schema for parameter tables (`Table::from_json`) |
-| `interp` | key/velocity interpolation → `NoteParams` (deterministic; float-exact vs the Python reference) |
-| `voice` | `Voice`: streaming render of one note. All per-sample math is recurrences: complex rotators for oscillators, decay-factor states for envelopes. Components below −140 dBFS are culled per buffer. `Quality {max_partials, noise, max_symp_lines}` prunes at note-on by A-weighted energy salience — tables are never modified |
+| `params` | serde schema for parameter tables (`Table::from_json`). Optional `config` block switches piano semantics → generic modal family: per-partial `fr` frequency ratios (freq = fr·f0, for bar/block mode series), `thump_tau_bands` (per-band click decay), `attack_s` onset ramp, `release_fade_s`/`release_remnant`/`undamped_above` damper behavior (`null` fade = no dampers). Absent config = exact piano behavior |
+| `interp` | key/velocity interpolation → `NoteParams` (deterministic; float-exact vs the Python reference; `fr` log-interpolated like amplitudes) |
+| `voice` | `Voice`: streaming render of one note. All per-sample math is recurrences: complex rotators for oscillators, decay-factor states for envelopes. Piano tables get unison beating/split strings; config tables get one plain rotator per partial + shared onset ramp. Components below −140 dBFS are culled per buffer. `Quality {max_partials, noise, max_symp_lines}` prunes at note-on by A-weighted energy salience — tables are never modified |
 | `stream` | `StreamSynth`: `note_on/note_off/set_pedal/all_notes_off/render(buf)`, voice culling. The real-time API |
 | `synth` | `Piano`: table loading, noise-band calibration, offline `synth_note`/`synth_chord` (thin wrappers over `Voice`) |
 | `bench` | host throughput measurement (`run`) and `pick_max_partials(polyphony, cpu_fraction)` |

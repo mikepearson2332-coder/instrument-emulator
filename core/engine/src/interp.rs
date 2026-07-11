@@ -11,6 +11,8 @@ pub const N_BANDS: usize = 10;
 #[derive(Clone, Serialize)]
 pub struct PState {
     pub n: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fr: Option<f64>,
     pub a1: f64,
     pub t1: f64,
     pub a2: f64,
@@ -62,6 +64,7 @@ fn layer_state(layer: &Layer) -> LayerState {
             .iter()
             .map(|p| PState {
                 n: p.n,
+                fr: p.fr,
                 a1: p.a1,
                 t1: p.t1,
                 a2: p.a2,
@@ -111,8 +114,17 @@ fn merge_partials(lo: &[PState], hi: &[PState], w: f64) -> Vec<PState> {
                 (None, Some(p)) => (p.a1 * 1e-4, p.t1, p.a2 * 1e-4, p.t2),
                 (None, None) => unreachable!(),
             };
+            // a side missing -> it inherits the other side's fr (mirrors
+            // the Python {**b, ...} copy semantics)
+            let fr_a = a.and_then(|p| p.fr).or_else(|| b.and_then(|p| p.fr));
+            let fr_b = b.and_then(|p| p.fr).or_else(|| a.and_then(|p| p.fr));
+            let fr = match (fr_a, fr_b) {
+                (Some(x), Some(y)) => Some(loglerp(x, y, 1e-6)),
+                _ => None,
+            };
             PState {
                 n: *n,
+                fr,
                 a1: loglerp(a1a, a1b, 1e-9),
                 t1: loglerp(t1a, t1b, 1e-3),
                 a2: loglerp(a2a, a2b, 1e-9),

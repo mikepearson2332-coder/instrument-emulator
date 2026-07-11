@@ -1,0 +1,50 @@
+"""Analyze woodblock reference samples -> reference/woodblock/analysis/*.json
+
+  python -m instruments.woodblock.analyze          # all (incl. _alt takes)
+"""
+
+import os
+import sys
+import traceback
+
+from .analysis import analyze_to_json
+from .calibrate import NOTES, LAYERS
+
+ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
+SAMPLES = os.path.join(ROOT, "reference", "woodblock", "samples")
+OUT = os.path.join(ROOT, "reference", "woodblock", "analysis")
+
+
+def main():
+    os.makedirs(OUT, exist_ok=True)
+    only = sys.argv[1:] or None
+    names = []
+    for note in NOTES:
+        for v in LAYERS:
+            names.append(f"{note}v{v}")
+            names += [f"{note}v{v}_alt{k}" for k in (1, 2)]
+    done, failed = 0, []
+    for name in names:
+        if only and name not in only:
+            continue
+        src = os.path.join(SAMPLES, f"{name}.flac")
+        dst = os.path.join(OUT, f"{name}.json")
+        if not os.path.exists(src):
+            continue
+        if os.path.exists(dst) and os.path.getmtime(dst) > os.path.getmtime(src):
+            done += 1
+            continue
+        try:
+            note = name.split("v")[0]
+            res = analyze_to_json(src, note, dst)
+            print(f"{name}: f0={res['f0']:.1f} Hz modes={res['n_modes']}",
+                  flush=True)
+            done += 1
+        except Exception:
+            failed.append(name)
+            traceback.print_exc()
+    print(f"analyzed {done}, failed {len(failed)}: {failed}")
+
+
+if __name__ == "__main__":
+    main()

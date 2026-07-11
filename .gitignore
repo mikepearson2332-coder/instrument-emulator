@@ -2,5 +2,6 @@ __pycache__/
 output/
 reference/samples/
 reference/*/samples/
+reference/*/raw/
 core/target/
 core/dist/

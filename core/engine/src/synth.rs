@@ -6,7 +6,7 @@ use crate::interp::{note_params, NoteParams, N_BANDS};
 use crate::params::Table;
 use crate::rng::Rng;
 use crate::stft::BandMetric;
-use crate::voice::{Quality, Voice, THUMP_TAU};
+use crate::voice::{Quality, ReleaseStyle, Voice, VoiceStyle, THUMP_TAU};
 
 pub fn band_edges() -> [f64; N_BANDS + 1] {
     // np.geomspace(40, 8000, 11)
@@ -21,10 +21,44 @@ pub struct Piano {
     pub table: Table,
     pub sr: usize,
     pub quality: Quality,
+    pub style: VoiceStyle,
     pub(crate) rng: Rng,
     pub(crate) band_sos: Vec<Sos>,
     pub(crate) cal_bed: Vec<f64>,
     pub(crate) cal_thump: Vec<f64>,
+    pub(crate) thump_taus: Vec<f64>,
+}
+
+/// Behavior + per-band click taus from the table config; absent config =
+/// exact piano semantics (grand.json predates the config block).
+fn style_from_table(table: &Table) -> (VoiceStyle, Vec<f64>) {
+    match &table.config {
+        None => (VoiceStyle::PIANO, vec![THUMP_TAU; N_BANDS]),
+        Some(c) => {
+            let tau = c.thump_tau_s.unwrap_or(THUMP_TAU);
+            let mut taus = c.thump_tau_bands.clone().unwrap_or_default();
+            taus.resize(N_BANDS, tau);
+            if c.thump_tau_bands.is_none() {
+                taus = vec![tau; N_BANDS];
+            }
+            let release = match c.release_fade_s {
+                Some(f) => ReleaseStyle::Fade {
+                    fade_s: f,
+                    remnant: c.release_remnant.unwrap_or(0.0),
+                    undamped_above: c.undamped_above,
+                },
+                None => ReleaseStyle::NoDampers,
+            };
+            (
+                VoiceStyle {
+                    piano_unison: false,
+                    attack_s: c.attack_s.unwrap_or(0.0),
+                    release,
+                },
+                taus,
+            )
+        }
+    }
 }
 
 impl Piano {
@@ -36,15 +70,13 @@ impl Piano {
     pub fn new(table: Table, sr: usize, seed: u64) -> Self {
         let edges = band_edges();
         let srf = sr as f64;
+        let (style, thump_taus) = style_from_table(&table);
         // per-band bandpass filters + empirical level calibration so that
         // synthesized noise reproduces measured bed/thump dB exactly under
         // the same measurement code (see stft.rs)
         let metric = BandMetric::new(sr);
         let mut probe_rng = Rng::new(99);
         let probe: Vec<f64> = (0..sr).map(|_| probe_rng.standard_normal()).collect();
-        let thump_env: Vec<f64> = (0..sr)
-            .map(|i| (-(i as f64) / (THUMP_TAU * srf)).exp())
-            .collect();
 
         let mut band_sos = Vec::with_capacity(N_BANDS);
         let mut cal_bed = Vec::with_capacity(N_BANDS);
@@ -55,7 +87,11 @@ impl Piano {
             let mut nb = probe.clone();
             sosfilt(&sos, &mut nb);
             let (steady_db, _) = metric.band_metric(&nb, edges[i], edges[i + 1]);
-            let nb_thump: Vec<f64> = nb.iter().zip(&thump_env).map(|(a, b)| a * b).collect();
+            let nb_thump: Vec<f64> = nb
+                .iter()
+                .enumerate()
+                .map(|(j, a)| a * (-(j as f64) / (thump_taus[i] * srf)).exp())
+                .collect();
             let (_, attack_db) = metric.band_metric(&nb_thump, edges[i], edges[i + 1]);
             band_sos.push(sos);
             cal_bed.push(steady_db);
@@ -66,10 +102,12 @@ impl Piano {
             table,
             sr,
             quality: Quality::FULL,
+            style,
             rng: Rng::new(seed),
             band_sos,
             cal_bed,
             cal_thump,
+            thump_taus,
         }
     }
 
@@ -90,6 +128,8 @@ impl Piano {
             &self.band_sos,
             &self.cal_bed,
             &self.cal_thump,
+            &self.thump_taus,
+            &self.style,
             &mut self.rng,
         )
     }

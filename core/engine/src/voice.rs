@@ -21,6 +21,42 @@ use std::f64::consts::{LN_10, LN_2, PI};
 
 pub const THUMP_TAU: f64 = 0.02; // s, attack-noise decay
 
+/// How note-off behaves for this instrument.
+#[derive(Clone, Copy, Debug)]
+pub enum ReleaseStyle {
+    /// Piano dampers: fade 0.12 s below midi 60 else 0.06 s, remnant 0.02,
+    /// keys above midi 88 undamped.
+    Piano,
+    /// Generic damper: fixed fade time + remnant from the table config.
+    Fade {
+        fade_s: f64,
+        remnant: f64,
+        undamped_above: Option<i32>,
+    },
+    /// No dampers at all (woodblock): note-off is a no-op.
+    NoDampers,
+}
+
+/// Instrument behavior switches derived from the table's `config`
+/// (absent config = piano semantics; see `synth::Piano::new`).
+#[derive(Clone, Debug)]
+pub struct VoiceStyle {
+    /// true: piano unison beating / split detuned strings by midi range.
+    /// false: one plain rotator per partial (generic modal family).
+    pub piano_unison: bool,
+    /// Partial onset ramp seconds (contact time); 0 = instant.
+    pub attack_s: f64,
+    pub release: ReleaseStyle,
+}
+
+impl VoiceStyle {
+    pub const PIANO: VoiceStyle = VoiceStyle {
+        piano_unison: true,
+        attack_s: 0.0,
+        release: ReleaseStyle::Piano,
+    };
+}
+
 #[derive(Clone, Copy, Debug)]
 pub struct Quality {
     /// Partials kept per voice (most salient first). usize::MAX = all.
@@ -139,6 +175,8 @@ enum PartialKind {
     /// Explicitly rendered detuned strings (top octave / single string);
     /// per-string weight folded into the rotator amplitude.
     Strings { oscs: Vec<Rotator> },
+    /// Generic modal family: one rotator, no unison structure.
+    Plain { osc: Rotator },
 }
 
 struct PartialState {
@@ -176,11 +214,16 @@ struct Release {
 pub struct Voice {
     pub midi: i32,
     pub key_down: bool,
-    releasable: bool, // keys above MIDI 88 have no dampers
+    releasable: bool,
+    release_fade_s: f64,
+    release_remnant: f64,
     partials: Vec<PartialState>,
     noise: Vec<NoiseBand>,
     symp: Vec<SympOsc>,
     release: Option<Release>,
+    // shared partial onset ramp (contact time); 1.0/0.0 = no ramp
+    ramp: f64,
+    ramp_inc: f64,
     scratch: Vec<f64>,
     last_level: f64,
     sr: f64,
@@ -198,6 +241,8 @@ impl Voice {
         band_sos: &[Sos],
         cal_bed: &[f64],
         cal_thump: &[f64],
+        thump_taus: &[f64],
+        style: &VoiceStyle,
         rng: &mut Rng,
     ) -> Voice {
         // number of unison strings (approx: 1 below ~B1, 2 to ~E2, else 3)
@@ -221,8 +266,11 @@ impl Voice {
         let mut cand: Vec<(usize, f64, f64)> = Vec::with_capacity(p.partials.len()); // (idx, fn, salience)
         for (i, prt) in p.partials.iter().enumerate() {
             let n = prt.n as f64;
-            let fnn = n * p.f0 * (1.0 + p.b * n * n).sqrt();
-            if fnn >= nyq || prt.a1 + prt.a2 <= 0.0 {
+            let fnn = match prt.fr {
+                Some(fr) => fr * p.f0,
+                None => n * p.f0 * (1.0 + p.b * n * n).sqrt(),
+            };
+            if fnn >= nyq || fnn <= 0.0 || prt.a1 + prt.a2 <= 0.0 {
                 continue;
             }
             let t1 = prt.t1.max(1e-3);
@@ -240,8 +288,16 @@ impl Voice {
         for (i, fnn, _) in &cand {
             let prt = &p.partials[*i];
             let n = prt.n as f64;
-            let env = Decay2::new(prt.a1, prt.t1.max(1e-3), prt.a2, prt.t2.max(1e-3), sr);
-            let kind = if midi < 76 && n_strings > 1 {
+            let env = Decay2::new(prt.a1, prt.t1.max(1e-4), prt.a2, prt.t2.max(1e-4), sr);
+            let kind = if !style.piano_unison {
+                PartialKind::Plain {
+                    osc: Rotator::new(
+                        2.0 * PI * fnn / sr,
+                        rng.uniform(-0.25, 0.25),
+                        1.0,
+                    ),
+                }
+            } else if midi < 76 && n_strings > 1 {
                 let span_c = (dets[dets.len() - 1] - dets[0]) * (1.0 + 0.02 * n);
                 let dfreq = fnn * span_c * LN_2 / 1200.0;
                 let m = if n_strings == 3 { 0.35 } else { 0.3 };
@@ -319,7 +375,7 @@ impl Voice {
                     bed_decay,
                     thump_gain,
                     thump_env: 1.0,
-                    thump_decay: (-1.0 / (sr * THUMP_TAU)).exp(),
+                    thump_decay: (-1.0 / (sr * thump_taus[i])).exp(),
                 });
             }
         }
@@ -350,14 +406,41 @@ impl Voice {
             })
             .collect();
 
+        let (releasable, release_fade_s, release_remnant) = match style.release {
+            ReleaseStyle::Piano => (
+                midi < 89,
+                if midi < 60 { 0.12 } else { 0.06 },
+                0.02,
+            ),
+            ReleaseStyle::Fade {
+                fade_s,
+                remnant,
+                undamped_above,
+            } => (
+                undamped_above.map(|u| midi <= u).unwrap_or(true),
+                fade_s,
+                remnant,
+            ),
+            ReleaseStyle::NoDampers => (false, 0.06, 0.0),
+        };
+        let (ramp, ramp_inc) = if style.attack_s > 0.0 {
+            (0.0, 1.0 / (style.attack_s * sr))
+        } else {
+            (1.0, 0.0)
+        };
+
         Voice {
             midi,
             key_down: true,
-            releasable: midi < 89,
+            releasable,
+            release_fade_s,
+            release_remnant,
             partials,
             noise,
             symp,
             release: None,
+            ramp,
+            ramp_inc,
             scratch: Vec::new(),
             last_level: f64::MAX,
             sr,
@@ -369,11 +452,10 @@ impl Voice {
         if !self.releasable || self.release.is_some() {
             return;
         }
-        let fade_t = if self.midi < 60 { 0.12 } else { 0.06 };
         self.release = Some(Release {
             fade: 1.0,
-            fade_d: (-1.0 / (fade_t * self.sr)).exp(),
-            rem: 0.02,
+            fade_d: (-1.0 / (self.release_fade_s * self.sr)).exp(),
+            rem: self.release_remnant,
             rem_d: (-1.0 / self.sr).exp(),
         });
     }
@@ -401,9 +483,26 @@ impl Voice {
         self.scratch.resize(n, 0.0);
         let scratch = &mut self.scratch;
 
-        // partials
+        // partials (onset ramp applies only to Plain — the generic modal
+        // family; piano kinds always have ramp 1)
+        let ramp0 = self.ramp;
+        let ramp_inc = self.ramp_inc;
         for ps in &mut self.partials {
             match &mut ps.kind {
+                PartialKind::Plain { osc } => {
+                    if ramp_inc > 0.0 && ramp0 < 1.0 {
+                        let mut rl = ramp0;
+                        for s in scratch.iter_mut() {
+                            let r = if rl < 1.0 { rl } else { 1.0 };
+                            rl += ramp_inc;
+                            *s += ps.env.step() * r * osc.step_sin();
+                        }
+                    } else {
+                        for s in scratch.iter_mut() {
+                            *s += ps.env.step() * osc.step_sin();
+                        }
+                    }
+                }
                 PartialKind::Beat {
                     osc,
                     beat_a,
@@ -431,6 +530,9 @@ impl Voice {
                     }
                 }
             }
+        }
+        if ramp_inc > 0.0 && ramp0 < 1.0 {
+            self.ramp = (ramp0 + ramp_inc * n as f64).min(1.0);
         }
 
         // broadband noise
@@ -505,6 +607,7 @@ mod tests {
             b: 0.0,
             partials: vec![PState {
                 n: 1,
+                fr: None,
                 a1,
                 t1,
                 a2: 0.0,
@@ -535,6 +638,8 @@ mod tests {
             &vec![vec![[0.0; 5]; 4]; N_BANDS],
             &[0.0; N_BANDS],
             &[0.0; N_BANDS],
+            &[THUMP_TAU; N_BANDS],
+            &VoiceStyle::PIANO,
             &mut rng,
         );
         let mut out = vec![0.0f64; 48000];
@@ -572,6 +677,7 @@ mod tests {
         let mut p = one_partial_params(440.0, 0.5, 0.5);
         p.partials.push(PState {
             n: 2,
+            fr: None,
             a1: 0.2,
             t1: 0.4,
             a2: 0.01,
@@ -583,7 +689,20 @@ mod tests {
         };
         let sos = vec![vec![[0.0; 5]; 4]; N_BANDS];
         let mk = |rng: &mut Rng| {
-            Voice::new(&p, 69, sr, q, &[], 1.2, &sos, &[0.0; N_BANDS], &[0.0; N_BANDS], rng)
+            Voice::new(
+                &p,
+                69,
+                sr,
+                q,
+                &[],
+                1.2,
+                &sos,
+                &[0.0; N_BANDS],
+                &[0.0; N_BANDS],
+                &[THUMP_TAU; N_BANDS],
+                &VoiceStyle::PIANO,
+                rng,
+            )
         };
         let mut rng1 = Rng::new(7);
         let mut v1 = mk(&mut rng1);
@@ -610,6 +729,7 @@ mod tests {
         for n in 2..=20 {
             p.partials.push(PState {
                 n,
+                fr: None,
                 a1: 0.5 / n as f64,
                 t1: 0.5,
                 a2: 0.0,
@@ -623,7 +743,20 @@ mod tests {
             max_symp_lines: 0,
         };
         let mut rng = Rng::new(3);
-        let v = Voice::new(&p, 57, sr, q, &[], 1.2, &sos, &[0.0; N_BANDS], &[0.0; N_BANDS], &mut rng);
+        let v = Voice::new(
+            &p,
+            57,
+            sr,
+            q,
+            &[],
+            1.2,
+            &sos,
+            &[0.0; N_BANDS],
+            &[0.0; N_BANDS],
+            &[THUMP_TAU; N_BANDS],
+            &VoiceStyle::PIANO,
+            &mut rng,
+        );
         assert_eq!(v.partials.len(), 5);
     }
 }
