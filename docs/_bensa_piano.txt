@@ -1,0 +1,1353 @@
+The simulation of piano string vibration: From physical models
+to ﬁnite difference schemes and digital waveguides
+Julien Bensa, Stefan Bilbao, Richard Kronland-Martinet, and Julius O. Smith III
+Center for Computer Research in Music and Acoustics (CCRMA), Department of Music,
+Stanford University, Stanford, California 94305-8180
+~Received 6 September 2002; revised 20 April 2003; accepted 8 May 2003 !
+A model of transverse piano string vibration, second order in time, which models
+frequency-dependent loss and dispersion effects is presented here. This model has many desirable
+properties, in particular that it can be written as a well-posed initial-boundary value problem
+~permitting stable ﬁnite difference schemes ! and that it may be directly related to a digital
+waveguide model, a digital ﬁlter-based algorithm which can be used for musical sound synthesis.
+Techniques for the extraction of model parameters from experimental data over the full range of the
+grand piano are discussed, as is the link between the model parameters and the ﬁlter responses in a
+digital waveguide. Simulations are performed. Finally, the waveguide model is extended to the case
+of several coupled strings. © 2003 Acoustical Society of America. @DOI: 10.1121/1.1587146#
+PACS numbers: 43.75.Mn, 43.40.Cw, 43.75.Wx @NHF#
+I. INTRODUCTION
+Several models of transverse wave propagation on a stiff
+string, of varying degrees of complexity, have appeared in
+the literature.
+1–5 These models, intended for the synthesis of
+musical tones, are always framed in terms of a partial differ-
+ential equation ~PDE!, or system of PDEs; usually, the sim-
+pliﬁed starting point for such a model is the one-dimensional
+wave equation,
+6 and the more realistic features, such as dis-
+persion, frequency-dependent loss and nonlinear hammer ex-
+citation ~in the case of the piano string !, are incorporated
+through several extra terms. Chaigne and Askenfelt
+3 have
+proposed such a model ~see the Appendix for a concise de-
+scription of this model !, and used it as the basis for a syn-
+thesis technique, through the use of ﬁnite differences—the
+time waveform on a struck piano string is simulated in this
+way to a remarkable degree of ﬁdelity.
+4 Frequency-
+dependent loss, the feature of primary interest in this paper,
+is modeled through the use of a third-order time derivative
+perturbation to the dispersive wave equation; while a physi-
+cal justiﬁcation for the use of such a term is tenuous, it does
+give rise to perceptually important variations in damping
+rates.
+In Sec. II, we introduce a model of string vibration,
+which is of second order in time differentiation; frequency-
+dependent loss is introduced via mixed time–space deriva-
+tive terms. As it turns out, the model discussed here is a
+substantial improvement in several different ways. First, the
+frequency domain analysis of a second-order system is quite
+straightforward, and it is quite easy to obtain explicit formu-
+las for dispersion and loss curves; this is considerably more
+complicated for systems which are higher order in time, es-
+sentially requiring the factorization of a higher order polyno-
+mial dispersion relation. Second, it is easy to prove that our
+model, when complemented by initial and boundary condi-
+tions, is well posed .
+7,8 Though we do not give a complete
+description of this condition here, to say that such an initial-
+boundary value problem is well posed is to say, generally
+speaking, that solutions may not grow faster than exponen-
+tially; for linear and shift-invariant systems such as simple
+stiff string models, the condition can be conveniently ex-
+pressed in the frequency domain. We show in the Appendix
+that the PDE ﬁrst proposed by Ruiz,
+9 and later popularized
+by Chaigne and Askenfelt 3,4 is in fact not well-posed, and
+possesses a spurious unstable solution. Third, it becomes
+easy to develop ﬁnite difference schemes , for which precise
+numerical stability conditions may be easily derived. Finite
+difference schemes are discussed brieﬂy in Sec. III. Fourth, it
+is possible to extend the model described here to a more
+realistic representation of dispersion and loss as a function of
+frequency through additional terms in the PDE, without com-
+promising well-posedness, or the stability of resulting nu-
+merical schemes.
+Finally, it is possible to identify the model PDE with a
+digital waveguide —this ﬁlterlike structure models one-
+dimensional wave propagation as purely lossless throughout
+the length of the string, with loss and dispersion lumped in
+terminating ﬁlters. It thus performs a simulation of a modi-
+ﬁed physical system.
+We show, in Sec. IV A, how one can relate the PDE
+model presented in Sec. II to a digital waveguide structure,
+paying particular attention to the relationship between the
+lumped ﬁlters used to model loss and dispersion and the
+model parameters which deﬁne our PDE. In Sec. V , we per-
+form several numerical simulations in order to compare the
+ﬁnite difference and waveguide approaches for this particular
+problem. In particular, in Sec. VI, we examine in detail a
+procedure allowing the resynthesis of natural string vibra-
+tion. Using experimental data obtained from a grand piano,
+both the terminating ﬁlters of a digital waveguide and the
+parameters of the physical model are estimated over most of
+the keyboard range. This leads to a simple description of the
+variation of some of these parameters ~namely loss param-
+eters and string stiffness ! over the piano’s range which can
+be used for the convenient synthesis string vibrations at a
+given excitation point. Finally, in Sec. VII, interstring cou-
+pling is discussed and modeled using coupled digital
+1095J. Acoust. Soc. Am. 114 (2), August 2003 0001-4966/2003/114(2)/1095/13/$19.00 © 2003 Acoustical Society of America
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+waveguides. This is a further step towards the design of a
+realistic piano simulator, which should ultimately also model
+effects such as nonlinear hammer-string coupling and sound-
+board radiation phenomena.
+II. SECOND-ORDER MODELS OF ONE-DIMENSIONAL
+WAVE PROPAGATION
+A. A family of PDEs
+Consider a general linear second-order ~in time ! wave
+equation, of the form
+]2y
+]t2 12 (
+k50
+M
+qk
+]2k11y
+]x2k]t
+1 (
+k50
+N
+rk
+]2ky
+]x2k 50. ~1!
+Here, y(x,t), the solution, is a function of position xPR and
+time t>0, and qk and rk are real constants; the solution is not
+uniquely deﬁned until two initial conditions are supplied.
+~For the moment, we concentrate on the pure initial value
+problem and ignore boundary conditions—we will return to
+this subject in Sec. II B. ! Because this equation describes a
+linear and shift-invariant system, it is possible to analyze it
+through Fourier techniques. Deﬁning the spatial Fourier
+transform yˆ(
+b,t)o f y(x,t)b y
+yˆ~b,t!5
+1
+A2p E
+2‘
+‘
+y~x,t!e2 jbx dx ,
+Eq. ~1! can be rewritten as
+]2yˆ
+]t2 12 (
+k50
+M
+~ jb!2kqk
+]yˆ
+]t 1 (
+k50
+N
+~ jb!2krkyˆ50. ~2!
+This second-order linear ordinary differential equation with
+real coefﬁcients will have solutions of the form
+yˆ~b,t!5yˆ0~b!est ~3!
+for complex frequencies s which satisfy the characteristic
+polynomial equation
+s212q~b!s1r~b!50 ~4!
+with
+q~b!5 (
+k50
+M
+~ jb!2kqk , r~b!5 (
+k50
+N
+~ jb!2krk .
+Notice that because only even derivatives appear in the fam-
+ily Eq. ~1!, the functions q and r are real. The characteristic
+polynomial equation has roots
+s652 q6Aq22r.
+The condition that the initial value problem corresponding to
+Eq. ~1! be well-posed is that these roots have real parts which
+are bounded from above as a function of b; this is in effect
+saying that solution growth can be no faster than exponen-
+tial. A more restrictive ~and physically relevant! condition is
+that these roots have nonpositive real part for all
+b, so that all
+exponential solutions are nonincreasing. It is simple to show
+that this will be true for
+q
+~b!,r~b!>0. ~5!
+For q and r satisfying Eq. ~5!, the imaginary parts of
+these roots correspond to oscillation frequencies, and the real
+parts to loss. Clearly, for real wave numbers b such that q2
+<r, the real parts of s6 are simply 2q. This case corre-
+sponds to normal damped wave propagation; notice in par-
+ticular that if q depends on
+b, then damping rates will be
+wave number ~and thus frequency! dependent. If q2.r, then
+both roots are purely real and nonpositive, yielding damped
+nontraveling solutions.
+Consider a member of the family deﬁned by Eq. ~1!,
+]2y
+]t2 5c2 ]2y
+]x2 2k2 ]4y
+]x4 22b1
+]y
+]t 12b2
+]3y
+]x2]t
+. ~6!
+The ﬁrst term on the right-hand side of the equation, in the
+absence of the others, gives rise to wavelike motion, with
+speed c. The second ‘‘ideal bar’’ term
+10 introduces disper-
+sion, or frequency-dependent wave velocity, and is param-
+etrized by a stiffness coefﬁcient
+k. The third and fourth terms
+allow for loss, and if b2Þ0, decay rates will be frequency
+dependent. @A complete model, for a piano string, is obtained
+by including a hammer excitation term, f (x,t), possibly ac-
+counting for nonlinear effects, on the right-hand side, and by
+restricting the spatial domain to a ﬁnite interval and supply-
+ing a realistic set of boundary conditions.# This model differs
+from that of Ruiz
+9 in only the last term ~see the Appendix!.
+The characteristic equation has the form of Eq. ~4!, with
+q~b!5b11b2b2, r~b!5c2b21k2b4.
+For b1 , b2>0, condition Eq. ~5! is satisﬁed and this PDE
+obviously possesses exponentially decaying solutions, and
+what is more, loss increases as a function of wave number.
+The PDE of Eq. ~6! possesses traveling wave solutions when
+q
+2<r, which, for realistic values of the deﬁning parameters
+for a piano string, includes the overwhelming part of the
+audio spectrum. For instance, for a C2 piano string, de-
+scribed by the parameters given in Table I, the lower cutoff
+wave number for traveling waves will be
+b50.0025, corre-
+sponding to a frequency of 0.080 Hz. There is no upper
+cutoff.
+In order to relate this PDE model with a digital wave-
+guide numerical simulation method, it is useful to write the
+expressions for dispersion and loss directly. Taking
+s
+65s6 jv ~7!
+over the range of b for which traveling wave solutions exist,
+we obtain
+s~b!52 b12b2b2, ~8!
+v~b!5A2~b11b2b2!21c2b21k2b4. ~9!
+We will discuss digital waveguide models in detail in Sec.
+IV A.
+TABLE I. Physical model parameters for piano tones C2, C4, and C7.
+C2 C4 C7 Units
+L 1.23 0.63 0.10 m
+c 160.9 329.6 418.6 m s 21
+k 0.58 1.25 1.24 m 2 s21
+b1 0.25 1.1 9.17 s 21
+b2 7.531025 2.731024 2.131023 m2 s21
+Fs 16 000 32 000 96 000 s 21
+1096 J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+Finally, we mention that the general form Eq. ~1! serves
+as a useful point of departure for more accurate models of
+loss and dispersion in a stiff string. The more terms are in-
+cluded, the better these phenomena can be modeled over the
+entire frequency range of interest. Though it is difﬁcult to
+associate physical processes directly with the various extra
+perturbation terms in the equation, it is at least simple to
+ensure, through condition Eq. ~5!, that the model is well-
+posed, an important ﬁrst step in developing stable numerical
+methods.
+B. Boundary conditions
+In this section, we provide a brief analysis of pinned
+boundary conditions, to show that when coupled to our string
+model, the same analysis of well-posedness may be applied
+~i.e., wave numbers of modal solutions are real !. Let us now
+restrict the spatial domain for the problem deﬁned by Eq. ~6!
+to xP
+@0,L#. As Eq. ~6! is of fourth order in the spatial de-
+rivatives, we need to supply two boundary conditions at ei-
+ther end, i.e., at x50 and x5L. Following Chaigne,
+3 we
+apply pinned boundary conditions,
+yux505yux5L5
+]2y
+]x2U
+x50
+5
+]2y
+]x2U
+x5L
+50. ~10!
+For a solution of the form y(x,t)5est 1 jbx, from dispersion
+relation Eq. ~4!, there are thus four solutions for b in terms
+of s,
+b1
+2 ~s!5
+2g1Ag224k2~s212b1s!
+2k2 , ~11a!
+b2
+2 ~s!5
+2g2Ag224k2~s212b1s!
+2k2 ~11b!
+with
+g5c212b2s.
+At frequency s, thus, any linear combination
+y~x,t!5est ~a1,1ejb1x1a1,2e2 jb1x1a2,1ejb2x
+1a2,2e2 jb2x! ~12!
+is a solution to Eq. ~6!. Applying the boundary conditions
+Eq. ~10! to this solution gives the matrix equation
+~13!
+Nontrivial solutions can occur only when det( A)50, giving
+the relation
+~b1
+2 2b2
+2 !2 sin~b1L!sin~b2L!50. ~14!
+Discounting the case b1
+2 5b2
+2 @which yields an identically
+zero solution y(x,t)], then obviously, solutions are of the
+form b15np/L, for integer nÞ0 ~similarly for b2), and
+the modal frequencies sn are, from the solutions Eq. ~8! and
+Eq. ~9! of the dispersion relation ~4!,
+sn5s~np/L!1 jv~np/L! ~15!
+over wave numbers for which a traveling solution exists ~for
+small b1 and b2 , this will be true for all n!.
+III. A FINITE DIFFERENCE SCHEME
+In order to solve Eq. ~6! numerically, we may approxi-
+mate its solution over a grid with spacing X, and with time
+step T. Equation ~6! can be written as
+dt
+2y5c2dx
+2y2k2dx
+2dx
+2
+y22b1dt,0y12b2dx
+2dt,2y
+1O~T,X2!, ~16!
+where the various difference operators are deﬁned by
+dx
+2y~x,t!5
+1
+X2 ~y~x1X,t!22y~x,t!1y~x2X,t!! ,
+dt
+2y~x,t!5
+1
+T2 ~y~x,t1T!22y~x,t!1y~x,t2T!! ,
+dt,0y~x,t!5
+1
+2T ~y~x,t1T!2y~x,t2T!! ,
+dt,2y~x,t!5
+1
+T ~y~x,t!2y~x,t2T!! .
+All these operators are ‘‘centered’’ about the point ( x,t),
+except for the backward difference operator dt,2 , which is
+used in order to obtain an explicit algorithm. The approxi-
+mation is ﬁrst-order accurate in the time step T, and second-
+order accurate in the space step X. @It is worth mentioning,
+that this is but one among many ways of discretizing ~6!.#
+We may now rewrite Eq. ~16! as a difference scheme, oper-
+ating on the grid function y
+m
+n , indexed by integer m and n,
+which will serve as an approximation to y(x,t) at the loca-
+tion x5mX , t5nT :
+ym
+n115a10ym
+n 1a11~ym11
+n 1ym21
+n !1a12~ym12
+n 1ym22
+n !
+1a20ym
+n211a21~ym11
+n21 1ym21
+n21 !. ~17!
+Here, the difference scheme coefﬁcients are deﬁned by
+a105~222l226m224b2m/k!/~11b1T!,
+a115~l214m212b2m/k!/~11b1T!,
+a1252 m2/~11b1T!, ~18!
+a205~2114b2m/k1b1T!/~11b1T!,
+a215~22b2m/k!/~11b1T!,
+where, for brevity, we have introduced the quantities
+l5cT /X, m5kT/X2.
+In order to examine the stability of scheme Eq. ~17!,
+which is, like its generating PDE, Eq. ~6!, linear and shift
+1097J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+invariant, we may apply frequency domain techniques—in
+the ﬁnite difference setting, these techniques are referred to
+as Von Neumann analysis.
+7,8 This analysis proceeds in a fash-
+ion exactly analogous to the analysis applied to the continu-
+ous time and space systems of the preceding sections. Short-
+cutting the process somewhat, we may consider a solution of
+the form y
+m
+n 5zneimX b, where z5esT ~we could equivalently
+employ a z transform and a discrete-time Fourier transform !.
+We thus obtain the two-step characteristic, or ampliﬁcation
+equation
+z21a1~b!z1a2~b!50,
+where the functions a1(b) and a2(b) are deﬁned in terms of
+the difference scheme parameters of Eq. ~18! by
+a1~b!52 a1022a11 cos~bX!22a12 cos~2bX!,
+a2~b!52 a2022a21 cos~bX!.
+The necessary and sufﬁcient stability conditions for Eq. ~17!
+are that the roots of the ampliﬁcation equation be of magni-
+tude less than or equal to unity, for all wave numbers
+b; for
+this real-valued quadratic, these conditions can be written in
+terms of a
+1(b) and a2(b)a s
+ua1~b!u21<a2~b!<1.
+The right inequality is satisﬁed for b1 , b2>0, and after some
+algebra, it can be shown that the left inequality is equivalent
+to the condition l
+214m214b2m/k<1, further implying
+that
+T<X2 24b21A16b2
+214~c2X214k2!
+2~c2X214k2!
+.
+The relative ease with which an exact bound such as the
+above may be derived is a direct consequence of the use of a
+two-step scheme and the relative simplicity of the model
+itself; for schemes involving more steps of lookback ~which
+results from the discretization of a model with higher time
+derivatives, such as Ruiz’s system !, this analysis becomes
+much more involved, though we do approach it nonetheless
+in the Appendix. This, in addition to reduced memory re-
+quirements, is a further advantage of using a second-order
+model as a starting point.
+Equation ~16! is but one of many possible discretizations
+of Eq. ~6!—for instance, replacing
+dt,2 by dt,0 yields an
+implicit algorithm,7 and other implicit schemes such as the
+u-forms discussed in the work of Chaigne5 may be of interest
+in reducing numerical dispersion,7 and may be of higher for-
+mal accuracy ~which may be tempered by the stability re-
+quirements!. To emphasize this point, we have plotted the
+phase velocities and loss curves for the model system of Eq.
+~6! versus those of the difference scheme of Eq. ~17! in Fig.
+1. Notice that this simple difference scheme is a reasonable
+approximation to the model only for small
+v ~i.e., for low
+frequencies!. As we will see later in Sec. V , this deviation
+from the model PDE will account for differences in simula-
+tion results obtained from digital waveguide models, which
+approximates the phase velocity and loss curves directly.
+IV. THE DIGITAL WAVEGUIDE MODEL
+The digital waveguide approach provides computational
+models for musical instruments primarily in the string, wind,
+and brass families.
+11 They have also been developed speciﬁ-
+cally for piano synthesis. 11–13 This section summarizes the
+basic ideas of the digital waveguide approach, and relates the
+parameters of a digital waveguide model to an underlying
+physical model.
+A. Background
+As mentioned in Sec. I, to arrive at a PDE modeling the
+piano string, it is fruitful to start with the ideal wave equation
+and add perturbation terms to give more realistic frequency-
+dependent dispersion and losses. The perturbed PDE is then
+numerically integrated via a ﬁnite-difference scheme ~or pos-
+sibly by another approach, such as ﬁnite element methods,
+etc.!. The digital waveguide approach interchanges the order
+of these operations: the ideal wave equation is integrated ﬁrst
+using a trivial ﬁnite-difference scheme, and the resulting so-
+lutions are perturbed using digital ﬁlters to add frequency-
+dependent loss and dispersion. In the case of a strongly dis-
+sipative and dispersive string, the modulus of these so-called
+loop ﬁlters decreases rapidly with frequency, and phase can
+become strongly nonlinear. For a frequency-domain imple-
+mentation, this has no effect on computational complexity,
+but for a time-domain implementation, a larger ﬁlter size
+may be required in order to match the large variations of the
+phase response.
+It has been known since d’Alembert
+14 that the ideal one-
+dimensional wave equation is solved exactly by arbitrary
+~sufﬁciently smooth! wave shapes propagating in both direc-
+tions. The digital waveguide formulation works directly with
+these traveling wave components. An isolated traveling wave
+is trivially simulated in practice using a delay line. An ideal
+vibrating string is then modeled as a pair of delay lines, one
+for each direction of travel.
+For digital implementation, the traveling waves are
+sampled at intervals of T seconds. By Shannon’s sampling
+FIG. 1. Phase velocity ~top! and loss ~bottom! for the model of Eq. ~6!~ solid
+line! and for difference scheme Eq. ~17!~ dashed line! as a function of the
+frequency. The model parameters are those corresponding to the note C2, as
+given in Table I.
+1098 J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa
+et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+theorem,15 the solution remains exact, in principle, at all fre-
+quencies up to half the sampling rate. To avoid aliasing, all
+initial conditions and ongoing excitations must be band-
+limited to less than half the sampling rate f
+s51/T.
+Figure 2 shows the simulation diagram for a digital
+waveguide model of a rigidly terminated string. The string is
+excited by the signal E and observed via the signal S.
+Sampled traveling velocity waves propagate to the right
+along the upper rail, and to the left along the lower rail. The
+rigid terminations cause inverting reﬂections ~the two 21
+scale factors!. The delay lines are denoted D
+i , i51,2,3, and
+the Fi blocks are digital ﬁlters to be described further below.
+Consider a wavelike solution propagating from a point
+M1 to a point M2 along a string ~see Fig. 3, top !. The dis-
+tance M1M2 will be arbitrarily called l and the propagation
+time d at the minimal phase velocity. At the observation point
+M2 , the wave will have arrived after having undergone the
+effects of loss and dispersion. In terms of digital waveguides,
+the wave will undergo a pure delay @in the frequency do-
+main, a multiplicative phase factor exp( 2i
+vd)], times a mul-
+tiplicative factor F(v) representing the loss and the disper-
+sion experienced by the wave during this interval ~see Fig. 3,
+bottom!.
+Since loss and dispersion are, for this system, linear
+time-invariant ~LTI! phenomena, even when frequency de-
+pendent, the perturbations needed for added realism in the
+digital waveguide string model are LTI digital ﬁlters. Since
+LTI ﬁlters commute, we may lump all of the ﬁltering associ-
+ated with propagation in one direction into a single LTI ﬁlter.
+These ﬁlters are denoted F
+i in Fig. 2, i51,2,3.
+For purposes of computing the output signal S from the
+input signal E, Fig. 2 may be further simpliﬁed.
+The two ﬁlters labeled F1 can be replaced by a single
+ﬁlter F1
+2 ~by commuting one of them with the intervening
+two delay lines D1 and 21 gain!. A similar simpliﬁcation is
+possible for F3 .
+In the same way, the two delay lines labeled D1 can be
+replaced by a single delay line D1
+2 ~having twice the length
+of D1), and the two D3 blocks can be replaced by one D3
+2
+block.
+In general, any uniform section of a linear vibrating
+string which is excited and observed only at its endpoints can
+be accurately modeled ~in one vibrational plane! by a pair of
+digital delay lines, each in series with a digital ﬁlter. A dis-
+cussion of more generalized approaches involving nonuni-
+form string sections, and the relationship with ﬁnite differ-
+ence schemes, is provided in a recent dissertation.
+16
+Since losses and dispersion are relatively weak in vibrat-
+ing strings and acoustic bores, a low-order ﬁlter can approxi-
+mate very well the distributed ﬁltering ~inﬁnite-order in prin-
+ciple! associated with a particular stretch of string or bore.
+~We should repeat, however, that the approach outlined
+above is equally applicable in the case of strongly dispersive
+or lossy systems, though in these cases, higher-order ﬁlters
+may be necessary. ! In practice, the desired loss and disper-
+sion ﬁlters are normally derived from measurements such as
+the decay time of overtones in the freely vibrating
+string.
+17–19 In the next section, the ﬁlter will be derived from
+the stiff-string model of Eq. ~16!. Interestingly, the ﬁlter~s! so
+designed can be mapped back to an equivalent PDE, includ-
+ing many higher-order terms ~which may or may not have a
+physical interpretation!. Lumping of traveling-wave ﬁltering
+in this way can yield computational savings by orders of
+magnitude relative to more typical ﬁnite difference
+schemes,
+20–22 and this efﬁciency can be important in appli-
+cations such as real-time modeling of musical instruments
+for purposes of automatic sound synthesis or ‘‘virtual acous-
+tic instrument’’ performance.
+B. Relating digital waveguide parameters to the
+physical model
+We address here the problem of relating digital wave-
+guide ﬁlter parameters to the loss and dispersion curves from
+the physical model discussed in Sec. II. For that, we consider
+the continuous frequency representation of the loop ﬁlter and
+show its relation with the physical parameters. The digital
+waveguide parameters can then be obtained by discretiza-
+tion. We do not address here the problem of the time domain
+implementation of the digital waveguide.
+According to Eqs. ~3! and ~7!, the transformations of the
+wave due to propagation along the string segment can be
+represented in terms of a digital waveguide ﬁlter by a mul-
+tiplicative phase factor exp( sd1j
+bl). Ideally, the modulus
+and phase of this expression are related to the ﬁlter F by
+uF~v!u5uesd 1 jblu5esd5e2~b11b2b2!d, ~19!
+arg~F~v!! 5arg~esd 1 jbl!5vd1bl. ~20!
+In order to write the expressions of the modulus and the
+phase of the loop ﬁlter in terms of the frequency v,i ti s
+necessary to express the wave number b in terms of v. From
+Eq. ~9!, solving for b, one gets
+b2~v!5
+2a16Aa1
+214a2~b1
+21v2!
+2a2
+~21!
+with
+a15c222b1b2 , a25k22b2
+2. ~22!
+Since b must be real ~see Sec. II B!, we keep only the solu-
+tion for which the term inside the root is positive. Then,
+FIG. 2. Digital waveguide model of a rigidly terminated string.
+FIG. 3. The physical system and its corresponding delay line/ﬁlter.
+1099J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+b~v!56 A
+2a11Aa1
+214a2~b1
+21v2!
+2a2
+. ~23!
+Given that, for realistic piano string modeling, b1.1,
+b2.1024, c.200, k.1, and v.400, we make the simpli-
+fying assumptions
+b1b2!c2, b2
+2!k2 ~24!
+~the second of which also ensures the realness of b!
+b1
+2!v2 ~25!
+which permit the following approximation of b:
+b~v!.6
+c
+kA2
+A211A114
+k2
+c4
+v2. ~26!
+In practice, it is helpful to work with more perceptually
+signiﬁcant parameters for sound synthesis purposes. For that
+purpose, we will now suppose that the string is of length L,
+with perfect reﬂections at the extremities. The delay D,
+which corresponds to the propagation time of the minimum
+phase-velocity wave along the length L can be expressed as
+D5L/c5
+p/v0 , ~27!
+where v0 is the fundamental frequency ~rad/s! of the ideal
+string and c is the minimum phase velocity given by
+c5v0L/p. ~28!
+Thus, D is the propagation time over distance L for a sinu-
+soidal traveling wave tuned to the ﬁrst resonant mode of the
+ideal string. This choice of nominal propagation-time D sim-
+pliﬁes the frequency-domain computations to follow; how-
+ever, since phase velocity increases with frequency, the as-
+sociated propagation ﬁlter F will be noncausal in the time
+domain. This poses no difﬁculty for frequency-domain
+implementation.
+Next, we may express
+b as
+b~v!.6
+p
+LA2B
+Aj ~29!
+with
+j52 11A114Bv2/v0
+2 ~30!
+in terms of the inharmonicity coefﬁcient 23 B given by
+B5k2v0
+2/c4, ~31!
+where c denotes c(v0) for notational simplicity.
+We now have to choose the sign of b in the expression
+for the phase. Since we want the output signal to be delayed
+with respect to the input signal, the loop ﬁlter/pure delay
+combination has to be causal. This means that the phase of
+the whole transfer function must be negative, i.e.,
+2
+vD1arg~F~v!! ,0. ~32!
+This indicates that we choose the negative solution for b
+in the phase expression. Finally, using Eq. ~29!, we arrive at
+approximate expressions for the modulus and phase of the
+ﬁlter F as a function of frequency
+v,
+uF~v!u.expS2DFb11
+b2p2j
+2BL 2 GD, ~33a!
+arg~F~v!! .vD2pA
+j
+2B. ~33b!
+These expressions serve as the link the PDE model of
+Eq. ~6! to the lumped ﬁlters of the digital waveguide. For the
+sake of simplicity, one can choose an ‘‘elementary ﬁlter’’
+dF5F1/D such that
+udF~v!u.expS2Fb11
+b2p2j
+2BL 2 GD, ~34a!
+arg~dF~v!! .v2v0A
+j
+2B. ~34b!
+The ﬁlters F of the digital waveguide, which correspond
+to propagation over a time duration D, can be then easily
+expressed in terms of dF by
+F5dFD. ~35!
+The stability of the digital waveguide model is ensured if the
+modulus of the ﬁlter dF is less than one. This condition is
+here always respected, since the expression in the exponen-
+tial of Eq. ~33a! is negative.
+V. NUMERICAL SIMULATIONS
+We now address the validity of the analytical approach
+of the preceding section to determine digital waveguide loop
+ﬁlters. The modulus and phase of the ﬁlters corresponding to
+the digital waveguide model have been directly linked to the
+parameters of the physical model. For a given set of PDE
+parameters, thus, we can design a complete digital wave-
+guide model simulating the signal of the vibrating string at a
+given location, for a predetermined excitation location. For
+purposes of comparison, we have generated output signals
+using both the ﬁnite difference scheme discussed in Sec. III,
+and the digital waveguide model for the same set of model
+parameters. The digital waveguide has been computed in the
+frequency domain, allowing the use of Eq. ~33a!. The exci-
+tation, a Gaussian function of the form e
+2@(x2x0)2/s2#, simu-
+lates an initial velocity distribution of the string at a distance
+x
+05L/8 from one end of characteristic width s5KcLH ,
+where Kc is an arbitrary constant and LH is the hammer
+width ~we do not enter into too much detail here, as hammer
+modeling is not dealt with in this paper !. The signal is ob-
+served at the location 9 L/10. We have performed simulations
+for the notes C2, C4, and C7 using the parameters in Table I
+~all of which are taken from values provided in the papers by
+Chaigne and Askenfelt,
+3,4 except for the parameter b2 , which
+comes from the calibration procedure applied subsequently
+in Sec. VI.
+Figure 4 shows the two ﬁrst periods of the waveforms
+generated by both approaches. The amplitudes are similar.
+Nevertheless, there is a slight discrepancy between the two
+signals, due to the numerical dispersion introduced by the
+ﬁnite difference scheme ~see Sec. III !.
+1100 J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+This discrepancy can be better seen by comparing the
+phase velocity of the two signals in Fig. 5. This corresponds
+to the phase velocity plotted in Fig. 1. The phase velocity of
+the signal produced by the waveguide is similar to the one of
+the model.
+The long-time behavior of the generated signal is also
+very similar. In Fig. 6 spectrograms obtained over the whole
+length of the sound are shown. It is clear that the global
+damping behavior is similar in the low-frequency range.
+However, at high frequencies, the ﬁnite-difference model
+suffers from an artiﬁcially high propagation gain, as derived
+in Sec. III. The fundamental frequencies are essentially
+equal, but the wave dispersion due to string stiffness is dif-
+ferent due to the numerical dispersion introduced by the dif-
+ference scheme. ~We can see in Fig. 7 a slight tuning differ-
+ence in the high-frequency partials. ! In summary, these
+ﬁgures illustrate the extent to which the waveguide model
+provides a more accurate digital simulation of stiff, lossy
+strings with respect to both attenuation and dispersion of
+wave propagation, when compared with ﬁnite difference
+schemes.
+VI. CALIBRATION OF PHYSICAL MODEL
+PARAMETERS FOR A GRAND PIANO FROM
+EXPERIMENTAL DATA
+A. Experimental setup
+In order to calibrate the parameters of the physical
+model, data were collected on an experimental setup consist-
+ing of a Yamaha Disklavier C6 grand piano equipped with
+sensors ~see Fig. 8 !. The string vibrations were measured
+FIG. 6. Spectrograms of the output of the ﬁnite difference scheme ~at top!
+and the waveguide model ~at bottom! for the note C2.
+FIG. 7. Partial frequencies of the output of the ﬁnite difference scheme
+~dotted! and of the waveguide model ~plain! as function of the theoretical
+frequencies.
+FIG. 4. Velocity signals obtained from the ﬁnite difference scheme pre-
+sented in Sec. III ~solid line! and a waveguide model ~dotted line!, for three
+different notes and for two periods of sound. The model is excited at dis-
+tance L/8 from one endpoint, and the output signal is measured at distance
+9L/10. Note that the abscissa scales is different for each ﬁgure.
+FIG. 5. Phase velocity for the waveguide model ~solid line! and for differ-
+ence scheme as a function of the frequency for the note C2. The analytically
+obtained phase is not shown, as it is identical ~by deﬁnition ! to the phase
+response of the waveguide network.
+1101J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa
+et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+using an accelerometer located at the bridge level. The Dis-
+klavier allows the piano to be played under computer con-
+trol. These measurements were made at the Laboratoire de
+Me´ canique et d’Acoustique, Marseille, France.
+In order to ensure that the measurements were taken
+under similar excitation conditions, we measured the ham-
+mer velocity using a photonic sensor ~MTI 2000, probe mod-
+ule 2125H!~ see Fig. 9 !.
+Since we were interested in exciting a large portion of
+the frequency spectrum while remaining in the linear domain
+of vibration, we chose a medium ~mezzo-forte! hammer ve-
+locity of 2.2 m s
+21, which corresponds roughly to a MIDI
+value of 80. Such a hammer velocity allows the generation of
+about 140 spectral components for low frequency tones with
+a reasonable signal-to-noise ratio ~see Fig. 10 !.
+For each note of the grand piano, the optical sensor was
+placed close to the hammer and the accelerometer ~B&K
+4374! at bridge level. For notes corresponding to double or
+triple sets of strings, the accelerometer was placed as close as
+possible to the strings ~see Fig. 11 !. Due to the imprecision
+of MIDI coding, several measurements were made, until a
+target value of the hammer speed was obtained. We have
+deemed an uncertainty of 60.1 m s
+21 for the hammer veloc-
+ity to be acceptable, as the estimation of modal frequency
+and decay rates is relatively insensitive to such an error. The
+acceleration measured at the bridge level was then digitally
+recorded at 16 bits at a sampling rate of 44.1 kHz, before
+being entered in the database.
+B. Estimation of parameters
+Because this model is intended for use in the context of
+musical sound synthesis, we here discuss the calibration of
+b
+1 and b2 , and the determination of the stiffness parameter
+for a given string.
+FIG. 8. Experimental setup. The grand piano was isolated in an anechoic
+room, and both the string vibrations and the acoustical radiated signal were
+measured. The string vibrations were measured using both an accelerometer
+located at the bridge level and a laser vibrometer, while the acoustic signal
+was measured at the head level of the pianist using an artiﬁcial headset. Our
+library of measured data also includes signals corresponding to various ham-
+mer velocities @referred to in recent and forthcoming articles concerned with
+the hammer-string interaction ~Ref. 31!#, but for this paper, we only need
+acceleration measurements for each string.
+FIG. 9. Optical sensor used to measure the hammer velocity. The velocity is
+obtained through the duration corresponding to the travel time of the ham-
+mer between two reﬂectors placed on it.
+FIG. 10. Spectrum of the note A0.
+FIG. 11. Accelerometer at the bridge level.
+1102 J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+To estimate the damping factor associated with each
+modal component of the signal, we used a signal processing
+technique based on the theory of analytic signals.
+24,25 The
+analytic signal representation provides an easy way of ex-
+tracting both the instantaneous frequency and the damping of
+each modal component, through band-pass ﬁltering. To iso-
+late each component in frequency, we used a truncated
+Gaussian window, the frequency bandwidth of which was
+chosen so as to minimize smoothing effects over the attack
+duration and to avoid overlapping two successive frequency
+components. The Gaussian was employed since its time-
+bandwidth product is minimized. As a consequence, it opti-
+mizes the exponential damping support after convolution
+with a causal single component for a given band pass
+ﬁltering.
+26
+The analytic signal associated with each individual com-
+ponent facilitates the estimation of both the instantaneous
+frequency and the amplitude modulation law of the compo-
+nent. The frequency dependent damping factor is directly
+related to the amplitude modulation law of each partial. Ac-
+cording to the physics of a single string vibrating in one
+plane, the amplitude modulation of each component is ex-
+pected to be exponential. This makes the damping factor
+easy to estimate by the measurement of the slope of the
+logarithmic representation of the amplitude of the analytic
+signal.
+19 This technique has advantages over other paramet-
+ric methods such as Prony’s method,27 mainly due to its abil-
+ity to extract a coherent mean damping factor when multiple
+components are present. In fact, the hammer usually strikes
+not one, but two or three strings simultaneously. The cou-
+pling gives rise to perceptually signiﬁcant phenomena such
+as beating and two-stage decay;
+28 these effects are not ac-
+counted for in our model Eq. ~6!. For these multistring notes,
+the calculated damping coefﬁcients s can be thought of de-
+scribing the global perceived decay of the sound.
+For the same reason, the spectral representation of each
+partial is the result of the summation of several contributions
+due to each string and each polarization of vibration. The
+phase of the analytic signal allows an accurate estimation of
+the mean frequency of the partials. Actually, it permits the
+calculation of the instantaneous frequency which is a time-
+dependent function oscillating around a mean value. This
+mean value coincides with the spectral centroid of the
+partial
+29 and consequently with the more likely perceived
+frequency. From the mean frequency values estimated this
+way for each partial, B may be deduced for each note, and
+consequently
+v0 , the fundamental frequency of the corre-
+sponding ideal string. The inharmonicity factor B is plotted
+as a function of the frequency in Fig. 12; B is an increasing
+function of the note number, except over the bass range,
+where the strings are double-wrapped ~this behavior has also
+been measured by Conklin
+30!.
+Combining Eqs. ~8! and ~29!, one obtains
+s~v!52 b12b2S
+p2
+2BL 2 @211A114B~v/v0!2# D.
+~36!
+Then, from the value of s obtained for each partial, b1 and
+b2 may be estimated for a given tone. The evolution of these
+parameters as a function of the fundamental frequency is
+shown in Fig. 13.
+We see that b1 and b2 are both increasing functions of
+MIDI note number, indicating increasing loss as one ap-
+proaches the treble range. In Fig. 13, we have also ﬁt ex-
+tremely simple curves to the loss parameter data. The ﬁts are
+linear as a function of the fundamental frequency, and are
+given by
+b
+154.431023 f 02431022, ~37a!
+b251.031026 f 01131025. ~37b!
+These simple empirical descriptions of b1 and b2 allow the
+reproduction of piano tones whose damping will be close to
+that of the perceived acoustic note. A multistring waveguide
+FIG. 12. The measured inharmonicity factor B.
+FIG. 13. Values of ‘‘equivalent’’b1 and b2 ﬁtted from measured data as a
+function of the fundamental frequency.
+1103J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+model has also been designed, 26,31 allowing for beating and
+two-stage decay. Its use for synthesis purposes is discussed
+in Sec. VII. The deviations in the curves ~Fig. 13! from the
+linear ﬁts must be attributed to the impedance ratio between
+the strings and the soundboard, which varies over the length
+of the bridge. As a result, the curves should not be inter-
+preted as impedance curves as they do not represent mea-
+surements at a single point and data are taken only at string
+modal frequencies. For a detailed discussion of soundboard
+impedance and its measurement, we refer to the work of
+Giordano.
+32,33
+VII. WAVEGUIDES AND SOUND SYNTHESIS
+The determination of b1 , b2 , B, and v0 for each note
+allows for an explicit expression of the behavior of the ﬁlter
+F as a function of note number. In order to represent the
+evolution of the elementary loop ﬁlter in terms of note value,
+we show in Fig. 14 the modulus and phase of the elementary
+ﬁlter
+dF, normalized with respect to the time delay D,
+dF5F1/D. ~38!
+In order to understand the general behavior of the modu-
+lus and the phase of the loop ﬁlter with respect to the note
+played, we expand their expressions @Eq. ~34a!# for
+4B(
+v/v0) to third order near zero. We obtain
+udF~v!u.expS2Fb11b2
+v2
+c2 GD, ~39a!
+arg~dF!.
+v3B
+2v0
+2 . ~39b!
+The modulus ~which also accounts for the losses at the
+endpoints!, is decreasing with note number as shown in Fig.
+14. This is mainly due to the increase in b1 . But the param-
+eter b2 , which allows for frequency dependent loss is also
+increasing, leading to a modiﬁcation of the slope of the
+modulus versus frequency for different note numbers. We
+note that this behavior is slightly different for the wrapped
+strings ~A0, A1! than for the other strings ~A2, A3!. We also
+note that although B is mainly an increasing function of note
+number, the phase of the ﬁlters
+dF grows less rapidly for the
+bass tones than for higher tones. This is due to the fact that
+the phase of the ﬁlter depends not only on B, but also on the
+fundamental frequency, as evidenced by Eq. ~39b!. Though
+this expression is meaningful only for the ﬁrst few partials, it
+is clear that phase dispersion decreases as a function of fun-
+damental frequency.
+In the case of the piano, the string is struck at a distance
+of approximately one-eighth to one-sixteenth of its length
+from the bridge, depending on the note. We are only inter-
+ested in the vibration generated at the bridge termination, as
+this is the mechanism by which energy is transmitted to the
+soundboard. This situation corresponds to a digital wave-
+guide structure identical to the one presented in Fig. 2, ex-
+cept that the loop ﬁlters F
+2 and F3 are combined. Using the
+parameters estimated by experiment, one can reproduce the
+vibration generated by a single string. Figure 15 shows the
+evolution of the amplitude of the ﬁrst six partials of the
+vibration velocity for the note E1, respectively, measured on
+the piano and generated by the digital waveguide model.
+From a perceptual point of view, the two sounds are identi-
+cal.
+If the tones are produced by two or three strings struck
+simultaneously, the basic digital waveguide model still gen-
+erates a signal having the same amplitude and damping of
+the modes. It does not, however, account for the modulations
+and double decays due to the coupling of the strings at the
+bridge.
+28 Using two or three coupled digital waveguides, and
+thus allowing for energy transfer between the strings, one
+can easily reproduce this phenomenon.
+20,26,31 Figure 16
+shows the time evolution of the amplitude of the ﬁrst six
+partials for the tone C2 ~two strings !, using the coupled-
+FIG. 14. Normalized modulus and phase of F for selected tones.
+FIG. 15. Amplitude of partials one to six for the note E1 as a function of
+time and frequency.
+1104 J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+strings model described in a recent publication. 26 The modu-
+lations are essentially perfectly reproduced. Moreover, this
+model follows directly from the physics of coupled strings.
+In fact, the loop ﬁlters are again related to the parameters of
+the physical model, and numerous sound transformations are
+conceivable. One could, for instance, extend the use of such
+a waveguide model to practically unrealizable situations in-
+volving, for example, widely mistuned strings or coupled
+strings with differing material properties.
+VIII. CONCLUSIONS
+We have presented a model of transverse vibrations on a
+string which includes the effects of stiffness and frequency-
+dependent loss. This model possesses several advantages
+over those proposed previously, in particular that it can be
+framed as a well-posed initial-boundary value problem ~lead-
+ing to stable numerical methods !, and also that it can be
+easily related to digital waveguides. The source of these
+good properties is the fact that this model allows only two
+traveling-wave type solutions; the nonphysical third unstable
+term in the model of Ruiz ~which can lead to difﬁculties both
+analytically and numerically ! is thus eliminated in favor of
+higher-order spatial terms. It is also simple to write expres-
+sions for dispersion and loss as a function of frequency in
+terms of the model system parameters—such information is
+critical for the design of the terminating ﬁlters in a digital
+waveguide implementation.
+For the sake of comparison, we have performed numeri-
+cal simulations of the model system, with pianolike param-
+eters, using both ﬁnite differences and a digital waveguide;
+the most notable distinction is the complete lack of numeri-
+cal dispersion ~which leads to mode mistuning ! in the wave-
+guide implementation. On the other hand, the waveguide al-
+lows the computation of a solution ~‘‘sound’’! only at
+preselected points on the string, whereas a ﬁnite difference
+scheme computes the entire string state in ~sampled! physical
+form. This is not a drawback for sound synthesis applications
+because, only the behavior of the string at the bridge is of
+interest in most stringed instruments. Moreover, physically
+accurate outputs from additional points along the string are
+easily added to a digital-waveguide simulation at the price of
+one small digital ﬁlter each.
+A set of experimental data measured from a grand piano
+was used in order to calibrate the PDE model parameters
+over the entire keyboard range. String vibration was mea-
+sured at the bridge through the use of an accelerometer, for
+each note on the piano, and for an average hammer velocity.
+The piano employed was equipped with sensors to provide
+hammer velocity data; from these measurements, all the pa-
+rameters relating to the relevant PDE model were estimated.
+Given that the model itself is not completely physical—that
+is, the various loss mechanisms, interstring coupling, as well
+as energy transfer to the soundboard are modelled, for sim-
+plicity, as internal to the string itself—these parameters must
+be considered as those describing an ‘‘equivalent’’ string,
+under ﬁxed termination. The equivalent parameters, are,
+however, sufﬁcient for the resynthesis of piano tones to a
+high degree of ﬁdelity, when a digital waveguide is em-
+ployed. The digital waveguide model was also extended in
+order to directly take into account the effects of interstring
+coupling, through the use of two or three coupled
+waveguides.
+The modeling of the excitation mechanism for the piano
+string ~i.e., the hammer ! is also of great importance, and
+must be carried out with some care; we have not addressed
+this issue here. As has been shown in the work of Chaigne
+and Askenfelt, it is possible to design a nonlinear hammer,
+which, when applied to a stiff string with frequency-
+dependent loss, produces signals quite similar to those mea-
+sured on a real piano. The problem of extracting hammer
+parameters from measured data is also worthy of future re-
+search.
+ACKNOWLEDGMENTS
+This work was supported in part by the DSP ~France!
+under Contract No. 016060 and by a fellowship from Region
+PACA ~France!.
+APPENDIX: THE PIANO STRING MODEL OF
+CHAIGNE AND ASKENFELT
+The results in this section have appeared, in a similar
+form, in the thesis of Ruiz. 9 We have added various com-
+ments regarding well-posedness and numerical stability.
+The stiff string model in the thesis of Ruiz 9 and in the
+papers by Chaigne and Askenfelt 3,5 is described by the fol-
+lowing equation:
+]2y
+]t2 5c2 ]2y
+]x2 2k2 ]4y
+]x4 22b1
+]y
+]t 12b3
+]3y
+]t3 . ~A1!
+This model differs from Eq. ~6! only by the replacement of
+the term 2 b2(]3y/]x2]t)b y2 b3(]3y/]t3); this model also
+allows for frequency-dependent loss, but the system itself is
+of a quite different character, due to the increased degree of
+the equation with respect to the time variable. We spend a
+FIG. 16. Amplitude of partials one to six for the note C2 as a function of
+time and frequency.
+1105J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+little time here explaining the signiﬁcance of the difference,
+which has a radical effect on the analysis of the system as a
+whole.
+We can examine the well posedness of the system by
+inserting a solution of the form y(x,t)5e
+st 1 jbx into Eq.
+~A1!, in order to obtain a dispersion relation,
+22b3s31s212b1s1c2b21k2b450. ~A2!
+This is a cubic in the variable s @the quantity on the left-hand
+side is referred to as the symbol7 of Eq. ~A1!#, and again, as
+discussed in Sec. II, a necessary condition for the system of
+Eq. ~A1! to be well posed is that the roots of this equation
+have real part bounded from above as a function of spatial
+frequency
+b. It is simple to see that the real part of at least
+one root of Eq. ~A2! will be positive and unbounded as a
+function of wave number. As this is a third-degree polyno-
+mial equation with real coefﬁcients, one root will always be
+real, and the two others occur as a complex conjugate pair
+~or perhaps as two other real roots !. Consider Eq. ~A2! as u
+bu
+becomes large. In this case, the three roots will behave as
+22b3s31k2b4’ 0
+and will be evenly distributed over a circle of radius
+(k2b4/(2 b3)) 1/3.I f b3.0 ~as suggested in the numerical
+experiments in the papers by Chaigne and Askenfelt 4!, then
+there will be one positive real root of the magnitude men-
+tioned above, clearly unbounded as a function of wave num-
+ber
+b. ~If b3,0, there will two roots in the right half plane,
+of this same magnitude, at an angle approaching 660 de-
+grees with respect to the positive real axis. ! We have thus
+shown that the initial value problem corresponding to the
+system of Eq. ~A1! is, formally speaking, ill-posed.
+We can extract some more detailed information by ask-
+ing under what conditions the roots of Eq. ~A2! have positive
+real part. A straightforward application of the Routh–Hurwitz
+stability criterion
+34 to Eq. ~A2! shows that in fact, if b3.0,
+there is always exactly one real positive root, regardless of
+the value of the wave number
+b.
+The following question then arises: How can we explain
+the apparently stable behavior exhibited by simulations 4 of
+these equations? Indeed, for realistic piano string parameters,
+the numerical integration routine provided in the paper by
+Chaigne and Askenfelt
+4 is stable, and produces piano sounds
+of excellent quality. A ﬁrst guess might be that the above
+analysis is incomplete due to the neglect of boundary condi-
+tions. Using the boundary conditions supplied by Chaigne,
+however, leads to an analysis identical to that performed in
+Sec. II B—the modal frequencies for the string system de-
+ﬁned by Eq. ~A1! will be given by solutions of the dispersion
+relation Eq. ~A2! under the replacement of
+b by np/L for
+integer n. For any n, there will be exactly one modal fre-
+quency sn with positive real part. Thus the instability persists
+even in the presence of boundary conditions.
+We must then conclude that discretization has a stabiliz-
+ing effect on system of Eq. ~A1!. To explore this idea in
+more detail, consider the discretization, 4 which can be writ-
+ten as
+ym
+n115a10ym
+n 1a20ym
+n211a11~ym11
+n 1ym21
+n !1a12~ym12
+n
+1ym22
+n !1a21~ym11
+n21 1ym21
+n21 !1a30ym
+n22. ~A3!
+This difference scheme involves three steps of lookback, re-
+ﬂecting the degree of the model system of Eq. ~A1!. Here,
+the difference scheme coefﬁcients are deﬁned by
+a105~222l226m21b3 /T!/D,
+a205~211b1T12b3 /T!/D, a115~l214m2!/D,
+~A4!a125~b3 /T2m2!/D, a215a305~2b3 /T!/D,
+where, for brevity, we have again used
+l5cT /X, m5kT/X2,
+as well as
+D511b1T12b3 /T.
+Let us now examine the characteristic polynomial, which can
+be written as
+z31a1~b!z21a2~b!z1a3~b!50 ~A5!
+with
+a1~b!52 a1022a11 cos~bX!22a12 cos~2bX!,
+a2~b!52 a2022a21 cos~bX!, a3~b!52 a30 .
+The solution to the recursion will be bounded and decay if
+the solutions to this equation are conﬁned to the interior of
+the unit circle for all
+bP@2p/X,p/X#. It is simple to show
+that this is in fact true, for any of the choices of parameters
+given in the papers by Chaigne and Askenfelt.
+4 This does not
+mean, however, that the difference scheme can be considered
+to be numerically stable in the V on Neumann sense.
+7 This is
+a rather subtle point, and is worth elaborating.
+According to the Lax–Richtmeyer equivalence
+theorem,7 if the initial-boundary value problem is well-
+posed, the solution to a ﬁnite difference scheme will con-
+verge to the solution of the model problem if it is consistent
+and stable. In this case, though, the model system is not well
+posed, and thus no ﬁnite difference can possibly converge to
+a stable solution in some limit as the time step T and the grid
+spacing X approach zero. The difference scheme Eq. ~A3! is
+indeed consistent with ~A1! to ﬁrst-order accuracy ~and we
+note that if one does wish to use this ill-posed model system,
+it is in fact possible to design second-order accurate explicit
+methods!, but it is possible to show ~as we expect ! that it
+cannot be stable in the limit as T becomes small. Because the
+recursion is of third order, the analysis is somewhat involved,
+and requires the application of the Schur–Cohn recursive
+procedure
+7 ~the discrete time analog of the Routh–Hurwitz
+stability test, again allowing us to check the stability of a
+polynomial without explicitly calculating the roots !. Never-
+theless, it is possible to show in this way that a necessary
+condition that the roots of the polynomial of Eq. ~A5! be
+inside the unit circle is that
+b
+3 /T<l 214m2<1.
+~The second inequality is exactly the necessary stability con-
+dition given in the paper by Chaigne and Askenfelt. 3! Al-
+1106 J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11
+though we have not provided all the details, we note that it
+sufﬁces to perform the Schur–Cohn test at the wave number
+b5p/X in order to arrive at these conditions. Clearly, these
+two conditions cannot be satisﬁed if
+T<b3)Sample rate >1/b3
+and thus for a small enough time step, the system poles must
+cross to the exterior of the unit circle, regardless of the grid
+spacing X.
+It should be said, however, that because b3 is in general
+quite small for realistic piano string models ~on the order of
+1029), for any reasonable sample rate in the audio range, the
+recursion does not exhibit this unbounded growth. On the
+other hand, as we have shown in this paper, it is simple
+enough to dispense with the nonphysical solution and all the
+concomitant analysis by making use of a simpler second-
+order model.
+1 L. Hiller and P. Ruiz, ‘‘Synthesizing musical sounds by solving the wave
+equation for vibrating objects,’’ J. Audio Eng. Soc. 19, 462–551 ~1971!.
+2 R. Bacon and J. Bowsher, ‘‘A discrete model of a struck string,’’ Acustica
+41, 21–27 ~1978!.
+3 A. Chaigne and A. Askenfelt, ‘‘Numerical simulations of struck strings. I.
+A physical model for a struck string using ﬁnite difference methods,’’ J.
+Acoust. Soc. Am. 95, 1112–1118 ~1994!.
+4 A. Chaigne and A. Askenfelt, ‘‘Numerical simulations of struck strings. II.
+Comparisons with measurements and systematic exploration of some
+hammer-string parameters,’’ J. Acoust. Soc. Am. 95, 1631–1640 ~1994!.
+5 A. Chaigne, ‘‘On the use of ﬁnite differences for musical synthesis. Ap-
+plication to plucked stringed instruments,’’ J. Acoust. 5, 181–211 ~1992!.
+6 N. Fletcher and T. Rossing, The Physics of Musical Instruments ~Springer-
+Verlag, New York, 1991!.
+7 J. Strikwerda, Finite Difference Schemes and Partial Differential Equa-
+tions ~Wadsworth and Brooks/Cole Advanced Books and Software, Paciﬁc
+Grove, CA, 1989 !.
+8 B. Gustaffson, H.-O. Kreiss, and J. Oliger, Time Dependent Problems and
+Difference Methods ~Wiley, New York, 1995!.
+9 P. M. Ruiz, ‘‘A technique for simulating the vibrations of strings with a
+digital computer,’’ Ph.D. thesis, University of Illinois, 1970.
+10 K. Graff, Wave Motion in Elastic Solids , 3rd ed. ~Prentice-Hall, Engle-
+wood Cliffs, NJ, 1974 !.
+11 J. O. Smith III, Digital Waveguide Modeling of Musical Instruments ,
+http://www.ccrma.stanford.edu/˜jos/waveguide/http://www-
+ccrma.stanford.edu/˜jos/waveguide/, 2002 ~printed version forthcoming !.
+12 J. O. Smith III and S. A. Van Duyne, ‘‘Commuted piano synthesis,’’Pro-
+ceedings of the 1995 International Computer Music Conference, Banff
+~Computer Music Association, 1995 !, pp. 319–326.
+13 S. A. Van Duyne and J. O. Smith III, ‘‘Developments for the commuted
+piano,’’Proceedings of the 1995 International Computer Music Confer-
+ence, Banff ~Computer Music Association, 1995 !, pp. 335–343.
+14 J. le Rond d’Alembert, ‘‘Investigation of the curve formed by a vibrating
+string, 1747,’’ in Acoustics: Historical and Philosophical Development ,
+edited by R. Bruce Lindsay ~Dowden, Hutchinson & Ross, Stroudsburg,
+1973!, pp. 119–123.
+15 J. O. Smith III and P. Gossett, ‘‘A ﬂexible sampling-rate conversion
+method,’’ Proceedings of the International Conference on Acoustics,
+Speech, and Signal Processing, San Diego ~IEEE Press, New York, 1984!,
+V ol. 2, pp. 19.4.1–19.4.2. An expanded tutorial based on this paper and
+associated free software are available online at The Digital Audio Resam-
+pling Home Page: http://www.ccrma.stanford.edu/
+˜jos/resample/http://
+www-ccrma.stanford.edu/˜jos/resample/
+16 S. Bilbao, Wave and scattering methods for the numerical integration of
+partial differential equations, Ph.D. thesis, Stanford University, 2001.
+17 J. O. Smith III, ‘‘Techniques for digital ﬁlter design and system identiﬁ-
+cation with applicaltion to the violin,’’ Ph.D. thesis, Stanford University
+~CCRMA!, 1983. Available as CCRMA Technical Report STAN-M-14.
+Portions available online at http://www.ccrma.stanford.edu/
+˜jos/http://
+www-ccrma.stanford.edu/˜jos/
+18 J. Laroche and J. L. Meillier, ‘‘Multichannel excitation/ﬁlter modeling of
+percussive sounds with application to the piano,’’ IEEE Trans. Speech
+Audio Process. 2, 329–344 ~1994!.
+19 V. V a¨lima¨ki, J. Huopaniemi, M. Karjalainen, and Zoltan Ja´ nosy, ‘‘Physical
+modeling of plucked string instruments with application to real-time
+sound synthesis,’’ J. Audio Eng. Soc. 44, 331–353 ~1996!.
+20 J. O. Smith III, ‘‘Efﬁcient synthesis of stringed musical instruments,’’
+Proceedings of the 1993 International Computer Music Conference, Tokyo
+~Computer Music Association, 1993 !, pp. 64 –71. Available online at
+http://www.ccrma.stanford.edu/
+˜jos/cs/
+21 M. Karjalainen, V . Va¨lima¨ki, and Z. Ja´ nosy, ‘‘Towards high-quality sound
+synthesis of the guitar and string instruments,’’ Proceedings of the 1993
+International Computer Music Conference, Tokyo ~Computer Music Asso-
+ciation, 1993!, pp. 56–63. Available online at http://www.acoustics.hut.ﬁ/
+˜vpv/publications/icmc93-guitar.htm
+22 T. Hikichi and N. Osaka, ‘‘An approach to sound morphing based on
+physical modeling,’’ Proceedings of the International Computer Music
+Conference ~Beijing, Computer Music Association, 1999 !, pp. 108–111.
+23 H. Fletcher, E. D. Blackham, and R. Stratton, ‘‘Quality of piano tones,’’ J.
+Acoust. Soc. Am. 34, 749–761 ~1961!.
+24 D. Gabor, ‘‘Theory of communication,’’ J. Inst. Electr. Eng., Part 1 93,
+429–457 ~1946!.
+25 R. Kronland-Martinet, Ph. Guillemain, and S. Ystad, ‘‘Modelling of natu-
+ral sounds using time-frequency and wavelet representations,’’ Organised
+Sound 2, 179–191 ~1997!.
+26 M. Aramaki, J. Bensa, L. Daudet, P. Guillemain, and R. Kronland-
+Martinet, ‘‘Resynthesis of coupled piano string vibrations based on physi-
+cal modeling,’’ J. New Music Res. 30, 213–226 ~2002!.
+27 J. D. Markel and A. H. Gray, Linear Prediction of Speech ~Springer-
+Verlag, New York, 1976!.
+28 G. Weinreich, ‘‘Coupled piano strings,’’ J. Acoust. Soc. Am. 62, 1474 –
+1484 ~1977!. Also contained in Ref. 36. See also Sci. Am. 240,9 4 ~1979!.
+29 Ph. Guillemain and R. Kronland-Martinet, ‘‘Characterization of acoustic
+signals through continuous linear time-frequency representations,’’ IEEE
+Special Issue on Time-Frequency and Time-Scale Analysis, 84, 561–585
+~1996!.
+30 H. A. Conklin, Jr., ‘‘Design and tone in the mechanoacoustic piano. III.
+Piano strings and scale design,’’ J. Acoust. Soc. Am. 100, 1286–1298
+~1996!.
+31 J. Bensa, F. Gibaudan, K. Jensen, and R. Kronland-Martinet, ‘‘Note and
+hammer velocity dependence of a piano string model based on coupled
+digital waveguides,’’ Proceedings of the International Computer Music
+Conference, La Havana, Cuba ~Computer Music Association, 2001 !,p p .
+95–98.
+32 N. Giordano, ‘‘Mechanical impedance of a piano soundboard,’’ J. Acoust.
+Soc. Am. 103, 2128–2133 ~1998!.
+33 N. Giordano, ‘‘Sound production by a vibrating piano soundboard: Ex-
+periment,’’ J. Acoust. Soc. Am.104, 1648–1653 ~1998!.
+34 M. Van Valkenburg, Network Analysis ~Dover, New York, 1975!.
+35 J. O. Smith III, Music applications of digital waveguides. Technical Re-
+port STAN-M-39, CCRMA, Music Dept., Stanford University, 1987. A
+compendium containing four related papers and presentation overheads on
+digital waveguide reverberation, synthesis, and ﬁltering. CCRMA techni-
+cal reports can be ordered by calling ~650!723-4971 or by sending elec-
+tronic mail requests to info@ccrma.stanford.edu
+36 Five Lectures on the Acoustics of the Piano, edited by A. Askenfelt ~Royal
+Swedish Academy of Music, Stockholm, 1990 !. Lectures by H. A. Con-
+klin, A. Askenfelt, E. Jansson, D. E. Hall, G. Weinreich, and K. Wogram.
+Sound example CD included. Publication number 64. Available online at
+http://www.speech.kth.se/music/5Ilectures/
+1107J. Acoust. Soc. Am., Vol. 114, No. 2, August 2003 Bensa
+et al.: Piano string simulation
+ Redistribution subject to ASA license or copyright; see http://acousticalsociety.org/content/terms. Download to IP:  131.123.46.168 On: Tue, 14 Apr 2015 20:55:11

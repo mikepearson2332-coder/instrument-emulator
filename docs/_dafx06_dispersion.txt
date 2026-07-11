@@ -1,0 +1,615 @@
+Proc. of the 9 th Int. Conference on Digital Audio Effects (DAFx-06), Montreal, Canada, September 18-20, 2006
+DISPERSION MODELING IN W A VEGUIDE PIANO SYNTHESIS
+USING TUNABLE ALLPASS FILTERS
+Jukka Rauhala, V esa Välimäki
+Laboratory of Acoustics and Audio Signal Processing
+Helsinki University of Technology, Espoo, Finland
+jukka.rauhala@acoustics.hut.ﬁ,vesa.valimaki@tkk.ﬁ
+ABSTRACT
+This paper extends a previously proposed method for designing
+ﬁlters simulating the dispersion phenomenon occurring in string
+instruments. In digital waveguide synthesis, the phenomenon is
+traditionally modeled by inserting an allpass ﬁlter to the string
+model feedback loop. In this paper, the concept of tunable disper-
+sion ﬁlter design, which provides a closed-form formula to design
+a dispersion ﬁlter, is applied to a cascade of ﬁrst-order allpass ﬁl-
+ters. Moreover, the method is extended to design a ﬁlter cascade
+including an arbitrary number of ﬁrst-order ﬁlters. In addition, it is
+shown how the designed dispersion ﬁlter can be used in a waveg-
+uide piano synthesis model.
+1. INTRODUCTION
+Dispersion is an important phenomenon present in string instru-
+ments making produced tones inharmonic. The audibility of the
+phenomenon depends on the instrument, for example, in the pi-
+ano it is a perceptually important effect that needs to be taken into
+account in sound synthesis [1].
+In digital waveguide modeling technique [2, 3], dispersion is
+modeled by inserting an allpass ﬁlter simulating the phase delay
+response of the dispersion phenomenon in the string model [2, 3,
+4, 5, 6, 7, 8]. A common way to implement the dispersion ﬁlter is
+to use either a high-order allpass ﬁlter [4] or a cascade of low-order
+ﬁlters [5, 6, 7]. An excellent overview of dispersion ﬁlter design is
+given in [8].
+V an Duyne and Smith [5] proposed the use of a cascade of
+ﬁrst- order ﬁlters. In this paper, the idea is extended by introducing
+a closed-form formula to determine the ﬁlter coefﬁcients based on
+the tunable dispersion ﬁlter design method [7].
+This paper is organized in the following way. In the beginning,
+the dispersion phenomenon is introduced in Section 2. Then, the
+previously proposed tunable dispersion ﬁlter design method for a
+cascade of second-order ﬁlters is presented is Section 3, followed
+by the adaptation for ﬁrst-order ﬁlters in Section 4. The results
+from the ﬁlter design are shown in Section 5 and the conclusions
+are presented in Section 6.
+2. DISPERSION PHENOMENON
+Dispersion is the property of a string, due to its stiffness, that
+causes the frequencies of the partials to be higher than the har-
+monic partials. The frequencies of inharmonic partials can be cal-
+culated [1]:
+fk = kf0
+p
+1 + Bk 2, (1)
+where k is the partial number, f0 is the nominal fundamental fre-
+quency of the ideal string (non-dispersive), and B is the inhar-
+monicity coefﬁcient. The value B can be calculated using string
+parameters [1]
+B = π3Qd4
+64l2T , (2)
+where Q is Y oung’s modulus,d is the diameter of the string, l is
+the length, and T is the string tension. Hence, there is a strong
+relation between the B value and the tension of the string.
+Fletcher et al. suggested in 1962 that inharmonicity is a sig-
+niﬁcant factor in producing the sound characteristic of the piano
+[1]. Even though Galembo et al. recently proposed that the spec-
+tral density might be even a more important factor [9], it is still
+clear that inharmonicity is an essential property, which needs to be
+taken into account in piano synthesis.
+Dispersion occurs in all string instruments, especially the pi-
+ano is known to have strong inharmonicity [1]. The amount of
+inharmonicity depends on the type of the piano; grand pianos tend
+to have less inharmonicity than upright pianos. Figure 1 depicts
+estimated B values from a Steinway grand piano. The B values
+were obtained by an automatic estimation algorithm, which ﬁrst
+uses the fast Fourier transform (FFT) to calculate the frequencies
+of the partials, and then estimates the B value by ﬁtting (1) to the
+measured data. Some values are missing in Figure 1, because the
+estimated values for some keys were unreliable (the most common
+reasons for excluding a B estimate were that the nominal funda-
+mental frequency was estimated incorrectly, or that our peak pick-
+ing algorithm got confused). The solid lines in the ﬁgure show the
+expected B range for pianos based on our results. Our estimated
+range is in line with the results by Askenfelt and Galembo [10].
+Although the inharmonicity is stronger at the higher end of the
+range, it has been shown by Järveläinen et al. that the inharmonic-
+ity is perceived mostly at the lower end of the range [11] (recent
+work by Järveläinen and Karjalainen suggest, however, that there
+may be variation in the perception depending on the instrument
+[12]). The estimated B values, displayed in Figure 1, are all above
+the threshold of audibility, which, along with the conﬁdence limits,
+are published in [11]. Thus, it can be expected that inharmonicity
+is heard through-out the range of the piano.
+3. TUNABLE DISPERSION FILTER DESIGN METHOD
+The tunable dispersion ﬁlter design method provided a way to use
+closed-form formulas to design a dispersion ﬁlter [7]. The origi-
+nal design was made for a cascade of second-order ﬁlters, but the
+method can be used to design an arbitrary-order ﬁlter cascade.
+DAFX-71
+Proc. of the 9 th Int. Conference on Digital Audio Effects (DAFx-06), Montreal, Canada, September 18-20, 2006
+0 10 20 30 40 50 60 70 8010
+!6
+10
+!5
+10
+!4
+10
+!3
+10
+!2
+Key number
+Inharmonicity coefficient B
+100 Hz 440 Hz 1000 Hz 4000 Hz
+Figure 1: Measured B values (dots) from a Steinway grand piano 1.
+The solid lines show the expected B range for the piano, the dashed
+line shows the threshold of audibility, and the dash-dotted line its
+conﬁdence limit [11].
+The tunable dispersion ﬁlter design method uses the Thiran
+all-pass ﬁlter design to determine the ﬁlter coefﬁcients [13, 14,
+15]. The Thiran allpass design method is commonly used to design
+fractional delay ﬁlters, but with large delay values the phase delay
+response becomes similar to the phase delay required to simulate
+the dispersion.
+In the Thiran design method, the ﬁlter coefﬁcients are deter-
+mined by using the desired delay value D at dc. The tunable dis-
+persion ﬁlter design method offers a formula to compute D ac-
+cording to the desired f0 and B [7]:
+D(Ikey, B) = e(Cd(B)−Ikey kd(B)), (3)
+where
+Ikey(f0) = log 12√
+2
+f0
+12√
+2
+27.5 , (4)
+kd(B) = e(k1(ln B)2+k2 ln B+k3), (5)
+Cd(B) = e(C1 ln B+C2), (6)
+and k1, k2, k3, C1, and C2 are predeﬁned constants presented in
+Table 1. It has been noticed that, when the inharmonicity coefﬁ-
+cient value is ﬁxed, the relation between required delay values (on
+a logarithmic scale) and key indices can be approximated with a
+straight line. Hence, parameter kd can be interpreted as the slope
+coefﬁcient of the line and parameter Cd as the remainder of the
+line formula. The line parameters kd and Cd are then parameter-
+ized, depending on the inharmonicity coefﬁcient, with parameters
+k1, k2, k3, C1, and C2.
+The dispersion ﬁlter, consisting of a cascade of four second-
+order allpass ﬁlters, produces an extra delay that must be taken into
+account in the string model by modifying the delay line length and
+the tuning ﬁlter coefﬁcients [7]. The extra delay can be estimated
+by using D value and multiplying it with M , the number of ﬁlters
+in cascade.
+1Steinway grand piano samples from University of Iowa Electronic
+Music Studios, http://theremin.music.uiowa.edu
+Parameter Filter 1 ( M = 4) Filter 2 ( M = 1)
+k1 -0.00050469 -0.0026580
+k2 -0.0064264 -0.014811
+k3 -2.8743 -2.9018
+C1 0.069618 0.071089
+C2 2.0427 2.1074
+Table 1: Predeﬁned parameters for the tunable dispersion ﬁlter
+using second-order ﬁlters [7]. Filter 1 (four ﬁlters in a cascade)
+is used for key numbers 1-44 and ﬁlter 2 (a single ﬁlter) for key
+numbers 45-88.
+1 2 3 4 5 6 7 80.06
+0.07
+0.08
+0.09
+M
+C1
+1 2 3 4 5 6 7 81.95
+1.96
+1.97
+1.98
+1.99
+M
+C2
+(a)
+(b)
+Figure 2: Searched (a) C1 and (b) C2 values for ﬁrst-order ﬁlters
+with M values 1 to 8 (solid line). The dashed line illustrates the
+parameterized values using the straight line ﬁt.
+4. NEW FIRST-ORDER DISPERSION FILTER DESIGN
+In this paper, a cascade of ﬁrst-order ﬁlters is used for designing
+a dispersion ﬁlter originally proposed by V an Duyne and Smith
+[5]. A cascade of identical ﬁlters is not as effective from the per-
+formance point of view as a cascade of ﬁlters with different co-
+efﬁcient values. However, the advantage of using a cascade of
+identical ﬁlters is that it is easy to design and, hence, it is used in
+this work.
+The problem with this idea has been the lack of closed-form
+design formulas, as V an Duyne and Smith did not indicate how
+the ﬁlter cascade can be designed, other than by trial and error or
+by using a search algorithm [5]. This problem can be solved by
+extending the tunable dispersion ﬁlter method [7]. In this section,
+the predeﬁned parameters (see equations 3-6) are determined for
+the tunable dispersion ﬁlter method using a cascade of an arbitrary
+number of ﬁrst-order allpass ﬁlters. Hence, the formula should
+take the fundamental frequency, the B value, and the number of
+ﬁlters in cascade M as input parameters.
+The ﬁve predeﬁned constant parameters in equation (5) and
+(6) were determined for eight cases with M varying from 1 to 8
+in a way similar to [7]. It was noticed that parameters k1, k2, and
+k3 lacked any kind of general trend. However, it seems that the
+importance of these parameters is minor compared to parameters
+C1 and C2, which had a clear linear trend on a logarithmic scale,
+as seen in Figure 2. The explanation for this is that the slope coef-
+DAFX-72
+Proc. of the 9 th Int. Conference on Digital Audio Effects (DAFx-06), Montreal, Canada, September 18-20, 2006
+Parameter V alue
+k1 -0.00179
+k2 -0.0233
+k3 -2.93
+m1 0.0126
+m2 0.0606
+m3 -0.00825
+m4 1.97
+Table 2: Calculated ﬁlter design parameters for a cascade of ﬁrst-
+order Thiran allpass ﬁlters.
+10
+!6
+10
+!5
+10
+!4
+10
+!3!1
+!0.9
+!0.8
+!0.7
+!0.6
+!0.5
+!0.4
+!0.3
+B
+a1
+M = 1
+M = 5
+M = 10
+M = 20
+M = 40
+Figure 3: The dispersion ﬁlter coefﬁcient a1 values with B values
+from 10−6 to 10−3 when the number of ﬁrst-order allpass ﬁlters in
+cascade M is 1, 5, 10, 20, and 40. The fundamental frequency is
+65.406 Hz (note C2) in all cases.
+ﬁcient kd does not depend on the number of ﬁlters in cascade M ,
+whereas the remainder term Cd is strongly linked to M . Hence,
+by using polynomial approximation, equation (6) can be extended
+as
+Cd(B, M ) = e((m1 ln M +m2) ln M +m3 ln M +m4) (7)
+where m1, m2, m3, and m4 are the polynomial coefﬁcients de-
+ﬁned in Table 2.
+The parameters required by the design formulas (3), (5), and
+(7) were optimized using polynomial approximation. Parameter
+values k1, k2, and k3 were determined by using M = 8 . The
+resulting values are shown in Table 2.
+In summary, the whole design process goes as follows. First,
+the desired B, M , and f0values should be decided. Then, the
+required D values can be determined by using equations (3), (4),
+(5), and (7). Finally, the ﬁrst-order allpass ﬁlter coefﬁcient a1 can
+be computed by using the Thiran allpass ﬁlter method [15]:
+a1 = 1 − D
+D + 1 (8)
+Two examples on how a1 behaves when the inharmonicity coefﬁ-
+cient value is changed are shown in Figures 3 and 4.
+The delay line length and the tuning ﬁlter coefﬁcient should be
+modiﬁed according to the additional delay produced by the disper-
+sion ﬁlter. It has to be accounted for that the product D · M may
+10
+!6
+10
+!5
+10
+!4
+10
+!3!1
+!0.9
+!0.8
+!0.7
+!0.6
+!0.5
+!0.4
+!0.3
+!0.2
+!0.1
+0
+B
+a1
+key #4
+key #16
+key #28
+key #40
+Figure 4: The dispersion ﬁlter coefﬁcient a1 values with B values
+from 10−6 to 10−3 at key indices 4, 16, 28, and 40, which corre-
+spond to keys C1, C2, C3, and C4, respectively. The number of
+ﬁlters in cascade M is 8 in all cases.
+not be a sufﬁcient estimate for the delay with large M values, as
+suggested in [7] for a cascade of four second-order ﬁlters, because
+the estimation error is approximately M times larger compared to
+a single allpass ﬁlter.
+5. RESULTS
+Figure 5 shows the deviation of the partial frequencies of the ex-
+ample ﬁlter proposed in this work at three fundamental frequencies
+(keys C1, C2, and C3) with reasonable inharmonicity coefﬁcient
+values, with the values for the number of ﬁlters in cascade M set
+to 1, 5, 10, 20, 30, and 40. The partial frequencies are compared to
+the target partial frequencies obtained from equation (1). Hence,
+an ideal dispersion ﬁlter would correspond to zero deviation at all
+frequencies. The ﬁgure shows that the quality of the ﬁlter im-
+proves when M is increased. On the other hand, when the number
+of ﬁlters in cascade M reaches approximately 40, the phase delay
+response does not ﬁt within the deﬁned error limits. In practical
+cases, M values below 20 are preferred for computational reasons.
+Hence, the parameter selection for the ﬁlter design is a trade-off
+between computational load and quality, but the quality does not
+improve limitlessly. Furthermore, the ﬁxing of parameters k1, k2,
+and k3 does not add too much bias to the results when M < 40,
+since the responses stay within the deﬁned error limits.
+The proposed ﬁlter, as well as the original tunable dispersion
+ﬁlter method [7], can be used for providing real-time control over
+the inharmonicity coefﬁcient. This can be done by recomputing
+equations (3), (5), (7), and (8), and by updating the ﬁlter coef-
+ﬁcient each time the inharmonicity coefﬁcient value is changed.
+The updating process requires eight additions, six multiplications,
+and one division from the computational point of view. Addition-
+ally, the logarithmic function is called once and the exponential
+function three times during the process.
+Finally, the ﬁlter was included in a simple piano synthesis
+model. The number of ﬁlters in cascade M was set to 8 in this ex-
+ample. The piano model included a basic string model, as shown
+DAFX-73
+Proc. of the 9 th Int. Conference on Digital Audio Effects (DAFx-06), Montreal, Canada, September 18-20, 2006
+0 200 400 600 800 1000 1200 1400 1600 1800!30
+!25
+!20
+!15
+!10
+!5
+0
+5
+10
+M=1
+Frequency (Hz)
+Deviation (cent)
+M=5
+M=10
+M=20
+M=30
+M=40
+(a)
+0 500 1000 1500 2000 2500 3000!30
+!25
+!20
+!15
+!10
+!5
+0
+5
+10
+M=1
+Frequency (Hz)
+Deviation (cent) M=5
+M=10
+M=20
+M=30
+M=40
+(b)
+0 1000 2000 3000 4000 5000!30
+!25
+!20
+!15
+!10
+!5
+0
+5
+10
+M=1
+Frequency (Hz)
+Deviation (cent)
+M=5
+M=10
+M=20
+M=30
+M=40
+(c)
+Figure 5: Deviation of the partial frequencies for the proposed
+ﬁlter (solid line with circles) with the number of ﬁlters in cas-
+cade M values 1, 5, 10, 20, 30, and 40, when (a) B = 0 .00020,
+f0 = 32.703 Hz (key C1), (b) B = 0.00010, f0 = 65.406 Hz (key
+C2), and (c) B = 0 .00015, f0 = 130 .82 Hz (key C3). The devia-
+tion for a harmonic tone is denoted as a dashed line and the max-
+imum number of perceived inharmonic partials [16] is denoted as
+a vertical line. The dash-dotted lines are 0.5% error limits corre-
+sponding to ±8.39 cents.
+Excitation
+model
+Loss filterDelay lineDispersion
+filter
+Tuning
+filter
+Basic string model
+Figure 6: An illustration of a basic piano string model.
+10 20 30 40 50 60 70 80
+10
+!4
+10
+!3
+10
+!2
+Key number
+B
+100 Hz 440 Hz 1000 Hz 4000 Hz
+Figure 7: The inharmonicity coefﬁcient B values used in the ex-
+ample piano synthesis model.
+10 20 30 40 50 60 70 80!1
+!0.9
+!0.8
+!0.7
+!0.6
+!0.5
+!0.4
+!0.3
+!0.2
+!0.1
+0
+Key number
+a1
+100 Hz 440 Hz 1000 Hz 4000 Hz
+Figure 8: The dispersion ﬁlter parameter a1 values for the piano
+model when a cascade of M = 8 ﬁrst-order allpass ﬁlters is used.
+in Figure 6, and the input signals were extracted from real piano
+samples [17]. The deﬁned inharmonicity coefﬁcient values used
+in the model are shown in Figure 7. In Figure 8, the correspond-
+ing dispersion ﬁlter coefﬁcient values are presented. Moreover,
+the determined delay line length and the delay produced by the
+dispersion ﬁlter are illustrated in Figure 9.
+DAFX-74
+Proc. of the 9 th Int. Conference on Digital Audio Effects (DAFx-06), Montreal, Canada, September 18-20, 2006
+0 10 20 30 40 50 60 70 800
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+Key number
+Delay (samples)
+100 Hz 440 Hz 1000 Hz 4000 Hz
+Figure 9: The delay parameters for the piano model: the length of
+the delay line (dashed line), the length without the dispersion ﬁlter
+(solid line) and the difference between these two which is the delay
+produced by the dispersion ﬁlter (solid line with dots).
+0 0.005 0.01 0.015 0.02 0.025 0.03 0.035 0.04
+!1
+!0.5
+0
+0.5
+1
+Time (ms)
+Amplitude
+Time (ms)
+Frequency (Hz)
+0 0.005 0.01 0.015 0.02 0.025 0.03 0.035 0.040
+1000
+2000
+3000
+4000
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+Figure 10: (a) The waveform and (b) the time-frequency plot of
+a harmonic tone ( f0 = 98 .0 Hz, key G2) produced with a string
+model with no dispersion ﬁlter . The excitation signal is simpliﬁed
+in order to emphasize the effect.
+When equation 3 resulted in a D value less than 1 (for in-
+stance, key numbers 75-88 in Figure 9), D was set to be 1, which
+corresponds to replacing the allpass ﬁlters with the transfer func-
+tion A(z) = 1 . The tuning ﬁlter was implemented with a ﬁrst-
+order Thiran allpass ﬁlter, and a delay of one sample was moved
+from the delay line to the tuning ﬁlter in order to have the frac-
+tional delay parameter in the range from 1 to 2. It can be noticed
+that the tunable dispersion ﬁlter reduces the need for a delay line
+memory up of to 200 samples in this case (see Figure 9).
+Figure 10 and Figure 11 illustrate how the dispersion ﬁlter af-
+fects the waveform and the spectral properties of the produced tone
+in time domain. This way of visualizing the effect of dispersion by
+using a short time window was suggested by Woodhouse [18]. The
+0 0.005 0.01 0.015 0.02 0.025 0.03 0.035 0.04
+!1
+!0.5
+0
+0.5
+1
+Time (ms)
+Amplitude
+Time (ms)
+Frequency (Hz)
+0 0.005 0.01 0.015 0.02 0.025 0.03 0.035 0.040
+1000
+2000
+3000
+4000
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+(a)
+(b)
+Figure 11: (a) The waveform and (b) the time-frequency plot of an
+inharmonic tone ( f0 = 98 .0 Hz, key G2, B = 0.0001) produced
+with a string model with eight ﬁrst-order allpass ﬁlters in cascade.
+The excitation signal is simpliﬁed in order to emphasize the effect.
+excitation of the synthetic tones contains 50 partials with sine start-
+ing phases produced by using additive synthesis. Two effects can
+be seen: the waveform of the tone becomes more spread out and
+the high frequencies travel faster in than the low frequencies in the
+feedback loop of the string model. Sound examples as well as Mat-
+lab code to calculate the dispersion ﬁlter coefﬁcient are available
+at http://www.acoustics.hut.ﬁ/demos/ext-disp/.
+6. CONCLUSIONS
+In this paper, a closed-form formula is proposed to be used in de-
+signing ﬁrst-order allpass ﬁlters for dispersion modeling. The tun-
+able dispersion ﬁlter design method that we introduced recently
+provides a technique which is extended in this work to determine
+the closed-form formula for an arbitrary number of ﬁrst-order ﬁl-
+ters in cascade. It enables an easy design process for ﬁrst-order
+dispersion ﬁlters, and, also, it provides real-time control over the
+dispersion phenomenon.
+7. ACKNOWLEDGMENTS
+This work was supported by the Nokia Foundation and the Academy
+of Finland (project no. 104934).
+8. REFERENCES
+[1] H. Fletcher, E. D. Blackham, and R. Stratton, “Quality of
+piano tones,” J. Acoust. Soc. Am. , vol. 34, no. 6, pp. 749–
+761, 1962.
+[2] J. O. Smith, “Physical modeling using digital waveguides,”
+Computer Music J., vol. 16, no. 4, pp. 74–91, 1992.
+[3] D. A. Jaffe and J. O. Smith III, “Extensions of the Karplus-
+Strong plucked-string algorithm,” Computer Music J., vol. 7,
+no. 2, pp. 56–69, 1983.
+[4] D. Rocchesso and F. Scalcon, “Accurate dispersion simu-
+lation for piano strings,” in Proc. Nordic Acoust. Meeting
+(NAM’96), Helsinki, Finland, 1996, pp. 407–414.
+DAFX-75
+Proc. of the 9 th Int. Conference on Digital Audio Effects (DAFx-06), Montreal, Canada, September 18-20, 2006
+[5] S. A. V an Duyne and J. O. Smith III, “A simpliﬁed approach
+to modeling dispersion caused by stiffness in strings and
+plates,” in Proc. Int. Comp. Music Conf. (ICMC’94), Århus,
+Denmark, 1994, pp. 407–410.
+[6] J. Bensa, “Analysis and synthesis of piano sounds using
+physical and signal models,” Ph.D. dissertation, Université
+de la Méditerranée, France, 2003.
+[7] J. Rauhala and V . Välimäki, “Tunable dispersion ﬁlter design
+for piano synthesis,” IEEE Sig. Proc. Letters , vol. 13, no. 5,
+pp. 253–256, 2006.
+[8] B. Bank, F. Avanzini, G. Borin, G. D. Poli, F. Fontana,
+and D. Rocchesso, “Physically informed signal processing
+methods for piano sound synthesis: A research overview,”
+EURASIP J. on Applied Sig. Proc. , vol. 2003, no. 10, pp.
+941–952, 2003.
+[9] A. Galembo, A. Askenfelt, L. L. Cuddy, and F. A. Russo,
+“Perceptual relevance of inharmonicity and spectral envelope
+in the piano bass range,” Acta Acustica united with Acustica ,
+vol. 90, no. 3, pp. 528–536, 2004.
+[10] A. Askenfelt and A. S. Galembo, “Study of the spectral in-
+harmonicity of musical sound by the algorithms of pitch ex-
+traction,” Acoust. Physics, vol. 46, no. 2, pp. 121–132, 2000.
+[11] H. Järveläinen, V . Välimäki, and M. Karjalainen, “Audibility
+of the timbral effects of inharmonicity in stringed instrument
+tones,” Acoust. Research Letters Online , vol. 2, no. 3, pp.
+79–84, 2001.
+[12] H. Järveläinen and M. Karjalainen, “Importance of inhar-
+monicity in the acoustic guitar,” in Proc. Int. Comp. Music
+Conf. (ICMC’05), Barcelona, Spain, 2005, pp. 363–366.
+[13] J.-P . Thiran, “Recursive digital ﬁlters with maximally ﬂat
+group delay,” IEEE Trans. Circuit Theory, vol. 18, no. 6, pp.
+659–664, 1971.
+[14] A. Fettweis, “A simple design of maximally ﬂat delay digi-
+tal ﬁlters,” IEEE Trans. Audio and Electroacoustics , vol. 20,
+no. 2, pp. 112–114, 1972.
+[15] T. I. Laakso, V . Välimäki, M. Karjalainen, and U. K. Laine,
+“Splitting the unit delay: Tools for fractional delay ﬁlter de-
+sign,” IEEE Sig. Proc. Magazine , vol. 13, no. 1, pp. 30–60,
+1996.
+[16] D. Rocchesso and F. Scalcon, “Bandwidth of perceived in-
+harmonicity for physical modeling of dispersive strings,”
+IEEE Trans. Speech and Audio Proc. , vol. 7, no. 5, pp. 597–
+601, 1999.
+[17] J. Rauhala and V . Välimäki, “Parametric excitation model
+for waveguide piano synthesis,” in Proc. IEEE Int. Conf.
+Acoust., Speech, and Sig. Proc. (ICASSP’06), Toulouse,
+France, 2006, pp. 157–160.
+[18] J. Woodhouse, “Plucked guitar transients: comparison of
+measurements and synthesis,” Acta Acustica united with
+Acustica, vol. 90, no. 5, pp. 945–965, 2004.
+DAFX-76

@@ -1,0 +1,4695 @@
+<!DOCTYPE html>
+<html data-js="yes" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index-frame_files/c3bdc00a0a2e184487830747601080da.js" type="text/javascript" async=""></script><script type="text/javascript" async="" src="index-frame_files/analytics.js"></script><script>document.documentElement.setAttribute('data-js', 'yes');</script>
+    <meta name="description" content="My expertise includes music informatics, music information retrieval, music signal processing, artificial intelligence, music cognition; content-based audio analysis; beat tracking, audio alignment, chord &amp; note transcription and singing intonation.
+">
+    
+    
+    
+    <title>Professor Simon Dixon - School of Electronic Engineering and Computer Science</title>
+    <link rel="stylesheet" type="text/css" media="" href="index-frame_files/lib.min.1.3.css"><!-- Lib 1.3 CSS -->
+  	<link rel="stylesheet" type="text/css" media="" href="index-frame_files/vendors~lib.min.1.2.4.css"><!-- Vendors Lib 1.2.4 CSS -->
+    <link rel="stylesheet" type="text/css" media="" href="index-frame_files/qm-custom.1.3.css"><!-- QM CUstom 1.3 -->
+    <link rel="stylesheet" type="text/css" media="all" href="">
+
+    <script type="text/javascript" src="index-frame_files/5388.js" async="async"></script>
+    
+
+
+<script src="index-frame_files/jquery-1.8.3.min.js"></script>
+<script>
+jQuery(document).ready(function($){
+
+$('.staffPic img').error(function() {
+  console.log('no image');
+  $('.staffPic').hide();
+});
+
+});
+
+</script>
+
+<style>
+.myDiv {
+  margin: 100px;
+  width: 80%;
+  text-align: left;
+}
+</style>
+<!--  background-color: lightblue; -->
+</head>
+
+<body>
+  <a href="#main-content" id="skiptocontent">Skip to main content</a>
+  
+	
+ 
+  <header class="header slat slat--blue" data-component="header" id="top" role="banner">
+    <div class="header__container slat__container">
+        <div class="header__nav" role="navigation" aria-labelledby="global-menu">
+            <a class="header__nav-trigger" href="#" data-toggle-drawer="primary-nav" aria-label="Open Main Menu">
+                <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+                    <use href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.1.2.3.svg#burger" xlink:href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.1.2.3.svg#burger"></use>
+                </svg>
+            </a>
+            <h2 class="vh" id="global-menu">Global main menu</h2>
+            <ul class="header__links">
+                <li class="header__link"><a class="header__link-primary" href="#primary-nav-study" data-action="show-section-link" aria-label="Study at Queen Mary University of London"><span>Study</span></a><a class="header__link-secondary" href="#primary-nav-study" id="primary-menu-trigger-study" data-action="show-section" aria-label="View more study pages"><svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation"><use href="#arrow-expand" xlink:href="#arrow-expand"></use></svg></a></li><li class="header__link"><a class="header__link-primary" href="#primary-nav-about" data-action="show-section-link" aria-label="About Queen Mary University of London"><span>About</span></a><a class="header__link-secondary" href="#primary-nav-about" id="primary-menu-trigger-about" data-action="show-section" aria-label="View more about pages"><svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation"><use href="#arrow-expand" xlink:href="#arrow-expand"></use></svg></a></li><li class="header__link"><a class="header__link-primary" href="#primary-nav-research" data-action="show-section-link" aria-label="Research at Queen Mary University of London"><span>Research</span></a><a class="header__link-secondary" href="#primary-nav-research" id="primary-menu-trigger-research" data-action="show-section" aria-label="View more research pages"><svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation"><use href="#arrow-expand" xlink:href="#arrow-expand"></use></svg></a></li>
+            </ul>
+        </div>
+        <a class="header__logo" href="https://www.qmul.ac.uk/">
+            <img src="index-frame_files/qm-logo-white.svg" alt="Return to the Queen Mary University of London homepage">
+        </a>
+        <div class="header__search">
+            <a class="header__link header__search-link" href="https://www.qmul.ac.uk/find-an-expert/">
+                <span>Find an expert</span>
+            </a>
+            <div class="sitesearch" data-role="sitesearch">
+                <button type="button" class="sitesearch__trigger" data-role="sitesearch-trigger" tabindex="0">
+                    <span class="twi  sitesearch__icon">
+                        <span class="twi__label">
+                            <span>Search</span>
+                        </span>
+                        <span class="twi__icon">
+                            <svg class="icon  sitesearch__icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+                                <use href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.1.2.3.svg#search" xlink:href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.1.2.3.svg#search"></use>
+                            </svg>
+                        </span>
+                    </span>
+                </button>
+                <form class="sitesearch__content" data-role="sitesearch-content" action="https://search.qmul.ac.uk/s/search.html" method="GET" role="search">
+                    <label class="vh" for="sitesearch__input">Search Queen Mary University London website</label>
+                    <input type="hidden" name="collection" value="queenmary-meta">
+                    <input type="text" name="query" placeholder="Search" class="sitesearch__input" id="sitesearch__input" autocomplete="off" data-role="sitesearch-input" tabindex="-1">
+                    <button class="sitesearch__submit" type="submit" name="button" aria-label="Submit search form" tabindex="-1">
+                        <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+                        <use href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.1.2.3.svg#arrow-navlink" xlink:href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.1.2.3.svg#arrow-navlink"></use>
+                        </svg>
+                    </button>
+                    <button class="sitesearch__close" type="button" aria-label="Close search form">
+                        <span class="twi">
+                            <span class="twi__label">
+                                <span>Close</span>
+                            </span>
+                            <span class="twi__icon">
+                                <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+                                    <use href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.1.2.3.svg#close" xlink:href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.1.2.3.svg#close"></use>
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<nav class="primary-nav nav-drawer--left nav-drawer slat" id="primary-nav" data-component="primary-nav" data-behaviour="nav-drawer">
+    <div class="nav-drawer__wrapper">
+        <div class="slat__container">
+            <div class="nav-drawer__head">
+                <a href="#" class="nav-drawer__home" data-role="home">Home</a>
+                <span class="nav-drawer__back" data-role="back">
+                    <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+                        <use href="/media/ow-assets/assets/icons/sprite.1.2.3.svg#arrow-navlink-back" xlink:href="/media/ow-assets/assets/icons/sprite.1.2.3.svg#arrow-navlink-back"></use>
+                    </svg>
+                    Back to home
+                </span>
+                <span class="nav-drawer__close" data-role="close">
+                    <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+                        <use href="/media/ow-assets/assets/icons/sprite.1.2.3.svg#close" xlink:href="/media/ow-assets/assets/icons/sprite.1.2.3.svg#close"></use>
+                    </svg>
+                </span>
+            </div>
+            <div class="nav-drawer__content" data-role="content">
+                <div class="primary-nav__section primary-nav__section--study" id="primary-nav-study" data-role="section">
+                    <h4 class="primary-nav__section-title" data-role="section-toggle">Study</h4>
+                    <div class="primary-nav__groups">
+
+                        <div class="primary-nav__group primary-nav__group--full">
+                            <h5 class="primary-nav__group-title">Areas of study</h5>
+                            <ul>
+                                <li><a href="https://www.qmul.ac.uk/study/foundation-courses/">Foundation courses</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/biological-and-biomedical-sciences/">Biological and biomedical sciences</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/business-and-management/">Business and management</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/chemical-sciences/">Chemical sciences</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/comparative-literature/">Comparative literature</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/computer-and-data-science/">Computer and data science</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/dentistry/">Dentistry</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/drama/">Drama</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/economics-finance/">Economics and finance</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/engineering/">Engineering</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/english/">English</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/film-studies/">Film studies</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/geography-and-environmental-science/">Geography and environmental science </a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/global-health/">Global health</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/history/">History</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/law/">Law</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/liberal-arts/">Liberal arts</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/linguistics/">Linguistics</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/materials-science/">Materials science</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/mathematics/">Mathematics</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/medicine/">Medicine</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/modern-languages-and-cultures/">Modern languages and cultures</a>
+                                </li>
+                                <li><a href="https://www.qmul.ac.uk/study/physics-and-astronomy/">Physics and astronomy</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/politics-and-international-relations/">Politics and international relations</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/psychology/">Psychology</a></li>
+                            </ul>
+                        </div>
+                        <div class="primary-nav__group primary-nav__group--half">
+                            <h5 class="primary-nav__group-title">Study at Queen Mary</h5>
+                            <ul>
+                                <li><a href="https://www.qmul.ac.uk/study/undergraduate/">Undergraduate study</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/postgraduate/">Postgraduate study</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/online-study/">Online study</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/international-students/">International students</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/undergraduate/coursefinder/">A-Z undergraduate courses</a>
+                                </li>
+                                <li><a href="https://www.qmul.ac.uk/study/postgraduate/taught/coursefinder/">A-Z postgraduate taught courses</a>
+                                </li>
+                                <li><a href="https://www.qmul.ac.uk/study/postgraduatehttps://www.qmul.ac.uk/research/subjects/">A-Z PhD&nbsp;subjects</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/undergraduate/clearing/">Clearing</a></li>
+                            </ul>
+                        </div>
+                        <div class="primary-nav__group primary-nav__group--half">
+                            <h5 class="primary-nav__group-title">Experience Queen Mary</h5>
+                            <ul>
+                                <li><a href="https://www.qmul.ac.uk/study/who-we-are/">Why Queen Mary?</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/accommodation/">Accommodation</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/our-campuses/">City campuses</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/your-2021-student-experience/">Your 2021 student experience</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/student-life/">Student life</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/the-london-advantage/">The London advantage</a></li>
+                                <li><a href="https://www.qmul.ac.uk/study/study/explore-our-campuses/">Explore our campuses</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="primary-nav__section primary-nav__section--about" id="primary-nav-about" data-role="section">
+                    <h4 class="primary-nav__section-title" data-role="section-toggle">About</h4>
+                    <div class="primary-nav__groups">
+
+                        <div class="primary-nav__group primary-nav__group--full">
+
+                            <ul>
+                                <li><a href="https://www.qmul.ac.uk/about/">About home</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/welcome/">Welcome</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/howtofindus/">How to find us</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/calendar/">Calendar</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/history/">Our history</a></li>
+                                <li><a href="https://www.qmul.ac.uk/alumni/">Alumni</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/community/">Local community</a></li>
+                                <li><a href="https://www.qmul.ac.uk/global/">Global</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/facts-and-figures/">Facts and figures</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/foi/">Freedom of information</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/whoswho/">Who's who</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/sustainability/">Sustainability</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/arts-and-culture/">Arts and Culture</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/the-medical-college-of-saint-bartholomews-hospital-trust/">The
+                                        Medical College of Saint Bartholomew’s Hospital Trust</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/equality-diversity-and-inclusion/">Equality, Diversity and
+                                        Inclusion</a></li>
+                                <li><a href="https://www.qmul.ac.uk/about/volunteering/">Volunteering</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="primary-nav__section primary-nav__section--research" id="primary-nav-research" data-role="section">
+                    <h4 class="primary-nav__section-title" data-role="section-toggle">Research</h4>
+                    <div class="primary-nav__groups">
+                        <div class="primary-nav__group primary-nav__group--half">
+                            <h5 class="primary-nav__group-title">Research and Innovation</h5>
+                            <ul>
+                                <li><a href="https://www.qmul.ac.uk/research/">Research home</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/strategy-support-and-guidance/">Strategy, support and
+                                        guidance</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/featured-research/">Featured research</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/facilities-and-resources/">Facilities and resources</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/publications/">Publications</a></li>
+                                <li><a href="https://eecs.qmul.ac.uk/postgraduatehttps://www.qmul.ac.uk/research/">Postgraduate research degrees</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/news/">News</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/research-impact/">Research impact</a></li>
+                            </ul>
+                        </div>
+                        <div class="primary-nav__group primary-nav__group--half">
+                            <h5 class="primary-nav__group-title">Research by faculties and centres</h5>
+                            <ul>
+                                <li><a href="https://www.qmul.ac.uk/research/faculties-and-research-centres/humanities-and-social-sciences/">Humanities
+                                        and Social Sciences</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/faculties-and-research-centres/medicine-and-dentistry/">Medicine
+                                        and Dentistry</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/faculties-and-research-centres/science-and-engineering/">Science
+                                        and Engineering</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/faculties-and-research-centres/interdisciplinary-research-centres/">Interdisciplinary
+                                        research centres</a></li>
+                            </ul>
+                        </div>
+                        <div class="primary-nav__group primary-nav__group--half">
+                            <h5 class="primary-nav__group-title">Collaborations and partnerships</h5>
+                            <ul>
+                                <li><a href="https://www.qmul.ac.uk/research/collaborate-with-us/">Collaborate with us</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/collaborate-with-us/contact-the-team/">Contact us</a></li>
+                                <li><a href="https://www.qmul.ac.uk/research/collaborate-with-us/case-studies/">Case studies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="section-header slat" data-component="section-header">
+    <div class="section-header__container slat__container">
+      <a href="https://eecs.qmul.ac.uk/" class="section-header__title" data-role="title">School of Electronic Engineering and Computer Science
+</a>
+      <a class="section-header__nav-trigger" href="#" data-toggle-drawer="secondary-menu">
+        <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+          <use href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.svg#menu" xlink:href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.svg#menu"></use>
+        </svg>
+      </a>
+    </div>
+  </div>
+  
+  <nav class="secondary-menu  nav-drawer--right nav-drawer slat" id="secondary-menu" data-component="secondary-menu" data-behaviour="nav-drawer" aria-labelledby="secondary-nav-menu">
+  	<div class="nav-drawer__wrapper">
+    	<div class="slat__container">
+    		<div class="nav-drawer__head">
+      	<a href="https://eecs.qmul.ac.uk/" class="nav-drawer__home" data-role="home">School of Electronic Engineering and Computer Science</a>
+      	<span class="nav-drawer__back" data-role="back">
+        
+      <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+        <use href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.svg#arrow-navlink-back" xlink:href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.svg#arrow-navlink-back"></use>
+      </svg>
+
+        School home
+      </span>
+      <span class="nav-drawer__close" data-role="close">
+        
+      <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+        <use href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.svg#close" xlink:href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.svg#close"></use>
+      </svg>
+
+      </span>
+    </div>
+
+    <div class="nav-drawer__content" data-role="content">
+     <div class="secondary-menu__nav is-ready" data-role="nav">
+      <h2 class="vh" id="secondary-nav-menu">School navigation</h2>
+      <ul>
+		<li><a href="https://aim.qmul.ac.uk/">AIM --- UKRI Centre for Doctoral Training in AI and Music</a></li>
+		<li><a href="https://c4dm.eecs.qmul.ac.uk/">C4DM --- Centre for Digital Music</a></li>
+      </ul>
+     </div>
+    </div>
+
+  </div>
+</div>
+  
+<div class="secondary-menu__panel" data-role="panel">
+  <div class="secondary-menu__panel-container" data-role="panel-content"></div>
+</div>
+</nav>
+  
+<main id="main-content">
+
+<div class="myDiv">
+<h1>
+	<img src="images/dixon-web-photo.jpg"
+	alt="Photo of Simon Dixon" width="100" height="151" align="right" /> 
+	Prof. Simon Dixon
+</h1>
+<h2>Contact Details</h2>
+    <p>
+		<b>Position</b>: Professor;<br />
+			Director of the <a href="https://aim.qmul.ac.uk">
+			UKRI Centre for Doctoral Training in Artificial
+			Intelligence and Music</a>;<br />
+			Deputy Director of the <a href="https://c4dm.eecs.qmul.ac.uk">
+			Centre for Digital Music</a><br />
+        <b>Tel:</b> <i>Internal</i>: <b>[13] 7681<br />
+        </b><i>International</i>:<b> +44 20 7882 7681<br />
+        <!--/b><i>National</i>: <b>020 7882 7681<br />
+        Fax: </b><i>National</i>:<b> 020 7882 7997<br />
+        </b><i>International</i>:<b> +44 20 7882 7997<br /-->
+        Em&#x61;il: </b><a href="&#109;&#97;&#105;&#108;&#116;&#111;:&#x73;&#46;&#101;&#46;&#x64;&#x69;&#x78;&#x6F;&#x6E;&#x40;&#113;&#x6D;&#x75;&#108;&#x2E;&#97;&#99;&#x2E;&#x75;&#107;">&#x73;&#46;&#101;&#46;&#x64;&#x69;&#x78;&#x6F;&#x6E;&#x40;&#113;&#x6D;&#x75;&#108;&#x2E;&#97;&#99;&#x2E;&#x75;&#107;</a><br />
+        <b>Office: </b>ENG 406 (access from ENG403 via 4th floor of Graduate Centre)<br />
+		<b>Office Hours: </b> Tue 3pm during semester.<br />
+		Please mail me in advance to confirm availability or to request
+		an appointment at other times.
+		<br />
+        <b>Research Group: </b>
+		<a href="https://c4dm.eecs.qmul.ac.uk">Centre for Digital Music</a>
+		<br />
+		<b>Google Scholar: </b> <a
+		href="https://scholar.google.co.uk/citations?user=9GvyqXEAAAAJ">
+		https://scholar.google.co.uk/citations?user=9GvyqXEAAAAJ </a>
+		<br />
+        <b>ORCID ID: </b>
+		<a href="https://orcid.org/0000-0002-6098-481X">0000-0002-6098-481X</a>
+		<!--
+		<br />
+		<b>Scopus ID: </b>
+		<a href="https://www.scopus.com/authid/detail.uri?authorId=57203056378">
+		57203056378</a>
+		<br />
+		<b>Semantic Scholar: </b>
+		<a href="https://www.semanticscholar.org/author/S.-Dixon/145039466">
+		https://www.semanticscholar.org/author/S.-Dixon/145039466</a>
+		<br />
+		<b>Dimensions ID: </b>
+		<a href="ID https://app.dimensions.ai/discover/publication?and_facet_researcher=ur.0627135504.09">ur.0627135504.09</a> and
+		<a href="ID https://app.dimensions.ai/discover/publication?and_facet_researcher=ur.012344053234.91">ur.012344053234.91</a>
+		
+		-->
+	</p>
+
+	<div class="container container--lg py-5">
+	<div class="tabs" data-component="tabs">
+	<ul class="tabNavigation tabs__tabs" data-role="tabs">
+	<li class="tabs__tab is-active"><a href="#news" data-role="trigger" class="selected">News</a></li>
+	<li class="tabs__tab"><a href="#research" data-role="trigger">Research
+	&amp; Projects</a></li>
+	<li class="tabs__tab"><a href="#publications" data-role="trigger">Publications</a></li>
+	<li class="tabs__tab"><a href="#team" data-role="trigger">Research Team</a></li>
+	<!--li class="tabs__tab"><a href="#tab6" data-role="trigger">Former Members</a></li-->
+	<li class="tabs__tab"><a href="#downloads" data-role="trigger">Downloads</a></li>
+	<li class="tabs__tab"><a href="#teaching" data-role="trigger">Teaching</a></li>
+	<li class="tabs__tab"><a href="#bio" data-role="trigger">Biography</a></li>
+	</ul>
+	<div class="tabs__container" data-role="container">
+	<div id="tab1" class="tabs__content prose" data-role="content" style="display: none;"></div>
+	<div id="news" class="tabs__content prose" data-role="content" style="display: block;">
+	<h2>News &amp; Events</h2>
+		<ul>
+		<li>8 May 2026: Ivan Shanin was awarded the ICASSP 2026
+			Best Student Paper Award for the paper
+			<a href="pub/2026/ShaninEtAl-ICASSP2026.pdf">
+			Audio-to-Score Jazz Solo Transcription with the Rhythm Perceiver
+			</a>
+			by Ivan Shanin, Xavier Riley and Simon Dixon, at the 2026 IEEE
+			International Conference on Acoustics, Speech and Signal Processing
+			</li>
+		<li>15 December 2025: Huan Zhang passed her PhD viva on
+			<a href="phd/HuanZhang-PhD-Thesis.pdf">
+			Computational Modeling of Expressive Piano Performance:
+			Understanding, Generation and Assessment
+			</a></li>
+		<li>13 November 2025: Yin-Jyun (Jun) Luo passed his PhD viva on
+			<a href="phd/YinJyunLuo-PhD-Thesis.pdf">Towards Robust and
+			Composable Disentangled Representations for Music and Speech
+			</a></li>
+		<li>25 September 2025: <a href="https://aim.qmul.ac.uk">AIM</a>
+			PhD student Ben Hayes, along with supervisors Charalampos Saitis and
+			George Fazekas, received the best student paper award at the
+			ISMIR 2025 conference, for their paper
+			<a href="https://ismir2025program.ismir.net/poster_7.html">
+			Audio Synthesizer Inversion in Symmetric Parameter Spaces with
+			Approximately Equivariant Flow Matching
+			</a>. Two other AIM papers were also among the seven papers
+			shortlisted for an award.</li>
+		<li>10 September 2025: <a href="https://aim.qmul.ac.uk">AIM</a>
+			PhD student Mary Pilataki received the Best Paper Award at the
+			Audio Engineering Society International Conference on Artificial
+			Intelligence and Machine Learning for Audio (AES AIMLA) 2025
+			for her paper <i>Extraction and Neural Synthesis of Low-Order
+			Spectral Components for Head-Related Transfer Functions</i>, 
+			carried out during her internship at PlayStation London with
+			Cal Armstrong and Chris Buchanan.</li>
+		<li>25 April 2025: Xavier Riley passed his PhD viva on
+			<a href="phd/XavierRiley-PhD-Thesis.pdf">Transcribing the Jazz
+			Ensemble: Applying Deep Learning Models to Jazz Transcription
+			</a></li>
+		<li>6 Dec 2024: Yukun Li passed his PhD viva on
+			<a href="phd/YukunLi-PhD-Thesis.pdf">Segmenting and Analysing
+				Pitch Contours across Singing Styles
+			</a></li>
+		<li>14 Nov 2024: Two of the three best paper awards at the
+			International Society for Music Information Retrieval Conference
+			featured <a href="https://aim.qmul.ac.uk">AIM</a> PhD students and
+			their supervisors:
+			<a href="https://qmro.qmul.ac.uk/xmlui/handle/123456789/98705">
+				MuChoMusic: Evaluating Music Understanding in Multimodal
+				Audio-Language Models</a>
+				(Benno Weck, Ilaria Manco, Emmanouil Benetos, Elio Quinton,
+				George Fazekas, Dmitry Bogdanov) and
+			<a href="https://qmro.qmul.ac.uk/xmlui/handle/123456789/98593">
+				ST-ITO: Controlling Audio Effects for Style Transfer with
+				Inference-Time Optimization</a>
+				(Christian J. Steinmetz, Shubhr Singh, Marco Comunità, Ilias
+				Ibnyahya, Shanxin Yuan, Emmanouil Benetos, Joshua D. Reiss)
+			</li>
+		<li>6 Nov 2024: Yixiao Zhang passed his PhD viva on
+			<a href="phd/YixiaoZhang-PhD-Thesis.pdf">Improving Controllability
+			and Editability for Pretrained Text-to-Music Generation Models
+			</a></li>
+		<li>12 Jul 2024: the <a href="https://smcnetwork.org/smc2024/#bestPaper">
+			Best Paper Award at the Sound and Music Computing Conference
+			(SMC 2024)</a>
+			was awarded to Alia Morsi (UPF), Huan Zhang (QMUL), Akira Maezawa
+			(Yamaha), Simon Dixon (QMUL) and Xavier Serra (UPF) for our paper:
+	<a href="https://smcnetwork.org/smc2024/papers/SMC2024_paper_id171.pdf">
+	Simulating Piano Performance Mistakes for Music Learning Contexts</a></li>
+		<li>26 Apr 2024: I will give a keynote presentation at the
+			Northern Network for Empirical Music Research (NEMuR) at the
+			University of Hull</li>
+		<li>7 Mar 2024: Brendan O'Connor passed his PhD viva on the topic of
+			<a href="phd/BrendanOConnor-PhD-Thesis.pdf">Analysis,
+			Disentanglement, and Conversion of Singing Voice Attributes</a></li>
+		<li>26 Feb 2024: Applications close for a research assistent to work
+			on the project
+			<a href="https://www.qmul.ac.uk/jobs/vacancies/items/9355.html">
+			Music Performance Assessment and Feedback</a></li>
+		<li>12 Jan 2024: Final workshop of
+			<a href="https://mirg.city.ac.uk/jazzdap/">JazzDAP
+			(the Jazz Digital Archives Project,
+			also known as New Directions in Digital Jazz Studies)</a> at
+			the Institute for Jazz Studies, Rutgers University, New Jersey.</li>
+		<li>11 Jan 2024: We (Adriana Cuervo, Pedro Cravinho, Simon Dixon,
+			Haftor Medbøe, Gabriel Solis and Tillman Weyde) presented a panel
+			on Artificial Intelligence and New Directions in Digital Jazz
+			Studies at the Jazz Congress 2024, Lincoln Center, New York
+			(the only time in my life I'll be on the same programme as
+			Dee Dee Bridgewater, Marcus Miller, John Patitucci, etc.!)</li>
+		<li>28 Apr 2023: Carlos Lordelo passed his PhD viva on the topic of
+			<i>Deep Learning Methods for Instrument Separation and
+			Recognition</i>.
+			Carlos was funded by the EU H2020 
+			<a href="https://mip-frontiers.eu/">MIP-Frontiers</a> project,
+			and completed most of his PhD in Sweden with our industry partner
+			DoReMIR Music Research, supervised by Emmanouil Benetos, Sven
+			Ahlb&auml;ck from DoReMIR and me.   His work is already in use in
+			the <a href="scorecloud.com">ScoreCloud</a> product range from
+			DoReMIR. The examiners found his work on unsupervised domain
+			adaptation particularly exciting, noting its potential beyond the
+			immediate application areas of the thesis.</li>
+		<li>21 Nov 2022: I gave a <a
+		href="https://www.cirmmt.org/en/events/distinguished-lectures/simon-dixon">Distinguished Lecture</a> on Automatic Music Transcription and Music Understanding at McGill University, Centre for Interdisciplinary Research in Music Media and Technology (CIRMMT).</li>
+		<li>28 Apr 2022: Emir Demirel passed his PhD viva on the topic
+			<a href="phd/EmirDemirel-PhD-Thesis.pdf">
+			Deep Neural Networks for Automatic Lyrics Transcription</a>,
+			as part of the
+			<a href="https://mip-frontiers.eu/">MIP-Frontiers</a> project,
+			in collaboration with DoReMIR Music Research.</li>
+		<li>12 Apr 2022: The <i>New Directions in Digital Jazz Studies</i> 
+			project, also known as
+			<a href="https://mirg.city.ac.uk/jazzdap/">JazzDAP
+			(Jazz Digital Archive Project)</a>, is seeking a research
+			assistant (postdoctoral or predoctoral) for a short-term (4-month)
+			position analysing jazz recordings for main melody, chords and
+			beats. Applications close on 5 May 2022. See advertisement
+			<a href="https://www.qmul.ac.uk/jobs/vacancies/items/6907.html">
+			here</a>.</li>
+		<li>25 Mar 2022: Ruchit Agrawal passed his PhD viva on the topic
+			<a href="phd/RuchitAgrawal-PhD-Thesis.pdf">
+			Towards Context-Aware Neural Performance-Score Synchronisation</a>,
+			as part of the
+			<a href="https://mip-frontiers.eu/">MIP-Frontiers</a> project,
+			in collaboration with Tido Music.</li>
+		<li>1 Dec 2021: At least 12 PhD studentships available for the
+			Sept 2022 intake of the <a href="https://aim.qmul.ac.uk">
+			UKRI Centre for Doctoral Training in AI and Music</a>.
+			Application deadline: 30 Jan 2022.</li>
+		<li>1 Oct 2021: I was awarded Turing Fellow status by the
+			<a href="https://www.turing.ac.uk/">Alan Turing Institute</a>.</li>
+		<li>1 Apr 2021: The Journal of the American Musicological Society
+			published a <a href="https://online.ucpress.edu/jams/article-abstract/74/1/195/116883/Dig-That-Lick-DTL-Analyzing-Large-Scale-Data-for?redirectedFrom=fulltext">review</a> of the <i><a href="https://dig-that-lick.eecs.qmul.ac.uk/">Dig that Lick</a></i> project by Chris Stover.</li>
+		<li>16 Dec 2020: Funding <a href="https://www.neh.gov/news/neh-and-uk-arts-and-humanities-research-council-announce-grants-support-digital-innovation">announced</a> for a new project in collaboration with the
+			University of Illinois, City University of London, Birmingham City
+			University, the Institute of Jazz Studies at Rutgers University,
+			and the Scottish Jazz Archive:
+			<i>New Directions in Digital Jazz Studies: Music Information
+			Retrieval and AI Support for Jazz Scholarship in Digital
+			Archives</i>.</li>
+		<li>30 Nov 2020: At least 12 PhD studentships available for the
+			Sept 2021 intake of the <a href="https://aim.qmul.ac.uk">
+			UKRI Centre for Doctoral Training in AI and Music</a>.
+			Application deadline: 27 Jan 2021.</li>
+		<li>14 Sep 2020: 15 students enrol as the second cohort of the
+			<a href="https://aim.qmul.ac.uk/students/">
+			UKRI Centre for Doctoral Training in AI and Music</a>.
+		<li>13 July 2020: Daniel Stoller successfully defends his PhD thesis
+			<a href="phd/DanielStoller-PhD-Thesis.pdf">
+			Deep Learning for Music Information Retrieval in Limited Data
+			Scenarios
+			</a>
+		</li>
+		<li>20 Apr 2020: Daniel Stoller's paper <I>Seq-U-Net: A One-Dimensional
+			Causal U-Net for Efficient Sequence Modelling</I> is accepted for
+			presentation in the main track at
+			<a href="https://www.ijcai20.org/">IJCAI-PRICAI 2020</a>. 
+		</li>
+		<li>20 Mar 2020: Francisco Rodr&iacute;guez-Algarra successfully
+			defends his PhD thesis
+			<a href="phd/FranciscoRodriguez-Algarra-PhD-Thesis.pdf">
+			A Critical Look at the Music Classification Experiment Pipeline:
+			Using Interventions to Detect and Account for Confounding Effects
+			</a>
+		</li>
+		<li>11 Feb 2020: Saumitra Mishra successfully defends his PhD thesis
+			<a href="phd/SaumitraMishra-PhD-Thesis.pdf">
+			Interpretable Machine Learning for Machine Listening
+			</a>
+		</li>
+		<li>Jan 2020: funding announced for the Innovate UK Smart Grant
+			(Project 43427)
+			<i>Hookslam: Making Hits with AI</i>, 2020-2021</li>    	
+		<li>Dec 2019: 12 PhD studentships available for the Sept 2020 intake
+		of the <a href="https://aim.qmul.ac.uk">UKRI Centre for Doctoral Training in AI and Music</a>. Deadline: 31 Jan 2020.</li>
+		<li>Sept 2019: First 12 students enrol in the
+			<a href="https://aim.qmul.ac.uk">UKRI CDT in AI and Music</a></li>
+		<li>July 2019: Funding announced for the Innovate UK Smart Grant 
+			(Project 30863)
+			<i>Development of Next-Generation Music Recognition Algorithm for
+			Content Monitoring</i>,
+			in collaboration with Breathe Music Ltd, Nov 2019 - May 2021</li>
+		<li>April 2019: Dig That Lick project mentioned on
+			<a href="https://www.sandybrownjazz.co.uk/whatsnew.html">
+			Sandy Brown Jazz</a> (scroll down / search for Weimar)</li>
+		<li>18 Mar 2019: 12 fully-funded PhD positions in Artificial
+		Intelligence and Music starting in Sept 2019. Deadline for applications
+		is 15 April. More details <a href="https://aim.qmul.ac.uk">here</a></li>
+		<li>21 Feb 2019: Funding
+		<a href="https://www.ukri.org/news/200m-to-create-a-new-generation-of-artificial-intelligence-leaders/">announced</a>
+		for the
+		<a href="https://aim.qmul.ac.uk">
+		UKRI Centre for Doctoral Training in Artificial Intelligence and Music
+		</a> at Queen Mary University of London (2019-2027). This centre will
+		fund over 70 PhD students spread over 5 cohorts starting each September
+		from 2019. The AIM CDT involves over 20 industry partners and is open to
+		expressions of interest from further prospective partners.
+		PhD studentships for September 2019 start will be advertised in March.
+		</li>
+		<li>15 Feb 2019: Jiajie Dai successfully defends her PhD thesis
+			<a href="phd/JiajieDai-PhD-Thesis.pdf">
+			Modelling Intonation and Interaction in Vocal Ensembles
+			</a>
+		</li>
+		<li>16 Jan 2019: Simon Dixon receives the Peter Claricoats Award for
+			service as Director of Graduate Studies and for sustained
+			high-quality research</a>
+		</li>
+		<li>4 Sep 2018: Launch of a new journal! The
+			<a href="https://transactions.ismir.net/">
+			Transactions of the International Society for Music Information
+			Retrieval (TISMIR)</a> launched its first issue today.
+			TISMIR is an open-access journal established to complement the
+			widely cited ISMIR conference proceedings and provide a vehicle
+			for the dissemination of the highest quality and most substantial
+			scientific research in music information retrieval.
+		</li>
+		<li>1 Apr 2018: EU H2020 MSCA ITN project
+			<a href="https://mip-frontiers.eecs.qmul.ac.uk">
+		    New Frontiers in Music Information Processing (MIP-Frontiers)</a>
+			begins
+		</li>
+		<li>26 Mar 2018: Adib Mehrabi successfully defends his PhD thesis
+			<a href="phd/AdibMehrabi-PhD-Thesis.pdf">
+			Vocal Imitation for Query by Vocalisation
+			</a>
+		</li>
+		<li>1 Mar 2018: Maria Panteli successfully defends her PhD thesis
+			<a href="phd/MariaPanteli-PhD-Thesis.pdf">
+			Computational Analysis of World Music Corpora
+			</a>
+		</li>
+		<li>20 Dec 2017: Zulfadhli Mohamad successfully defends his PhD thesis
+			<a href="phd/ZulfadhliMohamad-PhD-Thesis.pdf">
+			Estimating Performance Parameters from Electric Guitar Recordings
+			</a>
+		</li>
+		<li>30 Oct 2017:
+		<!-- a href="https://labs.bl.uk/British+Library+Labs+Awards" -->
+		<a href="https://blogs.bl.uk/digital-scholarship/2018/02/bl-labs-2017-symposium-a-large-scale-comparison-of-world-music-corpora-with-computational-tools-rese.html">
+		British Library Labs Research Award</a> recognising
+		"outstanding and innovative work that has been carried out
+		using the British Library's digital collections and data"
+		awarded to Maria Panteli, Emmanouil Benetos and Simon Dixon for
+		the project <I>A large-scale comparison of world music corpora with
+		computational tools</I>.
+		</li>
+		<li>15 Sep 2017: Siying Wang successfully defends her thesis
+		<a href="phd/SiyingWang-PhD-Thesis.pdf">
+		Computational Methods for the Alignment
+		and Score-Informed Transcription of Piano Music</a>,
+		co-supervised by Sebastian Ewert
+		</li>
+		<li>9 Aug 2017: Postdoctoral research position advertised
+		<a href="https://dig-that-lick.eecs.qmul.ac.uk/ads.html">here</a>
+		for the project
+		<a href="https://dig-that-lick.eecs.qmul.ac.uk">Dig that Lick:
+		Analysing large-scale data for melodic patterns in jazz performances
+		</a>. Deadline 15 September 2017.
+		</li>
+		<li>Jul 2017: Announcement of my promotion to Professor with effect
+		from 1 October.
+		</li>
+		<li>2 May 2017: Funding announced for
+		<a href="https://mip-frontiers.eecs.qmul.ac.uk">
+		New Frontiers in Music Information Processing</a>, a
+		Marie Sklodowska-Curie Innovative Training Network which will fund 15
+		PhD studentships between four universities (Queen Mary, Telecom
+		ParisTech, Universitat Pompeu Fabra, Johannes Kepler University of
+		Linz), three industry beneficiaries (Sony CSL, Roli Ltd, DoReMIR Music
+		Research), and
+		nine partner organisations (Native Instruments, Technicolor,
+		Audionamix, Deezer, Karajan Institute, Wiener Staatsoper, Tido Music,
+		BMAT Licensing, Jamendo). 
+		</li>
+		<li>29 March 2017: Funding
+		<a href="https://www.esrc.ac.uk/news-events-and-publications/news/news-items/trans-atlantic-platform-digging-into-data-challenge-14-new-research-projects-announced/">announced</a>
+		by the Trans-Atlantic Program Digging into Data Challenge
+		for the project:
+		<a href="https://diggingintodata.org/awards/2016/project/dig-lick-analysing-large-scale-data-melodic-patterns-jazz-performances">Dig that Lick:
+		Analysing large-scale data for melodic patterns in jazz performances
+		</a>, a collaboration between Queen Mary University of London, UK (lead
+		partner); Columbia University, USA; National Center for Scientific
+		Research (CNRS), France; University of Music Franz Liszt, Weimar,
+		Germany; University of Illinois Champaign Urbana, USA; and City
+		University of London, UK. Job ads
+		<a href="https://dig-that-lick.eecs.qmul.ac.uk/ads.html">here</a>.</li>
+		<li>11 November 2016: Siddharth Sigtia successfully defends his PhD
+		thesis:
+		<a href="phd/SiddharthSigtia-PhD-Thesis.pdf">
+		Neural Networks for Analysing Music and Environmental Audio
+		</a></li>
+		<li>28 October 2016: Tian Cheng successfully defends her PhD thesis:
+		<a href="phd/TianCheng-PhD-Thesis.pdf">
+		Exploiting Piano Acoustics in Automatic Transcription
+		</a></li>
+		<li>10 August 2016: Maria Panteli wins 
+		<a href="https://wp.nyu.edu/ismir2016/event/awards/">
+		Best Student Paper Award</a>
+		at the 17th International Society for Music Information Retrieval
+		Conference, for
+		<a href="pub/2016/Panteli-Benetos-Dixon-ISMIR2016.pdf">
+		Learning a Feature Space for World Music Style Similarity</a>, by
+		M. Panteli, E. Benetos and S. Dixon (2016).
+		</li>
+		<li>27 July 2016: Magdalena Chudy successfully defends her PhD thesis:
+		<a href="phd/MagdalenaChudy-PhD-Thesis.pdf">
+		Discriminating music performers by timbre:
+		On the relation between instrumental gesture, tone
+		quality and perception in classical cello performance
+		</a></li>
+		<li>15 Mar 2016: Robert Tubb successfully defends his PhD thesis:
+		<a href="phd/RobertTubb-PhD-Thesis.pdf">
+		Creativity, Exploration and Control in Musical Parameter Spaces
+		</a></li>
+		<li>14 Jan 2016: Shengchen Li successfully defends his PhD thesis:
+		<a href="phd/ShengchenLi-PhD-Thesis.pdf">
+		Expressive Timing Analysis in Classical Piano Performance by
+		Mathematical Model Selection</a></li>
+		<li>5 Oct 2015: Yading Song successfully defends his PhD thesis:
+		<a href="phd/YadingSong-PhD-Thesis.pdf">
+		The Role of Emotion and Context in Musical Preference</a></li>
+		<li>Jan 2015: Best Student Paper Award for the Audio and Acoustic
+		Signal Processing track of the
+		<a href="https://icassp2015.org/awards-grants/">IEEE International
+		Conference on Acoustics Speech and Signal Processing, 2015</a>,
+		awarded to Siying Wang for the paper:
+		<i>Compensating for Asynchronies between Musical Voices in
+		Score-Performance Alignment,</i> by
+		S. Wang, S. Ewert and S. Dixon, to appear in ICASSP 2015</li>
+		<li>12 Jan 2015: Oxford University Press <a
+		href="https://oupacademic.tumblr.com/post/107934814091/top-five-oup-music-journal-articles-of-2014">announces</a>
+		the most read article in the journal <i>Early Music</i> for 2014:
+		<a href="https://oxford.ly/1Gi4sye">The Temperament Police</a>
+		by Dan Tidhar, Simon Dixon, Emmanouil Benetos, and Tillman Weyde</li>
+		<li>Jan 2015: Simon Dixon takes on role of Deputy Director of C4DM</li>
+		<li>8 Jan 2015: Peter Foster successfully defends his PhD
+			thesis:
+			<a href="phd/PeterFoster-PhD-Thesis.pdf">
+			Information-Theoretic Measures of Predictability for
+			Music Content Analysis</a></li>
+		<li>4 Apr 2014: Am&eacute;lie Anglade successfully defends her PhD
+			thesis (no corrections required):
+			<a href="phd/AmelieAnglade-PhD-Thesis.pdf">
+			Logic-based Modelling of Musical Harmony for
+			Automatic Characterisation and Classification</a></li>
+		<li>24 Jan 2014: Holger Kirchhoff successfully defends his PhD thesis:
+			<a href="phd/HolgerKirchhoff-PhD-Thesis.pdf">
+			A User-Assisted Approach to Multiple Instrument Music Transcription
+			</a></li>
+		<li> 27 Nov 2013: AHRC grant
+			<i>Digital Music Lab - Analysing Big Music Data</i>
+			awarded (with City University and the British Library)</li> 
+		<li> 15-18 Oct 2013: The
+			<a href="https://www.cmmr2013.cnrs-mrs.fr/Awards.html">
+			MusicWest prize for the best poster paper
+			</a> at the 10th International Symposium on Computer Music
+			Multidisciplinary Research (CMMR)
+			was awarded to Holger Kirchhoff, Simon Dixon and Anssi Klapuri
+			for their paper entitled <i>Multiple Instrument Tracking based
+			on Recontruction Error, Pitch Continuity and Instrument Activity</i>
+			</li>
+		<li>30 September 2013: Semantic Media mini-project,
+			<a href="https://etree.linkedmusic.org/about/calma.html">
+			Computational Analysis of the Live Music Archive (CALMA)</a>,
+			awarded funding (with Oxford University, Manchester University
+			and the Internet Archive)</li>
+		<li>30 September 2013: Semantic Media mini-project,
+			<a href="https://www.eecs.qmul.ac.uk/~gyorgyf/music.html">
+			Metadata Used in Semantic Indexes and Charts (MUSIC)</a>,
+			awarded funding (with Northampton University and Academic Press)
+			</li>
+		<li>18 March 2013: Semantic Media mini-project,
+			<a href="https://www.semanticaudio.co.uk/">
+			Large-Scale capture of Producer-Defined Musical Semantics</a>,
+			awarded funding (with Birmingham City University)</li>
+		<li>22 Feb 2013: Lesley Mearns successfully defends her PhD thesis:
+			<a href="phd/LesleyMearns-PhD-Thesis.pdf">
+			The Computational Analysis of Harmony in Western Art Music
+			</a></li>
+		<li>22 Oct 2012: Emmanouil Benetos successfully defends his PhD thesis:
+			<a href="phd/EmmanouilBenetos-PhD-Thesis.pdf">
+			Automatic Transcription of Polyphonic Music Exploiting Temporal
+			Evolution</a></li>
+		<li>8 Oct 2012: Tutorial on
+	<I>Reusable software and reproducibility in music informatics research</I>
+			to be presented by Chris Cannam, Simon Dixon and Mark Plumbley at
+			the <a href="https://ismir2012.ismir.net">
+			13th International Society for Music Information Retrieval
+			Conference</a></li>
+		<li>19-22 June 2012: <a href="https://cmmr2012.eecs.qmul.ac.uk/">
+			9th International Symposium on Computer Music
+			Modelling and Retrieval (CMMR): Music and Emotions</a>
+			was hosted at Queen Mary University of London, with over
+			150 attendees</li>
+		<li>17 May 2012: JISC awards funding for the project:
+			Sound Data Management Training (SoDaMaT)</li>
+		<li>17 May 2012: JISC awards funding for the project:
+			A shared open vocabulary for audio research and retrieval
+			(SOVARR)</li>
+		<li>16 Jan 2012: Robert Macrae successfully defends his PhD thesis:
+			<a href="phd/RobertMacrae-PhD-Thesis.pdf">
+			Linking Music Metadata</a></li>
+		<li>27 Oct 2011: Simon Dixon elected as President Elect of the
+			International Society for Music Information Retrieval</li>
+		<li>25 Oct 2011:
+			<a href="https://www.eecs.qmul.ac.uk/~emmanouilb/prelude.html">
+			Transcription Prelude</a> by Emmanouil Benetos and Simon
+			Dixon performed by Lika Pailodze at the ISMIR 2011 Concert, Miami,
+			Florida</li>
+		<li>Oct 2011: EU FP7 Project <a href="https://www.mires.cc">
+			MIReS: Roadmap for Music Information ReSearch</a> starts.
+			Our partners for this 18 month project are:
+			UPF (Barcelona), BMAT (Barcelona),
+			OFAI (Vienna), IRCAM (Paris), INESC (Porto), Stromatalite (London)
+			</li>
+		<li>14 Sep 2011:
+			<a href="https://c4dm.eecs.qmul.ac.uk">C4DM</a> celebrates its
+			10-year anniversary, including a concert featuring the
+		<a href="https://www.youtube.com/watch?v=gEZ-sVWtRzc&feature=related">
+			Non Hidden Markov Models</a> and the 
+			<a href="https://www.youtube.com/watch?v=-VDO34AdxDw">
+			Sparse Beats</a></li>
+		<li><a name="mrd-jobs"></a>Sept 2011:
+		Openings for a short-term research assistant and
+		software developer (Oct 2011 - Mar 2012) for the JISC-funded project
+		Sustainable Management of Digital Music Research Data. Deadline 19 Sept.
+		Details:
+		Research Assistant
+	(<a href="jisc-mrd/ResearchAssistant-draft.pdf">Ad</a>,
+	<a href="jisc-mrd/JobProfile-ResearchAssistant-draft.pdf">Job Profile</a>);
+		Software Developer
+	(<a href="jisc-mrd/SoftwareDeveloper-draft.pdf">Ad</a>,
+	<a href="jisc-mrd/JobProfile-SoftwareDeveloper-draft.pdf">Job Profile</a>);
+		<a href="jisc-mrd/ProjectSummary.pdf">Project Summary</a></li>
+		<li>Sept 2011: JISC project
+		<a href="https://code.soundsoftware.ac.uk/projects/smdmrd">Sustainable
+		Management of Digital Music Research Data</a> awarded</li>
+		<li>Feb 2011: Opening for short-term research assistants (until July)
+		to work on the
+		<a href="https://linkedbrainz.c4dmpresents.org/">Linked Music Metadata
+		(LinkedBrainz)</a> project. The positions have now been filled.</li>
+		<li>23-28 Jan 2011:
+		<a href="https://www.dagstuhl.de/en/program/calendar/semhp/?semnr=11041">
+		Dagstuhl Seminar on Multimodal Music Processing</a>,
+		organised by Meinard M&uuml;ller, Masataka Goto and Simon Dixon</li> 
+		<li>December 2010: Special issue of the <a
+		href="https://www.informaworld.com/smpp/title~content=t713817838~db=all">
+		Journal of New Music Research</a> on
+		Computational Musicology and the
+		<a href="https://www.omras2.org">OMRAS-2 Project</a></li>
+		<li>August 2010: Audio Chord Detection algorithm by Mauch
+		and Dixon rated 1st in
+		<a href="https://www.music-ir.org/mirex/wiki/2010:MIREX2010_Results">
+		MIREX evaluation</a> </li>
+		<li>June 2010: JISC grant
+		<a href="https://linkedbrainz.c4dmpresents.org/">Linked Music Metadata
+		</a> awarded</li>
+		<li>April 2010: EPSRC grant
+		<a href="https://www.elec.qmul.ac.uk/digitalmusic/m4m/">
+		Musicology for the Masses</a> awarded</li>
+		<li>4 March 2010: Matthias Mauch successfully defends his PhD thesis:
+			<a href="phd/MatthiasMauch-PhD-Thesis.pdf">
+			Automatic Chord Transcription from Audio using Computational Models
+			of Musical Context</a></li>
+		<li>October 2009: Audio Chord Detection algorithm by Mauch
+			and Dixon rated 1st in the
+			<a href="https://www.music-ir.org/mirex/wiki/2009:MIREX2009_Results">
+			MIREX evaluation</a> </li>
+		<li>October 2009: Music Structure Segmentation algorithm by Mauch,
+			Noland and Dixon rated 1st in the
+			<a href="https://www.music-ir.org/mirex/wiki/2009:MIREX2009_Results">
+			MIREX evaluation</a> </li>
+		</ul>
+
+<h2>Press</h2>
+<P>The <a href="https://www.cs4fn.org/music/magazine/">Audio! magazine"</a>
+contains articles on audio technology, aimed at a teenage audience.
+We produced it in partnership with the
+<a href="https://www.cs4fn.org">CS4Fn</a> team led by Prof Paul Curzon.
+</P>
+<P>Articles about some of the research projects we have worked on appeared in:
+<ul>
+<li><a href="https://www.scientificamerican.com/podcast/episode/sing-solo-for-higher-fidelity/">Scientific American</a>, 18 March 2019
+<li><a href="https://www.myscience.org/wire/musical_influence_in_jazz_investigated_with_big_data-2017-QMUL">MyScience.org</a>, 31 March 2017</li>
+<li><a href="https://www.nytimes.com/2005/06/05/arts/music/05midg.html">
+New York Times</a>, NYT Arts and Leisure, 5 June 2005</li>
+<li><a href="https://www.diepresse.com/Artikel.aspx?channel=k&ressort+ke&id=424605">
+Die Presse</a>, 1 June 2004 (in German)</li>
+<li><a href="https://www.format.at">
+FORMAT Science</a>, 19 March 2004 (in German)</li>
+<li><a href="https://www.wired.com/wired/archive/9.09/widmer.html">
+Wired Magazine</a>, Sept 2001, pp 100-112</li>
+<li><a href="https://www.spiegel.de/netzwelt/technologie/0,1518,199120,00.html">
+Der Spiegel</a>, Nr.23/3.6.02, pp174-176 (in German)</li>
+</ul>
+</P>
+	</div>
+
+	<div id="research" class="tabs__content prose" data-role="content" style="display: block;">
+<h2>Research</h2>
+<p>
+My research interests are in the fields of
+music informatics (music information retrieval), artificial intelligence,
+computer music, music signal processing, digital audio and music cognition.
+In recent years I have mainly worked on
+high-level music signal analysis,
+computational modelling of musical knowledge,
+and the study of musical performance, rhythm, harmony and intonation.
+For example, I have worked on note and chord transcription,
+beat tracking, multimodal music alignment, and singing intonation,
+using signal processing approaches, probabilistic models, and deep learning.
+</p>
+
+<h2>Projects</h2>
+<UL>
+<li>Principal Investigator on
+    <a href="https://aim.qmul.ac.uk">UKRI Centre for Doctoral Training in
+	Artificial Intelligence and Music</a>, (EP/S022694/1), £6.24M,
+	2019-2027</li>
+<li>Principal Investigator on
+	industry project <i>Modelling Jazz Piano</i>,
+	sponsored by Yamaha Corporation, <!--£60k, -->2023-2025</li>
+<li>Principal Investigator on
+	industry project <i>Expressive Performance Rendering for Music
+    Generation Systems</i>, sponsored by DAACI Ltd, <!--£140k, -->2022-2026</li>
+<li>Co-Investigator on
+	industry-funded project
+    <i>Deep Learning Technologies For Multi-instrument Automatic Music 
+    Transcription</i> with Huawei Technologies,
+    <!--£252000, -->2022-2023</li>
+<li>Co-Investigator on
+    NEH/AHRC New Directions for Digital Scholarship in Cultural Institutions
+    project AH/V009699/1,
+    <a href="https://mirg.city.ac.uk/jazzdap/">New Directions in Digital Jazz
+	Studies: Music Information Retrieval and AI Support for Jazz Scholarship in
+	Digital Archives (JazzDAP)</a>,
+    £199685 total (£50k to QMUL), 2021-2023</li>
+<li>Co-Investigator on
+	Innovate UK Smart Grant (Project 43427),
+    <i>Hookslam: Making Hits with AI</i>,
+    £250k total (£75k to QMUL), 2020-2021</li>
+<li>Principal Investigator on
+    industry project <i>Industry-Scale Machine Listening for Music
+    and Audio Data</i>, sponsored by Spotify Ltd, <!--£108K, -->2020-2024</li>
+<li>QMUL Principal Investigator on
+    Innovate UK Smart Grant (Project 105516):
+    <i>Development of Next-Generation Music Recognition Algorithm for Content
+    Monitoring</i>, £350k total (£148k to QMUL), 2019-2021
+<li>Principal Investigator on
+    EU H2020 Innovative Training Network (Grant 765068)
+	<a href="https://mip-frontiers.eecs.qmul.ac.uk">
+	New Frontiers in Music Information Processing (MIP-Frontiers)</a>,
+    €3937k total (~€1M to QMUL), 2018-2022</li>
+<li>Principal Investigator on Trans-Atlantic Programme Digging into Data
+	Challenge project
+	<a href="https://dig-that-lick.eecs.qmul.ac.uk">
+	Dig that Lick: Analysing large-scale data for melodic patterns in
+	jazz performances</a>
+    (ES/R004005/1), £646k total (£106219 to QMUL), 2017-2019</li>
+<li>Principal Investigator on industry-sponsored project
+    <i>Automatic Detection of Structural Boundaries in Musical Audio</i>,
+    with Rotor Videos, £13646, 2017</li>
+<li>Principal Investigator (for QMUL) on EU H2020 project
+    <i>Polifoni-X-Score</i>, with DoReMIR Music Research AB,
+    £77445, 2015-2016 (QMUL as 3rd party)</li>
+<li>Principal Investigator on industry-sponsored project
+    <i>Audio Alignment Algorithms</i>, with Tido Music GmbH,
+    £34474, 2014-2016; £21600, 2014-2015; and £7542, 2015</li>
+<li>Co-Investigator (2014) and Principal Investigator (2015) on AHRC project
+	<i>Digital Music Lab - Analysing Big Music Data</i> (AH/L01016X/1),
+    £564689 (£122940 to QMUL), 2014-2015</li>
+<li>Principal Investigator (2015) on Innovate UK Project
+    <i>Audio Data Exploration</i>, £96804, 2014-15</li>
+<li>Principal Investigator (2015) on Technology Strategy Board (Innovate UK)
+	Project
+    <i>Advanced Smart Microphone</i>, £36000, 2014-15</li>
+<li>Principal Investigator on Semantic Media Mini-Project <i>MUSIC</i>,
+    £12442 (£5940 to QMUL), 2014</li>
+<li>Principal Investigator on Semantic Media Mini-Project: <i>CALMA</i>,
+    £23001 (£18820 to QMUL), 2013-2014</li>
+<li>Principal investigator on JISC project
+	<a href="https://rdm.c4dm.eecs.qmul.ac.uk/">Sound Data Management Training
+	(SoDaMaT)</a>, £57k, June 2012 - Feb 2013</li>
+<li>Principal investigator on JISC project
+	<i>A shared open vocabulary for audio research and retrieval (SOVARR)</i>,
+	£69k, October 2012 - May 2013</li>
+<li>Principal investigator on JISC project
+	<a href="https://rdm.c4dm.eecs.qmul.ac.uk/">Sustainable
+	Management of Digital Music Research Data</a>,
+	£89k, Oct 2011 - May 2012</li>
+<li>Principal investigator (for QMUL) on EU FP7 project
+	<a href="https://www.mires.cc">MIReS:
+	Roadmap for Music Information ReSearch</a>, €81k (to QMUL),
+	Oct 2011 - Mar 2013</li>
+<li>Principal investigator on RCUK Digital Economy project
+	<a href="https://gow.epsrc.ac.uk/ViewGrant.aspx?GrantRef=EP/I001832/1">
+	EP/I001832/1</a>
+	<a href="https://www.elec.qmul.ac.uk/digitalmusic/m4m/">
+	Musicology for the Masses</a>,
+    £250k, Sep 2010 - Feb 2012</li>
+<li>Principal investigator on JISC-funded
+	<a href="https://linkedbrainz.c4dmpresents.org/">Linked Music Metadata</a>
+	project, £95k, Aug 2010 - July 2011</li>
+<li>Co-investigator on EPSRC project
+	<a href="https://gow.epsrc.ac.uk/ViewGrant.aspx?GrantRef=EP/K009559/1">
+	EP/K009559/1</a>
+	Platform Grant: Digital Music, £1161k, 2013-2018
+<li>Co-investigator on TSB project 12033-76187,
+	<i>Making Musical Mood Metadata - M4</i>, £145k, 2011-2013</li>
+<li>Co-investigator for EPSRC project
+	<a href="https://gow.epsrc.ac.uk/ViewGrant.aspx?GrantRef=EP/H043101/1">
+	EP/H043101/1</a>
+	<a href="https://www.soundsoftware.ac.uk/">
+	Sustainable Software for Digital Music and Audio Research</a>,
+	£947k, 2010-2014
+<li>Co-investigator on WWTF-funded project
+	<a href="https://www.ofai.at/research/impml/projects/audiominer.html">
+	AudioMiner: Mathematical Signal Analysis and Modeling for Manipulation of
+	Sound Objects</a>, €484k, 2010-2012</li>
+<li>Co-investigator on EPSRC-funded OMRAS-2 Project
+	<a href="https://gow.epsrc.ac.uk/ViewGrant.aspx?GrantRef=EP/E017614/1">
+	EP/E017614/1</a>
+<a href="https://www.omras2.com">Online Music Recognition And Searching:
+	A Distributed Research Environment for Music Informatics and
+	Computational Musicology</a>, 2007-2010</li>
+<li>Co-investigator on
+	<a href="https://www.wwtf.at">
+	Vienna Science and Technology Fund (WWTF)</a> project
+	<a href="https://www.ofai.at/research/impml/projects/i2mproject.html">
+	Interfaces to Music</a>,
+	2004-2007</li> 
+<li>Researcher on EU 6th FP STREP Project
+	<a href="https://www.semanticaudio.org">
+	Semantic Interaction with Music Audio Contents (SIMAC)</a>,
+	2004-2006</li>
+<li>Researcher on Gerhard Widmer's START Research Prize project
+	<a href="https://www.ofai.at/research/impml/projects/startproject.html">
+	Computer-Based Music Research:
+	Artificial Intelligence Models of Musical Expression</a>,
+	1999-2005</li>
+<li>Researcher on EU 5th FP RTN Project:
+<!--a href="https://www.diku.dk/forskning/musinf/mosart/"-->
+	<i>Music Orchestration Systems in Algorithmic Research and Technology
+	(MOSART)</i>,
+<!--/a-->
+	2000-2003</li>
+</ul>
+	</div>
+
+	<div id="publications" class="tabs__content prose" data-role="content" style="display: block;">
+              <h2>Publications</h2>
+              <p style="font-size:60%">This material is presented to ensure
+			  timely dissemination of scholarly and technical work. Copyright
+              and all rights therein are retained by authors or by other
+              copyright holders. All persons copying this information
+              are expected to adhere to the terms and constraints invoked by
+              each author's copyright. In most cases, these works may not be
+              reposted without the explicit permission of the copyright holder.
+              </p>
+              <p>Link to my page on <a href="https://scholar.google.co.uk/citations?user=9GvyqXEAAAAJ">Google Scholar</a>.</p>
+<!-- PUBLICATIONS HERE -------------------------------------------------------->
+<!--2026-->
+
+<P>
+Johannes Hentschel, Axel Berndt, Carlos Cancino-Chacón, Simon Dixon,
+Anne Foo, Mark Gotham, Patricia Hu, Maik Köster, Felipe D. Martins,
+Davide A. Mauro, Meinard Müller, Markus Neuwirth, Alexander Pacha,
+Kevin R. Page, Silvan Peter, Egor Polyakov, Laurent Pugin, David Weigl,
+Christof Weiß, and Gerhard Widmer (2026),<br />
+<a href="pub/2026/">
+Time to Align! Modelling Musical Timelines for Music Information Retrieval
+and Digital Musicology</a>.<br />
+Transactions of the International Society for Music Information Retrieval,
+9(1), to appear.
+</P>
+
+<P>
+Patricia Hu, Huan Zhang, Silvan D. Peter, Carlos E. Cancino-Chacón, Simon
+Dixon, and Gerhard Widmer (2026),<br />
+<a href="pub/2026/">
+Revisiting Expressive Timing in Piano Performance at Scale:
+A Distant Listening, Multi-corpus Study</a>.<br />
+Transactions of the International Society for Music Information Retrieval,
+9(1), to appear.
+</P>
+
+<P>
+Mary Pilataki, Matthias Mauch and Simon Dixon (2026),<br />
+<a href="pub/2026/">
+Reconstruction Meets Prediction: Complementary SSL Objectives for Music Transcription</a>.<br />
+IEEE Signal Processing Letters, to appear.
+</P>
+
+<P>
+Ivan Shanin, Xavier Riley, and Simon Dixon (2026),<br />
+<a href="pub/2026/ShaninEtAl-ICASSP2026.pdf">
+Audio-to-Score Jazz Solo Transcription with the Rhythm Perceiver</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Best Student Paper Award.
+</P>
+
+<P>
+Yinghao Ma, Haiwen Xia, Hewei Gao, Weixiong Chen, Yuxin Ye, Yuchen
+Yang, Sungkyun Chang, Mingshuo Ding, Yizhi Li, Ruibin Yuan, Simon Dixon,
+and Emmanouil Benetos (2026),<br />
+<a href="pub/2026/">
+CMI-RewardBench: Evaluating Music Reward Models with Compositional Multimodal Instruction</a>.<br />
+International Conference on Machine Learning (ICML), to appear.
+</P>
+
+<P>
+Jackson Loth, Xavier Riley, Simon Dixon, Emmanouil Benetos (2026),<br />
+<a href="pub/2026/LothEtAl-EUSIPCO2026.pdf">
+Velocity Prediction in Automatic Guitar Transcription</a>.<br />
+34th European Signal Processing Conference (EUSIPCO 2026), to appear.
+</P>
+
+<P>
+Huan Zhang, Taegyun Kwon, Anders Friberg, Junyan Jiang, Hayeon Bang, Hyeyoon
+Cho, Gus Xia, Akira Maezawa, Simon Dixon, Dasaem Jeong (2026),<br />
+<a href="pub/2026/ZhangEtAl-NIME2026.pdf">
+RenCon 2025: Revival of the Expressive Performance Rendering Competition</a>.
+<br />
+26th International Conference on New Interfaces for Musical Expression (NIME),
+to appear.
+</P>
+
+<!--2025-->
+<P>
+Keitaro Tanaka, Kazuyoshi Yoshii, Simon Dixon and Shigeo Morishima (2025),<br />
+<a href="pub/2025/TanakaEtAl-APSIPA-TSIP-2025.pdf">Unsupervised Pitch-Timbre-Variation Disentanglement of Monophonic Music Signals
+Based on Random Perturbation and Re-entry Training</a>.<br />
+APSIPA Transactions on Signal and Information Processing, 14, e4.
+</P>
+
+<P>
+Huan Zhang, Vincent Cheung, Hayato Nishioka, Simon Dixon and Shinichi Furuya
+(2025),<br />
+<a href="pub/2025/ZhangEtAl-ICASSP-2025-preprint.pdf">
+LLaQo: Towards a Query-Based Coach in Expressive Performance Assessment</a>.
+<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP).
+<a href="https://doi.org/10.1109/ICASSP49660.2025.10890522">DOI</a>.
+</P>
+
+<P>
+Yixiao Zhang, Yukara Ikemiya, Woosung Choi, Naoki Murata, Marco A. Martínez-Ramírez, Liwei Lin, Gus Xia, Wei-Hsiang Liao, Yuki Mitsufuji, Simon Dixon (2025).<br />
+<a href="pub/2025/ZhangEtAl-ISMIR2025-InstructMusicGen.pdf">
+Instruct-MusicGen: Unlocking Text-to-Music Editing for Music Language Models via Instruction Tuning</a>.<br />
+International Society for Music Information Retrieval Conference.
+</P>
+
+<P>
+Sungkyun Chang, Simon Dixon, Emmanouil Benetos (2025).<br />
+<a href="pub/2025/ChangEtAl-WASPAA2025.pdf">
+RUMAA: Repeat-Aware Unified Music Audio Analysis for
+Score-Performance Alignment, Transcription, and Mistake Detection</a>.<br />
+IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA).
+</P>
+
+<P>
+Mary Pilataki, Matthias Mauch and Simon Dixon (2025).<br />
+<a href="pub/2025/PilatakiEtAl-WASPAA2025.pdf">
+Self-Supervised Representation Learning with a JEPA Framework for
+Multi-instrument Music Transcription</a>.<br />
+IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA).
+</P>
+
+<P>
+Ningzhi Wang, Daniel Stoller and Simon Dixon (2025).<br />
+<a href="pub/2025/WangEtAl-MLSP2025.pdf">
+Efficient Representation Learning for Music via Likelihood Factorisation of a Variational Autoencoder</a>.
+IEEE International Workshop on Machine Learning for Signal Processing (MLSP).
+</P>
+
+<P>
+Carey Bunks, Simon Dixon, Bruno Di Giorgi (2025).<br />
+<a href="pub/2025/BunksEtAl-ICME-HarmonicTags.pdf">
+Analysis of Improvised Jazz Melodies Using Harmonic Tags</a>.<br />
+Workshop on Artificial Intelligence for Music,
+IEEE International Conference on Multimedia and Expo.
+</P>
+
+<P>
+Carey Bunks, Simon Dixon, Bruno Di Giorgi (2025),<br />
+<a href="pub/2025/Bunks-UKAIRS.pdf">
+Composing Kernel Models with Self-Attention</a>.
+UK AI Research Symposium.
+</P>
+
+<!--2024-->
+<P>
+Mary Pilataki, Matthias Mauch and Simon Dixon (2024),<br />
+<a href="pub/2024/PilatakiEtAl-MMAsia-2024.pdf">
+Pitch-Aware Generative Pretraining Improves Multi-pitch
+Estimation with Scarce Data</a>.<br />
+ACM Multimedia Asia, pp 41:1-41:8.
+<a href="https://doi.org/10.1145/3696409.3700202">DOI</a>.
+</P>
+
+<P>
+Yin-Jyun Luo, Kin Wai Cheuk, Woosung Choi, Wei-Hsiang Liao, Keisuke Toyama, Toshimitsu Uesaka, Koichi Saito, Chieh-Hsin Lai, Yuhta Takida, Simon Dixon, Yuki Mitsufuji (2024),<br />
+<a href="pub/2024/LuoEtAl-NeurIPS-Workshop-2024.pdf">
+Disentangling Multi-instrument Music Audio for Source-Level Pitch and Timbre Manipulation</a>.<br />
+Audio Imagination: NeurIPS 2024 Workshop on AI-Driven Speech, Music, and Sound Generation.
+</P>
+
+<P>
+Xavier Riley, Zixun Guo, Andrew Edwards and Simon Dixon (2024),<br />
+<a href="pub/2024/RileyEtAl-ISMIR-2024.pdf">
+GAPS: A Large and Diverse Classical Guitar Dataset and Benchmark Transcription
+Model</a>.<br />
+International Society for Music Information Retrieval Conference, pp 611-617.
+<a href="https://doi.org/10.5281/zenodo.14877413">DOI</a>.
+</P>
+
+<P>
+Huan Zhang, Jinhua Liang and Simon Dixon (2024),<br />
+<a href="pub/2024/ZhangEtAl-ISMIR-2024.pdf">
+From Audio Encoders to Piano Judges: Benchmarking Performance Understanding for Solo Piano</a>.<br />
+International Society for Music Information Retrieval Conference, pp 511-519.
+<a href="https://doi.org/10.5281/zenodo.14877387">DOI</a>.
+</P>
+
+<P>
+Andrew Edwards, Xavier Riley, Pedro Sarmento and Simon Dixon (2024),<br />
+<a href="pub/2024/EdwardsEtAl-ISMIR-2024.pdf">
+MIDI-to-Tab: Guitar Tablature Inference via Masked Language Modeling</a>.<br />
+International Society for Music Information Retrieval Conference, pp 288-294.
+<a href="https://doi.org/10.5281/ZENODO.14877333">DOI</a>.
+</P>
+
+<P>
+Yin-Jyun Luo, Kin Wai Cheuk, Woosung Choi, Toshimitsu Uesaka,
+Keisuke Toyama, Wei-Hsiang Liao, Simon Dixon and Yuki Mitsufuji (2024),<br />
+<a href="pub/2024/432_lbd.pdf">
+Source-Level Pitch and Timbre Editing for Mixtures of Tones Using Disentangled Representations</a>.<br />
+Late-Breaking Demo at the International Society for Music Information Retrieval Conference.
+</P>
+
+<P>
+Xavier Riley and Simon Dixon (2024),<br />
+<a href="pub/2024/482_lbd.pdf">
+Enhanced Automatic Drum Transcription via Drum Stem Source Separation</a>.<br />
+Late-Breaking Demo at the International Society for Music Information Retrieval Conference.
+</P>
+
+<P>
+Huan Zhang, Vincent Cheung, Hayato Nishioka, Simon Dixon and Shinichi Furuya (2024),<br />
+<a href="pub/2024/465_lbd.pdf">
+How Does the Teacher Rate? Observations from the NeuroPiano Dataset</a>.<br />
+Late-Breaking Demo at the International Society for Music Information Retrieval Conference.
+</P>
+
+<P>
+Dave Foster and Simon Dixon (2024),<br />
+<a href="pub/2024/">
+Dual-Onset Detection for Rhythmic Analysis of Jazz Recordings</a>.<br />
+Abstract presented at <a href="https://www.ipop.at/rhythm/">Rhythm under the Microscope: An Interdisciplinary Conference on Microrhythm and Groove in Popular Music</a>.
+</P>
+
+<P>
+S. Chang, E. Benetos, H. Kirchhoff and S. Dixon (2024),<br />
+<a href="pub/2024/ChangEtAl-MLSP-2024.pdf">
+YourMT3+: Multi-instrument Music Transcription with Enhanced Transformer Architectures and Cross-Dataset Stem Augmentation</a>.<br />
+IEEE International Workshop on Machine Learning for Signal Processing (MLSP),
+pp 1-6.
+<a href="https://doi.org/10.1109/MLSP58920.2024.10734819">DOI</a>; 
+<a href="https://arxiv.org/pdf/2407.04822">arXiv preprint 2407.04822</a>.
+</P>
+
+<P>
+Huan Zhang, Shreyan Chowdhury, Carlos Eduardo Cancino-Chacón,
+Jinhua Liang, Simon Dixon and Gerhard Widmer (2024),<br />
+<a href="pub/2024/applsci-14-06543.pdf">
+DExter: Learning and Controlling Performance Expression with Diffusion Models</a>.<br />
+Applied Sciences, 14, 6543.
+<a href="https://doi.org/10.3390/app14156543">DOI</a>.
+</P>
+
+<P>
+Yixiao Zhang, Yukara Ikemiya, Gus Xia, Naoki Murata,
+Marco A. Martínez-Ramírez, Wei-Hsiang Liao, Yuki Mitsufuji, Simon Dixon (2024),
+<br />
+<a href="pub/2024/ZhangEtAl-IJCAI-2024.pdf">
+MusicMagus: Zero-Shot Text-to-Music Editing via Diffusion Models</a>.<br />
+International Joint Conference on Artificial Intelligence, pp 7805-7813.
+<a href="https://doi.org/10.24963/ijcai.2024/864">DOI</a>.
+</P>
+
+<P>
+Xavier Riley and Simon Dixon (2024),<br />
+<a href="pub/2024/RileyDixon-SMC2024.pdf">
+Reconstructing the Charlie Parker Omnibook using an audio-to-score automatic transcription pipeline</a>.<br />
+Sound and Music Computing Conference, pp 546-552.
+</P>
+
+<P>
+Alia Morsi, Huan Zhang, Akira Maezawa, Simon Dixon, and Xavier Serra (2024),<br />
+<a href="pub/2024/MorsiZhangMaezawaDixonSerra-SMC2024.pdf">
+Simulating Piano Performance Mistakes for Music Learning</a>.<br />
+Sound and Music Computing Conference (Best Paper Award), pp 179--186.
+</P>
+
+<P>
+Drew Edwards, Simon Dixon, Emmanouil Benetos, Akira Maezawa and Yuta Kusaka
+(2024),<br />
+<a href="pub/2024/EdwardsEtAl-IEEE-SPL-2024-preprint.pdf">
+A Data-Driven Analysis of Robust Automatic Piano Transcription</a>.<br />
+IEEE Signal Processing Letters, 31, pp 681-685.
+<a href="https://doi.org/10.1109/LSP.2024.3363646">DOI</a>.
+</P>
+
+<P>
+Müller, M., Dixon, S., Volk, A., Sturm, B. L. T., Rao, P., and Gotham, M. (2024),<br />
+<a href=pub/2024/MuellerEtAl-TISMIR-2024.pdf">
+Introducing the TISMIR Education Track: What, Why, How?</a>.<br />
+Transactions of the International Society for Music Information Retrieval, 7(1), 85–98.
+<a href="https://doi.org/10.5334/tismir.199">DOI</a>.
+</P>
+
+<P>
+Lucas Henry, Klaus Frieler, Gabriel Solis, Martin Pfleiderer, Simon Dixon, Frank H&ouml;ger, Tillman Weyde and H&eacute;l&egrave;ne Camille Crayencour (2024),<br />
+<!--a href="https://hal.archives-ouvertes.fr/hal-03084838/document"-->
+<a href="pub/2024/HenryEtAl-JazzForschung-2024.pdf">
+Dig That Lick: Exploring Patterns in Jazz with Computational Methods</a>.<br />
+Jazzforschung / Jazz Research, 50/51, pp 249-271.
+</P>
+
+<p>
+Xavier Riley, Drew Edwards and Simon Dixon (2024),<br />
+<a href="pub/2024/RileyEdwardsDixon-ICASSP2024-preprint.pdf">
+High Resolution Guitar Transcription via Domain Adaptation</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 1051-1055.
+<a href="https://doi.org/10.1109/ICASSP48485.2024.10446182">DOI</a>.
+</p>
+
+<p>
+Yin-Jyun Luo and Simon Dixon (2024),<br />
+<a href="pub/2024/LuoDixon-ICASSP2024-PVPGD.pdf">
+Posterior Variance-Parameterised Gaussian Dropout: Improving Disentangled Sequential Autoencoders for Zero-Shot Voice Conversion</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 11676-11680.
+<a href="https://doi.org/10.1109/ICASSP48485.2024.10447835">DOI</a>.
+</p>
+
+<p>
+Yin-Jyun Luo, Sebastian Ewert and Simon Dixon (2024),<br />
+<a href="pub/2024/LuoEwertDixon-ICASSP2024-JDSAE.pdf">
+Unsupervised Pitch-Timbre Disentanglement of Musical Instruments Using a Jacobian Disentangled Sequential Autoencoder</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp. 1036-1040.
+<a href="https://doi.org/10.1109/ICASSP48485.2024.10447564">DOI</a>.
+</p>
+
+<!--2023-->
+<P>
+Drew Edwards, Simon Dixon and Emmanouil Benetos (2023),<br />
+<a href="https://transactions.ismir.net/articles/10.5334/tismir.162">
+PiJAMA: Piano Jazz with Automatic MIDI Annotations</a>.<br />
+Transactions of the International Society for Music Information Retrieval, 6(1), pp. 89–102.
+<a href="https://doi.org/10.5334/tismir.162">DOI</a>.
+</P>
+
+<P>
+Carey Bunks, Tillman Weyde, Simon Dixon and Bruno Di Giorgi (2023),<br />
+<a href="pub/2023/BunksDiGiorgiWeydeDixon-ISMIR2023.pdf">
+Modeling Harmonic Similarity for Jazz Using Co-occurrence Vectors and the Membrane Area</a>.<br />
+International Society for Music Information Retrieval Conference, pp 757-764.
+</P>
+
+<P>
+Xavier Riley and Simon Dixon (2023),<br />
+<a href="pub/2023/RileyDixon-ISMIR2023.pdf">
+FiloBass: A Dataset and Corpus Based Study of Jazz Basslines</a>.<br />
+International Society for Music Information Retrieval Conference, pp 500-507.
+</P>
+
+<P>
+Huan Zhang, Emmanouil Karystinaios, Simon Dixon, Gerhard Widmer and Carlos
+Eduardo Cancino-Chacón (2023),<br />
+<a href="pub/2023/ZhangEtAl-ISMIR2023.pdf">
+Symbolic Music Representations for Classification Tasks: A Systematic Evaluation
+</a>.<br />
+International Society for Music Information Retrieval Conference, pp 848-858.
+</P>
+
+<P>
+Ivan Shanin and Simon Dixon (2023),<br />
+<a href="pub/2023/ShaninDixon-WASPAA2023.pdf">
+Annotating Jazz Recordings using Lead Sheet Alignment with Deep Chroma Features
+</a>.<br />
+IEEE Workshop on Applications of Signal Processing to Audio and Acoustics
+(WASPAA), DOI: 10.1109/WASPAA58266.2023.10248107.
+</P>
+
+<P>
+Brendan O'Connor and Simon Dixon (2023),<br />
+<a href="pub/2023/OConnorDixon-SMC2023.pdf">
+A Comparative Analysis of Latent Regressor Losses for Singing Voice
+Conversion</a>.<br />
+Sound and Music Computing Conference, pp 289-295.
+</P>
+
+<P>
+Xavier Riley and Simon Dixon (2023),<br />
+<a href="pub/2023/RileyDixon-SMC2023.pdf">
+CREPE Notes: A New Method for Segmenting Pitch Contours into Discrete
+Notes</a>.<br />
+Sound and Music Computing Conference, pp 1-5.
+</P>
+
+<P>
+Huan Zhang and Simon Dixon,<br />
+<a href="pub/2023/ZhangDixon-ICASSP2023.pdf">
+Disentangling the Horowitz factor: Learning content and style from expressive
+piano performance</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP).
+<a href="https://doi.org/10.1109/ICASSP49357.2023.10095009">DOI</a>.
+</P>
+
+<P>
+Xavier Riley, Drew Edwards and Simon Dixon (2023),<br />
+<a href="pub/2023/RileyEdwardsDixon-DMRN2023.pdf">
+Automatic Guitar Transcription with a Composable Audio-to-MIDI-to-Tablature Architecture</a>.<br />
+<a href="https://www.qmul.ac.uk/dmrn/dmrn18/">
+Digital Music Research Network One-Day Workshop</a>, p 11.
+</p>
+
+<!--2022-->
+<P>
+Huan Zhang,
+Jingjing Tang,
+Syed Rafee,
+Simon Dixon,
+George Fazekas and
+Geraint Wiggins (2022),<br />
+<a href="pub/2022/70.pdf">
+ATEPP: A Dataset of Automatically Transcribed Expressive Piano Performance</a>.<br
+/>
+International Society for Music Information Retrieval Conference, pp 446-453.
+</P>
+
+<P>
+Yixiao Zhang, Junyan Jiang, Gus Xia and Simon Dixon (2022),<br />
+<a href="pub/2022/103.pdf">
+Interpreting Song Lyrics with an Audio-Informed Pre-trained Language Model</a>.<br
+/>
+International Society for Music Information Retrieval Conference, pp 19-26.
+</P>
+
+<P>
+Yin-Jyun Luo, Sebastian Ewert and Simon Dixon (2022),<br />
+<a href="pub/2022/LuoEwertDixon-IJCAI-ECAI-2022.pdf">
+Towards Robust Unsupervised Disentanglement of Sequential Data — A Case Study Using Music Audio</a>.<br />
+<a href="https://www.ijcai.org">31st International Joint Conference on
+Artificial Intelligence and the 25th European Conference on Artificial
+Intelligence (IJCAI-ECAI 2022)</a>, pp 3299-3305.</P>
+
+<P>
+Polina Proutskova,
+Daniel Wolff,
+Gy&ouml;rgy Fazekas,
+Klaus Frieler,
+Frank H&ouml;ger,
+Olga Velichkina,
+Gabriel Solis,
+Tillman Weyde,
+Martin Pfleiderer,
+H&eacute;l&egrave;ne Camille Crayencour,
+Geoffroy Peeters,
+and Simon Dixon (2022),<br />
+<!--a href="https://authors.elsevier.com/sd/article/S1570-8268(22)00024-5"-->
+<a href="https://www.sciencedirect.com/science/article/pii/S1570826822000245">
+The Jazz Ontology:
+A semantic model and large-scale RDF repositories for jazz</a>.<br />
+Journal of Web Semantics, 74, 100735.
+<a href="https://doi.org/10.1016/j.websem.2022.100735">DOI</a>.
+</P>
+
+<P>
+Ruchit Agrawal, Daniel Wolff and Simon Dixon (2022),<br />
+<a href="pub/2022/AgrawalWolffDixon-SPL2022-preprint.pdf">
+A Convolutional-Attentional Neural Framework for Structure-Aware Performance-Score Synchronization</a>.<br />
+IEEE Signal Processing Letters, 29, pp 344-348.
+<a href="https://doi.org/10.1109/LSP.2021.3135192">DOI</a>.
+</P>
+
+<!--2021-->
+<P>
+C. Lordelo, E. Benetos, S. Dixon, S. Ahlb&auml;ck and P. Ohlsson (2021),<br />
+<a href="pub/2021/LordeloEtAl-IEEE-SPL-2021.pdf">
+Adversarial Unsupervised Domain Adaptation for Harmonic-Percussive Source Separation</a>.<br />
+IEEE Signal Processing Letters, 28, pp 81-85. 
+<a href="https://doi.org/10.1109/LSP.2020.3045915">DOI</a>.
+</P>
+
+<P>
+Emir Demirel, Sven Ahlb&auml;ck and Simon Dixon (2021),<br />
+<a href="pub/2021/DemirelAhlbaeckDixon-EUSIPCO2021.pdf">
+Computational Pronunciation Analysis in Sung Utterances</a>.<br />
+29th European Signal Processing Conference (EUSIPCO), pp 186-190.
+</P>
+
+<P>
+Emir Demirel, Sven Ahlb&auml;ck and Simon Dixon (2021),<br />
+<a href="pub/2021/DemirelAhlbaeckDixon-ISMIR2021.pdf">
+MSTRE-NET: Multistreaming Acoustic Modeling for Automatic Lyrics Transcription</a>.<br />
+22nd International Society for Music Information Retrieval Conference (ISMIR),
+pp 151-158.
+</P>
+
+<P>
+D. Foster and S. Dixon (2021),<br />
+<a href="pub/2021/FosterDixon-Filosax-ISMIR2021.pdf">
+Filosax: A Dataset of Annotated Jazz Saxophone Recordings</a>.<br />
+22nd International Society for Music Information Retrieval Conference (ISMIR),
+pp 205-212.
+</P>
+
+<P>
+C. Lordelo, E. Benetos, S. Dixon and S. Ahlb&auml;ck (2021),<br />
+<a href="pub/2021/LordeloBenetosDixonAhlbaeck-ISMIR2021.pdf">
+Pitch-Informed Instrument Assignment Using a Deep Convolutional Network with Multiple Kernel Shapes</a>.<br />
+22nd International Society for Music Information Retrieval Conference (ISMIR),
+pp 389-395.
+</P>
+
+<P>
+K. O'Hanlon, E. Benetos and S. Dixon (2021),<br />
+<a href="pub/2021/OHanlonBenetosDixon-MLSP2021.pdf">
+Detecting cover songs with Key-invariant Pitch Class Networks</a>.<br />
+2021 IEEE International Workshop on Machine Learning for Signal Processing
+(MLSP), pp 1-6.
+<a href="https://doi.org/10.1109/MLSP52302.2021.9596389">DOI</a>.
+</P>
+
+<P>
+B. O'Connor, S. Dixon and G. Fazekas (2021),<br />
+<a href="pub/2021/OConnorDixonFazekas-CMMR2021.pdf">
+Zero-shot Singing Technique Conversion</a>.<br />
+15th International Symposium on Computer Music Multidisciplinary Research (CMMR).
+</P>
+
+<P>
+R. Agrawal, D. Wolff and S. Dixon (2021),<br />
+<a href="pub/2021/AgrawalWolffDixon-ICASSP2021-preprint.pdf">
+Structure-Aware Audio-to-Score Alignment Using Progressively
+Dilated Convolutional Neural Networks</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 571-575.
+</P>
+
+<P>
+E. Demirel, S. Ahlb&auml;ck and S. Dixon (2021),<br />
+<a href="pub/2021/DemirelAhlbaeckDixon-ICASSP2021-preprint.pdf">
+Low Resource Audio-to-Lyrics Alignment from Polyphonic Music Recordings</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 586-590.
+</P>
+
+<P>
+Y. Zhang, G. Xia, M. Levy and S. Dixon (2021),<br />
+<a href="pub/2021/ZhangXiaLevyDixon-COSMIC-NIME2021.pdf">
+COSMIC: A Conversational Interface for Human-AI Music Co-Creation</a>.
+International Conference on New Interfaces for Musical Expression (NIME).
+</P>
+
+<P>
+J. Pauwels, S. Dixon and J.D. Reiss (2021),<br />
+<a href="pub/2021/Pauwels-WAC2021.pdf">
+A Frontend for Adaptive Online Listening Tests</a>.<br />
+Web Audio Conference (WAC).
+</P>
+
+<P>
+Yukun Li, Emir Demirel, Polina Proutskova and Simon Dixon (2021),<br />
+<a href="pub/2021/LiDemirelProutskovaDixon-NLP4MusA2021.pdf">
+Phoneme-Informed Note Segmentation of Monophonic Vocal Music</a>.<br />
+Second Workshop on NLP for Music and Spoken Audio (NLP4MuSA).
+</P>
+
+<!--2020-->
+<P>
+D. Stoller, M. Tian, S. Ewert and S. Dixon (2020),<br />
+<a href="pub/2020/StollerTianEwertDixon-IJCAI2020.pdf">
+Seq-U-Net: A One-Dimensional Causal U-Net for Efficient Sequence Modelling</a>.
+<br />
+International Joint Conference on Artificial Intelligence, pp. 2893-2900.
+</P>
+
+<P>
+D. Stoller, S. Ewert and S. Dixon (2020),<br />
+<a href="pub/2020/StollerEwertDixon-ICLR2020.pdf">
+Training Generative Adversarial Networks from Incomplete Observations using
+Factorised Discriminators</a>.<br />
+International Conference on Learning Representations, April 2020.
+</P>
+
+<P>
+B. O'Connor, S. Dixon and G. Fazekas (2020),<br />
+<a href="pub/2020/OConnorDixonFazekas-CSMC2020.pdf">
+An Exploratory Study on Perceptual Spaces of the Singing Voice</a>.<br />
+2020 Joint Conference on AI Music Creativity.
+</P>
+
+<P>
+R. Agrawal and S. Dixon (2020),<br />
+<a href="pub/2020/AgrawalDixon-EUSIPCO2020.pdf">
+Learning Frame Similarity using Siamese Networks for Audio-to-Score Alignment</a>.<br />
+28th European Signal Processing Conference, pp 141-145.
+</P>
+
+<P>
+E. Demirel, S. Ahlb&auml;ck and S. Dixon (2020),<br />
+<a href="pub/2020/DemirelAhlbackDixon-IJCNN-2020.pdf">
+Automatic Lyrics Transcription using Dilated Convolutional Neural Networks
+with Self-Attention</a>.<br />
+International Joint Conference on Neural Networks, July 2020.
+</P>
+
+<P>
+S. Mishra, E. Benetos, B.L. Sturm and S. Dixon (2020),<br />
+<a href="pub/2020/MishraBenetosSturmDixon-IJCNN-2020.pdf">
+Reliable Local Explanations for Machine Listening</a>.<br />
+International Joint Conference on Neural Networks, July 2020.
+</P>
+
+<!--2019-->
+
+<P>
+F. Rodríguez-Algarra, B. L. Sturm and S. Dixon (2019),<br />
+<a href="pub/2019/Algarra-et-al-TISMIR-2019.pdf">
+Characterising Confounding Effects in Music Classification Experiments
+through Interventions</a>.<br />
+Transactions of the International Society for Music Information Retrieval,
+2 (1), 52-66.
+<a href="https://doi.org/10.5334/tismir.24">DOI</a>
+</P>
+
+<P>
+A. Mehrabi, S. Dixon and M. Sandler (2019),<br />
+<a href="pub/2019/MehrabiDixonSandler-PLOSONE2019.pdf">
+Vocal imitation of percussion sounds:
+On the perceptual similarity between imitations and imitated sounds</a>.<br />
+PLoS ONE 14 (7): e0219955.
+<a href="https://doi.org/10.1371/journal.pone.0219955">DOI</a>
+</P>
+
+<P>
+J. Dai and S. Dixon (2019),<br />
+<a href="pub/2019/DaiDixon-JASA-Quartet-AcceptedVersion.pdf">
+Intonation Trajectories within Tones in Unaccompanied Soprano, Alto, Tenor,
+Bass Quartet Singing</a>.<br />
+Journal of the Acoustical Society of America, 146 (2): 1005-1014.
+<a href="https://doi.org/10.1121/1.5120483">DOI</a>
+</P>
+<P style="font-size:60%">Copyright (2019) Acoustical Society of America.
+This article may be downloaded for personal use only. Any other use
+requires prior permission of the author and the Acoustical Society of America.
+The article appeared in the Journal of the Acoustical Society of
+America, 146 (2), 1005-1014 and may be found at
+<a
+href="https://scitation.aip.org/content/asa/journal/jasa/146/2/10.1121/1.5120483?aemail=author">
+https://scitation.aip.org/content/asa/journal/jasa/146/2/10.1121/1.5120483?aemail=author</a>.
+</P>
+
+<P>
+J. Dai and S. Dixon (2019),<br />
+<a href="pub/2019/DaiDixon-JASA-Duet-AcceptedVersion.pdf">
+Pitch Accuracy and Interaction in Unaccompanied Duet Singing</a>.<br />
+Journal of the Acoustical Society of America, 145 (2), 663-675.
+<a href="https://doi.org/10.1121/1.5087817">DOI</a>
+</P>
+<P style="font-size:60%">Copyright (2019) Acoustical Society of America.
+This article may be downloaded for personal use only. Any other use
+requires prior permission of the author and the Acoustical Society of America.
+The article appeared in the Journal of the Acoustical Society of
+America, 145 (2), 663-675 and may be found at
+<a
+href="https://scitation.aip.org/content/asa/journal/jasa/145/2/10.1121/1.5087817?aemail=author">
+https://scitation.aip.org/content/asa/journal/jasa/145/2/10.1121/1.5087817?aemail=author</a>.
+</P>
+
+<P>
+E. Benetos, S. Dixon, Z. Duan, and S. Ewert (2019),<br />
+<a href="pub/2019/BenetosDixonDuanEwert-IEEE-SPM-2019.pdf">
+Automatic Music Transcription: An Overview</a>.<br />
+IEEE Signal Processing Magazine, 36 (1), 20-30.
+<a href="https://doi.org/10.1109/MSP.2018.2869928">DOI</a>
+</P>
+
+<P>
+C. Wei&szlig;, M. Mauch, S. Dixon and M. M&uuml;ller (2019),<br />
+<a href="pub/2019/Weiss-et-al-MusSci2019.pdf">
+Investigating style evolution of Western classical music:
+A computational approach</a>.<br />
+Musicae Scientiae, 23 (4): 486-507.
+<a href="https://doi.org/10.1177/1029864918757595">DOI</a>
+</P>
+
+<P>
+C. Vianna Lordelo, E. Benetos, S. Dixon and S. Ahlb&auml;ck (2019),<br />
+<a href="pub/2019/Lordelo-et-al-WASPAA-2019-Accepted.pdf">
+Investigating kernel shapes and skip connections for deep learning-based harmonic-percussive separation</a>.<br />
+IEEE Workshop on Applications of Signal Processing to Audio and Acoustics.
+</P>
+
+<P>
+K. Frieler, D. Ba&scedil;aran, F. H&ouml;ger, H.-C. Crayencour, G. Peeters and S. Dixon (2019),<br />
+<a href="pub/2019/Frieler-et-al-DLfM-2019.pdf">
+Don't Hide in the Frames: Note- and Pattern-based Evaluation of Automated Melody Extraction Algorithms</a>.<br />
+6th International Conference on Digital Libraries for Musicology, pp. 25-32.
+<a href="https://doi.org/10.1145/3358664.3358672">DOI</a>
+</P>
+
+<P>
+R. Agrawal and S. Dixon (2019),<br />
+<a href="pub/2019/Agrawal-Dixon-ML4MD-2019.pdf">
+A Hybrid Approach to Audio-to-Score Alignment</a>.<br />
+Machine Learning for Music Discovery Workshop at the
+36th International Conference on Machine Learning.
+</P>
+
+<P>
+E. Demirel, S. Ahlb&auml;ck and S. Dixon (2019),<br />
+<a href="pub/2019/Demirel-UK-Speech-2019.pdf">
+Exploring Generalizability of Automatic Phoneme Recognition Models</a>.<br />
+UK Speech 2019.
+</P>
+
+<P>
+S. Mishra, D. Stoller, E. Benetos, B. Sturm and S. Dixon (2019),<br />
+<a href="pub/2019/Mishra-et-al-ICLR-Safe-Workshop.pdf">
+GAN-Based  Generation  and  Automatic  Selection of Explanations for Neural
+Networks</a>.<br />
+Safe Machine Learning Workshop at the International Conference on Learning
+Representations.
+</P>
+
+<P>
+J. Dai and S. Dixon (2019),<br />
+<a href="pub/2019/DaiDixon-MMM2019.pdf">
+Understanding Intonation Trajectories and Patterns of Vocal Notes</a>.<br />
+25th International Conference on MultiMedia Modeling, pp 243-253.
+<a href="https://doi.org/10.1007/978-3-030-05716-9_20">DOI</a>
+</P>
+
+<!--2018-->
+<P>
+M. Panteli, E. Benetos and S. Dixon (2018),<br />
+<a href="pub/2017/PanteliBenetosDixon-JNMR2018.pdf">
+A review of manual and computational approaches for the study of world music
+corpora</a>.<br />
+Journal of New Music Research, 47 (2), 176-189.
+<a href="https://doi.org/10.1080/09298215.2017.1418896">DOI</a>
+</P>
+
+<P>
+K. Frieler, F. H&ouml;ger, M. Pfleiderer and S. Dixon (2018),<br />
+<a href="pub/2018/Frieler-et-al-ISMIR2018.pdf">
+Two Web Applications for Exploring Melodic Patterns in Jazz Solos</a>.<br />
+19th International Society for Music Information Retrieval Conference,
+pp 777-783.
+</P>
+
+<P>
+Eita Nakamura, Ryo Nishikimi, Simon Dixon and Kazuyoshi Yoshii (2018),<br />
+<a href="pub/2018/Nakamura-et-al-APSICA-ASC-2018.pdf">
+Probabilistic Sequential Patterns for Singing Transcription</a>.<br />
+Asia-Pacific Signal and Information Processing Association Annual Summit
+and Conference.
+<a href="https://doi.org/10.23919/APSIPA.2018.8659637">DOI</a>
+</P>
+
+<P>
+S. Mishra, B. Sturm and S. Dixon (2018),<br />
+<a href="pub/2018/MishraSturmDixon-ISMIR2018.pdf">
+Understanding Deep Machine Listening Systems through Feature Inversion</a>.<br />
+19th International Society for Music Information Retrieval Conference,
+pp 755-762.
+</P>
+
+<P>
+D. Stoller, S. Ewert and S. Dixon (2018),<br />
+<a href="pub/2018/StollerEwertDixon-ISMIR2018.pdf">Wave-U-Net:
+A Multi-Scale Neural Network for End-to-End Audio Source Separation</a>.
+<br />
+19th International Society for Music Information Retrieval Conference,
+pp 334-340.
+</P>
+
+<P>
+D. Stoller and S. Ewert and S. Dixon (2018),<br />
+<a href="pub/2018/StollerEwertDixon-LVA2018-Accepted.pdf">
+Jointly Detecting and Separating Singing Voice: A Multi-Task Approach</a>.<br />
+14th International Conference on Latent Variable Analysis and Signal Separation,
+pp 329-339.
+</P>
+
+<P>
+D. Stoller and V. Akkermans and S. Dixon (2018),<br />
+<a href="pub/2018/StollerAkkermansDixon-MLSP2018.pdf">Detection of cut-points for automatic music rearrangement</a>.<br />
+IEEE International Workshop on Machine Learning for Signal Processing.
+</P>
+
+<P>
+S. Mishra, B. Sturm and S. Dixon (2018),<br />
+<a href="pub/2018/MishraSturmDixon-EUSIPCO2018.pdf">
+"What are You Listening to?"
+Explaining Predictions of Deep Machine Listening Systems</a>.<br />
+26th European Signal Processing Conference, pp 2260-2264.
+</P>
+
+<P>
+Eita Nakamura, Emmanouil Benetos, Kazuyoshi Yoshii, Simon Dixon (2018),<br />
+<a href="pub/2018/Nakamura-et-al-ICASSP2018.pdf">
+Towards Complete Polyphonic Music Transcription:
+Integrating Multi-Pitch Detection and Rhythm Quantization</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 101-105.
+</P>
+
+<P>
+Daniel Stoller, Sebastian Ewert and Simon Dixon (2018),<br />
+<a href="pub/2018/StollerEwertDixon-ICASSP2018.pdf">
+Adversarial Semi-Supervised Audio Source Separation applied to Singing
+Voice Extraction</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 2391-2395.
+</P>
+
+<P>
+Adib Mehrabi, Kuenwoo Choi, Simon Dixon and Mark Sandler (2018),<br />
+<a href="pub/2018/MehrabiChoiDixonSandler-ICASSP2018.pdf">
+Similarity Measures for Vocal-based Drum Sample Retrieval using Deep
+Convolutional Auto-encoders</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 356-360.
+</P>
+
+<P>
+Shengchen Li, Simon Dixon and Mark Plumbley (2018),<br />
+<a href="pub/2018/LiDixonPlumbley-CCC2018.pdf">
+A demonstration of hierarchical structure usage in expressive timing
+analysis by model selection tests</a>.<br />
+37th Chinese Control Conference, pp 3190-3195.
+</P>
+
+<!--2017-->
+
+<P>
+M. Panteli, E. Benetos and S. Dixon (2017),<br />
+<a href="pub/2017/PanteliBenetosDixon-PLOSONE2017.pdf">
+A computational study on outliers in world music</a>.<br />
+PLoS ONE 12 (12): e0189399
+<a href="https://doi.org/10.1371/journal.pone.0189399">DOI</a>
+</P>
+
+<P>
+Z. Mohamad, S. Dixon and C. Harte (2017),<br />
+<a href="pub/2017/MohamadDixonHarte-JASA2017.pdf">
+Pickup position and plucking point estimation on an electric guitar
+via autocorrelation</a>.<br />
+Journal of the Acoustical Society of America, 142 (6), 3530-3540.
+<a href="https://dx.doi.org/10.1121/1.5016815">DOI</a>
+</P>
+<P style="font-size:60%">Copyright (2017) Acoustical Society of America.
+This article may be downloaded for personal use only. Any other use
+requires prior permission of the author and the Acoustical Society of America.
+The article appeared in the Journal of the Acoustical Society of
+America, 142 (6), 3530-3540 and may be found at
+<a
+href="https://scitation.aip.org/content/asa/journal/jasa/142/6/10.1121/1.5016815?aemail=author">
+https://scitation.aip.org/content/asa/journal/jasa/142/6/10.1121/1.5016815?aemail=author</a>.
+</P>
+
+<P>
+B. Di Giorgi, S. Dixon, M. Zanoni, and A. Sarti (2017),<br />
+<a href="pub/2017/DiGiorgiDixonZanoniSarti-TASLP2017-final-accepted.pdf">
+A Data-driven Model of Tonal Chord Sequence Complexity</a>.<br />
+IEEE/ACM Transactions on Audio, Speech and Language Processing,
+25 (11), 2237-2250.
+<a href="https://dx.doi.org/10.1109/TASLP.2017.2756443">DOI</a>
+</P>
+
+<P>
+S. Wang, S. Ewert and S. Dixon (2017),<br />
+<a href="pub/2017/WangEwertDixon-TASLP2017.pdf">
+Identifying Missing and Extra Notes in Piano Recordings Using Score-Informed
+Dictionary Learning</a>.<br />
+IEEE/ACM Transactions on Audio, Speech and Language Processing,
+25 (10), 1877-1889.
+<a href="https://dx.doi.org/10.1109/TASLP.2017.2724203">DOI</a>
+</P>
+
+<P>
+E. Nakamura, S. Dixon and K. Yoshii (2017),<br />
+<a href="pub/2017/NakamuraYoshiiDixon-TASLP2017.pdf">
+Note Value Recognition for Piano Transcription Using Markov Random Fields</a>.<br />
+IEEE/ACM Transactions on Audio, Speech and Language Processing, 25 (9)
+1846-1858.
+<a href="https://dx.doi.org/10.1109/TASLP.2017.2722103">DOI</a>
+</P>
+
+<P>
+A. Mehrabi, S. Dixon and M. Sandler (2017),<br />
+<a href="pub/2017/MehrabiDixonSandler-JASA-2017.pdf">
+Vocal Imitation of Synthesised Sounds Varying in Pitch, Loudness and Spectral
+Centroid.</a><br />
+Journal of the Acoustical Society of America, 141 (2), 783-796.
+<a href="https://dx.doi.org/10.1121/1.4974825">DOI</a>
+</P>
+<P style="font-size:60%">Copyright (2017) Acoustical Society of America.
+This article may be downloaded for personal use only. Any other use
+requires prior permission of the author and the Acoustical Society of America.
+The article appeared in the Journal of the Acoustical Society of
+America, 141 (2), pp 783-796 and may be found at
+<a
+href="https://scitation.aip.org/content/asa/journal/jasa/141/2/10.1121/1.4974825?aemail=author">
+https://scitation.aip.org/content/asa/journal/jasa/141/2/10.1121/1.4974825?aemail=author</a>.
+</P>
+
+<P>
+A. Mehrabi, C. Harte, C. Baume and S. Dixon (2017),<br />
+<a href="pub/2017/MehrabiHarteBaumeDixon-JAES-2017.pdf">Music Thumbnailing for Radio Podcasts: A Listener Evaluation</a>.<br />
+Journal of the Audio Engineering Society, 65 (6), 474-481.
+</P>
+
+<P>
+J. Dai and S. Dixon (2017),<br />
+<a href="pub/2017/DaiDixon-ISMIR2017.pdf">
+Analysis of Interactive Intonation in Unaccompanied SATB Ensembles</a>.<br />
+18th International Society for Music Information Retrieval Conference
+(ISMIR 2017), pp 599-605.
+</P>
+
+<P>
+S. Li, S. Dixon and M. Plumbley (2017),<br />
+<a href="pub/2017/LiDixonPlumbley-ISMIR2017.pdf">
+Clustering Expressive Timing with Regressed Polynomial Coefficients
+Demonstrated by a Model Selection Test</a>.<br />
+18th International Society for Music Information Retrieval Conference
+(ISMIR 2017), pp 457-463.
+</P>
+
+<P>
+S. Mishra, B. Sturm and S. Dixon (2017),<br />
+<a href="pub/2017/MishraSturmDixon-ISMIR2017.pdf">
+Local Interpretable Model-Agnostic Explanations for Music Content Analysis</a>.<br />
+18th International Society for Music Information Retrieval Conference
+(ISMIR 2017), pp 537-543.
+</P>
+
+<P>
+V. Kedyte, M. Panteli, T. Weyde and S. Dixon (2017),<br />
+<a href="pub/2017/KedytePanteliWeydeDixon-ISMIR2017.pdf">
+Geographical origin prediction of folk music recordings from the United Kingdom</a>.<br />
+18th International Society for Music Information Retrieval Conference
+(ISMIR 2017), pp 664-670.
+</P>
+
+<P>
+Z. Mohamad, S. Dixon and C. Harte (2017),<br />
+<a href="pub/2017/MohamadHarteDixon-DAFx2017.pdf">
+Estimating Pickup and Plucking Positions of Guitar Tones and Chords
+with Audio Effects</a>.<br />
+20th International Conference on Digital Audio Effects (DAFx-17),
+pp 420-427.
+</P>
+
+<P>
+Z. Mohamad, S. Dixon and C. Harte (2017),<br />
+<a href="pub/2017/MohamadHarteDixon-ICASSP2017.pdf">
+Pickup Position and Plucking Point Estimation on an Electric Guitar</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 651-655.
+</P>
+
+<P>
+M. Panteli, R. Bittner, J.P. Bello and S. Dixon (2017),<br />
+<a href="pub/2017/PanteliBittnerBelloDixon-ICASSP.pdf">
+Towards the Characterization of Singing Styles in World Music.</a><br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 636-640.
+</P>
+
+<P>
+E. Quinton, K. O'Hanlon, S. Dixon and M. Sandler (2017),<br />
+<a href="pub/2017/QuintonOHanlonDixonSandler-ICASSP2017.pdf">
+Tracking Metrical Structure Changes with Sparse-NMF</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing
+(ICASSP), pp 40-45.
+</P>
+
+<!--2016-->
+<P>
+S. Wang, S. Ewert and S. Dixon (2016),<br />
+<a href="pub/2016/WangEwertDixon-TASLP2016-preprint.pdf">
+Robust and Efficient Joint Alignment of Multiple Musical Performances.</a><br />
+IEEE/ACM Transactions on Audio, Speech and Language Processing,
+24 (11), 2132-2145.
+<a href="https://dx.doi.org/10.1109/TASLP.2016.2598318">DOI</a>
+</P>
+
+<P>
+S. Sigtia, E. Benetos and S. Dixon (2016),<br />
+<a href="pub/2016/SigtiaBenetosDixon-TASLP2016-preprint.pdf">
+An End-to-End Neural Network for Polyphonic Piano Music Transcription.</a><br />
+IEEE/ACM Transactions on Audio, Speech and Language Processing,
+24 (5), pp 927-939.
+<a href="https://dx.doi.org/10.1109/TASLP.2016.2533858">DOI</a>
+</P>
+
+<P>
+Y. Song, S. Dixon, M.T. Pearce and A.R. Halpern (2016),<br />
+<a href="pub/2016/SongDixonPearceHalpern-MusicPerception2016-preprint.pdf">
+Perceived and Induced Emotion Responses to Popular Music:
+Categorical and Dimensional Models,</a><br />
+Music Perception, 33 (4), pp 472-492.
+<a href="https://dx.doi.org/10.1525/MP.2016.33.4.472">DOI</a>
+</P>
+
+<P>
+T. Cheng, M. Mauch, E. Benetos and S. Dixon (2016),<br />
+<a href="pub/2016/Cheng-Mauch-Benetos-Dixon-ISMIR2016.pdf">
+An Attack/Decay Model for Piano Transcription.</a><br />
+17th International Society for Music Information Retrieval Conference
+(ISMIR 2016), pp 584-590.
+</P>
+
+<P>
+J. Dai and S. Dixon (2016),<br />
+<a href="pub/2016/Dai-Dixon-ISMIR2016.pdf">
+Analysis of Vocal Imitations of Pitch Trajectories.</a><br />
+17th International Society for Music Information Retrieval Conference
+(ISMIR 2016), pp 87-93.
+</P>
+
+<P>
+M. Panteli, E. Benetos and S. Dixon (2016),<br />
+<a href="pub/2016/Panteli-Benetos-Dixon-ISMIR2016.pdf">
+Learning a Feature Space for World Music Style Similarity.</a><br />
+17th International Society for Music Information Retrieval Conference
+(ISMIR 2016), pp 538-544 (Best Student Paper Award).
+</P>
+
+<P>
+M. Panteli and S. Dixon (2016),<br />
+<a href="pub/2016/Panteli-Dixon-ISMIR2016.pdf">
+On the Evaluation of Rhythmic and Melodic Descriptors for Music Similarity.</a><br />
+17th International Society for Music Information Retrieval Conference
+(ISMIR 2016), pp 468-474.
+</P>
+
+<P>
+D. Stoller and S. Dixon (2016),<br />
+<a href="pub/2016/Stoller-Dixon-ISMIR2016.pdf">
+Analysis and Classification of Phonation Modes in Singing.</a><br />
+17th International Society for Music Information Retrieval Conference
+(ISMIR 2016), pp 80-86.
+</P>
+
+<P>
+E. Quinton, M. Sandler and S. Dixon (2016),<br />
+<a href="pub/2016/Quinton-Sandler-Dixon-ICASSP2016.pdf">
+Estimation of the Reliability of Multiple Rhythm Features Extraction
+from a Single Descriptor.</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing (ICASSP), pp 256-260.
+</P>
+
+<P>
+M. Panteli, E. Benetos and S. Dixon (2016),<br />
+Automatic detection of outliers in world music collections.<br />
+Fourth International Conference on Analytical Approaches to World Music (AAWM).
+</P>
+
+<P>
+Adib Mehrabi, Simon Dixon and Mark Sandler (2016),<br />
+<a href="pub/2016/MehrabiDixonSandler-WIMP2016.pdf">
+Towards a Comprehensive Dataset of Vocal Imitations of Drum Sounds.</a><br />
+2nd AES Workshop on Intelligent Music Production, London, UK. 
+</P>
+
+<P>
+S. Li, S. Dixon, D. Black and M. Plumbley (2016),<br />
+<a href="pub/2016/Li-Dixon-Black-Plumbley-SMC2016.pdf">
+A Model Selection Test for Factors Affecting the Choice of Expressive Timing Clusters for a Phrase.</a><br />
+Proceedings of the 13th Sound and Music Computing Conference (SMC), pp. 247-252.
+</P>
+
+<!--2015-->
+<P>
+P. Foster, S. Dixon and A. Klapuri (2015),<br />
+<a href="pub/2015/FosterDixonKlapuri-TASLP2015-CoverSong.pdf">
+Identifying Cover Songs Using Information-Theoretic Measures of
+Similarity,</a><br />
+IEEE/ACM Transactions on Audio, Speech and Language Processing,
+23 (6), pp 993-1005.
+<a href="https://dx.doi.org/10.1109/TASLP.2015.2416655">DOI</a>
+</P>
+
+<P>
+J. Dai, M. Mauch and S. Dixon (2015),<br />
+<a href="pub/2015/DaiMauchDixon-ISMIR2015.pdf">
+Analysis of Intonation Trajectories in Solo Singing.</a><br />
+16th International Society for Music Information Retrieval Conference
+(ISMIR 2015), pp 420-426.
+</P>
+
+<P>
+S. Sigtia, N. Boulanger-Lewandowski and S. Dixon (2015),<br />
+<a href="pub/2015/SigtiaBoulanger-LewandowskiDixon-ISMIR2015-Chord.pdf">
+Audio Chord Recognition with a Hybrid Recurrent Neural Network.</a><br />
+16th International Society for Music Information Retrieval Conference
+(ISMIR 2015), pp 127-133.
+</P>
+
+<P>
+J. Osmalskyj, J.-J. Embrechts, P. Foster and S. Dixon (2015),<br />
+<a href="pub/2015/OsmalskyjFosterDixonEmbrechts-ISMIR2015-CoverSongs.pdf">
+Combining Features for Cover Song Identification.</a><br />
+16th International Society for Music Information Retrieval Conference
+(ISMIR 2015), pp 462-468.
+</P>
+
+<P>
+R. Tubb and S. Dixon (2015),<br />
+<a href="pub/2015/TubbDixon-CHI-MultidimensionalControllers.pdf">
+An Evaluation of Multidimensional Controllers for Sound Design Tasks</a>,<br />
+Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing
+Systems (CHI'15), pp 47-56.
+</P>
+
+<P>
+Z. Mohamad, S. Dixon and C. Harte (2015),<br />
+<a href="pub/2015/MohamadDixonHarte-DAFx2015-PickupPositionModelling.pdf">
+Digitally Moving an Electric Guitar Pickup</a>,<br />
+18th International Conference on Digital Audio Effects (DAFx-15), pp 284-291.
+</P>
+
+<P>
+T. Cheng, S. Dixon and M. Mauch (2015),<br />
+<a href="pubs/2015/ChengDixonMauch-EUSIPCO2015-NoteTracking.pdf">
+Improving Piano Note Tracking by HMM Smoothing</a>,<br />
+European Signal Processing Conference (EUSIPCO 2015), pp 2009-2013.
+</P>
+
+<P>
+Y. Song and S. Dixon (2015),<br />
+<a href="pub/2015/SongDixon-SMC2015-EmotionPrediction.pdf">
+How Well Can a Music Emotion Recognition System
+Predict the Emotional Responses of Participants?</a><br />
+12th Sound and Music Computing Conference, pp 387-392.
+</P>
+
+<P>
+S. Sigtia, E. Benetos, N. Boulanger-Lewandowski, T. Weyde, A.S. d'Avila Garcez 
+and S. Dixon (2015),<br />
+<a href="pub/2015/Sigtia-et-al-ICASSP2015.pdf">
+A Hybrid Recurrent Neural Network for Music Transcription,</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing (ICASSP), pp 2061-2065.
+</P>
+
+<P>
+T. Cheng, S. Dixon and M. Mauch (2015),<br />
+<a href="pub/2015/ChengDixonMauch-ICASSP2015-Decay.pdf">
+Modelling the Decay of Piano Sounds,</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing (ICASSP), pp 594-598.
+</P>
+
+<P>
+S. Wang, S. Ewert and S. Dixon (2015),<br />
+<a href="pub/2015/WangEwertDixon-ICASSP2015-3DDTW.pdf">
+Compensating for Asynchronies between Musical Voices in Score-Performance
+Alignment,</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing (ICASSP), pp 589-593 (Best Student Paper Award for the Audio and Acoustic
+Signal Processing track).
+</P>
+
+<P>
+M. Mauch, C. Cannam, R. Bittner, G. Fazekas, J. Salamon, J. Dai, J. Bello
+and S. Dixon (2015),<br />
+<a href="pub/2015/MauchEtAl-TENOR2015-Tony.pdf">
+Computer-aided Melody Note Transcription Using the Tony Software:
+Accuracy and Efficiency.</a><br />
+First International Conference on Technologies for Music Notation and Representation (TENOR 2015), pp 23-30.
+</P>
+
+<P>
+T. Wilmering, S. Bechhofer, S. Dixon, G. Fazekas and K. Page (2015),<br />
+<a href="pub/2015/WilmeringFazekasDixonBechhoferPage-LiME-p737.pdf">
+Automating Annotation of Media with Linked Data Workflows,</a><br />
+Third International Workshop on Linked Media (LiME 2015), pp 737-738.
+</P>
+
+<P>
+T. Wilmering, G. Fazekas, S. Dixon, K. Page and S. Bechhofer (2015),<br />
+Towards High Level Feature Extraction from Large Live Music Recording Archives,
+<br />
+Machine Learning for Music Discovery Workshop,
+32nd International Conference on Machine Learning.
+</P>
+
+<!--2014-->
+<P>
+D. Tidhar, S. Dixon, E. Benetos and T. Weyde (2014),<br />
+<a href="pub/2014/Early Music-2014-Tidhar-579-90.pdf">
+The Temperament Police</a>,<br />
+Early Music, 42 (4), pp 579-590.
+<a href="https://dx.doi.org/10.1093/em/cau101">DOI</a> 
+</P>
+
+<P>
+P. Foster, M. Mauch and S. Dixon (2014),<br />
+<a href="https://arxiv.org/abs/1402.6926">
+Sequential Complexity as a Descriptor for Musical Similarity</a>,<br />
+IEEE/ACM Transactions on Audio, Speech and Language Processing, 22 (12),
+pp 1965-1977.
+<a href="https://dx.doi.org/10.1109/TASLP.2014.2357676">DOI</a>
+</P>
+
+<P>
+M. Mauch, K. Frieler and S. Dixon (2014),<br />
+<!--a href="pub/2014/MauchFrielerDixon_IntonationInUnaccompaniedSinging.pdf"-->
+<a href="pub/2014/JASA_136_1_401_1.pdf">
+Intonation in Unaccompanied Singing: Accuracy, Drift and a Model of Reference
+Pitch Memory</a>,<br />
+Journal of the Acoustical Society of America, 136 (1), pp 401-411.
+<a href="https://dx.doi.org/10.1121/1.4881915">DOI</a>
+</P>
+<P style="font-size:60%">Copyright (2014) Acoustical Society of America.
+This article may be downloaded for personal use only. Any other use
+requires prior permission of the author and the Acoustical Society of America.
+The article appeared in the Journal of the Acoustical Society of
+America, 136 (1), pp 401-411 and may be found at
+<a
+href="https://scitation.aip.org/content/asa/journal/jasa/136/1/10.1121/1.4881915?aemail=author">
+https://scitation.aip.org/content/asa/journal/jasa/136/1/10.1121/1.4881915?aemail=author</a>.
+</P>
+
+<P>
+R. Tubb and S. Dixon (2014),<br />
+<a href="pub/2014/Tubb-Dixon-CMJ2014-preprint.pdf">
+A Zoomable Mapping of a Musical Parameter Space Using Hilbert Curves
+</a>,<br />
+Computer Music Journal, 38 (3), pp 23-33.
+<a href="https://dx.doi.org/10.1162/COMJ_a_00254">DOI</a>
+</P>
+
+<P>
+W. Goebl, S. Dixon and E. Schubert (2014),<br />
+Quantitative Methods: Motion Analysis, Audio Analysis, and Continuous Response
+Techniques,<br />
+in <i>Expressiveness in Music Performance:
+Empirical Approaches across Styles and Cultures</i>,
+Ed. D. Fabian, R. Timmers and E. Schubert, Oxford University Press,
+pp. 221-239.
+</P>
+
+<P>
+D. Stowell and S. Dixon (2014),<br />
+<a href="pub/2014/StowellDixon-BJME2014.pdf">
+Integration of informal music technologies in secondary school music lessons</a>.<br />
+<a href="https://journals.cambridge.org/repo_A91AFbq6">
+British Journal of Music Education</a>, 31 (1), pp 19-39.
+<a href="https://dx.doi.org/10.1017/S026505171300020X">DOI</a>
+<P style="font-size:60%">Copyright (2013) Cambridge University Press.
+The article appeared in the British Journal of Music Education.
+<!--a href="https://journals.cambridge.org/repo_A89tOAJz">FirstView Article, August 2013, pp 1 - 21</a-->
+</P>
+
+<P>
+T. Cheng, S. Dixon and M. Mauch (2014)<br />
+<a href="pub/2014/Cheng-Dixon-Mauch-DAFx2014.pdf">
+A Comparison of Extended Source-Filter Models for Musical Signal Reconstruction.
+</a><br />
+17th International Conference on Digital Audio Effects, pp 203-209.
+</P>
+
+<P>
+H. Kirchhoff, R. Badeau and S. Dixon (2014),<br />
+<a href="pub/2014/Kirchhoff-Badeau-Dixon-ICASSP2014.pdf">
+Towards Complex Matrix Decomposition of Spectrograms based
+on the Relative Phase Offsets of Harmonic Sounds.</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing (ICASSP), pp 1572-1576.
+</P>
+
+<P>
+M. Mauch and S. Dixon (2014),<br />
+<a href="pub/2014/MauchDixon-PYIN-ICASSP2014.pdf">
+PYIN: a Fundamental Frequency Estimator Using Probabilistic Threshold
+Distributions,</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing (ICASSP), 659-663.
+<a href="https://dx.doi.org/10.1109/ICASSP.2014.6853678">DOI</a>
+</P>
+
+<P>
+S. Sigtia and S. Dixon (2014),<br />
+<a href="pub/2014/SigtiaDixon-ICASSP2014.pdf">
+Improved Music Feature Learning With Deep Neural Networks,</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing (ICASSP), 6959-6963.
+<a href="https://dx.doi.org/10.1109/ICASSP.2014.6854949">DOI</a>
+</P>
+
+<P>
+S. Sigtia, E. Benetos, S. Cherla, T. Weyde, A. Garcez and S. Dixon (2014),<br />
+<a href="pub/2014/Sigtia-et-al-ISMIR2014.pdf">
+An RNN-based Music Language Model for Improving Automatic Music Transcription</a>,<br />
+15th International Society for Music Information Retrieval Conference,
+pp 53-58.
+</P>
+
+<P>
+L. Thompson, S. Dixon and M. Mauch (2014),<br />
+<a href="pub/2014/Thompson-Dixon-Mauch-ISMIR2014.pdf">
+Drum Transcription via Classification of Bar-level Rhythmic Patterns</a>,<br />
+15th International Society for Music Information Retrieval Conference,
+pp 187-192.
+</P>
+
+<P>
+S. Wang, S. Ewert and S. Dixon (2014),<br />
+<a href="pub/2014/Wang-Ewert-Dixon-ISMIR2014.pdf">
+Robust Joint Alignment of Multiple Versions of a Piece of Music</a>,<br />
+15th International Society for Music Information Retrieval Conference,
+pp 83-88.
+</P>
+
+<P>
+R. Tubb and S. Dixon (2014),<br />
+<a href="pub/2014/Tubb-Dixon-NIME2014.pdf">
+The Divergent Interface: Supporting Creative Exploration of Parameter
+Spaces</a>,<br />
+14th International Conference on New Interfaces for Musical Expression.
+</P>
+
+<P>
+R. Tubb and S. Dixon (2014),<br />
+<a href="pub/2014/Tubb-Dixon-ICCC2014.pdf">
+A Four Strategy Model of Creative Parameter Space Interaction</a>,<br />
+5th International Conference on Computational Creativity.
+</P>
+
+<P>
+T. Weyde, S. Cottrell, E. Benetos, D. Wolff, D. Tidhar, J. Dykes, M. Plumbley, S. Dixon, M. Barthet, N. Gold, S. Abdallah, M. Mahey (2014),<br />
+Digital Music Lab - A Framework for Analysing Big Music Data,<br />
+European Conference on Data Analysis, Workshop on Statistical Musicology
+(<a href="https://ecda2014.eu/wp-content/uploads/2014/06/bookofabstracts.pdf">
+abstract only</a>).
+</P>
+
+<P>
+T. Weyde, S. Cottrell, J. Dykes, E. Benetos, D. Wolff, D. Tidhar, N. Gold,
+S. Abdallah, M. Plumbley, S. Dixon, M. Barthet, M. Mahey, A. Tovell,
+A. Alancar-Brayner (2014),<br />
+<a href="pub/2014/Weyde-et-al-DLFM2014-BigData.pdf">
+Big Data for Musicology</a>,<br />
+1st International Digital Libraries for Musicology Workshop.
+</P>
+
+<P>
+C. Wei&szlig;, M. Mauch and S. Dixon (2014),<br />
+<a href="pub/2014/WeissMauchDixon-ICMC-SMC-2014-p1461.pdf">
+Timbre-invariant Audio Features for Style Analysis of Classical Music,</a><br />
+Joint 40th International Computer Music Conference and 11th Sound and Music Computing Conference, pp 1461-1468.
+</P>
+
+<!--2013-->
+<P>
+E. Benetos and S. Dixon (2013),<br />
+<a href="pub/2013/JASMAN13331727_1.pdf">
+Multiple-instrument Polyphonic Music Transcription using a
+Temporally-constrained Shift-invariant Model.</a><br />
+Journal of the Acoustical Society of America, 133 (3), pp 1727-1741.
+<a href="https://dx.doi.org/10.1121/1.4790351">DOI</a>
+</P>
+<P style="font-size:60%">Copyright (2013) Acoustical Society of America.
+This article may be downloaded for personal use only. Any other use
+requires prior permission of the author and the Acoustical Society of America.
+The article appeared in the Journal of the Acoustical Society of
+America, 131 (3), pp 1727-1741 and may be found at
+<a href="https://link.aip.org/link/?JAS/133/1727">
+https://link.aip.org/link/?JAS/133/1727"></a>
+</P>
+
+<P>
+E. Benetos, S. Dixon, D. Giannoulis, H. Kirchhoff and A. Klapuri (2013),<br />
+<a href="pub/2013/10.1007_s10844-013-0258-3.pdf">
+Automatic Music Transcription: Challenges and Future Directions</a>.<br />
+<a href="https://link.springer.com/article/10.1007/s10844-013-0258-3">
+Journal of Intelligent Information Systems,
+41 (3), pp 407-434</a>.
+<a href="https://dx.doi.org/10.1007/s10844-013-0258-3">DOI</a>
+</P>
+
+<P>
+X. Serra, M. Magas, E. Benetos, M. Chudy, S. Dixon, A. Flexer, E. G&oacute;mez, F. Gouyon, P. Herrera, S. Jorda, O. Paytuvi, G. Peeters, J. Schl&uuml;ter, H. Vinet and G. Widmer (2013),<br />
+<a href="pub/2013/MIRES_Roadmap_ver_1.0.0.pdf">
+Roadmap for Music Information Research</a>.<br />
+Final report of the EU FP7 <a href="https://mires.eecs.qmul.ac.uk">MIReS</a>
+Project.
+</P>
+
+<P>
+T. Cheng, S. Dixon and M. Mauch (2013),<br />
+<a href="pub/2013/Cheng-Dixon-Mauch-ISMIR2013.pdf">
+A Deterministic Annealing EM Algorithm for Automatic Music Transcription.
+</a><br />
+In 14th International Society for Music Information Retrieval Conference,
+pp 475-480.
+</P>
+
+<P>
+Y. Song, S. Dixon, M. Pearce and A. Halpern (2013),<br />
+<a href="pub/2013/Song-Dixon-Pearce-Halpern-ISMIR2013.pdf">
+Do Online Social Tags Predict Perceived or Induced Emotional Responses to Music?
+</a><br />
+In 14th International Society for Music Information Retrieval Conference,
+pp 89-94.
+</P>
+
+<P>
+H. Kirchhoff, S. Dixon and A. Klapuri (2013),<br />
+<a href="pub/2013/Kirchhoff-Dixon-Klapuri-CMMR2013.pdf">
+Multiple instrument tracking based on reconstruction error, pitch continuity
+and instrument activity.</a><br />
+In 10th International Symposium on Computer Music Multidisciplinary Research,
+pp 894-903 (Best Poster Paper Award).
+</P>
+
+<P>
+Y. Song, S. Dixon, M. Pearce and G. Fazekas (2013),<br />
+<a href="pub/2013/Song-Dixon-Pearce-Fazekas-ICME2013.pdf">
+Using Tags to Select Stimuli in the Study of Music and Emotion.</a><br />
+Proceedings of the 3rd International Conference on Music and Emotion.
+</P>
+
+P. Foster, S. Dixon and A. Klapuri (2013),<br />
+<a href="pub/2013/Foster-Dixon-Klapuri-ICASSP2013.pdf">
+Identification of Cover Songs using Information Theoretic Measures of Similarity.</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing
+(ICASSP), pp 739-743.
+</P>
+
+<P>
+H. Kirchhoff, S. Dixon and A. Klapuri (2013),<br />
+<a href="pub/2013/Kirchhoff-Dixon-Klapuri-ICASSP2013.pdf">
+Missing Template Estimation for User-assisted Music Transcription.</a><br />
+IEEE International Conference on Acoustics Speech and Signal Processing
+(ICASSP), pp 26-30.
+</P>
+
+<P>
+M. Chudy, A. Perez Carrillo and S. Dixon (2013),<br />
+<a href="pub/2013/ChudyPerezDixon-ICA2013.pdf">
+On the Relation between Gesture, Tone Production and Perception in Classical
+Cello Performance</a>.<br />
+Proceedings of Meetings on Acoustics 19 (1), 035017.
+Presented at the 21st International Congress on Acoustics.
+</P>
+
+<P>
+M. Chudy and S. Dixon (2013),<br />
+Recognising Cello Performers Using Timbre Models
+<a href="pub/2013/ChudyDixon-2013.pdf">(preprint)</a>.<br />
+In
+B. Lausen, D. van den Poel, and A. Ultsch, editors, Joint Annual Conference
+of the German Association for Pattern Recognition (DAGM) and the German
+Classification Society (GfKl), and Symposium of the International Federation of
+Classification Societies (IFCS): Algorithms from &amp; for Nature and Life,
+Studies in Classification, Data Analysis, and Knowledge Organization, 
+Heidelberg: Springer, pp 511-518.
+</P>
+
+<P>
+A. Allik, G. Fazekas, S. Dixon, and M. Sandler (2013),<br />
+<a href="pub/2013/AllikFazekasDixonSandler-ESWC2013-Facilitating.pdf">
+Facilitating Music Information Research with Shared Open Vocabularies</a>.<br />
+Extended Semantic Web Conference (ESWC), pp 178-183.
+<a href="https://dx.doi.org/10.1007/978-3-642-41242-4_20">(DOI)</a>
+</P>
+
+<P>
+A. Allik, G. Fazekas, S. Dixon, and M. Sandler (2013),<br /> 
+<a href="pub/2013/AllikFazekasDixonSandler-ESWC2013-SharedVocabulary.pdf">
+A Shared Vocabulary for Audio Features</a>.<br />
+Extended Semantic Web Conference (ESWC), pp 285-286.
+<a href="https://dx.doi.org/10.1007/978-3-642-41242-4_44">(DOI)</a>
+</P>
+
+<!--2012-->
+
+<P>
+S. Dixon, M. Mauch and D. Tidhar (2012),<br />
+<a href="pub/2012/JASMAN1311878_1.pdf">
+Estimation of Harpsichord Inharmonicity and Temperament from Musical
+Recordings.</a><br />
+Journal of the Acoustical Society of America, 131 (1), pp 878-887.
+</P>
+<p style="font-size:60%">Copyright (2012) Acoustical Society of America.
+This article may be downloaded for personal use only. Any other use
+requires prior permission of the author and the Acoustical Society of America.
+The article appeared in the Journal of the Acoustical Society of
+America, 131 (1), pp 878-887 and may be found at
+<A HREF="https://link.aip.org/link/?JAS/131/878">
+https://link.aip.org/link/?JAS/131/878</A>
+</p>
+
+<P>
+E. Benetos and S. Dixon (2012),<br />
+<!--a href="pub/2012/"-->
+A shift-invariant latent variable model for automatic music transcription</a>.<br />
+Computer Music Journal, 36 (4), pp 81-94.
+<a href="https://dx.doi.org/10.1162/COMJ_a_00146">DOI</a>
+</P>
+
+<P>
+A. Arzt, G. Widmer, and S. Dixon (2012),<br />
+<a href="pub/2012/Arzt-Widmer-Dixon-EUSIPCO2012.pdf">
+Adaptive distance normalization for real-time music tracking</a>.<br />
+In 20th European Signal Processing Conference, pp 2689-2693.
+</P>
+
+<P>
+E. Benetos and S. Dixon (2012),<br />
+<a href="pub/2012/Benetos-Dixon-LVAICA2012.pdf">
+Temporally-constrained Convolutive Probabilistic Latent Component Analysis
+for Multi-pitch Detection</a>.<br />
+International Conference on Latent Variable Analysis and Signal Separation,
+pp 364-371.
+</P>
+
+<P>
+E. Benetos, A. Klapuri and S. Dixon (2012),<br />
+<a href="pub/2012/Benetos-Klapuri-Dixon-EUSIPCO2012.pdf">
+Score-informed transcription for automatic piano tutoring</a>.<br />
+In 20th European Signal Processing Conference, pp 2153-2157.
+</P>
+
+<P>
+Emmanouil Benetos, Mathieu Lagrange, and Simon Dixon (2012),<br />
+<a href="pub/2012/Benetos-Lagrange-Dixon-DAFx-2012.pdf">
+Characterisation of
+acoustic scenes using a temporally-constrained shift-invariant model</a>.<br />
+In 15th International Conference on Digital Audio Effects, pp 317-323.
+</P>
+
+<P>
+Emmanouil Benetos, Simon Dixon, Dimitrios Giannoulis, Holger Kirchhoff, and
+Anssi Klapuri (2012),<br />
+<a href="pub/2012/Benetos-et-al-ISMIR2012-MIRrors.pdf">
+Automatic music transcription: Breaking the glass ceiling</a>.<br />
+In 13th International Society for Music Information Retrieval Conference,
+pp 379-384.
+</P>
+
+<P>
+P. Foster, A. Klapuri, and S. Dixon (2012),<br />
+<a href="pub/2012/Foster-Klapuri-Dixon-EUSIPCO2012.pdf">
+A method for identifying repetition structure in musical audio based on
+time series prediction</a>.<br />
+In 20th European Signal Processing Conference, pp 1299-1303.
+</P>
+
+<P>
+J. Gansemann, P. Scheunders, and S. Dixon (2012),<br />
+<a href="pub/2012/Ganseman-Scheunders-Dixon-EUSIPCO12.pdf">
+Improving PLCA-based score-informed source separation with
+invertible constant-Q transforms</a>.<br />
+In 20th European Signal Processing Conference, pp 2634-2638.
+</P>
+
+<P>
+H. Kirchhoff, S. Dixon and A. Klapuri (2012),<br />
+<a href="pub/2012/Kirchhoff-Dixon-Klapuri-ICASSP-2012.pdf">
+Shift-Variant Non-Negative Matrix Deconvolution for Music Transcription</a>.<br />
+IEEE International Conference on Acoustics Speech and Signal Processing (ICASSP), pp 125-128.
+</P>
+
+<P>
+Holger Kirchhoff, Simon Dixon, and Anssi Klapuri (2012),<br />
+<a href="pub/2012/Kirchhoff-Dixon-Klapuri-ISMIR-2012.pdf">
+Multi-template shift-variant non-negative matrix deconvolution for
+semi-automatic music transcription</a>.<br />
+In 13th International Society for Music Information Retrieval Conference,
+pp 415-420.
+</P>
+
+<P>
+R. Macrae and S. Dixon (2012),<br />
+<a href="pub/2012/Macrae-Dixon-ISMIR-2012.pdf">
+Ranking lyrics for online search</a>.<br />
+In 13th International Society for Music Information Retrieval Conference,
+pp 361-366.
+</P>
+
+<P>
+M. Mauch and S. Dixon (2012),<br />
+<a href="pub/2012/Mauch-Dixon-ISMIR-2012.pdf">
+A corpus-based study of rhythm patterns</a>.<br />
+In 13th International Society for Music Information Retrieval Conference,
+pp 163-168.
+</P>
+
+<P>
+M. Barthet, G. Fazekas, S. Dixon and M. Sandler (2012),<br />
+<a href="https://www.de2012.org/sites/default/files/digitalfutures2012papers/Papers/Session5BRecommenderSystems/Barthet_etal_SocialMediaRetrieval.pdf">
+Social Media Retrieval for Music Education</a>.<br />
+In Digital Futures 2012: The Third Annual Digital Economy All Hands Conference.
+</P>
+
+<P>
+Y. Song, M. Pearce, and S. Dixon (2012),<br />
+<a href="pub/2012/Song-Dixon-Pearce-CMMR-2012.pdf">
+A survey of music recommendation systems and future perspectives</a>.<br />
+In 9th International Symposium on Computer Music
+Modelling and Retrieval, pages 395-410, 2012.
+</P>
+
+<P>
+Y. Song, M. Pearce, and S. Dixon (2012),<br />
+<a href="pub/2012/Song-Dixon-Pearce-ISMIR-2012.pdf">
+Evaluation of musical features for emotion classification</a>.<br />
+In 13th International Society for Music Information Retrieval
+Conference, pp 523-528.
+</P>
+
+<P>
+M.J. Terrill, G. Fazekas, A.J.R. Simpson, J. Smith, and S. Dixon (2012),<br />
+<a href="pub/2012/Terrill-et-al-ISMIR-2012.pdf">
+Listening level changes music similarity</a>.<br />
+In 13th International Society for Music Information
+Retrieval Conference, pp 487-492.
+</P>
+
+<P>
+R. Tubb, A. Klapuri, and S. Dixon (2012),<br />
+<a href="pub/2012/Tubb-Klapuri-Dixon-DAFx12.pdf">
+The Wablet: Scanned synthesis on a multi-touch interface</a>.<br />
+In 15th International Conference on Digital Audio Effects,
+pp 279-286.
+</P>
+
+<!--2011-->
+
+<P>
+S. Dixon, M. Mauch and A. Anglade (2011),<br />
+<a href="pub/2011/Dixon-Mauch-Anglade-LNCS6684.pdf">
+Probabilistic and Logic-Based Modelling of Harmony</a>.<br />
+CMMR 2010 Post Symposium Proceedings, Ed. R. Kronland-Martinet, S. Ystad, K. Jensen and M. Aramaki, Springer LNCS 6684, Heidelberg, pp 1-19.
+</P>
+
+<P>
+S. Dixon, D. Tidhar and E. Benetos (2011),<br />
+<a href="pub/2011/Dixon-Tidhar-Benetos-ISMIR2011.pdf">The Temperament Police:
+The Truth, the Ground Truth and Nothing but the Truth</a>.<br />
+In 12th International Society for Music Information Retrieval Conference,
+pp 281-286.
+</P>
+
+<P>
+R. Macrae and S. Dixon (2011),<br />
+<a href="pub/2011/Macrae-Dixon-ISMIR2011.pdf">
+Guitar Tab Mining, Analysis and Ranking</a>.<br />
+In 12th International Society for Music Information Retrieval Conference,
+pp 453-458.
+</P>
+
+<P>
+D. Stowell and S. Dixon (2011),<br />
+<a href="pub/2011/Stowell-Dixon-ISMIR2011.pdf">
+MIR in School? Lessons from Ethnographic Observation of Secondary School
+Music Classes</a>.<br />
+In 12th International Society for Music Information Retrieval Conference,
+pp 347-352.
+</P>
+
+<P>
+M. Barthet and S. Dixon,<br />
+<a href="pub/2011/Barthet-Dixon-ISMIR2011.pdf">
+Ethnographic Observations of Musicologists at the British Library:
+Implications for Music Information Retrieval</a>.<br />
+In 12th International Society for Music Information Retrieval Conference,
+pp 353-358.
+</P>
+
+<P>
+E. Benetos and S. Dixon (2011),<br />
+<a href="pub/2011/BenetosDixon_JSTSP2011_postprint.pdf">
+Joint Multi-Pitch Detection using Spectral Envelope Estimation for Polyphonic Music Transcription</a>.<br />
+Journal of Selected Topics in Signal Processing, 5 (6), pp 1111-1123.
+</P>
+
+<P>
+E. Benetos and S. Dixon (2011),<br />
+<a href="pub/2011/Benetos-Dixon-WASPAA2011.pdf">
+A Temporally-Constrained Convolutive Probabilistic Model for Pitch
+Detection</a>.<br />
+IEEE Workshop on Applications of Signal Processing to Audio and Acoustics,
+pp 133-136.
+</P>
+
+<P>
+E. Benetos and S. Dixon (2011),<br />
+<a href="pub/2011/Benetos-Dixon-ICASSP2011.pdf">
+Polyphonic Music Transcription using Note Onset and Offset Detection</a>.<br />
+IEEE International Conference on Acoustics, Speech and Signal Processing,
+pp 37-40.
+</P>
+
+<P>
+E. Benetos and S. Dixon (2011),<br />
+<a href="pub/2011/Benetos-Dixon-SMC2011.pdf">
+Multiple-Instrument Polyphonic Music Transcription using a Convolutive Probabilistic Model</a>.<br />
+8th Sound and Music Computing Conference,
+pp 19-24.
+</P>
+
+<P>
+L.Mearns, E. Benetos and S. Dixon (2011),<br />
+<a href="pub/2011/Mearns-Benetos-Dixon-SMC2011-136.pdf">
+Automatically Detecting Key Modulations in J.S. Bach Chorale Recordings</a>.
+<br />
+8th Sound and Music Computing Conference,
+pp 25-32.
+</P>
+
+<P>
+R. Macrae, J. Neumann, X. Anguera, N. Oliver and S. Dixon (2011),<br />
+<a href="pub/2011/Macrae-Neumann-Anguera-Oliver-Dixon-ADMIRE-2011.pdf">
+Real-Time Synchronisation of Multimedia Streams in a Mobile Device</a>.<br />
+IEEE International Conference on Multimedia and Expo,
+Workshop on Advances in Music Information Research (AdMIRe).
+</P>
+
+<!--P>
+M. Chudy and S. Dixon (2011),<br />
+Recognising Cello Performers Using Timbre Models
+<a href="pub/2012/ChudyDixon-2012.pdf">
+(Postproceedings paper; see above for details)</a>.<br />
+Joint Annual Conference of the German Association for Pattern Recognition
+(DAGM) and the German Classification Society (GfKl).
+</P-->
+
+<P>
+C. Mesnage, A. Rafiq, S. Dixon and R. Brixtel (2011),<br />
+<a href="https://ceur-ws.org/Vol-793/womrad2011_paper1.pdf">
+Music Discovery with Social Networks</a>.<br />
+Workshop on Music Recommendation and Discovery,
+Chicago, USA, pp 1-6.
+</P>
+
+<!--2010-->
+
+<P>
+S. Dixon, M. Sandler, M. d’Inverno, and C. Rhodes (2010),<br />
+<a href="pub/2010/Dixon-Sandler-DInverno-Rhodes-JNMR-2010.pdf">
+Towards a distributed research environment for music informatics and
+computational musicology</a>.
+<br />
+Journal of New Music Research, 39 (4): 291-294.
+</P>
+
+<P>
+A. Anglade, E. Benetos, M. Mauch, and S. Dixon (2010),<br />
+<a href="pub/2010/Anglade-Benetos-Mauch-Dixon-JNMR-2010.pdf">
+Improving music genre classification using automatically induced harmony rules
+</a>.<br />
+Journal of New Music Research, 39 (4), 349-361.
+</P>
+
+<P>
+E. Benetos and S. Dixon (2010),<br />
+<a href="pub/2010/Benetos-Dixon-SAPA-2010.pdf">
+Multiple-F0 estimation of piano sounds exploiting spectral structure and
+temporal evolution.</a><br />
+In 2010 Workshop on Statistical and Perceptual Audition (SAPA), 2010.
+</P>
+
+<P>
+M. Chudy and S. Dixon (2010),<br />
+<a href="pub/2010/Chudy-Dixon-SysMus-2010.pdf">
+Towards music performer recognition using timbre features.</a><br />
+In Third International Conference of Students of Systematic Musicology.
+</P>
+
+<P>
+S. Dixon (2010),<br />
+<a href="pub/2010/Dixon-CMMR-2010.pdf">
+Computational modelling of harmony.</a><br />
+In 7th International Symposium on Computer Music Modeling and Retrieval,
+(CMMR 2010), Malaga, Spain.
+</P>
+
+<P>
+K. Jacobson, S. Dixon, and M. Sandler (2010),<br />
+<a href="pub/2010/Jacobson-Dixon-Sandler-ISMIR-2010-LBD-MusicBrainzNGS.pdf">
+LinkedBrainz: Providing the MusicBrainz
+next generation schema as linked data.</a><br />
+Late-breaking session, 11th International Society for Music Information
+Retrieval Conference, Utrecht, Netherlands.
+</P>
+
+<P>
+R. Macrae and S. Dixon (2010),<br />
+<a href="pub/2010/Macrae-Dixon-ICME-2010-demo.pdf">
+A guitar tablature score follower.</a><br />
+In IEEE International Conference on Multimedia and Expo.
+</P>
+
+<P>
+R. Macrae and S. Dixon (2010),<br />
+<a href="pub/2010/Macrae-Dixon-ISMIR-2010-WindowedTimeWarping.pdf">
+Accurate real-time windowed time warping.</a><br />
+In 11th International Society for Music Information Retrieval Conference.
+</P>
+
+<P>
+M. Mauch and S. Dixon (2010),<br />
+<a href="pub/2010/Mauch-Dixon-TASLP-2010.pdf">
+Simultaneous estimation of chords and musical context from audio.</a><br />
+IEEE Transactions on Audio, Speech and Language Processing, 18 (6), 1280-1289.
+DOI: 10.1109/TASL.2009.2032947
+</P>
+
+<P>
+M. Mauch and S. Dixon (2010),<br />
+<a href="pub/2010/Mauch-Dixon-ISMIR-2010.pdf">
+Approximate Note Transcription for the Improved Identification of Difficult
+	Chords.</a><br />
+In 11th International Society for Music Information Retrieval Conference
+(ISMIR 2010), Utrecht, Netherlands.
+</P>
+
+<P>
+L. Mearns and S. Dixon (2010),<br />
+<a href="pub/2010/Mearns-Dixon-ISMIR-2010-LBD.pdf">
+Characterisation of composer style using high level musical features.</a><br />
+Late-breaking session, 11th International Society for Music Information
+Retrieval Conference, Utrecht, Netherlands.
+</P>
+
+<P>
+L. Mearns, D. Tidhar, and S. Dixon (2010),<br />
+<a href="pub/2010/Mearns-Tidhar-Dixon-ACM-MML-2010.pdf">
+Characterisation of composer style using high-level musical features.</a><br />
+In 3rd ACM Workshop on Machine Learning and Music.
+</P>
+
+<P>
+L. Mearns and S. Dixon (2010),<br />
+How do you characterise musical style?<br />
+In Third International Conference of Students of Systematic Musicology, 2010.
+</P>
+
+<P>
+D. Tidhar, M. Mauch, and S. Dixon (2010),<br />
+<a href="pub/2010/Tidhar-Mauch-Dixon-ICASSP-2010.pdf">
+High precision frequency estimation for harpsichord tuning classification.</a><br />
+In Proceedings of the IEEE International Conference on Acoustics, Speech and
+Signal Processing, pages 61-64.
+</P>
+
+<P>
+D. Tidhar, G. Fazekas, M. Mauch, and S. Dixon (2010),<br />
+<a href="pub/2010/Tidhar-Fazekas-Mauch-Dixon-JNMR-2010.pdf">
+TempEst: Harpsichord temperament estimation in a semantic-web environment</a>.
+<br />
+Journal of New Music Research, 39 (4), 327-336.
+</P>
+
+<P>
+D. Tidhar, G. Fazekas, M. Mauch, and S. Dixon (2010),<br />
+<a href="pub/2010/Tidhar-Fazekas-Mauch-Dixon-ISMIR-2010-LBD-Temperament.pdf">
+Temperament estimation as an MIR task.</a><br />
+Late-breaking session, 11th International Society for Music Information
+Retrieval Conference, Utrecht, Netherlands.
+</P>
+
+<!--2009-->
+
+<P>
+A. Anglade and S. Dixon (2009),<br />
+<a href="pub/2009/Anglade2009-smc.pdf">First-order logic classification models
+of musical genres based on harmony.</a><br />
+In 6th Sound and Music Computing Conference, pages 309-314.
+</P>
+
+<P>
+A. Anglade, R. Ramirez, and S. Dixon (2009),<br />
+<a href="pub/2009/Anglade2009-ismir.pdf">Genre classification using harmony
+rules induced from automatic chord transcriptions.</a><br />
+In 10th International Society for
+Music Information Retrieval Conference, pages 669-674.
+</P>
+
+<P>
+M. Mauch, K. Noland, and S. Dixon (2009),<br />
+<a href="pub/2009/ISMIR2009-Mauch-PS2-7.pdf">
+Using musical structure to enhance automatic chord transcription.</a><br />
+In 10th International Society for Music Information Retrieval Conference,
+pages 231-236.
+</P>
+
+<P>
+M. Mauch, C. Cannam, M. Davies, S. Dixon, C. Harte, S. Kolozali, and D. Tidhar
+(2009),<br />
+<a href="pub/2009/late-breaking-C4DM.pdf">
+OMRAS-2 metadata project 2009.</a><br />
+Late-breaking session, 10th International Society for Music Information
+Retrieval Conference, Kobe, Japan.
+</P>
+
+<!--2008-->
+
+<P>
+A. Anglade, S. Dixon (2008),<br />
+<a href="pub/2008/Anglade-Dixon-ISMIR-2008.pdf">
+Characterisation of Harmony with Inductive Logic Programming.</a><br />
+Proceedings of the
+9th International Conference on Music Information Retrieval (ISMIR 2008),
+Philadelphia, USA, pp 63-68.
+</P>
+
+<P>
+A. Anglade, S. Dixon (2008),<br />
+<a href="pub/2008/Anglade-Dixon-MML-2008.pdf">
+Towards Logic-based Representations of Musical
+Harmony for Classification, Retrieval and Knowledge Discovery.</a><br />
+Proceedings of the International Workshop on Machine Learning and Music
+(MML2008 held in conjunction with ICML/COLT/UAI 2008), Helsinki, Finland,
+July, 2008.
+</P>
+
+<P>
+M. Mauch, S. Dixon (2008),<br />
+<a href="pub/2008/Mauch-Dixon-ISMIR-2008.pdf">
+A Discrete Mixture Model for Chord Labelling.</a><br />
+Proceedings of the
+9th International Conference on Music Information Retrieval (ISMIR 2008),
+Philadelphia, USA.
+</P>
+
+<P>
+M. Mauch, D. M&uuml;llensiefen, S. Dixon, G. Wiggins (2008),<br />
+<a href="pub/2008/Mauch-Mullensiefen-Dixon-Wiggins-ICMPC-2008.pdf">
+Can Statistical Language Models be Used for the Analysis of Harmonic
+Progressions?</a><br />
+Proceedings of the 10th International Conference on Music Perception and
+Cognition, Sapporo, Japan.
+</P>
+ 
+<P>
+M. Mauch, D. M&uuml;llensiefen, S. Dixon, G. Wiggins (2008),<br />
+Applying Tools from Natural Language Processing Analysis to Harmony:
+A Bottom Up Approach.<br />
+Conference on Music, Language and the Mind.
+</P>
+
+<!--a href="Macrae-Dixon-MIREX-2008.pdf"-->
+
+<P>
+R. Macrae, S. Dixon (2008),<br />
+<a href="pub/2008/Macrae-Dixon-NIME-2008.pdf">
+From Toy to Tutor: Note-Scroller is a Game to Teach Music.</a><br />
+8th International Conference on New Interfaces for Musical Expression. 
+</P>
+
+<P>
+A. Arzt, G. Widmer, S. Dixon (2008),<br />
+<a href="pub/2008/Arzt-Widmer-Dixon-ECAI-2008.pdf">
+Automatic Page Turning for Musicians via Real-Time Machine Listening.</a><br />
+Proceedings of the 18th European Conference on Artificial Intelligence, pp
+241-245.
+</P>
+
+<P>
+G. Widmer, S. Dixon, P. Knees, E. Pampalk, T. Pohle (2008),<br />
+From Sound to Sense via Feature Extraction and Machine Learning:
+Deriving High-Level Descriptors for Characterising Music.<br />
+<a href="https://smcnetwork.org/node/884">
+Sound to Sense - Sense to Sound: A State of the Art in Sound and Music
+Computing</a>, Ed. P. Polotti and D. Rocchesso, pp 161-194.
+</P>
+
+<P>
+W. Goebl, S. Dixon, G. De Poli, A. Friberg, R. Bresin, G. Widmer (2008),<br />
+Sense in Expressive Music Performance: Data Acquisition, Computational Studies,
+and Models.<br />
+<a href="https://smcnetwork.org/node/884">
+Sound to Sense - Sense to Sound: A State of the Art in Sound and Music
+Computing</a>, Ed. P. Polotti and D. Rocchesso, pp 195-242.
+</P>
+
+<!--2007-->
+
+<P>
+S. Dixon (2007),<br />
+<a href="pub/2007/jnmr07.pdf">
+Evaluation of the Audio Beat Tracking System BeatRoot.</a><br />
+Journal of New Music Research, 36, 1, pp 39-50.
+</P>
+
+<P>
+M. Mauch, S. Dixon, C. Harte, M. Casey, B. Fields<br />
+<a href="pub/2007/ISMIR2007_p255_mauch.pdf">
+Discovering Chord Idioms Through Beatles and Real Book Songs.</a><br />
+Proceedings of the
+<a href="https://ismir2007.ismir.net">
+8th International Conference on Music Information Retrieval (ISMIR 2007)</a>,
+Vienna, Austria, September 2007, pp 111-114.
+</P>
+
+<P>
+S. Dixon,<br />
+<a href="pub/2007/ica2007.pdf">
+Tools for Analysis of Musical Expression.</a><br />
+Proceedings of the 19th International Congress on Acoustics,
+Madrid, September 2007.
+</P>
+
+<P>
+F. Gouyon, S. Dixon and G. Widmer,<br />
+<a href="pub/2007/icassp.pdf">
+Evaluating low-level features for beat classification and tracking.</a><br />
+Proceedings of the 2007 International Conference on
+Acoustics, Speech and Signal Processing, Vol. IV, pp 1309-1312.
+</P>
+
+<!--2006-->
+
+<P>
+S. Dixon, W. Goebl and E. Cambouropoulos (2006),<br />
+<a href="https://ofai.at/papers/oefai-tr-2006-01.pdf">
+Perceptual Smoothness of Tempo in Expressively Performed Music.</a><br />
+Music Perception, 23 (3), pp 195-214.
+</P>
+
+<P>
+F. Gouyon, A. Klapuri, S. Dixon, M. Alonso,
+G. Tzanetakis, C. Uhle and P. Cano (2006),<br />
+<a href="https://ofai.at/papers/oefai-tr-2006-03.pdf">
+An Experimental Comparison of Audio Tempo Induction Algorithms.</a><br />
+IEEE Transactions on Audio, Speech and Language Processing, 14 (5), pp 1832-1844.
+</P>
+
+<P>
+S. Dixon<br />
+<a href="https://ofai.at/papers/oefai-tr-2006-12.pdf">
+Onset Detection Revisited</a><br />
+Proceedings of the
+<a href="https://www.dafx.ca">
+9th International Conference on Digital Audio Effects</a>,
+Montreal, September 2006, pp 133-137.
+</P>
+
+<P>
+A. Flexer, F. Gouyon, S. Dixon and G. Widmer,<br />
+<a href="https://ofai.at/papers/oefai-tr-2006-09.pdf">
+Probabilistic Combination of Features for Music Classification</a>,<br />
+Proceedings of the
+<a href="https://ismir2006.ismir.net">
+7th International Conference on Music Information Retrieval (ISMIR 2006)</a>,
+Victoria BC, October 2006, pp 111-114.
+</P>
+
+<P>
+S. Dixon,<br />
+Computer Analysis of Performance Timing,<br /> 
+<a href="https://www.icmpc2006.org/">
+9th International Conference on Music Perception and Cognition</a>,
+Bologna, August 2006.
+</P>
+
+<!--2005-->
+
+<P>
+F. Gouyon and S. Dixon,<br />
+<a href="https://ofai.at/papers/oefai-tr-2006-02.pdf">
+A Review of Automatic Rhythm Description Systems.</a><br />
+Computer Music Journal, 29 (1), 2005, pp 34-54.
+<a href="https://dx.doi.org/10.1162/comj.2005.29.1.34">DOI</a>
+</P>
+
+<P>
+S. Dixon,<br />
+<!--a href="pub/2005/ijcai05.pdf"-->
+<a href="https://ofai.at/papers/oefai-tr-2005-14.pdf">
+An On-Line Time Warping Algorithm for Tracking Musical Performances,</a><br />
+Proceedings of the 
+<a href="https://www.ijcai.org">
+International Joint Conference on Artificial Intelligence</a>,
+Edinburgh, August 2005, pp 1727-1728.
+</P>
+
+<P>
+S. Dixon,<br />
+<!--a href="pub/2005/dafx05.pdf"-->
+<a href="https://ofai.at/papers/oefai-tr-2005-16.pdf">
+Live Tracking of Musical Performances using On-Line Time Warping,</a><br />
+Proceedings of the 8th International Conference on Digital Audio Effects
+(DAFx05), Madrid, Spain, September 2005, pp 92-97.
+</P>
+
+<P>
+S. Dixon and G. Widmer,<br />
+<!--a href="pub/2005/ismir05.pdf"-->
+<a href="https://ofai.at/papers/oefai-tr-2005-17.pdf">
+MATCH: A Music Alignment Tool Chest,</a><br />
+6th International Conference on Music Information Retrieval (ISMIR 2005),
+London, England, September 2005, pp 492-497. (Best Poster Award)
+</P>
+
+<P>
+S. Dixon, W. Goebl and G. Widmer,<br />
+<!--a href="pub/2005/icmc05.pdf"-->
+<a href="https://ofai.at/papers/oefai-tr-2005-15.pdf">
+The 'Air Worm': An Interface for Real-Time Manipulation of Expressive Music
+Performance,</a><br />
+Proceedings of the 2005 International Computer Music Conference (ICMC2005),
+Barcelona, Spain, September 2005, pp 614-617.
+</P>
+
+<P>
+G. Widmer, S. Dixon, A. Flexer, W. Goebl, P. Knees, S.T. Madsen, E. Pampalk,
+T. Pohle, M. Schedl and A. Tobudic<br />
+<a href="https://ofai.at/papers/oefai-tr-2005-12.pdf">
+The Maching Learning and Intelligent Music Processing Group at the Austrian
+Research Institute for Artificial Intelligence (OFAI),</a><br />
+Proceedings of the 2005 International Computer Music Conference (ICMC2005),
+Barcelona, Spain, September 2005, pp 169-172.
+</P>
+
+<P>
+W. Goebl, S. Dixon, G. DePoli, A. Friberg, R. Bresin and G. Widmer<br />
+'Sense' in Expressive Music Performance:
+Data Acquisition, Computational Studies, and Models,<br />
+S2S2 Summer School, Genova, 2005.
+</P>
+
+<p>
+S. Dixon<br />
+Audio Analysis Applications for Music.<br />
+Encyclopedia of Information Science and Technology, 
+(ed. M.Khosrow-Pour), Idea Group, 2005, pp 188-196.
+</p>
+
+<!--2004-->
+
+<P>
+E. Pampalk and S. Dixon and G. Widmer,<br />
+Exploring Music Collections by Browsing Different Views.<br />
+Computer Music Journal, 28 (2), 2004, pp 49-62.
+</P>
+
+<P>
+S. Dixon, F. Gouyon and G. Widmer,<br />
+<a href="https://ofai.at/papers/oefai-tr-2004-20.pdf">
+Towards Characterisation of Music via Rhythmic Patterns,</a><br />
+5th International Conference on Music Information Retrieval (ISMIR 2004),
+pp 509-516.
+</P>
+
+<P>
+F. Gouyon and S. Dixon,<br />
+<a href="https://ofai.at/papers/oefai-tr-2004-21.pdf">
+Dance Music Classification: A Tempo-Based Approach,</a><br />
+5th International Conference on Music Information Retrieval (ISMIR 2004),
+pp 501-504.
+</P>
+
+<P>
+F. Gouyon, N. Wack and S. Dixon,<br />
+<a href="https://ofai.at/papers/oefai-tr-2004-22.pdf">
+An Open Source Tool for Semi-Automatic Rhythmic Annotation.</a><br />
+Proceedings of the 7th International Conference on Digital Audio Effects, 2004,
+pp 193-196.
+</P>
+
+<P>
+F. Gouyon, S. Dixon, E. Pampalk and G. Widmer,<br />
+<a href="https://ofai.at/papers/oefai-tr-2004-10.pdf">
+Evaluating Rhythmic Descriptors for Musical Genre Classification.</a><br />
+Proceedings of the AES 25th International Conference,
+London, June 2004, pp 196-204.
+</p>
+
+<p>
+S. Dixon<br />
+<a href="https://ofai.at/papers/oefai-tr-2002-39.pdf">
+Analysis of Musical Content in Digital Audio.</a><br />
+Computer Graphics and Multimedia: Applications, Problems, and Solutions
+(ed. J. DiMarco), Idea Group, 2004, pp 214-235.
+</p>
+
+<!--2003-->
+
+<p>
+G. Widmer, S. Dixon, W. Goebl, E. Pampalk and A. Tobudic<br />
+<a
+href="https://www.aaai.org/ojs/index.php/aimagazine/article/download/1722/1620">
+In Search of the Horowitz Factor.</a><br />
+AI Magazine, 24 (3), 2003, pp 111-130.
+</p>
+
+<p>
+S. Dixon, E. Pampalk and G. Widmer,<br />
+<!--a href="pub/2003/ismir-dance.pdf"-->
+<a href="https://ofai.at/papers/oefai-tr-2003-24.pdf">
+Classification of Dance Music by Periodicity Patterns.</a><br />
+4th International Conference on Music Information Retrieval (ISMIR 2003),
+Baltimore MD, October 2003, pp 159 - 165.
+</p>
+
+<p>
+E. Pampalk, S. Dixon and G. Widmer<br />
+<!--a href="pub/2003/ismir-views.pdf"-->
+<a href="https://ofai.at/papers/oefai-tr-2003-23.pdf">
+Exploring Music Collections by Browsing Different Views.</a><br />
+4th International Conference on Music Information Retrieval (ISMIR 2003),
+Baltimore MD, October 2003, pp 201 - 208.
+</p>
+
+<p>
+E. Pampalk, S. Dixon and G. Widmer<br />
+<a href="https://ofai.at/papers/oefai-tr-2003-22.pdf">
+On the Evaluation of Perceptual Similarity Measures for Music.</a><br />
+6th International Conference on Digital Audio Effects (DAFx-03),
+London, UK, September 2003, pp 7-12.
+</p>
+
+<p>
+S. Dixon<br />
+<a href="pub/2003/spie.pdf">
+On the Analysis of Musical Expression in Audio Signals.</a><br />
+Storage and Retrieval for Media Databases 2003,
+SPIE-IS&amp;T Electronic Imaging, SPIE Vol. 5021, pp 122-132.
+</p>
+
+<p>
+S. Dixon<br />
+<a href="pub/2003/escom.pdf">(PDF)<br />
+Towards Automatic Analysis of Expressive Performance.</a><br />
+5th Triennial Conference of the European Society for the Cognitive Sciences of
+Music (ESCOM5),
+8 - 13 September 2003, Hanover, Germany, pp 107-110.
+</p>
+
+<!--2002-->
+
+<p>
+S. Dixon, W. Goebl and G. Widmer<br />
+<a href="pub/2002/icmc.pdf">
+The Performance Worm: Real Time Visualisation of
+Expression Based on Langner's Tempo-Loudness Animation.</a><br />
+International Computer Music Conference,
+16 - 21 September 2002, G&ouml;teborg, Sweden, pp 361-364.
+</p>
+
+<p>
+S. Dixon, W. Goebl and G. Widmer<br />
+<a href="pub/2002/icmai.pdf">
+Real Time Tracking and Visualisation of Musical Expression.</a><br />
+II International Conference on Music and Artificial Intelligence,
+12 - 15 September 2002, Edinburgh, Scotland, pp 58-68.
+</p>
+
+<p>
+S. Dixon and W. Goebl<br />
+<a href="pub/2002/icmpc.pdf">
+Pinpointing the Beat: Tapping to Expressive Performances.</a><br />
+7th International Conference on Music Perception and Cognition (ICMPC7),
+17 - 21 July 2002, Sydney, Australia, pp 617-620.
+</p>
+
+<!--2001-->
+
+<p>
+S. Dixon.<br />
+<a href="pub/2001/jnmr.pdf">
+Automatic Extraction of Tempo and Beat from Expressive Performances.</a><br />
+Journal of New Music Research, 30 (1), 2001, pp 39-58.<br />
+<ul>
+<li><a href="beatroot/index.html">Download BeatRoot software</a>
+(requires <a href="https://java.sun.com/javase/downloads/index.jsp">Java 1.5</a> or higher)
+<li>Audio beat tracking examples
+	<UL>
+	<LI>MP3 files (~100kB each):&nbsp;&nbsp;
+		<a href="mp3/audio-pop-sunshine.mp3">1</a>,&nbsp;
+		<a href="mp3/audio-pop-superstition.mp3">2</a>,&nbsp;
+		<a href="mp3/audio-pop-dylan.mp3">3</a>,&nbsp;
+		<a href="mp3/audio-salsa-felicidad.mp3">4</a>,&nbsp;
+		<a href="mp3/audio-bossa-rosa.mp3">5</a>,&nbsp;
+		<a href="mp3/audio-jazz-michelle.mp3">6</a>
+	<LI>WAV files (~1-2MB each):&nbsp;&nbsp;
+		<a href="wav/audio-pop-sunshine.wav">1</a>,&nbsp;
+		<a href="wav/audio-pop-superstition.wav">2</a>,&nbsp;
+		<a href="wav/audio-pop-dylan.wav">3</a>,&nbsp;
+		<a href="wav/audio-salsa-felicidad.wav">4</a>,&nbsp;
+		<a href="wav/audio-bossa-rosa.wav">5</a>,&nbsp;
+		<a href="wav/audio-jazz-michelle.wav">6</a>
+	</UL>
+<li>MIDI beat tracking examples
+	<UL>
+	<LI>MP3 files (~100kB each):&nbsp;&nbsp;
+		<a href="mp3/midi-classical-mozart281-3.mp3">1</a>,&nbsp;
+		<a href="mp3/midi-classical-mozart282-3.mp3">2</a>,&nbsp;
+		<a href="mp3/midi-piano-michelle.mp3">3</a>
+	<LI>WAV files (~1-2MB each):&nbsp;&nbsp;
+		<a href="wav/midi-classical-mozart281-3.wav">1</a>,&nbsp;
+		<a href="wav/midi-classical-mozart282-3.wav">2</a>,&nbsp;
+		<a href="wav/midi-piano-michelle.wav">3</a>
+	</UL>
+</ul>
+</p>
+
+<p>
+S. Dixon.<br />
+<a href="pub/2001/icmc.pdf">
+An Interactive Beat Tracking and Visualisation System.</a><br />
+Proceedings of the International Computer Music Conference,
+Havana, Cuba, 2001, pp 215-218.
+<ul>
+<li><a href="beatroot/index.html">Download BeatRoot software</a>
+(requires <a href="https://java.sun.com/javase/downloads/index.jsp">Java 1.5</a> or higher)
+<li>Screen shots:
+<a href="images/audioBT.gif">audio beat tracking</a>,
+<a href="images/audioBT+spect.jpg">
+audio beat tracking (showing spectrogram)</a>,
+<a href="images/midiBT.gif">MIDI beat tracking</a>
+</ul>
+</p>
+
+<p>
+E. Cambouropoulos, S. Dixon, W. Goebl and G. Widmer.<br />
+<a href="pub/2001/isscm-smoothness.pdf">
+Human Preferences for Tempo Smoothness</a>.<br />
+VII International Symposium on Systematic and Comparative Musicology,
+III International Conference on Cognitive Musicology,
+16 - 19 August 2001, Jyv&auml;skyl&auml;, Finland, pp 18-26.
+</p>
+
+<p>
+W. Goebl and S. Dixon.<br />
+<a href="pub/2001/isscm-classes.pdf">
+Analysis of Tempo Classes in Performances of Mozart Sonatas</a>.<br />
+VII International Symposium on Systematic and Comparative Musicology,
+III International Conference on Cognitive Musicology,
+16 - 19 August 2001, Jyv&auml;skyl&auml;, Finland, pp 65-76.
+</p>
+
+<p>
+S. Dixon.<br />
+<a href="pub/2001/sbcm.pdf">
+An Empirical Comparison of Tempo Trackers</a>.<br />
+8th Brazilian Symposium on Computer Music,
+31 July - 3 August 2001, Fortaleza, Brazil, pp 832-840.
+</p>
+
+<p>
+S. Dixon, W. Goebl and E. Cambouropoulos.<br />
+Beat Extraction from Expressive Musical Performances.<br />
+2001 meeting of the Society for Music Perception and Cognition (SMPC2001),
+9 - 11 August 2001, Kingston, Ontario, Canada, pp 62-63.<br />
+<a href="https://ofai.at/papers/oefai-tr-2001-22.pdf">
+Technical report OFAI-TR-2001-22</a>
+</p>
+
+<p>
+S. Dixon.<br />
+<a href="pub/2001/mosart2001-onsets.pdf">
+Learning to Detect Onsets of Acoustic Piano Tones</a>.<br />
+MOSART Workshop on Current Research Directions in Computer Music,
+15 - 17 November 2001, Barcelona, Spain.
+</p>
+
+G. Widmer, S. Dixon, W. Goebl, E. Stamatatos and A. Tobudic.<br />
+Empirical Music Performance Research: OeFAI's Position.<br />
+MOSART Workshop on Current Research Directions in Computer Music,
+15 - 17 November 2001, Barcelona, Spain.
+</p>
+
+<!--2000-->
+
+<p>
+S. Dixon.<br />
+<a href="pub/2000/pricai.ps.gz">
+A Lightweight Multi-Agent Musical Beat Tracking System</a>.<br />
+PRICAI 2000: Proceedings of the
+Pacific Rim International Conference on Artificial Intelligence,<br />
+Melbourne, Australia, 2000, pp 778-788.
+</p>
+
+<p>
+S. Dixon and E. Cambouropoulos.<br />
+<a href="pub/2000/ecai.ps.gz">
+Beat Tracking with Musical Knowledge</a>.<br />
+ECAI 2000: Proceedings of the 14th European
+Conference on Artificial Intelligence,<br />
+ed. W.Horn, IOS Press, Amsterdam, 2000, pp 626-630.
+</p>
+
+<p>
+S. Dixon.<br />
+<a href="pub/2000/ieeepcm.ps.gz">
+Extraction of Musical Performance Parameters from Audio Data</a>.<br />
+IEEE Pacific-Rim Conference on Multimedia,<br />
+Sydney, Australia, December 2000, pp 42-45.
+</p>
+
+<p>
+S. Dixon.<br />
+<a href="https://farben.latrobe.edu.au/mikropol/">
+On the Computer Recognition of Solo Piano Music</a>.<br />
+Mikropolyphonie, 6, 2000.<br />
+An <a href="pub/2000/acmc.ps.gz">earlier version</a> appeared in:<br />
+Interfaces: Australasian Computer Music Conference,<br />
+Brisbane, Australia, 2000, pp 31-37.<br />
+Sound examples: MP3 files (~80kB) and WAV files (~1MB):
+<ul>
+<li>
+Mozart Piano Sonata K.332 (2nd movt):
+&nbsp;&nbsp;Original
+&nbsp;&nbsp;<a href="mp3/orig-k332-2.mp3">(MP3)</a>
+&nbsp;&nbsp;<a href="wav/orig-k332-2.wav">(WAV)</a>
+&nbsp;&nbsp;Transcribed
+&nbsp;&nbsp;<a href="mp3/trans-k332-2.mp3">(MP3)</a>
+&nbsp;&nbsp;<a href="wav/trans-k332-2.wav">(WAV)</a>
+<li>
+Mozart Piano Sonata K.279 (2nd movt):
+&nbsp;&nbsp;Original
+&nbsp;&nbsp;<a href="mp3/orig-k279-2.mp3">(MP3)</a>
+&nbsp;&nbsp;<a href="wav/orig-k279-2.wav">(WAV)</a>
+&nbsp;&nbsp;Transcribed
+&nbsp;&nbsp;<a href="mp3/trans-k279-2.mp3">(MP3)</a>
+&nbsp;&nbsp;<a href="wav/trans-k279-2.wav">(WAV)</a>
+<li>
+Mozart Piano Sonata K.281 (3rd movt):
+&nbsp;&nbsp;Original
+&nbsp;&nbsp;<a href="mp3/orig-k281-3.mp3">(MP3)</a>
+&nbsp;&nbsp;<a href="wav/orig-k281-3.wav">(WAV)</a>
+&nbsp;&nbsp;Transcribed
+&nbsp;&nbsp;<a href="mp3/trans-k281-3.mp3">(MP3)</a>
+&nbsp;&nbsp;<a href="wav/trans-k281-3.wav">(WAV)</a>
+</ul>
+</p>
+
+<!--1999-->
+
+<p>
+S. Dixon.<br />
+<a href="pub/1999/diderot.ps.gz">
+A Beat Tracking System for Audio Signals</a>.<br />
+Proceedings of the Conference on Mathematical and Computational Methods
+in Music,<br />
+Vienna, Austria, December 1999, pp 101-110.<br />
+Sound examples: the beat tracking system inserts a cowbell sample at
+each calculated beat time.<br />
+MP3 files (80kB each):&nbsp;&nbsp; 
+	<A HREF="mp3/sunshine.mp3">1</A>,
+	<A HREF="mp3/dylan.mp3">2</A>,
+	<A HREF="mp3/dumb.mp3">3</A>.<br />
+WAV files (880kB each):&nbsp;&nbsp; 
+	<A HREF="wav/sunshine.wav">1</A>,
+	<A HREF="wav/dylan.wav">2</A>,
+	<A HREF="wav/dumb.wav">3</A>.<br />
+</p>
+
+<!--1997-->
+
+<p>
+S. Dixon.<br />
+<a href="pub/1997/ai.ps.gz">
+Beat Induction and Rhythm Recognition</a>.<br />
+Proceedings of the Australian Joint Conference on Artificial Intelligence,<br />
+Perth, Australia, 1997, pp 311-320.
+</p>
+
+<!--1996-->
+
+<p>
+S. Dixon.<br />
+<a href="pub/1996/icmc.ps.gz">
+A Dynamic Modelling Approach to Music Recognition</a>.<br />
+Proceedings of the International Computer Music Conference,<br />
+Hong Kong, 1996, pp 83-86.
+</p>
+
+<p>
+S. Dixon.<br />
+<a href="pub/1996/acsc.ps.gz">
+Multiphonic Note Identification</a>.<br />
+Australian Computer Science Communications, 18, 1,<br />
+Proceedings of the 19th Australasian Computer Science Conference,<br />
+Melbourne, Australia, 1996, pp 318-323.
+</p>
+
+<p>
+S. Dixon, D. M. W. Powers.<br />
+<a href="pub/1996/sst.pdf">
+The Characterisation, Separation and Transcription of
+Complex Acoustic Signals</a>.<br />
+Proceedings of the Sixth Australian International Conference on
+Speech Science and Technology,<br />
+Adelaide, Australia, 1996, pp 73-78.
+</p>
+ 
+<p>
+D. M. W. Powers, C. R. Clark, S. Dixon, D. L. Weber.<br />
+<a href="pub/1996/anziis.pdf">
+Cocktails and Brainwaves:
+Experiments with Complex and Subliminal Auditory Stimuli</a>.<br />
+Proceedings of the Australian and New Zealand Conference on
+Intelligent Information Systems,<br />
+Adelaide, Australia, 1996, pp 68-71.
+</p>
+
+<!--1995-->
+
+<p>
+S. Dixon, W. R. Wobcke.<br />
+A Nonmonotonic Reasoning Belief Revision System.<br />
+Australian Computer Science Communications, 17, 1,<br />
+Proceedings of the 18th Australasian Computer Science Conference,<br />
+Adelaide, Australia, 1995, pp 151-160.
+</p>
+
+<!--1994-->
+
+<p>
+S. Dixon.<br />
+Belief Revision: A Computational Approach.
+&nbsp;&nbsp;<a href="pub/1994/thesis.pdf">(PDF)</a>
+&nbsp;&nbsp;<a href="pub/1994/thesis.ps.gz">(PS)</a><br />
+Unpublished PhD thesis, Basser Department of Computer Science,<br />
+University of Sydney, Australia, 1994.
+</p>
+
+<!--1993-->
+
+<p>
+S. Dixon, W. R. Wobcke.<br />
+The implementation of a first-order logic AGM belief revision system.<br />
+&nbsp;&nbsp;<a href="pub/1993/ieeetai.ps.gz">(PS)</a><br />
+Proceedings of 5th IEEE International Conference on Tools with AI,<br />
+Boston MA, pages 40--47.<br />
+IEEE Computer Society Press, 1993.
+</p> 
+
+<p> 
+S. Dixon, N. Y. Foo.<br />
+<a href="pub/1993/ijcai.ps.gz">
+Connections between the ATMS and AGM belief revision.</a><br />
+Proceedings of 13th International Joint Conference on
+Artificial Intelligence,<br />
+Chambery, France, pages 534-539.<br />
+Morgan Kaufmann, 1993.
+</p> 
+
+<p> 
+S. Dixon.<br />
+<a href="pub/1993/acsc.ps.gz">
+A finite base belief revision system.</a><br />
+Australian Computer Science Communications, 15(1):445-451.<br />
+Proceedings of ACSC-16: 16th Australian Computer Science Conference,<br />
+Brisbane, Australia, January 1993.<br />
+Queensland University of Technology, Brisbane, Australia, 1993.
+</p> 
+
+<!--1992-->
+
+<p> 
+S. Dixon, N. Y. Foo.<br />
+<a href="pub/1992/ai.ps.gz">
+Beyond foundational reasoning.</a><br />
+Proceedings of AI'92:
+5th Australian Joint Conference on Artificial Intelligence,<br />
+Hobart, Australia, pages 247-252.<br />
+World Scientific, Singapore, 1992.
+</p> 
+
+<p> 
+S. Dixon, N. Y. Foo.<br />
+<a href="pub/1992/tr441.ps.gz">
+Encoding the ATMS in AGM logic (revised)</a>.<br />
+Technical Report 441, Basser Department of Computer Science,<br />
+University of Sydney, Australia, 1992.
+</p>
+
+<!--1990-->
+
+<p>
+N. Y. Foo, S. Dixon, D. Kuo.<br />
+Systems Dynamics via Theory Revision.<br />
+Open Distributed Processing Workshop Proceedings,<br />
+University of Sydney, Australia, 1990.
+</p>
+
+<p>
+R. Colomb, S. Dixon.<br />
+Database Implementation of an Artificial Intelligence Programming Paradigm.<br />
+Proceedings of AI'90:
+4th Australian Joint Conference on Artificial Intelligence,<br />
+Perth, Australia, pp 462-473,<br />
+World Scientific Press, Singapore, 1990.
+</p>
+
+<!-- PUBLICATIONS END HERE ---------------------------------------------------->
+	</div>
+
+	<div id="team" class="tabs__content prose" data-role="content" style="display: block;">
+	<h2>Research Staff &amp; Students</h2>
+		<table width="100%" >
+		<tr>
+			<td>
+			Sungkyun Chang
+			<br />
+			(Research assistant)
+			</td>
+			<td>
+			Music Performance Assessment and Feedback
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Mary Pilataki-Manika
+			<br />
+			(PhD student on the <a href="https://aim.qmul.ac.uk">AIM CDT</a>,
+			co-supervised by Matthias Mauch, in collaboration with Apple Music)
+			</td>
+			<td>
+			Polyphonic Music Transcription using Deep Learning
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Dave Foster
+			<br />
+			(PhD student on the <a href="https://aim.qmul.ac.uk">AIM CDT</a>)
+			</td>
+			<td>
+			Modelling the Creative Process of Jazz Improvisation
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Drew Edwards
+			<br />
+			(PhD student on the <a href="https://aim.qmul.ac.uk">AIM CDT</a>,
+			co-supervised by Akira Maezawa, in collaboration with Yamaha)
+			</td>
+			<td>
+			Modeling Jazz Piano:
+			Symbolic Music Generation via Large-Scale Automatic Transcription
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Carey Bunks
+			<br />
+			(PhD student on the <a href="https://aim.qmul.ac.uk">AIM CDT</a>,
+			co-supervised by Bruno di Giorgi, in collaboration with Apple)
+			</td>
+			<td>
+			Cover Song Identification for Jazz
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Tyler McIntosh
+			<br />
+			(PhD student on the <a href="https://aim.qmul.ac.uk">AIM CDT</a>,
+			co-supervised by Nadine Kroher, in collaboration with DAACI)
+			</td>
+			<td>
+			Performance Rendering for Music Generation Systems
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Ningzhi Wang
+			<br />
+			(PhD student on the <a href="https://aim.qmul.ac.uk">AIM CDT</a>,
+			in collaboration with Spotify)
+			</td>
+			<td>
+			Generative Models for Music Audio Representation and Understanding
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Zixun (Nicolas) Guo
+			<br />
+			(PhD student on the <a href="https://aim.qmul.ac.uk">AIM CDT</a>)
+			</td>
+			<td>
+            Towards Comprehensive Automatic Guitar Transcription via a Multimodal Approach
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Ivan Shanin
+			</td>
+			<td>
+            Modeling Melodic Jazz Improvisation
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Weixiong (Leon) Chen
+			</td>
+			<td>
+            Sparse Architectures with Semantic Alignment
+			for Coarse-to-Fine Music Understanding
+			</td>
+		</tr>
+		<!--/table>
+
+	<h2>Joining Soon</h2>
+		<table width="100%">
+		</table>
+
+	<h2>Writing Up</h2>
+		<table width="100%" -->
+		</table>
+
+	<!--/div>
+	<div id="tab6" class="tabs__content prose" data-role="content" style="display: block;"-->
+
+	<h2>Completed PhDs</h2>
+		<table width="100%">
+		<tr>
+			<td>
+			Yin-Jyun Luo
+			<br />
+			(completed May 2026)
+			</td>
+			<td>
+			<a href="phd/JunLuo-PhD-Thesis.pdf">
+			Towards Robust and Composable
+            Disentangled Representations for Music and Speech
+			</a><br />
+			(PhD student in the <a href="https://aim.qmul.ac.uk">
+			UKRI Centre for Doctoral Training in AI and Music (AIM)</a>,
+			co-supervised by Sebastian Ewert, in collaboration with Spotify)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Huan Zhang
+			<br />
+			(completed May 2026)
+			</td>
+			<td>
+			<a href="phd/HuanZhang-PhD-Thesis.pdf">
+			Computational Modeling of Expressive Piano Performance:
+			Understanding, Generation and Assessment
+			</a><br />
+			(PhD student in the <a href="https://aim.qmul.ac.uk">
+			UKRI Centre for Doctoral Training in AI and Music (AIM)</a>)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Xavier Riley
+			<br />
+			(completed November 2025)
+			</td>
+			<td>
+			<a href="phd/XavierRiley-PhD-Thesis.pdf">
+			Transcribing the Jazz Ensemble:
+			Applying Deep Learning Models to Jazz Transcription
+			</a><br />
+			(PhD student in the <a href="https://aim.qmul.ac.uk">
+			UKRI Centre for Doctoral Training in AI and Music (AIM)</a>)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Yukun Li
+			<br />
+			(completed Feb 2025)
+			</td>
+			<td>
+			<a href="phd/YukunLi-PhD-Thesis.pdf">
+			Segmenting and Analysing Pitch Contours across Singing Styles
+			</a><br />
+			(co-supervised by Polina Proutskova)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Yixiao Zhang
+			<br />
+			(completed Nov 2024)
+			</td>
+			<td>
+			<a href="phd/YixiaoZhang-PhD-Thesis.pdf">
+			Improving Controllability and Editability for
+			Pretrained Text-to-Music Generation Models
+			</a><br />
+			(PhD student in the <a href="https://aim.qmul.ac.uk">
+			UKRI Centre for Doctoral Training in AI and Music (AIM)</a>,
+			in collaboration with Apple, co-supervised by Mark Levy)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Brendan O'Connor
+			<br />
+			(completed March 2024)
+			</td>
+			<td>
+            <a href="phd/BrendanOConnor-PhD-Thesis.pdf">
+		Analysis, Disentanglement, and Conversion of Singing Voice Attributes
+			</a><br />
+			(part of the <a href="https://mat.qmul.ac.uk/">Media and Arts
+			Technology (MAT) Centre for Doctoral Training</a>)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Carlos Vianna Lordelo
+			<br />
+			(completed Nov 2023)
+			</td>
+			<td>
+			<a href="phd/Lordelo-PhD-Thesis.pdf">
+			Deep Learning Methods for Instrument Separation and Recognition
+			</a><br />
+			(part of the <a href="https://mip-frontiers.eu/">MIP-Frontiers</a>
+			project, in collaboration with DoReMIR Music Research, and
+			co-supervised by Emmanouil Benetos)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://emirdemirel.github.io/">
+			<!--a href="https://www.linkedin.com/in/emir-demirel-047465156/"-->
+			Emir Demirel
+			</a><br />
+			(completed June 2022)
+			</td>
+			<td>
+			<a href="phd/EmirDemirel-PhD-Thesis.pdf">
+			Deep Neural Networks for Automatic Lyrics Transcription
+			</a><br />
+			(part of the <a href="https://mip-frontiers.eu/">MIP-Frontiers</a>
+			project, in collaboration with DoReMIR Music Research)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Ruchit Agrawal
+			<br />
+			(completed May 2022)
+			</td>
+			<td>
+			<a href="phd/RuchitAgrawal-PhD-Thesis.pdf">
+			Towards Context-Aware Neural Performance-Score Synchronisation
+			</a><br />
+			(part of the <a href="https://mip-frontiers.eu/">MIP-Frontiers</a>
+			project, in collaboration with Tido Music)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/people/view/50538/saumitra-mishra">
+			Saumitra Mishra
+			</a><br />
+			(completed Sept 2020)
+			</td>
+			<td>
+			<a href="phd/SaumitraMishra-PhD-Thesis.pdf">
+			Interpretable Machine Learning for Machine Listening
+			</a><br />
+			(co-supervisor: Bob Sturm, KTH)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a
+			href="https://www.eecs.qmul.ac.uk/people/view/46613/daniel-stoller">
+			Daniel Stoller
+			</a><br />
+			(completed July 2020)
+			</td>
+			<td>
+			<a href="phd/DanielStoller-PhD-Thesis.pdf">
+			Deep Learning for Music Information Retrieval in Limited Data
+            Scenarios
+			</a><br />
+			(co-supervisor: Sebastian Ewert, Spotify)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Francisco Rodr&iacute;guez-Algarra
+			<br />
+			(completed June 2020)
+			</td>
+			<td>
+			<a href="phd/FranciscoRodriguez-Algarra-PhD-Thesis.pdf">
+			A Critical Look at the Music Classification Experiment Pipeline:
+			Using Interventions to Detect and Account for Confounding Effects
+			</a><br />
+			(co-supervisor: Bob Sturm, KTH)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<!--a href="https://www.eecs.qmul.ac.uk/people/view/"-->
+			Jiajie Dai<!--/a--><br />
+			(completed March 2019)
+			</td>
+			<td>
+			<a href="phd/JiajieDai-PhD-Thesis.pdf">
+			Modelling Intonation and Interaction in Vocal Ensembles
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.adibmehrabi.com/">
+			Adib Mehrabi</a><br />
+			(completed April 2018)
+			</td>
+			<td>
+			<a href="phd/AdibMehrabi-PhD-Thesis.pdf">
+			Vocal Imitation for Query by Vocalisation
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/people/view/43549/maria-panteli">
+			Maria Panteli</a><br />
+			(completed April 2018)
+			</td>
+			<td>
+			<a href="phd/MariaPanteli-PhD-Thesis.pdf">
+			Computational Analysis of World Music Corpora
+			</a><br />
+			(co-supervisor: Matthias Mauch)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/people/view/34841/zulfadhli-mohamad">
+			Zulfadhli Mohamad</a><br />
+			(completed April 2018)
+			</td>
+			<td>
+			<a href="phd/ZulfadhliMohamad-PhD-Thesis.pdf">
+			Estimating Performance Parameters from Electric Guitar Recordings
+			</a><br />
+			(co-supervisor: Chris Harte)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/people/view/3622/siying-wang">
+			Siying Wang</a><br />
+			(completed Nov 2017)
+			</td>
+			<td>
+			<a href="phd/SiyingWang-PhD-Thesis.pdf">
+			Computational Methods for the Alignment
+			and Score-Informed Transcription of Piano Music
+			</a><br />
+			(co-supervisor: Sebastian Ewert)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/~sss31/">
+			Siddharth Sigtia</a><br />
+			(completed Feb 2017)
+			</td>
+			<td>
+			<a href="phd/SiddharthSigtia-PhD-Thesis.pdf">
+			Neural Networks for Analysing Music and Environmental Audio
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/people/view/32084/tian-cheng">
+			Tian Cheng</a><br />
+			(completed Nov 2016)
+			</td>
+			<td>
+			<a href="phd/TianCheng-PhD-Thesis.pdf">
+			Exploiting Piano Acoustics in Automatic Transcription
+			</a><br />
+			(co-supervisor: Matthias Mauch)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a
+			href="https://www.eecs.qmul.ac.uk/people/view/3959/magdalena-chudy">
+			Magdalena Chudy</a><br />
+			(completed Sept 2016)
+			</td>
+			<td>
+			<a href="phd/MagdalenaChudy-PhD-Thesis.pdf">
+			Discriminating music performers by timbre:
+			On the relation between instrumental gesture, tone
+			quality and perception in classical cello performance
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/people/view/16586/robert-tubb">
+			Robert Tubb</a><br />
+			(completed May 2016)
+			</td>
+			<td>
+			<a href="phd/RobertTubb-PhD-Thesis.pdf">
+			Creativity, Exploration and Control in Musical Parameter Spaces
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="">
+			Shengchen Li</a><br />
+			(completed Mar 2016)
+			</td>
+			<td>
+			<a href="phd/ShengchenLi-PhD-Thesis.pdf">
+			Expressive Timing Analysis in Classical Piano Performance by
+			Mathematical Model Selection
+			</a>
+			(supervised with Mark Plumbley)
+			</td>
+		</tr>
+		<tr>
+			<td width="33%">
+			<a href="">
+			Yading Song</a><br />
+			(completed Jan 2016)
+			</td>
+			<td>
+			<a href="phd/YadingSong-PhD-Thesis.pdf">
+			The Role of Emotion and Context in Music Preference
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/~peterf">
+			Peter Foster</a><br />
+			(completed Apr 2015)
+			</td>
+			<td>
+			<a href="phd/PeterFoster-PhD-Thesis.pdf">
+			Information-Theoretic Measures of Predictability for
+			Music Content Analysis
+			</a><br />
+			(co-supervisor: Anssi Klapuri)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.mat.qmul.ac.uk/people/items/111690.html">
+			Holger Kirchhoff</a><br />
+			(completed May 2014)
+			</td>
+			<td>
+			<a href="phd/HolgerKirchhoff-PhD-Thesis.pdf">
+			A User-Assisted Approach to Multiple Instrument Music Transcription
+			</a><br />
+			(co-supervisor: Anssi Klapuri)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=ameliea&tp=phd&type=phd">
+			Am&eacute;lie Anglade</a><br />
+			(completed Apr 2014)
+			</td>
+			<td>
+			<a href="phd/AmelieAnglade-PhD-Thesis.pdf">
+			Logic-based Modelling of Musical Harmony for
+			Automatic Characterisation and Classification</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=lesleym&tp=phd&type=phd">
+			Lesley Mearns</a><br />
+			(completed May 2013)
+			</td>
+			<td>
+			<a href="phd/LesleyMearns-PhD-Thesis.pdf">
+			The Computational Analysis of Harmony in Western Art Music</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=emmanouilb&tp=phd&type=phd">
+			Emmanouil Benetos</a><br />
+			(completed Dec 2012)
+			</td>
+			<td>
+			<a href="phd/EmmanouilBenetos-PhD-Thesis.pdf">
+			Automatic Transcription of Polyphonic Music
+			Exploiting Temporal Evolution</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=robertm&tp=phd&type=phd">
+			Robert Macrae</a><br />
+			(completed Mar 2012)
+			</td>
+			<td>
+			<a href="phd/RobertMacrae-PhD-Thesis.pdf">
+			Linking Music Metadata</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a
+			href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=matthiasm&tp=phd&type=phd">
+			Matthias Mauch</a><br />
+			(completed Mar 2010)
+			</td>
+			<td>
+			<a href="phd/MatthiasMauch-PhD-Thesis.pdf">
+			Automatic Chord Transcription from Audio
+			using Computational Models of Musical Context</a>
+			</td>
+		</tr>
+		</table>
+
+	<h2>Former Research Assistants, Students and Visitors</h2>
+		<table width="100%" >
+		<tr>
+			<td>
+			Ivan Shanin
+			<br />
+			(Research Assistant on the
+			<a href="https://mirg.city.ac.uk/jazzdap/">JazzDAP
+			(Jazz Digital Archive Project)</a> project (Oct 2022 - Aug 2023).
+			</td>
+			<td>
+			New Directions in Digital Jazz Studies: Music Information
+            Retrieval and AI Support for Jazz Scholarship in Digital Archives
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Keitaro Tanaka<br />
+			Visiting PhD student (Mar 2023 - Sep 2023)
+			</td>
+			<td>
+			Disentangled Representation Learning
+			</td>
+		</tr>
+		<tr>
+			<td>
+			Ken O'Hanlon<br />
+			Postdoctoral Research Assistant on Innovate UK Project
+        	in collaboration with Breathe Music Ltd (Nov 2019 - Jun 2021)
+			</td>
+			<td>
+        	Development of Next-Generation Music Recognition Algorithm for
+        	Content Monitoring
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="">
+			Polina Proutskova</a><br />
+			(Postdoctoral RA, Dec 2017 - Sep 2019)
+			</td>
+			<td>
+			<a href="https://dig-that-lick.eecs.qmul.ac.uk">
+			Dig that Lick: Analysing large-scale data for melodic patterns in
+			jazz performances
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a
+			href="https://www.researchgate.net/scientific-contributions/70521287_Wenming_Gui">
+			Wenming Gui</a><br />
+			(Visiting Fellow, Oct 2018 - Oct 2019)
+			</td>
+			<td>
+			Deep Learning and Singing Voice Detection
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a
+			href="https://scholar.google.co.uk/citations?hl=en&user=XsofCnQAAAAJ">
+			Jordan Smith</a><br />
+			(Postdoctoral RA, Mar - May 2019)
+			</td>
+			<td>
+			<a href="https://dig-that-lick.eecs.qmul.ac.uk">
+			Dig that Lick: Analysing large-scale data for melodic patterns in
+			jazz performances
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://scholar.google.com/citations?user=wQRi9NEAAAAJ">
+			Eita Nakamura</a><br />
+			(Visiting Postdoctoral Fellow, Nov 2016 - Oct 2017)
+			</td>
+			<td>
+			Note Value Recognition for Rhythm Transcription
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="">
+			Lasse Vetter
+			</a><br />
+			(Research student, co-supervised with George Fazekas)
+			</td>
+			<td>
+			Polytimbral Instrument Activity Detection
+			using Deep Recurrent Neural Networks
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/~peterf">
+			Peter Foster</a><br />
+			(Postdoctoral Research Assistant, Nov 2015 - Oct 2016)
+			</td>
+			<td>
+			Automatic Transcription of Music (with DoReMIR Music Research AB)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.brunodigiorgi.it/">
+			Bruno Di Giorgi</a><br />
+			(Visiting PhD Student, Apr - Jul 2016)
+			</td>
+			<td>
+			Modelling the Complexity of Tonal Chord Sequences
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=matthiasm&type=ra">
+			Matthias Mauch</a><br />
+			(Royal Academy of Engineering Research Fellow, 2012-2015)
+			</td>
+			<td>
+			Software Systems for Computer-Aided Music Understanding
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="">
+			Emilia Gomez</a><br />
+			(Visiting Researcher, Jun - Sep 2015)
+			</td>
+			<td>
+			Intonation in Flamenco Singing
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="">
+			Julien Osmalskyj</a><br />
+			(Visiting PhD Student, Feb - Jun 2015)
+			</td>
+			<td>
+			Cover Song Detection
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/~peterf">
+			Peter Foster</a><br />
+			(RA Nov 2014 - Aug 2015)
+			</td>
+			<td>
+			Audio Data Exploration (with Audio Analytic Ltd)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/~sss31">
+			Siddharth Sigtia</a><br />
+			(RA Nov 2014 - Aug 2015)
+			</td>
+			<td>
+			Audio Data Exploration (with Audio Analytic Ltd) and
+			Smart Microphone v2.0 (with Audio Analytic Ltd)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="">
+			Gabrielle Medeot</a><br />
+			(Visiting Research Student, Nov 2014 - Apr 2015)
+			</td>
+			<td>
+			Memory-enhanced RNN-NADE networks for modelling
+			polyphonic musical sequences
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="">
+			Christof Weiss</a><br />
+			(Visiting PhD Student, Feb, Nov 2014)
+			</td>
+			<td>
+			A musicologically motivated approach to automatic classification of
+			music data
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="">
+			Lucas Thompson</a><br />
+			(Vacation bursary Jun - Aug 2013)
+			</td>
+			<td>
+			Analysis of Intonation in Unaccompanied Singing
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/people/view/33413/alo-allik">
+			Alo Allik</a><br />
+			(RA Oct 2012 - May 2013)
+			</td>
+			<td>
+			A Shared Open Vocabulary for Audio Research and Retrieval
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=stephenw&type=ra">
+			Stephen Welburn</a><br />
+			(RA Dec 2011 - Feb 2013)
+			</td>
+			<td>
+			Sustainable Management of Digital Music Research Data (2011-12)
+			and Sound Data Management Training (2012-13)
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a
+			href="mailto:joachim.ganseman@ua.ac.be">
+			Joachim Ganseman</a><br />
+			(Visiting PhD Student, November 2011 - September 2012)
+			</td>
+			<td>
+			Sinusoidal modeling based on score-to-audio alignment
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a
+			href="https://www.eecs.qmul.ac.uk/people/view/3959/magdalena-chudy">
+			Magdalena Chudy</a><br />
+			(RA Oct 2011 - Mar 2013)
+			</td>
+			<td>
+			<a href="mires.eecs.qmul.ac.uk">
+			MIReS: Roadmap for Music Information ReSearch
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a
+			href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=marcof&type=ra">
+			Marco Fabiani</a><br />
+			(RA October 2011 - May 2012)
+			</td>
+			<td>
+			Sustainable Management of Digital Music Research Data
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=adams&type=ra">
+			Adam Stark</a><br />
+			(RA Dec 2011 - Mar 2012)
+			</td>
+			<td>
+			Musicology for the Masses
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=xuew&type=ra">
+			Xue Wen</a><br />
+			(RA Dec 2011 - Mar 2012)
+			</td>
+			<td>
+			Musicology for the Masses
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=dans&type=ra">
+			Dan Stowell</a><br />
+			(RA Sept 2010 - March 2012)
+			</td>
+			<td>
+			Musicology for the Masses
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=mathieub&type=ra">
+			Mathieu Barthet</a><br />
+			(RA Sept 2010 - Nov 2011)
+			</td>
+			<td>
+			Musicology for the Masses
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=ivand&type=ra">
+			Ivan Damnjanovic</a><br />
+			(RA Oct-Nov 2011)
+			</td>
+			<td>
+			Sustainable Management of Digital Music Research Data
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=asmar&tp=phd&type=phd">
+			Asma Rafiq</a><br />
+			(Research student)
+			</td>
+			<td>
+			Modeling Users&#39; Intentions for the Enhancement of Music
+			Recommendation Systems
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=barryn&type=ra">
+			Barry Norton</a><br />
+			(RA April-July 2011)
+			</td>
+			<td>
+			Linked Music Metadata
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=zazi&type=ra">
+			Thomas G&auml;ngler</a><br />
+			(RA July 2011)
+			</td>
+			<td>
+			Linked Music Metadata
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=cedricm&type=ra">
+			Cedric Mesnage</a><br />
+			(RA March-July 2011)
+			</td>
+			<td>
+			Linked Music Metadata
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="https://www.eecs.qmul.ac.uk/staff/staff.php?l=kurtj&tp=phd&type=phd">
+			Kurt Jacobson</a><br />
+			(Research Assistant, 2010)
+			</td>
+			<td>
+			Linked Music Metadata
+			</td>
+		</tr>
+		</table>
+	</div>
+
+	<div id="downloads" class="tabs__content prose" data-role="content" style="display: block;">
+<h2>Downloads</h2>
+<p>
+Beat tracking software
+<a href="beatroot/index.html">BeatRoot</a> (requires: Java, any platform)<br />
+BeatRoot is also available as a
+<a href="https://www.vamp-plugins.org/download.html">VAMP plugin</a> for
+<a href="https://sonicvisualiser.org">Sonic Visualiser</a>.
+</p>
+<p>
+Audio alignment software
+<a href="match/index.html">MATCH</a> (requires: Java, any platform)<br />
+MATCH is also available as a
+<a href="https://www.vamp-plugins.org/download.html">VAMP plugin</a> for
+<a href="https://sonicvisualiser.org">Sonic Visualiser</a>. There is a tutorial
+<a href="https://www.sonicvisualiser.org/doc/tutorial/en/sv-alignment.pdf">here
+</a>.
+</p>
+<p>
+Slides from the
+<a href="pub/2015/WhySingingIsInteresting-Handouts.pdf">
+ISMIR 2015 Tutorial: Why Singing is Interesting</a>
+by Simon Dixon, Masataka Goto and Matthias Mauch.
+</p>
+<p>
+Slides from the
+<a href="pub/2012/PlumbleyDixon12-ima-tutorial-slides.pdf">
+IMA 2012 Tutorial on Music Signal Processing</a>,
+by Mark Plumbley and Simon Dixon.
+</p>
+<p>
+Slides from the
+<!--a href="https://www.ofai.at/~fabien.gouyon/slides-GouyonDixon-ISMIR06.pdf"-->
+<a href="pub/2006/ISMIR06-RhythmTutorial-GouyonDixon.pdf">
+ISMIR 2006 Tutorial on Computational Rhythm Description</a>,
+by Fabien Gouyon and Simon Dixon.
+</p>
+	</div>
+
+	<div id="teaching" class="tabs__content prose" data-role="content" style="display: block;">
+<h2>Teaching</h2>
+<p>This year I am teaching (with Emmanouil Benetos):
+<ul>
+<li>
+ECS7006: Music Informatics
+(for the MSc in Sound and Music Computing
+and the PhD programme in Artificial Intelligence and Music).</li>
+This module introduces students to state-of-the-art methods for the analysis
+of music data, with a focus on music audio. It presents in-depth
+studies of general approaches to the low-level analysis of audio
+signals, and follows these with specialised methods for the high-level
+analysis of music signals, including the extraction of information
+related to the rhythm, melody, harmony, form and instrumentation of
+recorded music. This is followed by an examination of the most important
+methods of extracting high-level musical content, sound source
+separation, and on analysing multimodal music data.</p>
+<!--li><a href="projectIdeas.html">Project Supervision</a>:
+click the link for project ideas</li-->
+</ul>
+I have previously taught the following modules (or parts thereof):<ul>
+<li>Artificial Intelligence</li>
+<li>Music Analysis and Synthesis</li>
+<li>Software Tools for Engineers</li>
+<li>Introduction to Multimedia</li>
+<li>Knowledge Representation and Reasoning</li>
+<li>Computational Logic</li>
+<li>Digital Audio and Computer Music</li>
+<li>Data Structures and Algorithms</li>
+<li>Cognitive Science</li>
+<li>Computer Programming</li>
+</ul>
+</p>
+	</div>
+
+	<div id="bio" class="tabs__content prose" data-role="content" style="display: block;">
+<h2>Biography</h2>
+<p>
+I completed my BSc(Hons) (1986-1989) and PhD (1990-1994) degrees in
+Computer Science at the University of Sydney, and also learnt
+Classical Guitar at the NSW Conservatorium of Music,
+obtaining the AMusA (1987) and LMusA (1988).
+I was a lecturer in Computer Science at
+<a href="https://www.cs.flinders.edu.au">
+Flinders University of South Australia</a>
+from 1994 until mid 1999, and a research scientist in the 
+<a href="https://www.ofai.at/research/impml/index.html">
+Intelligent Music Processing Group</a> at the
+<a href="https://www.ofai.at/">
+Austrian Research Institute for Artificial Intelligence</a>
+from 1999 to 2006. In December 2006 I joined QMUL's Centre for Digital
+Music as a Lecturer (now Professor), where I am now Deputy Director and
+lead the Music Informatics theme.
+I am Director of the
+<a href="https://aim.qmul.ac.uk">
+UKRI Centre for Doctoral Training in Artificial Intelligence and Music</a>,
+and founding editor of the journal
+<a href="https://transactions.ismir.net/">Transactions of the
+International Society for Music Information Retrieval</a>.
+I was Programme Co-chair for the
+<a href="https://ismir2007.ismir.net">
+8th International Conference on Music Information Retrieval</a> (2007) and
+the <a href="https://ismir2013.ismir.net">
+14th International Society for Music Information Retrieval Conference</a> (2013), and
+General Co-chair for the Dagstuhl Seminar on Multimodal Music Processing (2011)
+and the <a href="https://cmmr2012.eecs.qmul.ac.uk/">9th International Symposium
+on Computer Music Modeling and Retrieval (CMMR 2012): Music and Emotions</a>.
+I was President of the 
+<a href="https://www.ismir.net">
+International Society for Music Information Retrieval</a> (2014-15);
+and am on the Editorial Board of the Journal of New Music Research, and the
+Advisory Board of the Music Information Retrieval Evaluation Exchange (MIREX).
+</p>
+</div></div></div></div>
+</div>
+
+</main>
+<footer class="footer slat slat--blue" role="navigation" aria-labelledby="footer-nav">
+  <h2 class="vh" id="footer-nav">Footer navigation</h2>
+    <div class="footer__container slat__container">
+        <div class="footer__section footer__top grid">
+            <div class="grid__item">
+                <h5 class="footer__title">Contact the university</h5>
+                <p>Queen Mary University of London<br>
+                    Mile End Road<br>
+                    London E1 4NS<br>
+                    +44 (0) 20 7882 5555
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="btt" data-component="btt">
+  <div class="btt__inner">
+    <a href="#top" class="btt__link" data-role="link">
+      <svg class="icon" xmlns="https://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
+        <use href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.svg#arrow-navup" xlink:href="https://eecs.qmul.ac.uk/media/ow-assets/assets/icons/sprite.svg#arrow-navup"></use>
+      </svg>
+      <span class="vh">Back to top</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  [data-component^="slider"]>*:nth-child(n+2) {
+      display: none;
+  }
+</style>
+
+<script defer="defer" src="index-frame_files/svgxuse.js"></script>
+<script src="index-frame_files/jquery.min.js"></script>
+
+  <script>
+    $(function () {
+      QMULComponents.header.init();
+      QMULComponents.primaryNav.init();
+      QMULComponents.secondaryNav.init();
+      QMULComponents.navDrawer.init();
+      QMULComponents.btt.init();
+      QMULComponents.revealMore.init(); 
+    });
+  </script>
+
+<script defer="defer" src="index-frame_files/vendors~lib.min.1.2.4.js"></script><!-- Vendors Lib 1.2.4 JS -->
+<script defer="defer" src="index-frame_files/lib.min.1.3.js"></script><!-- Lib 1.3 JS -->
+
+<script type="text/javascript">
+    $(function () {
+        var tabContainers = $('div.tabs__container > div');
+        var hash = window.location.hash;
+        if (!hash || hash == '#') {    hash = $('.tabs__tabs li').first().find('a').attr('href'); }
+        $(function () {
+                tabContainers.hide();
+                tabContainers.filter(hash).show();
+                $('ul.tabs__tabs a').removeClass('selected');
+                $('ul.tabs__tabs li').removeClass('is-active');
+                $('ul.tabs__tabs a[href="' + hash + '"]').addClass('selected').parent().addClass('is-active');
+                return false;
+        });
+        
+        $('ul.tabs__tabs a').click(function () {
+            tabContainers.hide();
+            tabContainers.filter(this.hash).show();
+            $('ul.tabs__tabs a').removeClass('selected');
+            $('ul.tabs__tabs li').removeClass('is-active');
+            $(this).addClass('selected').parent().addClass('is-active');
+            return false;
+        });
+        
+        $("ul.tabs__tabs").each(function() {if(!$(this).has("li").length)$("div.tabs").hide();});
+        
+        $("a[href=\'qmroHref\']").contents().unwrap();
+        $("a[href=\'authorUrl\']").contents().unwrap();
+        $("span.doi:contains(doi)").html("");
+        $("span.nameOfConference:contains(nameOfConference)").html("");
+        $("span.authorsText:contains(authorsText)").html("");
+        $("span.publicationYear:contains(publicationYear)").html("");
+        $("span.qmroHref:contains(qmroHref)").html("");
+        $("span.small:contains(publicationDate)").html("");
+        $("span.journal:contains(journal)").html("");
+        $("span.authorUrl:contains(authorUrl)").html("");
+    });
+    
+</script>
+
+</body></html>

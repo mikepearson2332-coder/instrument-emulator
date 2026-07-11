@@ -1,0 +1,1633 @@
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 1
+A Modal-Based Real-Time Piano Synthesizer
+Bal´ azs Bank, Stefano Zambon, and Federico Fontana, Member, IEEE
+Abstract—This paper presents a real-time piano synthesizer
+where both the transverse and longitudinal motion of the str ing
+is modeled by modal synthesis, resulting in a coherent and hi ghly
+parallel model structure. The paper applies recent develop ments
+in piano modeling and focuses on the issues related to practi cal
+implementation (e.g., numerical stability, aliasing, and efﬁciency).
+A strong emphasis is given to modeling nonlinear string vi-
+brations, and a new variation of earlier synthesis techniqu es is
+proposed which is particularly well suited for modal synthe sis.
+For soundboard modeling, the possibilities of using FFT-ba sed
+fast convolution and parallel second-order ﬁlters are disc ussed.
+Additionally, the paper describes the details of the softwa re
+implementation and discusses the computational complexit y of
+each model block. The piano model runs on current computer
+hardware with full polyphony in real time.
+Index Terms—physics-based sound synthesis, modal synthesis,
+piano.
+I. I NTRODUCTION
+T
+HE piano is a particularly important instrument for sound
+synthesis applications because of many reasons. First, the
+piano has a large prominence in western music, while it is
+large, heavy and expensive. Thus, there is a great demand for
+an electronic substitute for home or stage use. Second, because
+the piano is a keyboard instrument, its control interface is
+relatively simple, unlike that of the guitar or the violin. T hat
+is, there is no physical obstacle on the control side to fulﬁl l
+this demand.
+Most of the current digital pianos are based on sample
+playback. Because of the simple interface (the player contr ols
+the key velocity only), a high level of realism can be achieve d.
+The variation of the sound as a function of key velocity can be
+taken into account by linear ﬁltering or by crossfading between
+samples recorded at different dynamic levels. However, the
+dynamic interactions of the different parts of the piano, li ke
+the restrike of the same string or the coupling between the
+strings, cannot be faithfully reproduced.
+The remedy of the problems of sampling synthesis is the use
+of physical modeling, where, instead of reproducing the sou nd
+of the instrument, the entire sound production mechanism is
+modeled. That is, a complete virtual instrument is running
+on the computer or dedicated hardware. Because of the very
+nature of physical modeling, the interaction of different p arts
+Manuscript received April 01, 2009; revised December 03, 20 09. Current
+version published April 14, 2010. This work was supported by the joint project
+of Viscount International SpA and Verona University. The as sociate editor
+coordinating the review of this manuscript and approving it for publication
+was Prof. Julius Smith.
+B. Bank was with the Department of Computer Science, Verona U niversity,
+37134 Verona, Italy. He is now with the Department of Measure ment and
+Information Systems, Budapest University of Technology an d Economics,
+1117 Budapest, Hungary (e-mail: bank@mit.bme.hu).
+S. Zambon and F. Fontana are with the Department of Computer S cience,
+Verona University, 37134 Verona, Italy (e-mails: stefano. zambon@univr.it;
+federico.fontana@univr.it).
+(such as the coupling of strings) is automatically modeled.
+Moreover, the user (player or sound designer) controls a
+relatively small set of meaningful parameters similar to th ose
+of real pianos, like hammer hardness, string mistuning, etc .
+The ﬁrst step of physics-based sound synthesis is to un-
+derstand how the instrument works, that is, the equations de -
+scribing the main parts of the instrument have to be develope d
+and the interactions of the different parts have to be reveal ed.
+However, the resulting computational complexity of numer-
+ically solving an instrument model that incorporates all th e
+details we know about a speciﬁc instrument is usually too hig h
+for real-time implementation. Therefore, some simpliﬁcat ions
+have to be made. This is usually done by neglecting some
+perceptually less relevant phenomena in such a way that this
+should not lead to signiﬁcant audible differences compared
+to the full model. Next, efﬁcient signal processing algorit hms
+are developed for computing the solution of this simpliﬁed
+physical model.
+The ﬁrst physics-based instrument model was presented as
+early as 1971 by Hiller and Ruiz [1], [2]. Interestingly, the
+ﬁrst piano model has followed 16 years later, which was the
+digital waveguide-based piano of Garnett [3]. In 1995, Smit h
+and Van Duyne [4], [5] proposed a piano model based on
+commuted synthesis. As part of a collaboration between the
+University of Padova and Generalmusic S.p.A., Borin et al.
+[6] presented the ﬁrst complete real-time piano model in 199 7.
+Bank [7] introduced a similar physical model in 2000, with
+slightly different implementation, and its real-time version was
+implemented in 2002. A concise overview of these two models
+and some additional results have been presented in [8]. In th e
+recent years, several improvements were proposed by Bensa
+and coworkers, concentrating on the modeling of coupled
+piano strings and on a parametric excitation model [9], [10] ,
+[11]. Bank has examined the generation of longitudinal motion
+in piano strings and proposed various modeling methods
+[12], [13]. Rauhala and their colleagues have concentrated
+on improved parameter estimation techniques and efﬁcient,
+parametric implementations [14], [15]. We have started the
+implementation of our real-time modal-based piano synthe-
+sizer in 2007 as a part of collaboration between Viscount
+International and Verona University, and this forms the top ic
+of the present paper.
+Although physics-based piano synthesis has a more than two
+decades tradition in academic research, it has been applied in
+commercial products only very recently, due to its relative ly
+high computational cost. A software piano, Pianoteq, was
+introduced by Modartt in 2006 [16], and the ﬁrst digital pian o
+employing physical modeling was presented by Roland in
+2009 [17]. It is expected that physical modeling will be the
+current trend in digital pianos.
+In this paper we describe a complete piano synthesizer
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 2
+String
+Bridge
+Soundboard Hammer
+0 hx L
+x
+(a)
+(b)
+Fig. 1. General structures; (a) schematic representation o f the instrument
+with the coordinate system for string modeling; (b) basic mo del structure.
+based on modal synthesis. Concerning each model block, the
+chosen approach is brieﬂy compared to other possibilities,
+and its advantages are discussed. A strong emphasis is given
+to the connection of the different blocks and on practical
+issues related to numerical stability, aliasing, and efﬁci ent
+implementation. For modeling longitudinal vibrations, a n ew
+variation of previous approaches is proposed which is parti c-
+ularly well suited for modal synthesis. Finally, the real-t ime
+software implementation is discussed, and the computation al
+complexity of the different blocks is estimated.
+II. M ODEL STRUCTURE
+Since the physical modeling approach simulates the sound
+production of the instrument, the blocks in the piano model
+resemble the parts of a real piano, as displayed in Fig. 1. The
+ﬁrst model block is the excitation, the hammer strike exciti ng
+the string. The string determines the fundamental frequenc y
+of the tone and its quasi-periodic output signal is ﬁltered
+through a post-processing block, covering the radiation ef fects
+of the soundboard. Figure 1(b) shows that the hammer–string
+interaction is bi-directional, since the hammer force depe nds
+on the string displacement. The string–soundboard couplin g is
+also bidirectional in real instruments, because the soundb oard,
+besides radiating the sound, provides a terminating impeda nce
+to the string. However, since the impedance of the soundboar d
+is around a thousand times larger than that of the string, the
+only signiﬁcant effect of the string–soundboard coupling i s a
+change in the modal frequencies and decay times of the string .
+Therefore, it is customary to use a simpliﬁed modeling where
+the “impedance effects” of the coupling, i.e., the variatio n in
+the modal frequencies and decay times of the string, are take n
+into account by changing the parameters of the string block,
+and only the “radiation properties” are modeled in the radia tor
+block.
+Figure 1 displays only the main parts of the instrument and
+the corresponding synthesis model—the blocks for modeling
+secondary effects are omitted for clarity. The full piano mo del
+is displayed in Fig. 2. The functions of the various blocks wi ll
+be explained later in the corresponding sections.
+III. M AIN STRING MODEL
+In reality, the string vibrates in two transverse and one
+longitudinal directions. First we consider the vibration o f the
+Long. excitation force
+Soundboard
+modelHammer Main string model
+Long. vibration
+Secondary resonators
+To the secondary
+resonators of other stings
+From the main string
+model of other stings
+Sound
+Fig. 2. Detailed model structure.
+main transverse polarization y(x, t ). The stiff and lossy string
+equation is
+µ ∂ 2y
+∂t 2 = T0
+∂ 2y
+∂x 2 − ESκ 2 ∂ 4y
+∂x 4 − 2Rµ ∂y
+∂t + dy(x, t ), (1)
+which is the ideal wave equation extended by terms describin g
+the stiffness and losses of the string [18]. The tension of th e
+string is denoted T0, and µ is the mass per unit length. The
+stiffness of the string is characterized by ESκ 2, where E is
+the Young’s modulus,S is the cross-section area of the string,
+and κ is the radius of gyration. The internal losses of the string
+and the losses due to the impedance effect of the soundboard
+are approximated by the frictional resistance R. Note that in
+real instruments, losses are frequency dependent. This eff ect
+will be taken into account later in (3). External driving for ces
+are included in the excitation force density dy(x, t ), which has
+the dimension of force per unit length.
+Equation (1) can be numerically solved in many ways; see
+[19] for an overview of the methods used in sound synthesis
+applications. We summarize only three commonly used ap-
+proaches. The ﬁrst is ﬁnite difference modeling, which is based
+on approximating the derivatives of the wave equation (1) by
+differences, leading to a difference equation that can be ea sily
+solved numerically. Finite difference piano models includ e
+[20], [21], [22]. Finite-difference modeling is especiall y well
+suited for modeling complex structures (such as the piano
+soundboard), where a closed-form solution cannot be derive d.
+However, for simple linear systems, such as the one-
+dimensional wave equation (1), the closed-form solution is
+known, and the computational complexity can be greatly
+reduced if the continuous-time solution is discretized ins tead
+of the wave equation itself. Digital waveguide modeling,
+introduced by Smith [23], [24], discretizes the traveling w ave
+solution of the ideal wave equation. The losses and dispersi on
+of real strings are lumped to one speciﬁc ﬁlter in the model.
+Thus, the full string model reduces to a delay line and a
+relatively low order IIR ﬁlter in a feedback loop. Most of
+the piano models intended for sound synthesis applications
+[3], [6], [7], [10], [15] are based on the digital waveguide
+technique due to its efﬁciency.
+In modal synthesis, the modal solution of the wave equation
+is discretized [25], [26]. Thus, the string is modeled by a se t
+of second-order resonators, each implementing the respons e
+of one particular mode. The modal approach has been already
+used for the simulation of nonlinear vibrations in piano str ings
+[12], [13]. This paper presents a complete piano model that i s
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 3
+based on modal synthesis.
+The choice of the modeling method for the string has been
+made after carefully considering the advantages and drawbacks
+of digital waveguides and modal synthesis. The main differ-
+ence of our piano model from the previous ones presented in
+the literature is the ability to model nonlinear string vibrations.
+Thus, the usual choice of digital waveguide modeling had to
+be revised. It has been shown in [13] that precise modeling
+is not possible with digital waveguides in their efﬁcient fo rm,
+because the modal shapes of the string model become non-
+orthogonal due to the lumped dispersion ﬁlter. Either the
+dispersion ﬁlter has to be distributed, increasing the mode l
+complexity signiﬁcantly, or, some less physical “tricks” h ave
+to be used [13]. On the other hand, modeling the nonlinear
+vibrations in piano strings is very straightforward with mo dal
+synthesis, as will be shown in Sec. V.
+While the computational complexity of our modal pi-
+ano model is probably higher compared to earlier, digital-
+waveguide based piano models that neglect nonlinear string
+vibrations, it is still efﬁcient enough to consume only one
+third of the resources of a today’s PC, which we ﬁnd an
+acceptable compromise. This efﬁciency can be achieved in
+spite of the relatively high number of required arithmetic
+operations because modal synthesis results in a fully paral lel
+structure and simple code that is easier to optimize (see Sec .
+VIII for details). An additional advantage of modal synthesis is
+greater ﬂexibility, since all the parameters of the partials can be
+set independently. This leads to simpler parameter estimat ion
+and the possibility of modifying the parameters in real-tim e.
+A. Continuous-time equations
+The modal solution of the string equation can be found in
+various acoustics textbooks. Nevertheless, summarizing it here
+is still instructive and helps understanding the different parts
+of the model. The following derivation is a slightly modiﬁed
+and more concise version of Chap. 2 in [13].
+If the string is rigidly terminated at x = 0 and x = L
+with hinged boundary conditions, as displayed in Fig. 1 (a),
+the string shape y(x, t ) can be expressed by the Fourier-like
+series
+y(x, t ) =
+∞∑
+k=1
+yk(t) sin
+( kπx
+L
+)
+x ∈ [0, L ] (2)
+where yk(t) is the instantaneous amplitude of mode k.
+The solution of (1) can be separated for the different modes
+if (2) is substituted into (1), then multiplied by the modal shape
+sin(kπx/L ) and integrated over x from 0 to L. The resulting
+second-order differential equation governing the behavio r of
+mode k is
+d2yk
+dt2 + a1,k
+dyk
+dt + a0,k yk = b0,k Fy,k (t), (3)
+where
+a1,k = 2 Rk (4a)
+a0,k = T0
+µ
+( kπ
+L
+) 2
++ ESκ 2
+µ
+( kπ
+L
+) 4
+(4b)
+b0,k = 2
+Lµ (4c)
+Fy,k (t) =
+∫ L
+x=0
+sin
+( kπx
+L
+)
+dy(x, t )dx. (4d)
+In (3), Fy,k (t) is the excitation force of mode k, and it is
+computed as the scalar product of the excitation force densi ty
+and the modal shape (see (4d)).
+Once the partial differential equation (1) is decoupled to
+a set of ordinary differential equations (3), it is possible to
+modify each of the parameters of (3). We take advantage of
+this fact by using Rk instead of R in (4a) in order to model
+frequency dependent losses, since now Rk can be different for
+the various modes having different modal frequencies.
+The solution of (3) for Fy,k (t) = δ (t) with zero initial
+conditions is an exponentially decaying sine function give n
+by
+yδ,k (t) = Ake− t
+τ k sin(2πf kt) (5a)
+Ak = b0,k
+2πf k
+= 1
+πLµf k
+(5b)
+τ k = 2
+a1,k
+= 1
+Rk
+(5c)
+fk = 1
+2π
+√
+a0,k −
+a2
+1,k
+4 ≈ f0k
+√
+1 + Bk 2, (5d)
+where Ak is the initial amplitude, τ k is the decay time, and
+fk is the frequency of mode k. In (5d), f0 is the fundamental
+frequency of the string and B is the inharmonicity coefﬁcient.
+They are computed as
+f0 = 1
+2L
+√
+T0
+µ = 1
+2L ct and B = κ 2 ES
+T0
+( π
+L
+) 2
+, (6)
+where ct is the transverse propagation speed.
+A practical choice for the loss term Rk is the second-order
+function
+Rk = 1
+τ k
+= b1 + b32πf k, (7)
+which implements the same type of frequency dependent
+losses as the ﬁnite-difference model of [20], [21], or the us ual
+one-pole loss ﬁlter in digital waveguide modeling (see the
+Appendix of [7]). Example values for the b1 and b3 coefﬁcients
+can be found in [21]. Note that (7) is just the simplest choice ,
+since Rk = 1 /τ k can be chosen arbitrarily for the various
+modes, e.g., based on the analysis of real tones.
+As (5) computes the impulse response of the system char-
+acterized by (3), the response to the excitation force Fy,k (t)
+is obtained by the time domain convolution
+yk(t) = yδ,k (t) ∗ Fy,k (t). (8)
+Now we can summarize the computation of the string shape
+y(x, t ) as a response to an external force:
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 4
+1) Computation of the force Fy,k (t) acting on mode k,
+which is the scalar product of the excitation-force den-
+sity dy(x, t ) and the modal shape sin(kπx/L ), as in (4d)
+2) Computation of the instantaneous amplitude yk(t) of
+mode k by the convolution of the mode excitation force
+Fy,k (t) and the mode impulse response yδ,k (t), as in (8)
+3) Computation of the string shape by summing the modal
+shapes sin(kπx/L ) multiplied by their instantaneous
+amplitudes yk(t), as in (2).
+Besides the string shape, we are also interested in the force
+acting at the termination, because that will form the input o f
+the soundboard modeling block. The bridge force Fb(t) at the
+termination x = 0 is computed as follows:
+Fb(t) = T0
+∂y
+∂x
+⏐
+⏐
+⏐
+⏐
+x=0
+= T0π
+L
+∞∑
+k=1
+k y k(t), (9)
+which is a weighted sum of instantaneous modal amplitudes
+yk(t).
+B. Discretization
+We have seen that either we are interested in the string
+deﬂection or the force at the bridge, the computation has the
+same structure: ﬁrst projecting the external force to the in put
+forces of the modes, then ﬁltering with the impulse response s
+of the modes, and ﬁnally projecting back to the variable of
+interest (force or displacement). Since these projections do not
+depend on the time variable, they are implemented in discret e
+time without any modiﬁcations from the continuous-time cas e.
+The only task left is to discretize the impulse response of th e
+modes (5).
+The discretization with respect to time can be done by vari-
+ous methods. We have chosen the impulse invariant transform
+[27], because in this case the discrete-time impulse respon se
+of each mode will have a leading zero which results in a
+one-sample delay. Therefore, we will avoid the problem of
+delay free loops in excitation modeling that can arise in oth er
+discretizations, such as the bilinear transform (see Sec. I V
+for details). This useful initial zero in each modal impulse
+response occurs because we are modeling string displacemen t
+in response to a force excitation. With the impulse invarian t
+transform, the discrete-time impulse response is obtained by
+simply sampling the continuous-time impulse response (5a) ,
+yielding
+yδ,k [n] = yδ,k (tn) = 1
+fs
+Ake− tn
+τ k sin(2πf ktn), (10)
+where tn = nTs, Ts = 1 /f s being the sampling interval.
+Equation (10) differs from (5a) by a scaling factor of 1/f s.
+This scaling is required because the discrete-time unit pul se
+has an area of 1/f s, while the continuous-time Dirac impulse
+has unity area.
+Taking the z transform of yδ,k [n], after some algebra, gives
+Hres,k (z) = bkz−1
+1 + a1,k z−1 + a2,k z−2 (11a)
+bk = Ak
+fs
+Im{pk} (11b)
+a1,k = −2Re{pk} (11c)
+a2,k = |pk|2 (11d)
+pk = ej2π
+fk
+fs e− 1
+τ k fs . (11e)
+That is, each mode is implemented by a two-pole ﬁlter and a
+delay in series, as displayed in the top of Fig. 3 (the detaile d
+description of the ﬁgure is left for Sec. IV).
+IV. H AMMER MODELING
+Generally, two distinct approaches are used for modeling the
+excitation of piano strings. One commonly employed approach
+is to model the excitation using a signal model [11], [15],
+where the perceptual parameters of the resulting tone (loudness
+of the partials) can be directly controlled. Another common
+approach is physical modeling [20], [21], [6], [7], [22]. We
+follow the physics-based approach in our work because we
+believe that a fully physical excitation model is necessary to
+provide the required responsiveness to the player. In addit ion,
+its parameters, like hammer mass and hardness, are close to
+those of a real piano, leading to an intuitive control for the
+user.
+Accordingly, the piano hammer is modeled by a small mass
+connected to a nonlinear spring that contacts the string at
+a mathematical point xh [28]. The equations describing the
+interaction are as follows:
+Fh(t) = F (∆ y) =
+{
+Kh(∆ y)Ph if∆ y > 0
+0 if∆ y ≤ 0 , (12a)
+Fh(t) = −mh
+d2yh(t)
+dt2 , (12b)
+where Fh(t) is the interaction force, ∆ y = yh(t) − ys(t) is the
+compression of the hammer felt, yh(t) is the position of the
+hammer, and ys(t) is the position of the string at the excitation
+point xh (i.e., ys(t) = y(xh, t )). The hammer mass is denoted
+mh, Kh is the hammer stiffness coefﬁcient, and Ph is the
+stiffness exponent. Example values for hammer parameters can
+be found in [21].
+These equations can be easily discretized with respect to
+time. Equation (12a) is a static nonlinearity so it is imple-
+mented as is. Equation (12b) can be converted to a discrete-
+time system by the impulse invariant transform. Thus, the
+discrete-time version of (12) is the following:
+Fh[n] = F (∆ y) = F (yh[n] − ys[n]) (13a)
+yh(z) = −Fh(z) 1
+mh
+( 1
+fs
+1
+1 − z−1
+) 2
+z−1, (13b)
+which is displayed in the bottom of Fig. 3. The extra delay
+term z−1 is inserted in (13b) to avoid the delay-free loop that
+would arise because there is a mutual dependence between
+Fh[n] and yh[n]. That is, for the calculation of one of these
+variables, the other should be known. Inserting the delay
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 5
+z-1
+z-1
+1 ,inw 1b 1 ,outw
+1 , 1a−
+1 , 2a−
+1y
+1 ,yF z-1
+z-1
+z-1
+Kinw , Kb Koutw ,
+Ka , 1−
+Ka , 2−
+Ky
+KyF ,
+z-1
+1 ,bw
+Kbw ,
+z-1
+sf
+1
+z-1
+sf
+1
+hm
+1−
+F(Δy)
+z-1
+hF
+hF
+sy
+hyhv
+yΔ
+1−
+bF
+hF sy
+ha
+Hammer model
+Main string model
+Fig. 3. The string and hammer models, and their interconnect ion.
+comes from the assumption that the hammer position changes
+a little during one time step yh[n] ≈ yh[n − 1], which
+is generally true because yh[n] is computed as the double
+integration of Fh[n].
+It is a bigger problem in general that there is no delay
+between the input (the string position ys[n]) and output (the
+hammer force Fh[n]) of the hammer block. This means that
+for computing the hammer force, the string displacement
+should be known, which, in return, depends on the hammer
+force. This again leads to a delay-free loop which is usually
+resolved by assuming ys[n] ≈ ys[n−1], implemented by using
+ys[n − 1] instead of ys[n] in (13a). However, this can lead to
+numerical instabilities at high impact velocities [8], bec ause
+the string signal can have large jumps violating the assumption
+ys[n] ≈ ys[n − 1].
+Nevertheless, in our special case, because of the right choice
+of discretization of the string model in Sec. III-B, the dela y-
+free loop does not arise because the string model contains a
+delay element in the signal ﬂow (see (11a) and Fig. 3). Note
+that in the case of different discretizations leading to a de lay-
+free loop, special measures are needed to maintain numerica l
+stability [29], [8].
+The only parameters in Fig. 3 that have not been described
+so far are the input and output weights of the string model. If
+we assume that the hammer contacts the string at an inﬁnitely
+small area at position xh, the excitation density for the string
+becomes dy(x, t n) = δ (x − xh)Fh[n]. Computing the scalar
+product of the Dirac function and the modal shape according
+to (4d) leads to the following input weights of the resonator s:
+win,k = sin
+( kπx h
+L
+)
+. (14)
+Not so surprisingly, computing the string displacement ys =
+y(xh, t n) at the hammer position xh by (2) leads to the same
+weights as for win,k :
+wout,k = sin
+( kπx h
+L
+)
+. (15)
+The third set of weights wb,k are used to compute the bridge
+force Fb[n] which is the input of the soundboard model. From
+(9), these weights become:
+wb,k = kπT 0
+L . (16)
+Figure 3 shows the hammer–string model in a form that
+corresponds to the above derivations, but some simpliﬁcati ons
+are possible to decrease computational complexity. Because of
+linearity, we may lump the effects of coefﬁcients win,k , wout,k ,
+wb,k , and bk of Fig. 3, so ﬁnally only two of them have to
+be implemented. It is beneﬁcial to lump the coefﬁcients in
+such a way that wb,k = 1 meaning that the bridge force is
+computed as a simple summation. The hammer model runs
+during the hammer–string contact only (ﬁrst few ms), therefore
+the remaining two scalings have to be computed for a limited
+amount of time. Additionally, the z−1 terms coming after the
+bk coefﬁcient in Fig. 3 can be also lumped, therefore, only one
+delay element has to be implemented for each string model.
+We note that piano hammers are not fully characterized by
+the model of (12), as the felt has a hysteretic behavior [28],
+[30], and the vibration of the hammer shank can also have
+some inﬂuence on the hammer force [31]. We neglect these
+secondary phenomena in our hammer model.
+V. L ONGITUDINAL STRING VIBRATIONS
+In the piano string at fortissimo levels, because of the
+relatively large amplitude of transverse vibration, the te nsion
+is not anymore constant, resulting in a nonlinear excitatio n of
+longitudinal modes. The perceptual effect is most importan t in
+the low note range where it greatly contributes to the metall ic
+character of the tone (the interested reader may listen to th e
+examples at the companion page of [12]). The importance of
+these spectral components has been recognized long ago by
+piano builders [32]. In addition to the longitudinal modal f re-
+quencies, a second series of partials with lower inharmonic ity
+coefﬁcient has also been found in piano tones [33], which
+was named “phantom partials” later [34]. It has turned out
+that phantom partials are also generated by the longitudina l
+motion of the string, as a response to the tension variation
+coming from the transverse string motion [12]. In other word s,
+longitudinal modal peaks and phantom partials are the free
+and the forced response of the same system, respectively.
+Therefore, a single model can describe both phenomena, which
+will be outlined in this section. The related theory has been
+developed in [12] and in [35] independently.
+A very efﬁcient way of modeling the perceptual effect of
+phantom partials has been presented in [36], but it has a
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 6
+loose connection to physical reality. In [12] and in Chap. 6
+of [13] various, more physically meaningful techniques wer e
+presented. We propose a new variation of these physics-base d
+techniques, which provides greater accuracy at a negligibl e
+increase in computational complexity.
+A. Continuous-time equations
+The wave equation for the longitudinal motion takes the
+following form [13]:
+µ ∂ 2ξ
+∂t 2 = ES ∂ 2ξ
+∂x 2 − 2Rξ µ ∂ξ
+∂t + 1
+2 ES
+∂
+(
+∂y
+∂x
+) 2
+∂x , (17)
+where Rξ is the frictional resistance of the longitudinal polar-
+ization (frequency dependency will be introduced later in ( 21)
+by using different Rξ for the various modes). Equation (17) is
+a linear wave equation with a nonlinear forcing term depending
+on the transverse slope. By comparing (17) with (1) it can be
+noticed that the two equations are of the same form, and they
+differ only in their parameters: T0 is substituted by ES, and
+the dispersion term (fourth order spatial derivative) is mi ssing.
+The external force density dy(x, t ) is replaced by
+dξ (x, t ) = 1
+2 ES
+∂
+(
+∂y
+∂x
+) 2
+∂x , (18)
+which represents the excitation from the transverse polari za-
+tion.
+1) Longitudinal motion: The formal similarity to (1) means
+that the results of Sec. III can be directly used. By assuming
+inﬁnitely rigid terminations, the longitudinal displacem ent can
+be written in its modal form
+ξ (x, t ) =
+∞∑
+k=1
+ξ k(t) sin
+( kπx
+L
+)
+. (19)
+Accordingly, the instantaneous amplitude ξ k(t) of the longi-
+tudinal mode k is obtained as
+ξ k(t) = Fξ,k (t) ∗ ξ δ,k (t), (20a)
+Fξ,k (t) =
+∫ L
+0
+dξ (x, t ) sin
+( kπx
+L
+)
+dx, (20b)
+ξ δ,k (t) = 1
+πLµf ξ,k
+e
+− t
+τ ξ,k sin (2πf ξ,k t) , (20c)
+where Fξ,k (t) is the excitation force acting on the longitudinal
+mode k. The time-domain impulse response of longitudinal
+mode k is denoted by ξ δ,k (t).
+For small frictional resistance, the longitudinal modal fr e-
+quencies fξ,k and decay times τ ξ,k are
+fξ,k = kfξ, 0 = k
+2L
+√
+ES
+µ and τ ξ,k = 1
+Rξ,k
+, (21)
+where fξ, 0 = fξ, 1 is the fundamental frequency of the
+longitudinal vibration. In practice, the fundamental freq uency
+of the longitudinal vibration in piano strings is around 16 t o
+20 times higher than that of the transverse vibration [32].
+The ﬁrst step in calculating the longitudinal motion is the
+computation of the excitation force Fξ,k (t) by Eq. (20b),
+which is the scalar product of the excitation-force density
+dξ (x, t ) and the longitudinal modal shape. If the transverse
+vibration is expressed in the modal form of (2), from (18) and
+(20b) it turns out that a longitudinal mode with mode number
+k is excited by such transverse mode pairs m and n only, for
+which either the sum m + n or the difference |m − n| of their
+mode numbers equal to k [12].
+The two cases can be computed separately by deﬁning
+Fξ,k (t) as a sum of two components, i.e., Fξ,k (t) = Fξ,k (t)++
+Fξ,k (t)−. The component originating from the transverse
+modes that satisfy m + n = k is
+Fξ,k (t)+ = −ES π 3
+8L2 k
+k−1∑
+n=1
+n(k − n) yn(t)yk−n(t). (22a)
+The component coming from |m − n| = k becomes
+Fξ,k (t)− = −2ES π 3
+8L2 k
+∞∑
+n=1
+n(k + n) yn(t)yk+n(t). (22b)
+That is, the various terms of the longitudinal excitation fo rce
+are the products of the instantaneous amplitudes of two tran s-
+verse modes, ym(t) and yn(t), meaning that the longitudinal
+modes will be excited at the sum and difference frequencies
+of transverse modes.
+The force exciting the ﬁrst longitudinal mode Fξ, 1(t) is
+displayed in Fig. 4 (a) by a solid line, computed by the
+discrete-time implementation of the modal model described by
+(22) and (20). The simulation example is a G1 piano string.
+Note that the excitation force has an odd-like partial serie s
+and a lower inharmonicity compared to the spectrum of the
+transverse bridge force [12], which is displayed by dots to
+show the transverse modal frequencies as a reference. The
+dashed line indicates the Fourier transform of the impulse
+response of the ﬁrst longitudinal mode ξ δ, 1(t), amplifying the
+frequencies around 690 Hz. Figure 4 (b) shows the excitation -
+force spectrum of the second longitudinal mode for the same
+example. It can be seen that here the excitation spectrum
+contains even partials only and that the peak of the longitudinal
+mode (dashed line) is located at a higher frequency (1380 Hz
+in this case). It is also true for all other longitudinal mode s
+that odd modes are excited by an odd-like spectrum and even
+longitudinal modes by an even-like. However, the frequenci es
+of the excitation components will be slightly different eve n
+within the odd and even modes, because of the inharmonicity
+of the transverse vibration [12].
+The longitudinal motion is the sum of the motion of
+different modes. This means that spectra similar to Figs. 4
+(a) and (b) should be superimposed with only slightly shifte d
+excitation frequencies and very different longitudinal mo dal
+frequencies. The result is similar to formants on a quasi-
+harmonic spectrum but here the peaks are somewhat smeared
+as they are made up of many close frequencies [12].
+2) Bridge force: If the instantaneous amplitudes yn(t) of
+the transverse modes are known, the longitudinal displacement
+can be directly computed by the use of (22), (20) and (19).
+However, we still need to compute the force Fb,ξ (t) acting
+on the bridge in the longitudinal direction, since that is le d to
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 7
+0 0.5 1 1.5 240
+60
+80
+100Magnitude [dB]
+(a)
+0 0.5 1 1.5 240
+60
+80
+100
+(b)
+Frequency [kHz]
+Magnitude [dB]
+Fig. 4. The force spectrum exciting the ﬁrst (a) and the secon d (b)
+longitudinal modes ( Fξ, 1(t) and Fξ, 2(t)) of a simulated G1 piano string
+(solid line). The transverse bridge force (dotted line) is d isplayed to show the
+transverse modal frequencies. The dashed lines show the fre quency response
+of the ﬁrst (a) and the second (b) longitudinal modes. The hor izontal dash-
+dotted lines are the low frequency approximations of the cor responding
+frequency responses. The relative levels of the signals are arbitrary.
+the input of the soundboard model. The bridge force Fb,ξ (t)
+equals the tension at the termination [12]:
+Fb,ξ (t) = T0 + ES ∂ξ
+∂x
+⏐
+⏐
+⏐
+⏐
+x=0
++ 1
+2 ES
+( ∂y
+∂x
+⏐
+⏐
+⏐
+⏐
+x=0
+) 2
+. (23)
+Equation (23) shows that the force Fb,ξ (t) depends not only
+on the longitudinal motion but on the transverse vibration a s
+well. Due to the second-order nonlinearity, the component
+coming from the transverse motion has the same sum- and
+difference frequency terms as the component arising from
+the longitudinal motion, but their amplitudes and phases ar e
+different.
+It can be seen in Fig. 4 (dashed lines) that the longitudinal
+modes have a constant gain under their resonance frequency.
+Therefore, let’s assume for the moment that all the longitudinal
+modes are excited below their resonance. The transfer function
+of longitudinal mode k is the Laplace transform of Eq. (20c):
+L{ξ δ,k (t)} = 2
+Lµ
+1
+s2 + 2
+τ ξ,k
+s + 1
+τ 2
+ξ,k
++ 4π 2f 2
+ξ,k
+, (24)
+from which the low frequency response ξ δ,k (t) of the resonator
+can be approximated as a constant gain by assuming s → 0
+and 1/τ ξ,k ≪ fξ,k :
+ξ δ,k (t) = − 2
+Lµ 4π 2f 2
+ξ,k
+δ (t). (25)
+The transfer function corresponding to Eq. (25) (which is a
+constant gain) is displayed for longitudinal mode 1 and 2 in
+Fig. 4. If Eq. (25) holds for all the longitudinal modes, that is,
+all the longitudinal modes are excited signiﬁcantly below t heir
+resonance frequency, most of the transverse and longitudin al
+terms cancel out in (23) and only the double frequency terms
+remain [12], [13]. This means that the tension is spatially
+uniform along the string, and the bridge force becomes
+Fb,ξ (t) =
+T (t) = T0 + π 2ES
+4L2
+∞∑
+n=1
+n2y2
+n(t), (26)
+which is a simple squared sum of the instantaneous modal
+amplitudes yn(t) of the transverse polarization. Note that
+this corresponds to the case when the ﬁrst and second time
+derivatives in (17) are zero (inertial and viscosity effect s are
+negligible), thus, the dynamics of the longitudinal modes p lay
+no role [12]. As a result, the longitudinal motion simply
+follows the transverse one due to the fact that tension along
+the string tries to reach an equilibrium state. We may call th is
+as a “static motion” of longitudinal modes.
+Equation (25) holds for most of the longitudinal modes.
+Nevertheless, it does not hold for the lowest K modes, which
+are also excited around or above their resonant frequency. F or
+these modes a correction is made by subtracting their static dc
+response (which is already included in the tension computed
+by Eq. (26)) and adding their real, frequency dependent
+response:
+Fb,ξ (t) = T (x, 0) =
+T (t) + ES π
+L
+K∑
+k=1
+k ˜ξ k(t), (27)
+where ˜ξ k(t) is the “dynamic response” of mode k, i.e., that
+portion of the motion which is in addition to the static
+stretching. It is computed as
+˜ξ k(t) = Fξ,k (t) ∗ (ξ δ,k (t) −
+ξ δ,k (t)). (28)
+Note that the terms ξ δ,k (t) − ξ δ,k (t) = ˜ξ δ,k (t) correspond to
+a resonant second-order high-pass ﬁlter, since they are the
+difference of a low-pass and a constant response.
+Despite the quite complicated math we had to go through,
+we end up with a relatively simple series of steps for comput-
+ing the longitudinal bridge force as a function of transvers e
+motion:
+1) Computation of the excitation force Fξ,k (t) acting on
+longitudinal mode k as pairwise products of transverse
+mode amplitudes yn(t) and ym(t) by (22)
+2) Computation of the spatially uniform part of the tension
+T (t) by the squared sum of yn(t) by (26)
+3) Computation of the dynamic responses ˜ξ k(t) for the ﬁrst
+K longitudinal modes according to (28)
+4) Correcting the spatially uniform tension T (t) by the
+weighted sum of the dynamic responses ˜ξ k(t) of the
+ﬁrst K longitudinal modes by (27)
+This tension correction has to be done only for those longi-
+tudinal modes, which are excited above and under resonance.
+That is, the resonance frequency of each longitudinal mode
+should be compared with the bandwidth of Fξ,k , which is the
+double of that of the transverse vibration due to the second-
+order nonlinearity. This leads to K taking on values between
+2 to 10 in practice.
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 8
+B. Discretization
+1) The precise model: The above steps can be easily
+discretized with respect to time. Again, the only part that needs
+consideration is the dynamics of the longitudinal modes. Th e
+impulse response ξ δ,k (t) of mode k is discretized exactly in
+the same way as that of the transverse modes, resulting in
+a ﬁlter of the form (11). Then, the dynamic response of the
+longitudinal modes ˜ξ k(t) is calculated by subtracting the static
+response of the modes, which is computed by multiplying Fξ,k
+with the DC gain of the longitudinal resonators.
+However, because the excitation signal of longitudinal
+modes is obtained by multiplying the instantaneous amplitudes
+of transverse modes according to (22), aliasing should be
+considered. It turns out that because modal synthesis is use d,
+aliasing can be easily avoided (in contrast to, e.g., ﬁnite
+difference string models). We just have to take care not to
+implement any of the products in (22) and (26) where the
+sum frequency would go beyond the Nyquist limit fs/ 2. This
+way we also throw away some difference-frequency terms
+from (22) that would not be aliased, but this is of no concern
+because these low-frequency terms would be attenuated by
+the high-pass ﬁlters implementing the dynamic response of
+the longitudinal modes anyway. Since the transverse modal
+frequencies are known, it is easy to decide which terms shoul d
+be discarded from (22) and (26). However, it is a reasonable
+simpliﬁcation to limit the computation of (22) and (26) for
+such transverse modes whose frequencies are below the half
+of the Nyquist rate, that is, to compute (22) and (26) up to
+transverse mode N for which fN < f s/ 4.
+2) Efﬁcient modeling: Since typically only K < 10 longi-
+tudinal resonances are within the audible range, the ﬁlteri ng
+needed to compute the dynamic response of the longitudinal
+modes ˜ξ k(t) is negligible compared to that of transverse
+vibration, where hundreds of modes are computed. The com-
+putational complexity lies in (22), where hundreds of pairw ise
+products of transverse amplitudes yn(t) has to be calculated.
+As an example, for K = 10 longitudinal and N = 100 trans-
+verse partials, this leads to 1000 multiplications and addi tions,
+so we may seek at some more efﬁcient implementations.
+As noted earlier, odd longitudinal modes are excited by an
+odd-like spectrum, while even ones with an even-like, and th e
+odd and even spectra are similar (the frequencies are only
+slightly shifted due to the inharmonicity). Example spectr a
+can be found in Chap. 6 of [13]. Therefore, similarly to the
+synthesis models of [12], we compute a single excitation for ce
+for the odd longitudinal modes and another one for the even
+ones. For example, all the longitudinal modes with odd mode
+number k are excited by the same force as computed for
+mode 3 ( Fξ,k (t) = Fξ, 3(t) for odd k), and all the longitudinal
+modes with even mode number k are excited by the same
+force as mode 4 ( Fξ,k (t) = Fξ, 4(t) for even k). Naturally,
+other excitation force pairs (such as Fξ, 1(t) and Fξ, 2(t)) can
+also be chosen. Additionally, only the Fξ,k (t)− part of (22)
+is computed, since the Fξ,k (t)+ part contains low frequency
+components that are out of the passband of the high-pass ﬁlte r
+implementing the dynamic response of the longitudinal mode
+˜ξ δ,k (t).
+It is worth noting that both in (26) and in (22b) the trans-
+verse terms appearing are always of the form nyn(t), which is
+the instantaneous amplitude of the transverse mode multipl ied
+by its mode number. The same multiplication is needed in
+(9), therefore, no additional multiplications are needed h ere.
+For computing (22b) the transverse mode outputs are simply
+tapped before the bridge summation point and those outputs
+are pairwise multiplied which has a mode number difference
+of k, and the products are summed. From a computational
+viewpoint, since the transverse modal amplitudes are store d
+in a vector, this means correlating the vector and its shifte d
+version. For (26) the squared sum of the same vector is
+computed.
+Note that in the sound synthesis model of [12] the transverse
+contribution (last term of (23)) was simply neglected, whic h
+has led to the appearance of some unwanted low-frequency
+components that should otherwise cancel out, as described
+in Sec. V-A2. This is avoided in the proposed model, since
+now the effect of the transverse vibration on the longitudin al
+bridge force is also included. This is accomplished by the
+additional computation of the string tension (26), and by
+ﬁltering the longitudinal excitation force by the dynamic
+part of the longitudinal response ˜ξ δ,k (t) (resonant high-pass
+ﬁlter) instead of the full response ξ δ,k (t) (resonant low-pass
+ﬁlter). As a result, the new model is more precise, while the
+computational cost is increased only slightly by the additi onal
+tension computation of (26).
+VI. S TRING COUPLING
+Coupling effects in transverse string vibrations occur at t wo
+different levels: ﬁrst of all, even a single string vibrates both
+in the horizontal and vertical plane, and these vibrations a re
+coupled through the bridge. The situation gets even more
+complex for the piano because for most of the keys three
+slightly mistuned strings are sounded together. This resul ts
+in beating and two-stage decay [37], where the ﬁrst is a low-
+frequency amplitude modulation of partial envelopes, and t he
+second means that the partial decay is faster in the early par t
+than in the latter.
+At a second level, and with lower efﬁciency, coupling
+between strings occurs not only for the two or three differen t
+strings belonging to the same key, but also between the
+strings of various keys. This effect (sometimes referred to as
+sympathetic resonances) is most prominent when the dampers
+of the strings are raised by the sustain pedal, leading to the
+coupling of all the strings of the piano. In fact, the bridge–
+soundboard system connects the strings together and acts as a
+distributed driving-point impedance for string terminati ons.
+Both of these two phenomena are modeled by the “Sec-
+ondary resonators” in Fig. 2.
+A. Beating and two-stage decay
+The simplest way to model beating and two-stage decay is
+to use two string models in parallel for a single note. Varyin g
+by the type of coupling used, many different solutions have
+been presented in the literature [38], [39], [10].
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 9
+A computationally more efﬁcient, perception-based ap-
+proach is to model the beating and two-stage decay for those
+partials only where the phenomenon is audibly prominent. One
+way of achieving this is to implement a few (5–10) resonators
+in parallel, driven by the excitation signal [7], [8]. Anoth er
+option is the beating equalizer [15], where the partial enve lope
+is modulated by a peak EQ tuned to the frequency of the
+partial.
+In this work, we are modeling beating and two-stage decay
+by adding a set of secondary resonators to the string model,
+driven by the hammer force. This is displayed in Fig. 2.
+Depending on the parameterization of the resonators, they
+can be seen as additional string models, or, they can be used
+for a perception-based efﬁcient modeling, where only a few
+additional resonators are implemented. We have chosen to
+implement them as additional string models with a full set of
+modes (albeit with less modes than the main string), because
+the same structure will be used to model the sustain pedal
+effect (see Sec. VI-B). The resonators are implemented by
+second-order IIR ﬁlters, exactly as described in Sec. III-B ,
+resulting in a coherent model structure. The only differenc e
+from the resonators of the main string models that the string
+displacement does not have to be computed, thus, coefﬁcient s
+wout,k in Fig. 3 are missing, and only the bridge force is
+computed by wb,k . Accordingly, the effect of win,k , bk, and
+wb,k can be lumped to a single coefﬁcient.
+B. Sympathetic resonances
+It is relatively straightforward to model sympathetic res-
+onances in digital waveguides with bi-directional couplin g
+between the strings, when all the strings are connected to th e
+same termination [3], [6]. Implementing numerically stable bi-
+directional coupling is more complicated in modal synthesi s;
+therefore, we are applying a simpliﬁcation where the coupli ng
+of the strings is uni-directional. This leads to a “structur ally
+stable” solution, meaning that the coupled model is stable
+for any choice of the coupling parameters. For this, several
+different variations have been presented in the literature [38],
+[15].
+Our choice is similar to [38], where the outputs of the main
+string models are summed and feed to the secondary resonators
+of all string models, as shown in Fig. 2. This way, energy is
+ﬂowing from the main string models to the secondary ones,
+but not vice-versa. The simplest way of implementing this is
+to sum the outputs of all string models, multiply them with a
+constant coefﬁcient, and then distribute this signal to all sec-
+ondary resonator banks. However, it is also possible to cont rol
+the strength of coupling between the strings, resulting in a
+more realistic behavior. This can be achieved by subdividin g
+the strings into R different regions [40], where the cumulated
+string outputs are Fb = [Fb, 0, . . . , F b,R ] and the inputs of the
+secondary resonator groups are Fp = [ Fp, 0, . . . , F p,R ]. The
+coupling is controlled by a R × R gain matrix B:
+Fp = B F b. (29)
+In our implementation, we have chosen a subdivision in R = 8
+keyboard regions, requiring an additional 64 multiplicati ons
+and additions.
+VII. S OUNDBOARD MODELING
+As already mentioned in Sec. II, only the radiation effects
+of the soundboard are implemented here, while the impedance
+effects are taken into account in the string model.
+The computationally most efﬁcient way of implementing
+the effect of the soundboard ﬁltering is commuted synthesis
+[4], [5], where the order of the model blocks (hammer–
+string–soundboard) is commuted: the impulse response of
+the soundboard excites the strings and the effect of the
+hammer is taken into account as a ﬁltering operation. Thus,
+the soundboard response is implemented as a wavetable,
+resulting in a low computational complexity. However, the
+method assumes linearity and time-invariance, therefore, some
+important effects, such as the restrike of the same string or the
+nonlinear vibration of strings, cannot be precisely modele d.
+Another efﬁcient way of implementing the effect of the
+soundboard is to apply a reverberation-like algorithm. Ex-
+amples include the coupled digital waveguides in [3], and
+feedback delay networks in [6], [7]. A difﬁculty of these
+reverberator-based approaches is that only the statistica l dis-
+tribution and the overall damping of the body modes can be
+set by the available parameter estimation techniques.
+In ﬁlter-based techniques, the measured force–pressure
+transfer function of a real piano soundboard is used as a
+target speciﬁcation for ﬁlter design. The most straightfor ward
+approach is the use of a ﬁnite impulse response (FIR) ﬁlter
+obtained by windowing of the measured impulse response. The
+drawback is that long ﬁlters are required: for a good tonalit y,
+1000-2000 tap FIR ﬁlters are needed at fs = 44 . 1 kHz, and
+for reproducing the characteristic knock sound of the middl e
+and high notes, ten thousands of taps are needed. Therefore, a
+direct FIR implementation is not advantageous. Either a mul ti-
+rate approach can be used [8], [13], or the FIR ﬁlter should
+be implemented as a fast convolution algorithm. The latter h as
+been implemented in our real-time piano model and will be
+outlined in Sec. VII-A.
+Another option is the use of a specially designed inﬁnite
+impulse response (IIR) ﬁlter, where a quasi-logarithmic fr e-
+quency resolution can lead to large computational savings
+compared to traditional FIR and IIR ﬁlter designs. The most
+commonly used technique is frequency warping, where the
+z−1 elements of traditional ﬁlters are replaced by ﬁrst-order
+allpass ﬁlters [41]. Kautz ﬁlters [42] can be seen as the
+generalization of warped FIR ﬁlters with more ﬂexibility
+in determining the frequency resolution. Fixed-pole paral lel
+ﬁlters [43] produce the same results as the Kautz ﬁlters but
+lead to a simpler ﬁlter structure. Soundboard modeling with
+parallel ﬁlters is summarized in Sec. VII-B.
+The impulse response of the soundboards varies as a func-
+tion of bridge excitation point. This can be simulated by having
+different soundboard ﬁlters for the different regions of th e
+bridge. In addition, for each region, two ﬁlter outputs are
+needed for stereo effect. This complexity can be reduced by
+implementing only one high-order soundboard ﬁlter (or a ﬁlt er
+pair for stereo output) and additional low-order shaping ﬁl ters
+for the different regions of the bridge, to account for the to nal
+differences between them [7].
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 10
+A. Partitioned convolution by FFT
+A very efﬁcient way to implement the convolution required
+by soundboard ﬁltering is adopting a partitioned FFT-based
+convolution, like the overlap-and-add (OLA) method, which
+is well documented in standard digital signal processing te xt-
+books [44].
+Both the input signal (i.e., the total force at the bridge)
+and the soundboard impulse response are partitioned in bloc ks
+which are N samples long. In a typical software implementa-
+tion, N can be taken equal to the internal buffer size of the
+soundcard, thus avoiding any additional latency in the com-
+putation. For each output buffer, we need to take a 2N point
+FFT of the input buffer, then multiply the result with every
+block of the transfer function and ﬁnally compute the result
+by taking a 2N point IFFT. If we denote with M the length of
+the impulse response, the total cost per buffer is O(N log N )
+for the Fourier transforms and 4(N + 1) ⌈M/N ⌉ = O(M )
+for the multiplication in the frequency domain. Therefore, the
+cost per input sample is O(log N + M/N ), which is typically
+dominated by the complex multiplication when N is small,
+as it is the case when low-latency processing is needed. As
+an example, with a typical soundboard length of 20000 taps
+and block size N=128, the multiplication in the frequency
+domain requires 633 ﬂoating point operations at each time
+sample. This computational complexity could be decreased i f
+necessary by combining the FFT-based convolution with multi-
+rate ﬁltering, such as [8], [13], at the expense of somewhat
+more complicated model structure and parameter estimation .
+It is possible to avoid the trade-off between computational
+load and processing delay by using a non-uniform partitioni ng
+scheme [45], [46]. With these algorithms, the principal issue is
+ﬁnding an optimal scheduling of the different computationa l
+tasks in order to get a constant load suitable for real-time
+implementations.
+B. Fixed-pole parallel second-order ﬁlters
+Another option is to model the soundboard as a set of
+second-order parallel ﬁlters [43]. Implementing IIR ﬁlter s in
+the form of parallel second-order sections has been used tra -
+ditionally because it has good quantization noise performa nce
+and the possibility of code parallelization. The parameter s of
+the second-order sections are usually determined from dire ct
+form IIR ﬁlters by partial fraction expansion [27]. Here the
+poles are set to a predetermined (e.g., logarithmic) freque ncy
+scale, leaving the zeros as free parameters for optimizatio n. In
+the case of modeling a desired impulse response, the paralle l
+ﬁlter uses the outputs of the second-order sections (expo-
+nentially decaying sinusoidal functions) as basis functio ns of
+a linear-in-parameter model. In addition to the second-ord er
+sections, it is beneﬁcial to include a parallel FIR path for t he
+modeling of non-minimumphase responses. Thus, the transfe r
+function becomes
+H(z−1) =
+K∑
+k=1
+dk, 0 + dk, 1z−1
+1 + ak, 1z−1 + ak, 2z−2 +
+M∑
+m=0
+bmz−m (30)
+where K is the number of second order sections. The ﬁlter
+structure is depicted in Fig. 5
+Input 
+0 , 1d
+1−z
+2
+2 , 1
+1
+1 , 11
+1
+−− ++ zaza 1 , 1d
+0 ,Kd
+1−z
+2
+2 ,
+1
+1 ,1
+1
+−− ++ zaza KK
+1 ,Kd
+0b
+1−z
+1b
+MbMz−
+.
+.
+.
+.
+Optional 
+FIR part 
+Output 
+Fig. 5. Structure of the parallel second-order ﬁlter.
+Since we are aiming at a logarithmic frequency resolution,
+the poles are set to a logarithmic scale
+ϑ k = 2πf k
+fs
+(31)
+pk = Rϑ k/π e±jϑ k (32)
+where ϑ k are the pole frequencies in radians determined by the
+logarithmic frequency series fk and the sampling frequency
+fs. The pole radii form an exponentially damped sequence
+approximating constant Q resolution. The pole radius at fs/ 2
+is set by the damping parameter R, similarly as proposed for
+Kautz ﬁlters in [47].
+It can be seen in (30) and in Fig. 5 that since the poles
+determine the coefﬁcients of the denominators ak, 1 and ak, 2,
+(30) becomes linear in its free parameters dk, 1, dk, 2, and bm,
+which can be calculated in a closed form by standard least-
+squares equations from the measured soundboard response
+[43].
+Figure 6 (a) shows the frequency response of a parallel
+second-order design with 100 logarithmically spaced poles
+with R = 0 . 98, giving a ﬁlter order of 200. The order of
+the FIR part M was set to zero, resulting in a canonical
+structure containing second-order IIR sections only. The t ime-
+domain response of Fig. 6 shows that the parallel ﬁlter can
+follow the long-ringing modes due to its logarithmic frequency
+resolution.
+A beneﬁt of using the parallel ﬁlter instead of the FFT-
+based convolution is that this results in a coherent model
+structure, a “fully modal” piano, since the structure of the
+soundboard model is essentially the same as that of the strin g
+model, the only difference is that now each second-order ﬁlt er
+has a zero as well. Although the pole frequencies of the
+soundboard ﬁlter differ from the actual modal frequencies o f
+the measured soundboard (the poles of the ﬁlter are set to a
+logarithmic scale by (31) and (32)), we may consider each
+second-order section as implementing one normal mode of
+the soundboard vibration. This analogy leads to interestin g
+parameter modiﬁcations. The resonance frequencies of the
+second-order ﬁlters (pole angles) can be changed to simulat e
+a bigger or smaller instrument body, and the decay times of
+the body modes can be inﬂuenced by varying the pole radii.
+Changing the overall magnitude response can be accomplished
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 11
+10
+2
+10
+3
+10
+4−100
+−50
+0
+Frequency [Hz]
+Magnitude [dB]
+(a)
+0 500 1000 1500 2000−0.02
+0
+0.02
+0.04
+0.06
+0.08
+Time [samples]
+Amplitude
+(b)
+Fig. 6. Frequency (a) and time-domain (b) responses of a 200t h order parallel
+second-order ﬁlter design with logarithmic pole positioni ng. In (a) and (b),
+the top curve is the ﬁlter response, while the bottom is the ta rget (the time-
+and frequency-domain ﬁlter responses are shifted for clari ty).
+Synthesis block MPOS for a single note Overall cost
+Transversal vibration 2 × N (free string) 40%
+Hammer update 2 × N + 3 (+static nonlinearity) 5%
+Secondary resonators 3 × N2 30%
+Longitudinal vibration 3 × Nexc + 3 × Nl 25%
+TABLE I
+COMPUTATIONAL COST OF STRING AND HAMMER MODELING .
+by scaling the feedforward coefﬁcients dk, 0 and dk, 1 of Fig. 5,
+without an additional ﬁlter. These modiﬁcations can be carr ied
+out even in run-time for special effects. Multiple outputs ( e.g.,
+for stereo effects) can be efﬁciently achieved by using the same
+set of poles for the different channels, thus, only the outpu t
+coefﬁcients of Fig. 5 have to be implemented for the channels
+separately [43].
+According to preliminary comparisons, the computational
+complexity seems to be larger compared to the partitioned
+convolution for the same sound quality. On the other hand, th e
+parallel ﬁlter requires signiﬁcantly smaller amount of mem ory,
+has zero latency and results in a simpler code, which may be
+beneﬁcial in some DSP implementations. Although it is not yet
+part of the current real-time piano implementation, we have
+good experience with ofﬂine simulations.
+VIII. S OFTWARE IMPLEMENTATION
+We have implemented our model in the form of a real-
+time software, written in C++ using the RtAudio and RtMidi
+classes from the Synthesis Tool Kit (STK) [48]. The design
+of the software architecture was driven by the requirements of
+ﬂexibility in the control and efﬁciency for real-time use.
+Flexible control is achieved by imposing a strong modularity
+on the system. The different tasks are separated into three
+categories, depending on the rate at which they are executed
+at run-time. Obviously, the arithmetic-intensive operati ons
+required for the synthesis are performed for each audio sample,
+i.e., at the audio rate (sampling rate fs). Polyphony man-
+agement, hammer initialization and all the other operation s
+that depend directly on player interaction are performed at
+MIDI rate = fs/N a, where Na is the audio buffer size.
+Finally, run-time modiﬁcations of the synthesis parameter s
+are handled at a calibration rate , which is the slowest one,
+usually between 20 and 50 Hz. Calibration parameters are
+received from an external program running a graphical user
+interface, or alternatively with MIDI control change messa ges.
+The processing of these parameters may be computationally
+expensive, but it is performed asynchronously at a low rate,
+so real-time performance is not affected.
+In order to plan efﬁcient optimizations on the structure, it
+is important to estimate the computational cost of each note ,
+which can vary signiﬁcantly from the bass to the treble range .
+The cost of each synthesis block is summarized in Table I in
+terms of the number of the primary resonators N, secondary
+resonators N2, longitudinal resonators Nl and the number
+Nexc of transverse modes used for computing the excitation
+force for the longitudinal vibration. Figure 7 shows typica l
+values for the number of resonators in a practical calibrati on
+of the model. The number of resonators is derived by imposing
+an upper limit on their frequency and an additional absolute
+limit on the number of resonators.
+Basically, we need to perform 3 MPOS (multiplications
+per output sample) per resonating ﬁlter if there is a non-zer o
+input signal, and only 2 for the free evolution of the ﬁlter.
+Moreover, if the hammer is exciting the string, we also need
+to consider the cost for updating the string position at cont act
+point (N MPOS), plus the cost of updating Eq. (13). Finally,
+longitudinal excitation force computation requires three MPOS
+for every transverse partial involved, one for the spatiall y
+constant tension term of Eq. (26), and two for the products of
+Eq. (22b) since the excitation force is computed for one odd
+and one even longitudinal mode. The estimated relative overall
+cost when all the notes are sounding is indicated in the third
+column of Table I. The computation assumes that the hammer
+is active only for a limited amount of time, as in normal
+playing conditions. Note that the number of multiplication s
+do not precisely represent the resulting computational loa d
+in modern processors, since that will highly depend on the
+efﬁciency of memory access (cache), pipeline stalls, code a nd
+data parallelization, etc. However, they can still give an i dea
+about the relative computational load of the various parts o f
+the model.
+One nice feature of the modal based approach is that paral-
+lelization is very straightforward for most of the componen ts.
+In our particular implementation, we have taken advantage
+of the parallel capabilities of current x86 PCs, but similar
+approaches are applicable to most of shared-memory paralle l
+architectures, which also include custom DSP boards. The
+parallel bank of ﬁlters of Figure 3 can be easily implemented
+in a SIMD (single instruction multiple data) fashion. We use d
+Intel’s SSE instructions [49], which can produce a speed-up
+factor of almost four times with single precision ﬂoating po int
+data.
+Soundboard ﬁltering is implemented by a fast convolution
+engine with uniform partition size, using the efﬁcient FFTW
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 12
+0 10 20 30 40 50 60 70 80 900
+20
+40
+60
+80
+100
+120
+140
+Note number
+Number of partials
+ 
+ 
+N
+N2
+Nexc
+Nl
+Fig. 7. Number of resonators for each note. N refers to primary resonators,
+N2 to the secondary ones, Nl to the longitudinal modes and Nexc is
+the number of transversal partials used for longitudinal ex citation force
+computation.
+library [50]. By looking at the general diagram of Figure 2,
+it is easy to notice that the soundboard radiation ﬁlter can
+be run in parallel with the rest of the model. In our imple-
+mentation, we exploit the multicore capabilities of curren t
+processors by performing soundboard ﬁltering in a separate
+thread, which communicates with the main synthesis thread
+through a ring buffer. The drawback is that some additional
+latency is introduced, which can be avoided in hardware
+with ﬁner synchronization capabilities of DSP boards. The
+computational load of soundboard ﬁltering varies dependin g
+on the number of convolutions, the length of each ﬁlter and
+the implementation used. In our case, running four 20000 tap
+convolutions requires around one fourth of the resources us ed
+by string and hammer modeling at full polyphony.
+Our software is able to run at full polyphony, with a total
+number of 10000 second-order resonators and four 20000 tap
+convolutions, at an approximate load of 30% on a Intel’s Core
+2 Duo@2.4 GHz laptop. The computational cost can be further
+reduced by applying some sort of polyphony management.
+By knowing the approximate cost of each note, we have
+implemented a polyphony queue where the limit is imposed
+on the total computational cost and not on the number of the
+notes. It is possible to further extend this approach in many
+ways, for example by selectively deactivating the partials of a
+single note when they are not audible anymore. The only limit
+coming from the architecture of the model is that the secondary
+bank of resonators cannot be deactivated, since they are als o
+used for simulating sympathetic resonances.
+The interested reader may listen to the sound examples at
+http://www.mit.bme.hu/∼bank/publist/taslp-piano.
+IX. C ONCLUSION AND FUTURE RESEARCH
+This paper has presented a real-time piano model based
+on recent developments in string modeling. The main string
+model is based on the discretization of the modal solution
+of the wave equation, and it is connected to a nonlinear
+hammer model. The problem of delay-free loops is avoided
+by the appropriate choice of discretization. The effects of
+beating and two-stage decay are modeled by a secondary
+bank of resonators, driven by the excitation force of the
+main string model. Sympathetic resonances are synthesized
+by redistributing some parts of the outputs of the main
+string models to the secondary resonators. The bridge force
+arising due to nonlinearly excited longitudinal vibration s is
+computed by ﬁrst assuming spatially uniform tension, then
+correcting this with the dynamics of longitudinal modes.
+The proposed method provides greater accuracy compared to
+earlier techniques, while does not increase the computatio nal
+complexity signiﬁcantly. For soundboard modeling, the FFT -
+based partitioned convolution and a ﬁlter structure simila r to
+that of the string model was considered. The computational
+cost of the string parts was estimated based on the number
+of resonators, and the details of the software implementati ons
+were also given.
+In the current piano model, dampers are implemented by
+simply decreasing the decay times of the resonators. For
+future work, a physics-based damper model would increase
+the realism of the note off sounds signiﬁcantly and would
+allow the simulation of part pedaling. The soundboard model s
+based on fast convolution and parallel second-order ﬁlters
+should be evaluated from a perceptual point of view. That
+is, the computational complexity of the two methods that
+is required for reaching the same subjective quality should
+be determined by listening tests. Finally, the combination of
+the two approaches could possibly lead to an even higher
+efﬁciency.
+In our piano model, all the parts are real physical models
+except the soundboard, which is implemented as a digital ﬁlt er
+and parameterized from measured transfer functions. In the
+far future, it might be possible to incorporate a physics-ba sed
+soundboard model based on ﬁnite difference or ﬁnite element
+modeling. Alternatively, the soundboard impulse response
+could be computed at calibration rate by ﬁnite difference
+or ﬁnite element modeling, and implemented as a ﬁltering
+algorithm, allowing the modiﬁcation of the geometrical and
+material properties of the soundboard in run time.
+ACKNOWLEDGEMENTS
+The authors would like to thank Dr. L´ aszl´ o Sujbert, Zsolt
+Garamv¨ olgyi, the Associate Editor Prof. Julius Smith, andthe
+anonymous reviewers for their helpful comments.
+REFERENCES
+[1] L. Hiller and P. Ruiz, “Synthesizing musical sounds by so lving the wave
+equation for vibrating objects: Part 1,” J. Audio Eng. Soc., vol. 19, no. 6,
+pp. 462–470, June 1971.
+[2] ——, “Synthesizing musical sounds by solving the wave equ ation for
+vibrating objects: Part 2,”J. Audio Eng. Soc., vol. 19, no. 7, pp. 542–550,
+1971.
+[3] G. E. Garnett, “Modeling piano sound using digital waveg uide ﬁltering
+techniques,” in Proc. Int. Computer Music Conf., Urbana, Illinois, USA,
+1987, pp. 89–95.
+[4] J. O. Smith and S. A. Van Duyne, “Commuted piano synthesis ,” in Proc.
+Int. Computer Music Conf. , Banff, Canada, September 1995, pp. 335–
+342, URL: http://ccrma.stanford.edu/∼jos/cs.html.
+[5] S. A. Van Duyne and J. O. Smith, “Developments for
+the commuted piano,” in Proc. Int. Computer Music
+Conf., Banff, Canada, September 1995, pp. 319–326, URL:
+http://ccrma.stanford.edu/∼jos/cs.html.
+PUBLISHED IN IEEE TRANS. ON AUDIO, SPEECH, AND LANGUAGE PROC ESSING, VOL. 18, NO. 4, PP. 809–821, MAY 2010 13
+[6] G. Borin, D. Rocchesso, and F. Scalcon, “A physical piano model for
+music performance,” in Proc. Int. Computer Music Conf. , Thessaloniki,
+Greece, Sep. 1997, pp. 350–353.
+[7] B. Bank, “Physics-based sound synthesis of the piano,” M aster’s
+thesis, Budapest University of Technology and Economics,
+Hungary, May 2000, published as Report 54 of HUT
+Laboratory of Acoustics and Audio Signal Processing, URL:
+http://www.mit.bme.hu/∼bank/thesis.
+[8] B. Bank, F. Avanzini, G. Borin, G. De Poli, F. Fontana, and D. Roc-
+chesso, “Physically informed signal-processing methods for piano sound
+synthesis: a research overview,”EURASIP J. on Applied Signal Process.,
+vol. 2003, no. 10, pp. 941–952, Sep. 2003.
+[9] J. Bensa, “Analysis and synthesis of piano sounds using
+physical and signal models,” Ph.D. dissertation, Universi t´ e
+de la M´ edit´ erran´ ee, Marseille, France, May 2003, URL:
+http://www.lma.cnrs-mrs.fr/∼bensa.
+[10] M. Aramaki, J. Bensa, L. Daudet, P. Guillemain, and R. Kr onland-
+Martinet, “Resynthesis of coupled piano string vibrations based on
+physical modeling,” Journal of New Music Research , vol. 30, no. 3,
+pp. 213–226, 2002.
+[11] J. Bensa, K. Jensen, and R. Kronland-Martinet, “A hybri d resynthesis
+model for hammer–string interaction of piano tones,” EURASIP J. on
+Applied Signal Process. , vol. 2004, no. 1, pp. 1021–1035, Jan. 2004.
+[12] B. Bank and L. Sujbert, “Generation of longitudinal vib rations in piano
+strings: From physics to sound synthesis,” J. Acoust. Soc. Am., vol. 117,
+no. 4, pp. 2268–2278, Apr. 2005, URL:http://www.mit.bme.hu/
+∼bank/jasa-longitud.
+[13] B. Bank, “Physics-based sound synthesis of string inst ruments in-
+cluding geometric nonlinearities,” Ph.D. dissertation, B udapest Uni-
+versity of Technology and Economics, Hungary, Feb. 2006, UR L:
+http://www.mit.bme.hu/∼bank/phd.
+[14] J. Rauhala, H. M. Lehtonen, and V . V¨ alim¨ aki, “Toward next-generation
+digital keyboard instruments,”IEEE Signal Process. Mag., vol. 24, no. 2,
+pp. 12–20, Mar. 2007.
+[15] J. Rauhala, M. Laurson, V . V¨ alim¨ aki, H.-M. Lehtonen, and V . Norilo,
+“A parametric piano synthesizer,”Computer Music J., vol. 32, no. 4, pp.
+17–30, Winter 2008.
+[16] Modartt S.A.S., “Pianoteq True Modelling,” Ramonvill e, France, 2006,
+URL: http://www.pianoteq.com/.
+[17] Roland Corporation, “Roland V-Piano,” 2009, URL:
+http://www.roland.com/products/en/V-Piano/.
+[18] P. M. Morse, Vibration and Sound . McGraw-Hill, 1948, reprint, (1 st
+ed. 1936).
+[19] V . V¨ alim¨ aki, J. Pakarinen, C. Erkut, and M. Karjalain en, “Discrete-
+time modelling of musical instruments,” Reports on Progress in Physics,
+vol. 69, no. 1, pp. 1–78, Oct. 2006.
+[20] A. Chaigne and A. Askenfelt, “Numerical simulations of piano strings.
+I. A physical model for a struck string using ﬁnite differenc e methods,”
+J. Acoust. Soc. Am. , vol. 95, no. 2, pp. 1112–1118, Feb. 1994.
+[21] ——, “Numerical simulations of piano strings. II. Compa risons with
+measurements and systematic exploration of some hammer-st ring para-
+meters,” J. Acoust. Soc. Am. , vol. 95, no. 3, pp. 1631–1640, Mar. 1994.
+[22] N. Giordano and M. Jiang, “Physical modeling of the pian o,” EURASIP
+J. on Applied Signal Process., vol. 2004, no. 7, pp. 926–933, June 2004.
+[23] J. O. Smith, “Techniques for digital ﬁlter design and sy stem iden-
+tiﬁcation with application to the violin,” Ph.D. dissertat ion, Stanford
+University, California, USA, June 1983.
+[24] ——, Physical Audio Signal Processing for Virtual Musical
+Instruments and Audio Effects . USA: Center for Computer
+Research in Music and Acoustics, Stanford University, W3K
+Publishing, Aug. Accessed: July 2009., on-line book, URL:
+http://ccrma.stanford.edu/∼jos/pasp.
+[25] J.-M. Adrien, “The missing link: Modal synthesis,” in Representations
+of Musical Signals , G. De Poli, A. Piccialli, and C. Roads, Eds.
+Cambridge, Massachusetts, USA: The MIT Press, 1991, pp. 269 –297.
+[26] L. Trautmann and R. Rabenstein, Digital Sound Synthesis by Physical
+Modeling using the Functional Transformation Method . New York,
+USA: Kluwer Academic/Plenum Publishers, 2003.
+[27] L. R. Rabiner and B. Gold, Theory and Application of Digital Signal
+Processing. Englewood Cliffs, New Jersey, USA: Prentice-Hall, 1975.
+[28] X. Boutillon, “Model for piano hammers: Experimental d etermination
+and digital simulation,” J. Acoust. Soc. Am., vol. 83, no. 2, pp. 746–754,
+Feb. 1988.
+[29] G. Borin, G. De Poli, and D. Rocchesso, “Elimination of d elay-free loops
+in discrete-time models of nonlinear acoustic systems,” IEEE Trans.
+Acoust. Speech Signal Process. , vol. 8, no. 5, pp. 597–606, Sep. 2000.
+[30] A. Stulov, “Hysteretic model of the grand piano felt,” J. Acoust. Soc.
+Am., vol. 97, no. 4, pp. 2577–2585, Apr. 1995.
+[31] N. Giordano and J. P. Winans II, “Piano hammers and their compression
+characteristics: Does a power law make sense?” J. Acoust. Soc. Am., vol.
+107, no. 4, pp. 2248–2255, Apr. 2000.
+[32] H. A. Conklin, “Design and tone in the mechanoacoustic p iano. Part III.
+Piano strings and scale design,” J. Acoust. Soc. Am. , vol. 100, no. 3, pp.
+1286–1298, June 1996.
+[33] I. Nakamura and D. Naganuma, “Characteristics of piano sound spectra,”
+in Proc. Stockholm Music Acoust. Conf. , 1993, pp. 325–330.
+[34] H. A. Conklin, “Generation of partials due to nonlinear mixing in a
+stringed instrument,” J. Acoust. Soc. Am. , vol. 105, no. 1, pp. 536–545,
+Jan. 1999.
+[35] A. Watzky, “On the generation of axial modes in the nonli near vibrations
+of strings,” in Proc. Acoustics’08 Paris Conf., Paris, France, June 2008.
+[36] J. Bensa and L. Daudet, “Efﬁcient modeling of ”phantom” partials in
+piano tones,” in Int. Symp. on Musical Acoust. , Nara, Japan, Mar. 2004,
+pp. 207–210.
+[37] G. Weinreich, “Coupled piano strings,” J. Acoust. Soc. Am. , vol. 62,
+no. 6, pp. 1474–1484, Dec. 1977.
+[38] M. Karjalainen, V . V¨ alim¨ aki, and T. Tolonen, “Plucked-string models:
+from Karplus-Strong algorithm to digital waveguides and be yond,”
+Computer Music J. , vol. 22, no. 3, pp. 17–32, 1998.
+[39] J. O. Smith, “Efﬁcient synthesis of stringed musical in struments,” in
+Proc. Int. Computer Music Conf. , Tokyo, Japan, Sep. 1993, pp. 64–71,
+URL: http://ccrma.stanford.edu/∼jos/cs/cs.html.
+[40] S. Zambon, H.-M. Lehtonen, and B. Bank, “Simulation of p iano sustain-
+pedal effect by parallel second-order ﬁlters,” in Proc. Conf. on Digital
+Audio Effects, Espoo, Finland, Sep. 2008, pp. 199–204.
+[41] M. Karjalainen and J. O. Smith, “Body modeling techniqu es for string
+instrument synthesis,” in Proc. Int. Computer Music Conf. , Hong Kong,
+Aug. 1996, pp. 232–239.
+[42] T. Paatero and M. Karjalainen, “Kautz ﬁlters and genera lized frequency
+resolution: Theory and audio applications,” J. Audio Eng. Soc. , vol. 51,
+no. 1–2, pp. 27–44, Jan./Feb. 2003.
+[43] B. Bank, “Direct design of parallel second-order ﬁlter s for
+instrument body modeling,” in Proc. Int. Computer Music
+Conf., Copenhagen, Denmark, Aug. 2007, pp. 458–465, URL:
+http://www.acoustics.hut.fi/go/icmc07-parfilt.
+[44] V . Madisetti and D. Williams, The digital signal processing handbook .
+CRC press, 1998.
+[45] W. G., “Efﬁcient convolution without input–output del ay,”J. Audio Eng.
+Soc., vol. 43, no. 3, pp. 127–136, Nov. 1995.
+[46] G. Garcia, “Optimal Filter Partition for Efﬁcient Conv olution with Short
+Input Output Delay,” in Proc. 113th AES Conv., Preprint No. 5660, Los
+Angeles, USA, 2002.
+[47] M. Karjalainen and T. Paatero, “Equalization of loudsp eaker and
+room responses using Kautz ﬁlters: Direct least squares des ign,”
+EURASIP J. on Advances in Sign. Proc., Spec. Iss. on Spatial S ound
+and Virtual Acoustics , vol. 2007, p. 13, 2007, article ID 60949,
+doi:10.1155/2007/60949.
+[48] G. Scavone, “RtAudio: A Cross-Platform C++ Class for Re altime Audio
+Input/Output,” inProc. Int. Computer Music Conf., Gothenburg, Sweden,
+Sep. 2002, pp. 196–199.
+[49] R. Gerber, A. Bik, K. Smith, and X. Tian, The software optimization
+cookbook. Intel press, 2002.
+[50] M. Frigo and S. Johnson, “FFTW: An adaptive software arc hitecture for
+the FFT,” in Proc. IEEE Int. Conf. Acoust. Speech and Signal Process. ,
+vol. III, Seattle, Washington, USA, May 1998, pp. 1381–1384 .
