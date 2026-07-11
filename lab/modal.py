@@ -19,7 +19,9 @@ Table schema (superset of the piano's; `config` drives the differences):
       "release_fade_s": null,      # null: note-off ignored (no dampers)
                                    # number: exponential fade on release
       "release_remnant": 0.0,      # residual level that rings after damping
-      "undamped_above": null       # midi above which release is a no-op
+      "undamped_above": null,      # midi above which release is a no-op
+      "pol_beat_m": [0.3, 0.8],    # dual-polarization beat depth range
+      "pol_beat_cents": [0.5, 2.0] # ... and detune range (plucked strings)
     },
     "keys": [ {note, midi, f0, B, layers: [ {vel, peak, thump_db, bed_db,
         bed_t60, bed_anchor_s, partials: [{n, fr, a1, t1, a2, t2}]} ]} ]
@@ -66,6 +68,8 @@ class ModalSynth:
         self.thump_taus = ([float(v) for v in tb] if tb
                            else [self.thump_tau] * N_BANDS)
         self.attack_s = float(cfg.get("attack_s", 0.0) or 0.0)
+        self.pol_beat_m = cfg.get("pol_beat_m")        # [lo, hi] or None
+        self.pol_beat_cents = cfg.get("pol_beat_cents")
         self.release_fade_s = cfg.get("release_fade_s")  # None -> undamped
         self.release_remnant = float(cfg.get("release_remnant", 0.0) or 0.0)
         self.undamped_above = cfg.get("undamped_above")
@@ -251,6 +255,20 @@ class ModalSynth:
             env = a1 * np.exp(-t / max(t1, 1e-4)) + a2 * np.exp(-t / max(t2, 1e-4))
             if ramp is not None:
                 env = env * ramp
+            if self.pol_beat_m is not None:
+                # dual-polarization beating: each partial's two orthogonal
+                # string polarizations are detuned by a fraction of a cent
+                # to a couple of cents, producing the dip-and-recover
+                # envelopes real plucked strings show (Weinreich). The
+                # polarizations start IN PHASE at the pluck (dip comes at
+                # half the beat period); normalize so t=0 keeps the
+                # measured amplitude.
+                m = self.rng.uniform(*self.pol_beat_m)
+                span = self.rng.uniform(*self.pol_beat_cents)
+                dfreq = fn * span * math.log(2) / 1200.0
+                ph = self.rng.uniform(-0.4, 0.4)
+                env = env * ((1.0 + m * np.cos(2 * np.pi * dfreq * t + ph))
+                             / (1.0 + m * math.cos(ph)))
             phase = self.rng.uniform(-0.25, 0.25)
             out += env * np.sin(2 * np.pi * fn * t + phase)
 

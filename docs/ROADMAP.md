@@ -168,8 +168,17 @@ composite encodes piano-specific structure and must not be blindly reused).
    `docs/library.md` + `docs/instruments/piano.md` written.
 6. **Instrument 2: unpitched percussion** (woodblock, claves, …) — smallest
    possible exercise of the whole pipeline end-to-end via the skill.
+   ✅ Done 2026-07-11 — woodblock (VCSL CC0). Engine grew the generic
+   modal-family config (per-partial `fr` ratios, plain partials, onset
+   ramp, per-band click decay, release styles) with the piano gate held
+   at 1.195. Score 1.01 vs take-null 1.32. `docs/instruments/woodblock.md`.
 7. **Instrument 3: mallets/bells**, then **plucked strings**. WASM/npm and
    C-ABI packaging polish somewhere alongside 6–7, once the API stops moving.
+   ✅ Done 2026-07-11 — vibraphone (Iowa MIS; 42 keys × 3 dynamics,
+   measured 75 ms damper fade; 0.464 vs seed null ±0.005) and koto-family
+   long zither (VCSL đàn tranh CC0 — no license-clean true-koto
+   multisample exists, substitution documented; 1.132 vs take-null 1.754).
+   `docs/instruments/{vibraphone,koto}.md`. WASM/C-ABI packaging still open.
 
 ## Environment notes / risks
 

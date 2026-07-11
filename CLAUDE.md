@@ -7,7 +7,12 @@ Each instrument is developed against a reference benchmark (samples or
 soundfonts) via research → implement → evaluate iteration. Architecture and
 phased plan: `docs/ROADMAP.md`. Currently implemented: **piano** (calibrated
 modal synthesis, same family as Pianoteq, patent US7915515B2; benchmarked
-against Salamander Grand Piano V3, Yamaha C5).
+against Salamander Grand Piano V3, Yamaha C5), **woodblock** (VCSL),
+**vibraphone** (Iowa MIS), **koto-family long zither** (VCSL đàn tranh —
+see `instruments/koto/SOURCES.md` for the reference-substitution decision).
+Non-piano instruments run on the same Rust engine via the table `config`
+block (`fr` mode ratios, release styles, per-band click decay); their
+pipelines are `python -m instruments.<name>.{analyze,calibrate,evaluate}`.
 
 New instruments: use the `instrument-dev` skill
 (`.claude/skills/instrument-dev/SKILL.md`) — reference acquisition with
