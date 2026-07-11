@@ -7,13 +7,18 @@
 //! reference implementation is `instruments/piano/synth.py`; this is a port
 //! verified against it by the Python evaluation harness.
 
+pub mod bench;
 pub mod filters;
 pub mod interp;
 pub mod params;
 pub mod rng;
 pub mod stft;
+pub mod stream;
 pub mod synth;
+pub mod voice;
 
 pub use interp::NoteParams;
 pub use params::Table;
+pub use stream::StreamSynth;
 pub use synth::Piano;
+pub use voice::Quality;

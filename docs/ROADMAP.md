@@ -138,6 +138,13 @@ composite encodes piano-specific structure and must not be blindly reused).
    render, note-on/off events) lands with phase 3/4.
 3. **Quality/perf system**: salience-sorted modes, quality levels, host
    benchmark + auto-preset.
+   ✅ Done 2026-07-11 — implemented as *runtime* salience pruning (A-weighted
+   energy; tables unchanged, calibration never re-runs) via
+   `Quality {max_partials, noise, max_symp_lines}`; streaming API
+   (`StreamSynth`) landed here too. Pruning to 32 partials is quality-free;
+   16 full-quality voices at 2.3x realtime, 64 voices at p24_s12 preset 1.3x
+   (one ARM64 core). Known next lever: shared global sympathetic bank —
+   per-voice fixed cost dominates at high polyphony (see piano DEVLOG).
 4. **Testbed GUI** — tkinter control surface over the Rust `io` crate
    (cpal/WASAPI audio thread, midir MIDI-in); no Python audio packages needed.
 5. **Skill + harness generalization**: extract instrument-agnostic

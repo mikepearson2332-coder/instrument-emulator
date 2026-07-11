@@ -36,7 +36,8 @@ python scripts/summarize_eval.py                  # score table by register
 scripts/build_core.ps1                            # cargo build + stage core/dist/instrument_core.pyd
 python scripts/compare_engines.py                 # Rust-vs-Python parity smoke test
 python scripts/compare_eval_runs.py               # eval.json vs eval_rust.json deltas
-python scripts/bench_core.py                      # engine throughput benchmark
+python scripts/bench_core.py                      # throughput + streaming + host benchmark
+python scripts/quality_sweep.py                   # score vs quality level -> output/quality_sweep.json
 python scripts/diagnose.py C4v11 ...              # comparison PNGs -> output/diag/
 python scripts/demo.py                            # listening demos -> output/demo/
 ```

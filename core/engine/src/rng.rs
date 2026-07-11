@@ -58,22 +58,21 @@ impl Rng {
         lo + (hi - lo) * self.next_f64()
     }
 
-    /// Standard normal via Box-Muller (pair-cached).
+    /// Standard normal via the Marsaglia polar method (pair-cached, no trig).
     pub fn standard_normal(&mut self) -> f64 {
         if let Some(v) = self.spare_normal.take() {
             return v;
         }
-        let u1 = loop {
-            let u = self.next_f64();
-            if u > 0.0 {
-                break u;
+        loop {
+            let x = 2.0 * self.next_f64() - 1.0;
+            let y = 2.0 * self.next_f64() - 1.0;
+            let s = x * x + y * y;
+            if s > 0.0 && s < 1.0 {
+                let f = (-2.0 * s.ln() / s).sqrt();
+                self.spare_normal = Some(y * f);
+                return x * f;
             }
-        };
-        let u2 = self.next_f64();
-        let r = (-2.0 * u1.ln()).sqrt();
-        let theta = 2.0 * std::f64::consts::PI * u2;
-        self.spare_normal = Some(r * theta.sin());
-        r * theta.cos()
+        }
     }
 }
 

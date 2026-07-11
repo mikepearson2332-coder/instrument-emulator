@@ -154,6 +154,38 @@ Traps for future porters:
   absolute thresholds (slow unison beats make single-window deviations of
   several dB legitimate).
 
+## Phase 3 (2026-07-11): streaming voices, recursive resonators, quality system
+
+`core/engine/src/voice.rs` replaces every per-sample transcendental with a
+recurrence (complex rotators for sin/cos, decay-factor states for
+exponentials). `synth_note` is now a thin offline wrapper over the streaming
+Voice; `StreamSynth` (stream.rs) is the real-time API (note_on/off, pedal,
+buffer render, voice culling). Tests: recurrence vs closed form <1e-9;
+buffered streaming == one-shot bit-exact (noise off); pedal/release/culling
+functional (`probe_stream.py`). Eval gate at full quality: **1.195** vs
+Python 1.192 — inside the seed null.
+
+Quality = runtime pruning, table unchanged (calibration never re-runs):
+partials sorted by A-weighted energy salience, symp lines by level, then
+truncated to `Quality {max_partials, noise, max_symp_lines}`.
+Sweep (v11 subset, 30 notes): full 1.219 · p48 1.206 · p32 1.199 (pruning to
+32 is FREE) · p24 1.275 · p16 1.341 · p8 1.575 · p24+symp12 1.398 ·
+p16+symp8+no-noise 1.883 (4x cheaper).
+
+Performance (one ARM64 core, release+LTO): offline 35x realtime/note (was
+12.6x direct-eval). Streaming: 16 full-quality voices 2.3x realtime; 64
+voices at p24_s12 1.3x. Host bench (`engine::bench`): 7.4 ns per
+partial-sample, 273 ns fixed per voice-sample. **The fixed per-voice cost
+(53 symp rotators + 10 noise bands) dominates at high polyphony** —
+`pick_max_partials` is honest about this (64 voices @ 50% core -> 0 spare
+partials). Next lever: a *shared global sympathetic bank* (physically one
+soundboard, not one per voice) + folding noise bands; would cut the fixed
+cost by ~10x at large polyphony. Dead components (env < -140 dB) are culled
+per buffer, so ringing voices get cheaper as they fade.
+
+Also: normals via Marsaglia polar (no trig); noise realization differs
+per draw-order between offline and streaming paths — statistical only.
+
 ## Probes
 
 `scripts/probe*.py` are one-off debugging probes kept as worked examples:
