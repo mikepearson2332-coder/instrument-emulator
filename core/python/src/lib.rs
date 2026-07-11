@@ -138,9 +138,93 @@ impl StreamSynth {
     }
 }
 
+/// Live audio: cpal output stream + optional MIDI-in, driving StreamSynth
+/// on the audio thread. Control calls just enqueue events.
+#[pyclass(unsendable)]
+struct Live {
+    inner: instrument_io::Live,
+}
+
+#[pymethods]
+impl Live {
+    #[new]
+    #[pyo3(signature = (table_path, seed=1234))]
+    fn new(table_path: &str, seed: u64) -> PyResult<Self> {
+        instrument_io::Live::new(table_path, seed)
+            .map(|inner| Live { inner })
+            .map_err(PyValueError::new_err)
+    }
+
+    #[getter]
+    fn sr(&self) -> u32 {
+        self.inner.sr
+    }
+
+    #[getter]
+    fn device_name(&self) -> String {
+        self.inner.device_name.clone()
+    }
+
+    fn note_on(&self, midi: u8, velocity: f64) {
+        self.inner.send(instrument_io::Event::NoteOn(midi, velocity));
+    }
+
+    fn note_off(&self, midi: u8) {
+        self.inner.send(instrument_io::Event::NoteOff(midi));
+    }
+
+    fn set_pedal(&self, down: bool) {
+        self.inner.send(instrument_io::Event::Pedal(down));
+    }
+
+    fn all_notes_off(&self) {
+        self.inner.send(instrument_io::Event::AllNotesOff);
+    }
+
+    #[pyo3(signature = (max_partials=None, noise=true, max_symp_lines=None))]
+    fn set_quality(&self, max_partials: Option<usize>, noise: bool, max_symp_lines: Option<usize>) {
+        self.inner.send(instrument_io::Event::Quality(
+            max_partials.unwrap_or(usize::MAX),
+            noise,
+            max_symp_lines.unwrap_or(usize::MAX),
+        ));
+    }
+
+    /// Master gain before the soft clipper (default 0.25).
+    fn set_gain(&self, gain: f64) {
+        self.inner.send(instrument_io::Event::Gain(gain));
+    }
+
+    /// (active_voices, cpu_load_fraction, peak_since_last_call) — peak is
+    /// 1.0 = 0 dBFS and resets on read.
+    fn meters(&self) -> (usize, f64, f64) {
+        use std::sync::atomic::Ordering;
+        let v = self.inner.meters.voices.load(Ordering::Relaxed);
+        let load = self.inner.meters.load_permille.load(Ordering::Relaxed) as f64 / 1000.0;
+        let peak = self.inner.take_peak_milli() as f64 / 1000.0;
+        (v, load, peak)
+    }
+
+    #[staticmethod]
+    fn midi_ports() -> Vec<String> {
+        instrument_io::Live::midi_ports()
+    }
+
+    fn midi_connect(&mut self, port_index: usize) -> PyResult<String> {
+        self.inner
+            .midi_connect(port_index)
+            .map_err(PyValueError::new_err)
+    }
+
+    fn midi_disconnect(&mut self) {
+        self.inner.midi_disconnect();
+    }
+}
+
 #[pymodule]
 fn instrument_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<Piano>()?;
     m.add_class::<StreamSynth>()?;
+    m.add_class::<Live>()?;
     Ok(())
 }

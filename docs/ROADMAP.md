@@ -147,6 +147,14 @@ composite encodes piano-specific structure and must not be blindly reused).
    per-voice fixed cost dominates at high polyphony (see piano DEVLOG).
 4. **Testbed GUI** — tkinter control surface over the Rust `io` crate
    (cpal/WASAPI audio thread, midir MIDI-in); no Python audio packages needed.
+   ✅ Done 2026-07-11 — `core/io` (Live: event queue -> audio thread ->
+   StreamSynth, atomic meters, soft-clip master gain, MIDI-in parsing) +
+   `testbed/piano_testbed.py` (88-key canvas with glissando, computer-key
+   rows with octave shift, velocity/volume, quality presets, sustain pedal,
+   MIDI-in selector, MIDI-file playback via mido + built-in demo, voice/DSP/
+   peak meters in the title bar). Verified live on-device: demo played 14
+   voices at 36% DSP through WASAPI. Live MIDI-in code ready, untested
+   until a controller is available.
 5. **Skill + harness generalization**: extract instrument-agnostic
    analysis/calibrate/evaluate framework; author the skill; write
    `docs/library.md` and `docs/instruments/piano.md` (from DEVLOG + research

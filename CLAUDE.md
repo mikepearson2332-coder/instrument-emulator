@@ -26,7 +26,8 @@ records which approaches already failed and why.
 ## Commands (piano)
 
 ```
-python piano.py "C4 E4 G4" --vel 90 --dur 5 [--play] [--release 1.5]   # the app
+python testbed/piano_testbed.py                   # live testbed GUI (audio via core/io)
+python piano.py "C4 E4 G4" --vel 90 --dur 5 [--play] [--release 1.5]   # offline CLI
 python scripts/analyze_reference.py [NAMEv#...]   # FLAC -> reference/piano/analysis/*.json
 python scripts/measure_symp.py                    # global sympathetic lines -> reference/piano/symp.json
 python -m instruments.piano.calibrate             # JSONs+symp -> instruments/piano/params/grand.json

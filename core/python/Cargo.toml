@@ -9,5 +9,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 engine = { path = "../engine" }
+instrument-io = { path = "../io" }
 serde_json = "1"
 pyo3 = { version = "0.23", features = ["extension-module", "abi3-py312"] }

@@ -1,0 +1,12 @@
+[package]
+name = "instrument-io"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "instrument_io"
+
+[dependencies]
+engine = { path = "../engine" }
+cpal = "0.15"
+midir = "0.10"
