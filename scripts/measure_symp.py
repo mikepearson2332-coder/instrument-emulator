@@ -6,7 +6,7 @@ sample; cluster across samples; keep lines present in >= 20% of samples
 (these are instrument resonators, not note partials).
 Pass 2: for every sample, demodulate each line -> level at anchor + t60.
 
-Output: reference/symp.json
+Output: reference/piano/symp.json
 """
 
 import os
@@ -19,12 +19,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
 from scipy.ndimage import median_filter, maximum_filter
 
-from pianomodel.notes import SALAMANDER_NOTES, SALAMANDER_VELS, name_to_midi, midi_to_freq
-from pianomodel.analysis import load_mono, find_onset, partial_envelope
+from instruments.piano.notes import SALAMANDER_NOTES, SALAMANDER_VELS, name_to_midi, midi_to_freq
+from instruments.piano.analysis import load_mono, find_onset, partial_envelope
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-SAMPLES = os.path.join(ROOT, "reference", "samples")
-ANALYSIS = os.path.join(ROOT, "reference", "analysis")
+SAMPLES = os.path.join(ROOT, "reference", "piano", "samples")
+ANALYSIS = os.path.join(ROOT, "reference", "piano", "analysis")
 
 FMIN, FMAX = 60.0, 8000.0
 ANCHOR = 1.2  # s
@@ -141,7 +141,7 @@ def main():
         t60 = float(np.median(t60s[li])) if t60s[li] else 8.0
         result["lines"].append({"freq": round(lf, 2), "t60": round(t60, 2)})
 
-    out = os.path.join(ROOT, "reference", "symp.json")
+    out = os.path.join(ROOT, "reference", "piano", "symp.json")
     with open(out, "w") as f:
         json.dump(result, f)
     print(f"wrote {out}")

@@ -1,7 +1,7 @@
 import sys, os, json, math
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-a = json.load(open(os.path.join(os.path.dirname(__file__), "..", "reference", "analysis", "C4v11.json")))
+a = json.load(open(os.path.join(os.path.dirname(__file__), "..", "reference", "piano", "analysis", "C4v11.json")))
 peak = a["peak_abs"]
 print("n | spectral amp dB | a_fast dB | tau_f | a_slow dB | tau_s")
 amax = max(p["amp"] for p in a["partials"])

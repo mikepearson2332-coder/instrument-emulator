@@ -42,6 +42,15 @@ The lab evaluates through the Python binding, so the engine that gets scored
 is byte-identical to the engine that ships. `pianomodel/synth.py` remains as
 the executable spec during the port, then becomes reference-only.
 
+**Crate split (decided 2026-07-11).** The Rust workspace separates:
+`engine` — pure DSP, interface is "events in, sample buffers out", no
+devices/threads/OS deps (required for WASM/AudioWorklet and for consumers
+embedding into their own audio graph); `io` — optional feature-gated layer
+doing audio output via `cpal` (WASAPI) and MIDI-in via `midir`. Device I/O
+lives in Rust, not Python: audio callbacks never touch the GIL, ARM64 wheel
+availability for `sounddevice`/`python-rtmidi` stops mattering, and the
+testbed exercises the exact real-time path consumers use.
+
 **Engine families.** The core hosts multiple engine families behind one
 voice/render API. Family 1 (modal: banks of exponentially decaying resonators
 + excitation model + coupling/resonance bed) covers piano, percussion,
@@ -84,11 +93,13 @@ instrument-model/
 
 ## Testbed
 
-Small GUI app (Python + tkinter now — already available; the runtime core does
-the audio, so the GUI tech is disposable). Features: instrument selector,
-on-screen keyboard (mouse + computer-keyboard mapping), velocity control,
-MIDI-file playback, voice/CPU meter, quality-level switch. Live MIDI-in wired
-behind the same event path, activated when a controller is available.
+Small GUI app: Python + tkinter as a thin control surface over the Rust `io`
+layer (Rust owns the audio thread; the GUI sends note events through PyO3, so
+GUI tech is disposable). Features: instrument selector, on-screen keyboard
+(mouse + computer-keyboard mapping), velocity control, MIDI-file playback,
+voice/CPU meter, quality-level switch. Live MIDI-in wired behind the same
+event path, activated when a controller is available. Depends on phase 2 —
+no real-time engine exists before the piano port.
 
 ## Instrument-dev skill
 
@@ -122,9 +133,8 @@ composite encodes piano-specific structure and must not be blindly reused).
    equal or better; real-time headroom measured.
 3. **Quality/perf system**: salience-sorted modes, quality levels, host
    benchmark + auto-preset.
-4. **Testbed GUI** (needs `sounddevice` for output — install and verify on
-   ARM64; fallback: WASAPI via a small Rust audio thread, which we may prefer
-   anyway).
+4. **Testbed GUI** — tkinter control surface over the Rust `io` crate
+   (cpal/WASAPI audio thread, midir MIDI-in); no Python audio packages needed.
 5. **Skill + harness generalization**: extract instrument-agnostic
    analysis/calibrate/evaluate framework; author the skill; write
    `docs/library.md` and `docs/instruments/piano.md` (from DEVLOG + research

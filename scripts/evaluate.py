@@ -15,14 +15,14 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
 import soundfile as sf
 
-from pianomodel.notes import SALAMANDER_NOTES, SALAMANDER_VELS, name_to_midi
-from pianomodel.calibrate import LAYER_TO_VEL
-from pianomodel.synth import Piano
-from pianomodel.benchmark import compare, composite_score
-from pianomodel.analysis import load_mono
+from instruments.piano.notes import SALAMANDER_NOTES, SALAMANDER_VELS, name_to_midi
+from instruments.piano.calibrate import LAYER_TO_VEL
+from instruments.piano.synth import Piano
+from instruments.piano.benchmark import compare, composite_score
+from instruments.piano.analysis import load_mono
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-SAMPLES = os.path.join(ROOT, "reference", "samples")
+SAMPLES = os.path.join(ROOT, "reference", "piano", "samples")
 OUTDIR = os.path.join(ROOT, "output")
 
 
@@ -47,7 +47,7 @@ def main():
             ref, sr = load_mono(ref_path)
             dur = min(len(ref) / sr, 8.0)
             release_at = None
-            ana_path = os.path.join(ROOT, "reference", "analysis", f"{name}.json")
+            ana_path = os.path.join(ROOT, "reference", "piano", "analysis", f"{name}.json")
             if os.path.exists(ana_path):
                 with open(ana_path) as f:
                     release_at = json.load(f).get("release_s")

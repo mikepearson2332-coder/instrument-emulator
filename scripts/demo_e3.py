@@ -3,8 +3,8 @@ import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
 import soundfile as sf
-from pianomodel.synth import Piano
-from pianomodel.analysis import load_mono, find_onset
+from instruments.piano.synth import Piano
+from instruments.piano.analysis import load_mono, find_onset
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 piano = Piano()
@@ -13,7 +13,7 @@ sr = piano.sr
 parts = []
 for kind, arg in [("ref", "D#3v11"), ("synth", (52, 70)), ("ref", "F#3v11")]:
     if kind == "ref":
-        x, rsr = load_mono(os.path.join(ROOT, "reference", "samples", f"{arg}.flac"))
+        x, rsr = load_mono(os.path.join(ROOT, "reference", "piano", "samples", f"{arg}.flac"))
         o = find_onset(x, rsr)
         y = x[o: o + int(4 * rsr)]
     else:

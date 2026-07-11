@@ -13,9 +13,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
 import soundfile as sf
 
-from pianomodel.notes import name_to_midi
-from pianomodel.synth import Piano
-from pianomodel.analysis import load_mono, find_onset
+from instruments.piano.notes import name_to_midi
+from instruments.piano.synth import Piano
+from instruments.piano.analysis import load_mono, find_onset
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 OUT = os.path.join(ROOT, "output", "demo")
@@ -66,7 +66,7 @@ sf.write(os.path.join(OUT, "chords.wav"), norm(canvas), sr)
 # --- A/B pairs: synth then reference
 for name, midi, vel in [("C4v11", 60, 88), ("A0v16", 21, 127),
                         ("C6v6", 84, 48), ("F#2v11", 42, 88)]:
-    ref, rsr = load_mono(os.path.join(ROOT, "reference", "samples", f"{name}.flac"))
+    ref, rsr = load_mono(os.path.join(ROOT, "reference", "piano", "samples", f"{name}.flac"))
     ref = ref[find_onset(ref, rsr):int(find_onset(ref, rsr) + 5 * rsr)]
     y = piano.synth_note(midi, vel, dur=5.0)
     y = y * (np.abs(ref).max() / (np.abs(y).max() + 1e-12))

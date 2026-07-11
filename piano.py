@@ -18,8 +18,8 @@ import soundfile as sf
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-from pianomodel.notes import name_to_midi
-from pianomodel.synth import Piano
+from instruments.piano.notes import name_to_midi
+from instruments.piano.synth import Piano
 
 
 def parse_note(tok: str) -> int:

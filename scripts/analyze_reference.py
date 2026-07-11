@@ -1,4 +1,4 @@
-"""Analyze all downloaded Salamander reference samples -> reference/analysis/*.json"""
+"""Analyze all downloaded Salamander reference samples -> reference/piano/analysis/*.json"""
 
 import os
 import sys
@@ -7,12 +7,12 @@ import traceback
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from pianomodel.notes import SALAMANDER_NOTES, SALAMANDER_VELS
-from pianomodel.analysis import analyze_to_json
+from instruments.piano.notes import SALAMANDER_NOTES, SALAMANDER_VELS
+from instruments.piano.analysis import analyze_to_json
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-SAMPLES = os.path.join(ROOT, "reference", "samples")
-OUT = os.path.join(ROOT, "reference", "analysis")
+SAMPLES = os.path.join(ROOT, "reference", "piano", "samples")
+OUT = os.path.join(ROOT, "reference", "piano", "analysis")
 os.makedirs(OUT, exist_ok=True)
 
 

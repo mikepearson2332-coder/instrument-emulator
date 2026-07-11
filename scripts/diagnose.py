@@ -14,11 +14,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from pianomodel.notes import name_to_midi
-from pianomodel.calibrate import LAYER_TO_VEL
-from pianomodel.synth import Piano
-from pianomodel.analysis import load_mono, find_onset
-from pianomodel.benchmark import _band_spectrogram
+from instruments.piano.notes import name_to_midi
+from instruments.piano.calibrate import LAYER_TO_VEL
+from instruments.piano.synth import Piano
+from instruments.piano.analysis import load_mono, find_onset
+from instruments.piano.benchmark import _band_spectrogram
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 
@@ -38,7 +38,7 @@ def main():
     for name in sys.argv[1:]:
         note = name.split("v")[0]
         layer = int(name.split("v")[1])
-        ref_path = os.path.join(ROOT, "reference", "samples", f"{name}.flac")
+        ref_path = os.path.join(ROOT, "reference", "piano", "samples", f"{name}.flac")
         ref, sr = load_mono(ref_path)
         ref = ref[find_onset(ref, sr):]
         dur = min(len(ref) / sr, 8.0)

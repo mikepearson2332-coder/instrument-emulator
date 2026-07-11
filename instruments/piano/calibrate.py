@@ -187,10 +187,10 @@ def build_table(analysis_dir: str, out_path: str, symp_path: str | None = None) 
 
 
 def main():
-    root = os.path.join(os.path.dirname(__file__), "..")
-    analysis_dir = os.path.join(root, "reference", "analysis")
-    out = os.path.join(root, "pianomodel", "params", "grand.json")
-    symp = os.path.join(root, "reference", "symp.json")
+    root = os.path.join(os.path.dirname(__file__), "..", "..")
+    analysis_dir = os.path.join(root, "reference", "piano", "analysis")
+    out = os.path.join(os.path.dirname(__file__), "params", "grand.json")
+    symp = os.path.join(root, "reference", "piano", "symp.json")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     t = build_table(analysis_dir, out, symp_path=symp)
     n_keys = len(t["keys"])

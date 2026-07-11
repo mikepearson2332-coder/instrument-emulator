@@ -2,8 +2,8 @@
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
-from pianomodel.synth import Piano
-from pianomodel.analysis import load_mono, find_onset
+from instruments.piano.synth import Piano
+from instruments.piano.analysis import load_mono, find_onset
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 
@@ -23,7 +23,7 @@ def band_levels(y, sr, t0, t1):
 piano = Piano()
 midi, vel = 108, 48
 
-ref, sr = load_mono(os.path.join(ROOT, "reference", "samples", "C8v6.flac"))
+ref, sr = load_mono(os.path.join(ROOT, "reference", "piano", "samples", "C8v6.flac"))
 ref = ref[find_onset(ref, sr):]
 
 full = piano.synth_note(midi, vel, dur=3.5)

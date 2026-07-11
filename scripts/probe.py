@@ -1,7 +1,7 @@
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
-from pianomodel.synth import Piano
+from instruments.piano.synth import Piano
 
 p = Piano()
 for midi, vel, label in [(21, 127, "A0v16"), (84, 48, "C6v6"), (60, 88, "C4v11")]:

@@ -1,11 +1,11 @@
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
-from pianomodel.analysis import load_mono, find_onset
+from instruments.piano.analysis import load_mono, find_onset
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 for name in ["C7v1", "C7v6", "C7v11", "C7v16", "A7v6", "A7v16", "C8v6", "C8v16"]:
-    x, sr = load_mono(os.path.join(ROOT, "reference", "samples", f"{name}.flac"))
+    x, sr = load_mono(os.path.join(ROOT, "reference", "piano", "samples", f"{name}.flac"))
     x = x[find_onset(x, sr):]
     seg = x[: int(0.4 * sr)]
     w = np.hanning(len(seg))

@@ -1,8 +1,11 @@
-# instrument-model — sample-free grand piano synthesizer
+# instrument-model — sample-free instrument synthesis
 
-Renders realistic grand-piano notes and chords from **note + MIDI velocity**
+A growing bank of algorithmically generated instruments (currently: grand
+piano) — see `docs/ROADMAP.md` for the library architecture and plan.
+
+The piano renders realistic notes and chords from **note + MIDI velocity**
 alone: no audio samples at runtime, no internet. The only shipped data is a
-~0.5 MB parameter table (`pianomodel/params/grand.json`) fitted offline
+~0.5 MB parameter table (`instruments/piano/params/grand.json`) fitted offline
 against the Salamander Grand Piano V3 recordings (Yamaha C5, CC-BY 3.0,
 https://github.com/sfzinstruments/SalamanderGrandPiano) — the same
 "physics + calibrated modal tables" architecture Pianoteq's patent
@@ -42,7 +45,7 @@ Per note (interpolated across 30 calibrated keys × 4 velocity layers):
 ```
 scripts/analyze_reference.py   FLAC -> per-note JSON (partials, decays, profiles)
 scripts/measure_symp.py        global sympathetic line extraction
-python -m pianomodel.calibrate JSONs -> pianomodel/params/grand.json
+python -m instruments.piano.calibrate   JSONs -> instruments/piano/params/grand.json
 scripts/evaluate.py [--save]   render + score all 120 notes vs reference
 scripts/summarize_eval.py      score table by register
 scripts/diagnose.py NAME       spectrogram/envelope/spectrum comparison PNG
@@ -75,15 +78,18 @@ sample).
 ## Documentation map
 
 - `CLAUDE.md` — pipeline commands, iteration loop, gotchas (start here).
-- `docs/DEVLOG.md` — iteration history, failed approaches, bug post-mortems,
-  ranked next steps.
-- `docs/research-brief.md` — the physics: equations, parameter tables,
-  literature citations (companion PDFs alongside).
+- `docs/ROADMAP.md` — library architecture and multi-instrument plan.
+- `instruments/piano/DEVLOG.md` — iteration history, failed approaches, bug
+  post-mortems, ranked next steps.
+- `instruments/piano/research/research-brief.md` — the physics: equations,
+  parameter tables, literature citations (companion PDFs alongside).
+- `instruments/piano/SOURCES.md` — reference sample provenance and license.
 - `output/demo/` — listening demos incl. synth-vs-reference A/B pairs.
 
 ## References
 
-See `docs/research-brief.md` (with equations, parameter tables, citations):
+See `instruments/piano/research/research-brief.md` (with equations,
+parameter tables, citations):
 Bank/Zambon/Fontana TASLP 2010 modal piano; Rauhala & Välimäki dispersion
 filters; Bensa et al. JASA 2003 loss model; Weinreich coupled strings;
 Stulov hammer model; Conklin strike points; Pianoteq patent US7915515B2.
