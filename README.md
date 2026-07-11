@@ -79,6 +79,10 @@ sample).
 
 - `CLAUDE.md` — pipeline commands, iteration loop, gotchas (start here).
 - `docs/ROADMAP.md` — library architecture and multi-instrument plan.
+- `docs/library.md` — developer reference: runtime crates, lab framework,
+  quality system, verification methodology.
+- `docs/instruments/piano.md` — how the piano is modeled and calibrated.
+- `.claude/skills/instrument-dev/` — the workflow for adding instruments.
 - `instruments/piano/DEVLOG.md` — iteration history, failed approaches, bug
   post-mortems, ranked next steps.
 - `instruments/piano/research/research-brief.md` — the physics: equations,

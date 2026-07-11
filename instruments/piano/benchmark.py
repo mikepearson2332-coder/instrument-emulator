@@ -1,4 +1,7 @@
-"""Objective benchmark: compare a synthesized note against its reference sample.
+"""Objective benchmark: compare a synthesized piano note against its
+reference sample. Generic metrics come from lab/; this module adds the
+piano-specific structure (partial matching, decay comparison) and the
+composite weighting.
 
 Metrics (all lower = better, except noted):
   - f0_cents:        fundamental tuning error in cents
@@ -14,38 +17,19 @@ Metrics (all lower = better, except noted):
 
 from __future__ import annotations
 
-import json
 import math
-import os
 
 import numpy as np
-from scipy.signal import stft
 
-from .analysis import load_mono, find_onset, find_partials, partial_envelope, fit_double_decay
-from .notes import name_to_midi
-from .analysis import analyze_note
+from lab.audio import find_onset, load_mono
+from lab.metrics import band_spectrogram as _band_spectrogram
+from lab.metrics import lsd_slice as _lsd
+from lab.partials import find_partials, fit_double_decay, partial_envelope
+from .notes import midi_to_freq, name_to_midi
 
 
 def _align(x: np.ndarray, sr: int) -> np.ndarray:
     return x[find_onset(x, sr):]
-
-
-from .analysis import band_spectrogram as _band_spectrogram
-
-
-def _lsd(bs: np.ndarray, br: np.ndarray, t: np.ndarray, t0: float, t1: float,
-         floor_db: float = -75.0) -> float:
-    """Mean abs dB difference over a time slice, ignoring bands where both
-    are below the floor (relative to each signal's own max)."""
-    sel = (t >= t0) & (t < t1)
-    if not sel.any():
-        return float("nan")
-    a = bs[:, sel] - bs.max()
-    b = br[:, sel] - br.max()
-    mask = (a > floor_db) | (b > floor_db)
-    if not mask.any():
-        return float("nan")
-    return float(np.abs(a[mask] - b[mask]).mean())
 
 
 def compare(synth: np.ndarray, sr: int, ref_path: str, note: str,
@@ -74,7 +58,6 @@ def compare(synth: np.ndarray, sr: int, ref_path: str, note: str,
 
     # partial structure
     midi = name_to_midi(note)
-    from .notes import midi_to_freq
     f0n = midi_to_freq(midi)
     f0s, Bs, ps = find_partials(s, sr, f0n)
     f0r, Br, pr = find_partials(r, sr, f0n)
@@ -140,7 +123,8 @@ def compare(synth: np.ndarray, sr: int, ref_path: str, note: str,
 
 
 def composite_score(m: dict) -> float:
-    """Single scalar quality distance (lower = closer to reference)."""
+    """Single scalar quality distance (lower = closer to reference).
+    Weights are PIANO-SPECIFIC — do not reuse for other instruments."""
     parts = []
     if m.get("partial_cents") is not None:
         parts.append(min(m["partial_cents"], 50) / 10)

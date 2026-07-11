@@ -9,10 +9,16 @@ phased plan: `docs/ROADMAP.md`. Currently implemented: **piano** (calibrated
 modal synthesis, same family as Pianoteq, patent US7915515B2; benchmarked
 against Salamander Grand Piano V3, Yamaha C5).
 
+New instruments: use the `instrument-dev` skill
+(`.claude/skills/instrument-dev/SKILL.md`) — reference acquisition with
+license gate, research brief, benchmark design, implement, iterate, ship
+with Rust port. Developer reference for the runtime/lab: `docs/library.md`.
+
 Layout: `instruments/<name>/` = per-instrument lab code + params + DEVLOG +
 research; `reference/<name>/` = reference samples + analysis (samples are
 gitignored, see `instruments/<name>/SOURCES.md` to re-download); `lab/` =
-shared framework (placeholder until phase 5); `core/` = Rust runtime —
+shared framework (notes/audio/partials/metrics/evalharness — the
+instrument-agnostic measurement half); `core/` = Rust runtime —
 `core/engine` is the pure-DSP crate (port of the Python synth, verified
 against it), `core/python` the PyO3 binding. Build with
 `scripts/build_core.ps1` (needs rustup + VS Build Tools ARM64, installed).

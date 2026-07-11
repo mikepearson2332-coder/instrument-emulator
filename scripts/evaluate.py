@@ -6,21 +6,20 @@ Usage:
   python scripts/evaluate.py --save     -> also write synth WAVs to output/synth/
   python scripts/evaluate.py --engine=rust  -> use the Rust core (default: python)
                                                writes output/eval_rust.json
+  python scripts/evaluate.py --seed=N   -> synth RNG seed (default 1234;
+                                           non-default appends _seedN)
 """
 
+import json
 import os
 import sys
-import json
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-import numpy as np
-import soundfile as sf
-
+from lab.evalharness import EvalCase, run_eval
 from instruments.piano.notes import SALAMANDER_NOTES, SALAMANDER_VELS, name_to_midi
 from instruments.piano.calibrate import LAYER_TO_VEL
 from instruments.piano.benchmark import compare, composite_score
-from instruments.piano.analysis import load_mono
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 SAMPLES = os.path.join(ROOT, "reference", "piano", "samples")
@@ -43,7 +42,8 @@ def main():
     else:
         from instruments.piano.synth import Piano
     piano = Piano(seed=seed)
-    rows = []
+
+    cases = []
     for note in SALAMANDER_NOTES:
         for layer in SALAMANDER_VELS:
             name = f"{note}v{layer}"
@@ -52,40 +52,21 @@ def main():
             ref_path = os.path.join(SAMPLES, f"{name}.flac")
             if not os.path.exists(ref_path):
                 continue
-            midi = name_to_midi(note)
-            vel = LAYER_TO_VEL[layer]
-            ref, sr = load_mono(ref_path)
-            dur = min(len(ref) / sr, 8.0)
             release_at = None
             ana_path = os.path.join(ROOT, "reference", "piano", "analysis", f"{name}.json")
             if os.path.exists(ana_path):
                 with open(ana_path) as f:
                     release_at = json.load(f).get("release_s")
-            y = piano.synth_note(midi, vel, dur=dur, release_at=release_at)
-            m = compare(y, piano.sr, ref_path, note)
-            m["name"] = name
-            m["score"] = composite_score(m)
-            rows.append(m)
-            print(f"{name:8s} score={m['score']:6.3f}  f0c={m['f0_cents']:7.2f} "
-                  f"pc={m['partial_cents']}  dec={m['decay_logerr']} "
-                  f"lsdE={m['lsd_early']} lsdM={m['lsd_mid']} "
-                  f"env={m['env_db']} cent={m['centroid_ratio']}", flush=True)
-            if save:
-                os.makedirs(os.path.join(OUTDIR, "synth"), exist_ok=True)
-                peak = np.max(np.abs(y)) + 1e-12
-                sf.write(os.path.join(OUTDIR, "synth", f"{name}.wav"),
-                         (y / peak * 0.9).astype(np.float32), piano.sr)
+            cases.append(EvalCase(name=name, midi=name_to_midi(note),
+                                  velocity=LAYER_TO_VEL[layer], ref_path=ref_path,
+                                  note=note, release_at=release_at))
 
-    if rows:
-        scores = [r["score"] for r in rows]
-        print(f"\nmean score: {np.mean(scores):.3f}   median: {np.median(scores):.3f}"
-              f"   worst: {max(scores):.3f} ({rows[int(np.argmax(scores))]['name']})")
-        os.makedirs(OUTDIR, exist_ok=True)
-        out_name = "eval_rust.json" if engine == "rust" else "eval.json"
-        if seed != 1234:
-            out_name = out_name.replace(".json", f"_seed{seed}.json")
-        with open(os.path.join(OUTDIR, out_name), "w") as f:
-            json.dump(rows, f, indent=1)
+    out_name = "eval_rust.json" if engine == "rust" else "eval.json"
+    if seed != 1234:
+        out_name = out_name.replace(".json", f"_seed{seed}.json")
+    run_eval(cases, piano, compare, composite_score,
+             out_path=os.path.join(OUTDIR, out_name),
+             save_wav_dir=os.path.join(OUTDIR, "synth") if save else None)
 
 
 if __name__ == "__main__":

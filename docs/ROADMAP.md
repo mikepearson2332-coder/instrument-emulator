@@ -159,6 +159,13 @@ composite encodes piano-specific structure and must not be blindly reused).
    analysis/calibrate/evaluate framework; author the skill; write
    `docs/library.md` and `docs/instruments/piano.md` (from DEVLOG + research
    brief).
+   ✅ Done 2026-07-11 — `lab/` (notes, audio, partials, metrics,
+   evalharness) extracted verbatim with piano re-exports; gates passed
+   byte-identically (analysis JSONs, grand.json, eval.json).
+   `.claude/skills/instrument-dev/` codifies the confirmed workflow
+   (checkpointed by default, `--auto` mode; legal-to-analyze license bar
+   with SOURCES.md audit trail; Rust port required to ship).
+   `docs/library.md` + `docs/instruments/piano.md` written.
 6. **Instrument 2: unpitched percussion** (woodblock, claves, …) — smallest
    possible exercise of the whole pipeline end-to-end via the skill.
 7. **Instrument 3: mallets/bells**, then **plucked strings**. WASM/npm and
