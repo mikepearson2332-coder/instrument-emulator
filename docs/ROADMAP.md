@@ -127,10 +127,15 @@ composite encodes piano-specific structure and must not be blindly reused).
 
 1. **Restructure** to the layout above; piano lab code moves, nothing changes
    behavior. Gate: `evaluate.py` reproduces mean **1.192** exactly.
+   ✅ Done 2026-07-11 — gate passed byte-identically.
 2. **Rust core + piano port** (largest step). Install Rust (ARM64 MSVC
    toolchain); implement modal engine family; port piano synth; PyO3 binding.
-   Gate: Rust render matches Python render (near-sample-exact), eval score
-   equal or better; real-time headroom measured.
+   Gate: deterministic paths match exactly, renders match statistically
+   (different PRNG), eval score equal or better; throughput measured.
+   ✅ Done 2026-07-11 — note_params exact (≤4e-15); eval mean 1.189 vs
+   Python 1.192; ~12.5x realtime offline (sin-bound, same as numpy — the
+   real-time win comes from phase-3 resonators). Streaming voice API (buffer
+   render, note-on/off events) lands with phase 3/4.
 3. **Quality/perf system**: salience-sorted modes, quality levels, host
    benchmark + auto-preset.
 4. **Testbed GUI** — tkinter control surface over the Rust `io` crate

@@ -102,16 +102,59 @@ metric the analysis uses — never convert analytically.
 ## Data flow
 
 ```
-reference/samples/*.flac  (120, gitignored-size data, CC-BY Salamander)
-  └─ scripts/analyze_reference.py → reference/analysis/*.json   (per-note fits)
-       └─ scripts/measure_symp.py → reference/symp.json          (global lines)
-            └─ pianomodel/calibrate.py → pianomodel/params/grand.json  (ship this)
-                 └─ pianomodel/synth.py (Piano) ← piano.py CLI
-                      └─ scripts/evaluate.py ↔ pianomodel/benchmark.py → output/eval.json
+reference/piano/samples/*.flac  (120, gitignored-size data, CC-BY Salamander)
+  └─ scripts/analyze_reference.py → reference/piano/analysis/*.json  (per-note fits)
+       └─ scripts/measure_symp.py → reference/piano/symp.json         (global lines)
+            └─ instruments/piano/calibrate.py → instruments/piano/params/grand.json  (ship this)
+                 └─ instruments/piano/synth.py (Piano) ← piano.py CLI
+                 └─ core/engine (Rust port) ← instruments/piano/synth_rs.py
+                      └─ scripts/evaluate.py ↔ instruments/piano/benchmark.py → output/eval.json
 ```
 
 `reference/analysis/*.json` are derived artifacts — safe to delete, ~1 min/8
 notes to rebuild. `grand.json` is the only file the app needs at runtime.
+
+## Phase 2 (2026-07-11): Rust port of the synth (`core/engine`)
+
+The synth was ported 1:1 to Rust (`core/engine/src/synth.rs` + interp.rs /
+filters.rs / stft.rs) for the real-time runtime; `instruments/piano/synth_rs.py`
+wraps it with the `Piano` interface via PyO3 (`core/python`).
+
+Verification (three levels):
+1. **Exact**: `note_params` (all interpolation) matches Python to ≤4e-15 rel
+   across 128 on/off-grid key×velocity combos (`compare_engines.py`).
+   Butterworth SOS + sosfilt + STFT band metric match scipy reference values
+   to <1e-6 rel (unit tests in the crates, constants from
+   `scripts/probe_stft_conventions.py`).
+2. **Statistical**: renders use a different PRNG (xoshiro256++/Box-Muller vs
+   numpy PCG64/ziggurat), so waveforms differ in noise/phase realization.
+   Python-vs-Python seed nulls show up to ~5-6 dB per-window envelope
+   deviation where unison beat periods exceed the render (the random beat
+   phase sets the fundamental's level); the Rust engine sits inside that null.
+3. **Benchmark**: full 120-note eval — Rust mean **1.189** vs Python 1.192
+   (Δ −0.003), 62/120 notes worse (coin flip), per-note Δ std 0.150.
+   Null (Python seed 4321 vs 1234, same engine): Δ +0.0087, std 0.143,
+   max mover ±0.41 — the Rust engine is statistically indistinguishable
+   from a seed change.
+
+Throughput (ARM64, release+LTO, offline whole-note renders): Rust ≈ numpy at
+~12.5x realtime — both are `sin()`-per-sample bound. Real-time polyphony
+headroom comes from phase-3 recursive resonators, not from the language swap.
+Engine init (band-noise calibration via its own STFT) ~150 ms.
+
+Traps for future porters:
+- The band-noise calibration must reproduce *scipy's* STFT conventions
+  (periodic hann, /win.sum(), boundary zero-extension, t=0 first frame,
+  onesided without doubling) — a constant dB offset does NOT cancel: it biases
+  synthesized noise directly (analysis measured the reference with scipy).
+- scipy's zpk2sos section grouping differs from the natural per-pole-pair
+  grouping; overall transfer function is identical — test impulse responses,
+  not coefficients.
+- Envelope smoke tests must be judged against a multi-seed Python null, not
+  absolute thresholds (slow unison beats make single-window deviations of
+  several dB legitimate).
+
+## Probes
 
 `scripts/probe*.py` are one-off debugging probes kept as worked examples:
 probe (synth param dump), probe2 (spectral vs envelope amplitude cross-check),

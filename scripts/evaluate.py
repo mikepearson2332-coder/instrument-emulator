@@ -4,6 +4,8 @@ Usage:
   python scripts/evaluate.py            -> all notes/velocities
   python scripts/evaluate.py C4v11 ...  -> subset
   python scripts/evaluate.py --save     -> also write synth WAVs to output/synth/
+  python scripts/evaluate.py --engine=rust  -> use the Rust core (default: python)
+                                               writes output/eval_rust.json
 """
 
 import os
@@ -17,7 +19,6 @@ import soundfile as sf
 
 from instruments.piano.notes import SALAMANDER_NOTES, SALAMANDER_VELS, name_to_midi
 from instruments.piano.calibrate import LAYER_TO_VEL
-from instruments.piano.synth import Piano
 from instruments.piano.benchmark import compare, composite_score
 from instruments.piano.analysis import load_mono
 
@@ -29,10 +30,19 @@ OUTDIR = os.path.join(ROOT, "output")
 def main():
     args = [a for a in sys.argv[1:]]
     save = "--save" in args
+    engine = "rust" if "--engine=rust" in args else "python"
+    seed = 1234
+    for a in args:
+        if a.startswith("--seed="):
+            seed = int(a.split("=")[1])
     args = [a for a in args if not a.startswith("--")]
     only = set(args) or None
 
-    piano = Piano()
+    if engine == "rust":
+        from instruments.piano.synth_rs import Piano
+    else:
+        from instruments.piano.synth import Piano
+    piano = Piano(seed=seed)
     rows = []
     for note in SALAMANDER_NOTES:
         for layer in SALAMANDER_VELS:
@@ -71,7 +81,10 @@ def main():
         print(f"\nmean score: {np.mean(scores):.3f}   median: {np.median(scores):.3f}"
               f"   worst: {max(scores):.3f} ({rows[int(np.argmax(scores))]['name']})")
         os.makedirs(OUTDIR, exist_ok=True)
-        with open(os.path.join(OUTDIR, "eval.json"), "w") as f:
+        out_name = "eval_rust.json" if engine == "rust" else "eval.json"
+        if seed != 1234:
+            out_name = out_name.replace(".json", f"_seed{seed}.json")
+        with open(os.path.join(OUTDIR, out_name), "w") as f:
             json.dump(rows, f, indent=1)
 
 

@@ -12,8 +12,12 @@ against Salamander Grand Piano V3, Yamaha C5).
 Layout: `instruments/<name>/` = per-instrument lab code + params + DEVLOG +
 research; `reference/<name>/` = reference samples + analysis (samples are
 gitignored, see `instruments/<name>/SOURCES.md` to re-download); `lab/` =
-shared framework (placeholder until phase 5); `core/` = Rust runtime
-(phase 2, not started).
+shared framework (placeholder until phase 5); `core/` = Rust runtime —
+`core/engine` is the pure-DSP crate (port of the Python synth, verified
+against it), `core/python` the PyO3 binding. Build with
+`scripts/build_core.ps1` (needs rustup + VS Build Tools ARM64, installed).
+`instruments/piano/synth_rs.py` wraps the native module with the same
+interface as `synth.Piano`.
 
 Read `instruments/piano/DEVLOG.md` before changing the piano model — it
 records which approaches already failed and why.
@@ -27,7 +31,12 @@ python scripts/analyze_reference.py [NAMEv#...]   # FLAC -> reference/piano/anal
 python scripts/measure_symp.py                    # global sympathetic lines -> reference/piano/symp.json
 python -m instruments.piano.calibrate             # JSONs+symp -> instruments/piano/params/grand.json
 python scripts/evaluate.py [--save] [NAMEv#...]   # render+score vs reference -> output/eval.json
+python scripts/evaluate.py --engine=rust          # same via Rust core -> output/eval_rust.json
 python scripts/summarize_eval.py                  # score table by register
+scripts/build_core.ps1                            # cargo build + stage core/dist/instrument_core.pyd
+python scripts/compare_engines.py                 # Rust-vs-Python parity smoke test
+python scripts/compare_eval_runs.py               # eval.json vs eval_rust.json deltas
+python scripts/bench_core.py                      # engine throughput benchmark
 python scripts/diagnose.py C4v11 ...              # comparison PNGs -> output/diag/
 python scripts/demo.py                            # listening demos -> output/demo/
 ```
@@ -63,3 +72,8 @@ after analysis-code edits or you'll evaluate against mixed-version data.
 - Keys above MIDI 89 have no dampers (release does nothing there) — modeled.
 - Evaluation metric weights are piano-specific; new instruments get their own
   (shared harness arrives with `lab/` in phase 5).
+- The Rust engine is a verified port of `synth.py`: `note_params` matches to
+  float precision; renders differ in noise/phase realization (different PRNG),
+  so waveforms are compared statistically, not sample-exact. Until the Python
+  synth is retired, model changes must be mirrored in
+  `core/engine/src/synth.rs` and re-verified (`compare_engines.py` + eval).
