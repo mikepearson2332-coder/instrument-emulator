@@ -218,12 +218,19 @@ pub fn note_params(table: &Table, midi: i32, velocity: f64) -> NoteParams {
     let dev_hi = 1200.0 * (khi.f0 / midi_to_freq(khi.midi as f64)).log2();
     let dev = dev_lo + (dev_hi - dev_lo) * w;
     let f0 = midi_to_freq(midi as f64) * 2f64.powf(dev / 1200.0);
-    let log_b = klo.b.ln() + (khi.b.ln() - klo.b.ln()) * w;
+    // B = 0 tables (exact-harmonic instruments, e.g. rhodes): ln(0) = -inf
+    // makes the lerp NaN, and a NaN B slips past the voice's fnn guards
+    // into the salience sort (panic at voice.rs). Mirror the Python
+    // reference: floor at 1e-12, clamp back to 0 below 1e-11.
+    let blo = klo.b.max(1e-12);
+    let bhi = khi.b.max(1e-12);
+    let log_b = blo.ln() + (bhi.ln() - blo.ln()) * w;
+    let b = log_b.exp();
     let n_lines = slo.symp_db.len().max(shi.symp_db.len());
     let (plo, phi) = (pad_to(&slo.symp_db, n_lines), pad_to(&shi.symp_db, n_lines));
     NoteParams {
         f0,
-        b: log_b.exp(),
+        b: if b <= 1e-11 { 0.0 } else { b },
         partials: merge_partials(&slo.partials, &shi.partials, w),
         thump_db: lerp_profile(&slo.thump_db, &shi.thump_db, w),
         bed_db: lerp_profile(&slo.bed_db, &shi.bed_db, w),

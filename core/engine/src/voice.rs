@@ -283,7 +283,9 @@ impl Voice {
             let w = a_weight(fnn);
             cand.push((i, fnn, energy * w * w));
         }
-        cand.sort_by(|a, b| b.2.partial_cmp(&a.2).unwrap());
+        // total_cmp: salience must never panic the audio thread — a NaN
+        // (e.g. from a malformed table) sorts deterministically instead
+        cand.sort_by(|a, b| b.2.total_cmp(&a.2));
         cand.truncate(q.max_partials);
 
         let mut partials = Vec::with_capacity(cand.len());
