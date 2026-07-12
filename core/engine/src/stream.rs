@@ -2,12 +2,11 @@
 //! This is the API real-time consumers (testbed, io crate, WASM) drive;
 //! the offline `Piano::synth_note` is a thin wrapper over the same Voice.
 
-use crate::synth::Piano;
-use crate::voice::Voice;
+use crate::synth::{AnyVoice, Piano};
 
 pub struct StreamSynth {
     pub piano: Piano,
-    voices: Vec<Voice>,
+    voices: Vec<AnyVoice>,
     pedal: bool,
 }
 
@@ -27,8 +26,8 @@ impl StreamSynth {
 
     pub fn note_off(&mut self, midi: i32) {
         for v in &mut self.voices {
-            if v.midi == midi && v.key_down {
-                v.key_down = false;
+            if v.midi() == midi && v.key_down() {
+                v.set_key_down(false);
                 if !self.pedal {
                     v.trigger_release();
                 }
@@ -40,7 +39,7 @@ impl StreamSynth {
         self.pedal = down;
         if !down {
             for v in &mut self.voices {
-                if !v.key_down {
+                if !v.key_down() {
                     v.trigger_release();
                 }
             }
@@ -49,7 +48,7 @@ impl StreamSynth {
 
     pub fn all_notes_off(&mut self) {
         for v in &mut self.voices {
-            v.key_down = false;
+            v.set_key_down(false);
             v.trigger_release();
         }
     }

@@ -84,7 +84,7 @@ impl Default for Quality {
 }
 
 /// A-weighting amplitude gain (linear, not dB) — salience proxy weight.
-fn a_weight(f: f64) -> f64 {
+pub(crate) fn a_weight(f: f64) -> f64 {
     let f2 = f * f;
     let r = (12194.0f64.powi(2) * f2 * f2)
         / ((f2 + 20.6f64.powi(2))

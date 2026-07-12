@@ -16,6 +16,8 @@ import instrument_core
 TABLES = {
     "rhodes": "instruments/rhodes/params/mk1.json",
     "jamblock": "instruments/jamblock/params/jam.json",
+    "strings-vln": "instruments/strings/params/vln.json",
+    "strings-cb": "instruments/strings/params/cb.json",
 }
 
 

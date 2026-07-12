@@ -59,7 +59,7 @@ def detect_f0(x: np.ndarray, sr: int, f_named: float) -> float:
     S = np.fft.rfft(seg, nfft)
     ac = np.fft.irfft(S * np.conj(S))[: n]
     ac = ac / (ac[0] + 1e-20)
-    best_f, best_v = f_named, -1e18
+    cands = []
     for k in (0, 1, 2):
         fc = f_named * 2 ** k
         lo = max(2, int(sr / (fc * 1.06)))
@@ -67,9 +67,14 @@ def detect_f0(x: np.ndarray, sr: int, f_named: float) -> float:
         if hi <= lo:
             continue
         i = lo + int(np.argmax(ac[lo: hi]))
-        if ac[i] > best_v:
-            best_v, best_f = ac[i], sr / i
-    return best_f
+        cands.append((sr / i, ac[i]))
+    if not cands:
+        return f_named
+    # ACF is octave-ambiguous DOWNWARD (r(2T) ~ r(T) for a periodic
+    # signal): among candidates within 8% of the best correlation,
+    # take the highest frequency (vln D5_v2 lesson).
+    best_v = max(v for _, v in cands)
+    return max(f for f, v in cands if v >= 0.92 * best_v)
 
 
 def main():

@@ -20,6 +20,22 @@ pub struct Table {
 /// tables only state what differs from the defaults.
 #[derive(Deserialize, Clone, Default)]
 pub struct Config {
+    /// Engine family: absent/None = modal; "sustained" = engine family 2
+    /// (continuous excitation: bowed strings etc., see sustained.rs).
+    #[serde(default)]
+    pub engine: Option<String>,
+    /// Sustained family: per-harmonic ensemble detune (rms, cents).
+    #[serde(default)]
+    pub drift_cents: Option<f64>,
+    /// Sustained family: bandwidth of the detune random walk (Hz).
+    #[serde(default)]
+    pub drift_hz: Option<f64>,
+    /// Sustained family: shared vibrato FM depth (peak, cents).
+    #[serde(default)]
+    pub vib_cents: Option<f64>,
+    /// Sustained family: per-harmonic slow AM depth (dB).
+    #[serde(default)]
+    pub harm_am_db: Option<f64>,
     /// Native sample rate of the reference set (informational; the engine
     /// renders at whatever rate it is constructed with).
     #[serde(default)]
@@ -59,7 +75,8 @@ pub struct Key {
     pub note: String,
     pub midi: i32,
     pub f0: f64,
-    #[serde(rename = "B")]
+    /// Inharmonicity (modal family). Sustained tables have no "B".
+    #[serde(rename = "B", default)]
     pub b: f64,
     pub layers: Vec<Layer>,
 }
@@ -78,7 +95,40 @@ pub struct Layer {
     pub bed_anchor_s: Option<f64>,
     #[serde(default)]
     pub symp_db: Option<Vec<Option<f64>>>,
+    /// Modal family. Sustained layers have no "partials".
+    #[serde(default)]
     pub partials: Vec<Partial>,
+
+    // ---- sustained family (engine family 2) ----
+    /// Steady harmonic amplitude table (absolute linear).
+    #[serde(default)]
+    pub harm: Option<Vec<Harm>>,
+    /// Steady bow/breath noise per band (12 log bands 40 Hz - 16 kHz,
+    /// 0.2 s-window STFT median convention — see sustained.rs).
+    #[serde(default)]
+    pub noise_db: Option<Vec<Option<f64>>>,
+    #[serde(default)]
+    pub rise_s: Option<f64>,
+    #[serde(default)]
+    pub und_db: Option<f64>,
+    #[serde(default)]
+    pub und_hz: Option<f64>,
+    #[serde(default)]
+    pub vib_hz: Option<f64>,
+    #[serde(default)]
+    pub vib_am_db: Option<f64>,
+    #[serde(default)]
+    pub rel_s: Option<f64>,
+    #[serde(default)]
+    pub rel_remnant: Option<f64>,
+    #[serde(default)]
+    pub rel_tail_s: Option<f64>,
+}
+
+#[derive(Deserialize, Clone, Copy)]
+pub struct Harm {
+    pub n: i64,
+    pub a: f64,
 }
 
 #[derive(Deserialize, Clone, Copy)]

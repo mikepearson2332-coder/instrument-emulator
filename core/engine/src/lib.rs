@@ -14,6 +14,7 @@ pub mod params;
 pub mod rng;
 pub mod stft;
 pub mod stream;
+pub mod sustained;
 pub mod synth;
 pub mod voice;
 

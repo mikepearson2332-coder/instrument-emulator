@@ -6,7 +6,64 @@ use crate::interp::{note_params, NoteParams, N_BANDS};
 use crate::params::Table;
 use crate::rng::Rng;
 use crate::stft::BandMetric;
+use crate::sustained::{
+    sus_band_edges, sus_note_params, SusConfig, SustainedVoice, N_BANDS_SUS,
+    NOISE_HOP_S, NOISE_WIN_S,
+};
 use crate::voice::{Quality, ReleaseStyle, Voice, VoiceStyle, THUMP_TAU};
+
+/// A voice of either engine family behind one dispatch surface.
+pub enum AnyVoice {
+    Modal(Voice),
+    Sustained(SustainedVoice),
+}
+
+impl AnyVoice {
+    pub fn midi(&self) -> i32 {
+        match self {
+            AnyVoice::Modal(v) => v.midi,
+            AnyVoice::Sustained(v) => v.midi,
+        }
+    }
+    pub fn key_down(&self) -> bool {
+        match self {
+            AnyVoice::Modal(v) => v.key_down,
+            AnyVoice::Sustained(v) => v.key_down,
+        }
+    }
+    pub fn set_key_down(&mut self, down: bool) {
+        match self {
+            AnyVoice::Modal(v) => v.key_down = down,
+            AnyVoice::Sustained(v) => v.key_down = down,
+        }
+    }
+    pub fn trigger_release(&mut self) {
+        match self {
+            AnyVoice::Modal(v) => v.trigger_release(),
+            AnyVoice::Sustained(v) => v.trigger_release(),
+        }
+    }
+    pub fn is_finished(&self) -> bool {
+        match self {
+            AnyVoice::Modal(v) => v.is_finished(),
+            AnyVoice::Sustained(v) => v.is_finished(),
+        }
+    }
+    pub fn render_add(&mut self, out: &mut [f64], rng: &mut Rng) {
+        match self {
+            AnyVoice::Modal(v) => v.render_add(out, rng),
+            AnyVoice::Sustained(v) => v.render_add(out, rng),
+        }
+    }
+}
+
+/// Sustained-family engine data (per-band filters + self-calibration in
+/// the family's own 0.2 s STFT convention).
+pub struct SusEngine {
+    pub cfg: SusConfig,
+    pub band_sos: Vec<Sos>,
+    pub cal_bed: Vec<f64>,
+}
 
 pub fn band_edges() -> [f64; N_BANDS + 1] {
     // np.geomspace(40, 8000, 11)
@@ -27,6 +84,7 @@ pub struct Piano {
     pub(crate) cal_bed: Vec<f64>,
     pub(crate) cal_thump: Vec<f64>,
     pub(crate) thump_taus: Vec<f64>,
+    pub(crate) sus: Option<SusEngine>,
 }
 
 /// Behavior + per-band click taus from the table config; absent config =
@@ -98,6 +156,35 @@ impl Piano {
             cal_thump.push(attack_db);
         }
 
+        // sustained family: own bands (12, to 16 kHz) + own calibration
+        // convention (0.2 s windows) — see sustained.rs
+        let sus = match &table.config {
+            Some(c) if c.engine.as_deref() == Some("sustained") => {
+                let e = sus_band_edges();
+                let metric = BandMetric::with_windows(sr, NOISE_WIN_S, NOISE_HOP_S);
+                let mut s_rng = Rng::new(99);
+                let s_probe: Vec<f64> =
+                    (0..sr).map(|_| s_rng.standard_normal()).collect();
+                let mut s_sos = Vec::with_capacity(N_BANDS_SUS);
+                let mut s_cal = Vec::with_capacity(N_BANDS_SUS);
+                for i in 0..N_BANDS_SUS {
+                    let (lo, hi) = (e[i], e[i + 1].min(srf / 2.0 * 0.98));
+                    let sos = butter_bandpass4(lo, hi, srf);
+                    let mut nb = s_probe.clone();
+                    sosfilt(&sos, &mut nb);
+                    let (steady_db, _) = metric.band_metric(&nb, e[i], e[i + 1]);
+                    s_sos.push(sos);
+                    s_cal.push(steady_db);
+                }
+                Some(SusEngine {
+                    cfg: SusConfig::from_table(&table),
+                    band_sos: s_sos,
+                    cal_bed: s_cal,
+                })
+            }
+            _ => None,
+        };
+
         Piano {
             table,
             sr,
@@ -108,6 +195,7 @@ impl Piano {
             cal_bed,
             cal_thump,
             thump_taus,
+            sus,
         }
     }
 
@@ -115,10 +203,23 @@ impl Piano {
         note_params(&self.table, midi, velocity)
     }
 
-    pub(crate) fn make_voice(&mut self, midi: i32, velocity: f64) -> Voice {
+    pub(crate) fn make_voice(&mut self, midi: i32, velocity: f64) -> AnyVoice {
+        if let Some(sus) = &self.sus {
+            let p = sus_note_params(&self.table, midi, velocity);
+            return AnyVoice::Sustained(SustainedVoice::new(
+                &p,
+                &sus.cfg,
+                midi,
+                self.sr as f64,
+                self.quality,
+                &sus.band_sos,
+                &sus.cal_bed,
+                &mut self.rng,
+            ));
+        }
         let p = self.note_params(midi, velocity);
         let lines = self.table.symp_lines.as_deref().unwrap_or(&[]);
-        Voice::new(
+        AnyVoice::Modal(Voice::new(
             &p,
             midi,
             self.sr as f64,
@@ -131,7 +232,36 @@ impl Piano {
             &self.thump_taus,
             &self.style,
             &mut self.rng,
-        )
+        ))
+    }
+
+    /// Sustained-family interpolated params as JSON (parity checks).
+    pub fn sus_params_json(&self, midi: i32, velocity: f64) -> Option<String> {
+        self.sus.as_ref()?;
+        let p = sus_note_params(&self.table, midi, velocity);
+        let harm: Vec<String> = p
+            .harm
+            .iter()
+            .map(|(n, a)| format!("{{\"n\":{n},\"a\":{a:e}}}"))
+            .collect();
+        let noise: Vec<String> = p.noise_db.iter().map(|v| format!("{v:e}")).collect();
+        Some(format!(
+            "{{\"f0\":{:e},\"rise_s\":{:e},\"und_db\":{:e},\"und_hz\":{:e},\
+             \"vib_hz\":{:e},\"vib_am_db\":{:e},\"rel_s\":{:e},\
+             \"rel_remnant\":{:e},\"rel_tail_s\":{:e},\
+             \"harm\":[{}],\"noise_db\":[{}]}}",
+            p.f0,
+            p.rise_s,
+            p.und_db,
+            p.und_hz,
+            p.vib_hz,
+            p.vib_am_db,
+            p.rel_s,
+            p.rel_remnant,
+            p.rel_tail_s,
+            harm.join(","),
+            noise.join(",")
+        ))
     }
 
     /// Render one note. `dur` = total render length in seconds;

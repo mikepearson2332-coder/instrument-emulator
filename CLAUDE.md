@@ -13,13 +13,15 @@ see `instruments/koto/SOURCES.md` for the reference-substitution decision),
 **rhodes** (tine EP; MK8 target calibrated on jRhodes3d Mark I, CC BY-NC —
 substitution documented in `instruments/rhodes/SOURCES.md`), **jamblock**
 (plastic jam block, CC0 Freesound previews; single-dynamic reference,
-velocity layers modeled from woodblock deltas). **strings** (bowed section)
-is stopped at the engine-family gate — continuous excitation needs engine
-family 2; reference + research done, decision pending in
-`instruments/strings/DEVLOG.md`.
-Non-piano instruments run on the same Rust engine via the table `config`
-block (`fr` mode ratios, release styles, per-band click decay); their
-pipelines are `python -m instruments.<name>.{analyze,calibrate,evaluate}`.
+velocity layers modeled from woodblock deltas), **strings** (bowed string
+sections vln/vla/vc/cb, VSCO-2-CE CC0 — the first **engine family 2**
+instrument: sustained stochastic harmonic bank, `config.engine:
+"sustained"`, reference renderer `lab/sustained.py`, Rust
+`core/engine/src/sustained.rs`).
+Modal (non-piano) instruments run on the same Rust engine via the table
+`config` block (`fr` mode ratios, release styles, per-band click decay);
+per-instrument pipelines are
+`python -m instruments.<name>.{analyze,calibrate,evaluate}`.
 
 New instruments: use the `instrument-dev` skill
 (`.claude/skills/instrument-dev/SKILL.md`) — reference acquisition with

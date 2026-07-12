@@ -34,7 +34,9 @@ pub fn run(piano: &mut Piano) -> BenchResult {
     let n_samp = piano.sr as f64 * dur;
     let midi = 48; // low-mid key: many partials available
 
-    let full = piano.note_params(midi, 88.0).partials.len();
+    // sustained tables have no modal partials — floor the budget spread
+    // so the two-point fit stays well-posed (harm counts are similar)
+    let full = piano.note_params(midi, 88.0).partials.len().max(24);
     let k_hi = full.min(60);
     let k_lo = 8usize;
 

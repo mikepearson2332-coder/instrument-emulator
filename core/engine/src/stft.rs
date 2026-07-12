@@ -22,8 +22,15 @@ pub struct BandMetric {
 
 impl BandMetric {
     pub fn new(sr: usize) -> Self {
-        let nper = (0.046 * sr as f64) as usize;
-        let hop = (0.010 * sr as f64) as usize;
+        Self::with_windows(sr, 0.046, 0.010)
+    }
+
+    /// Same scipy conventions with a different window/hop — the sustained
+    /// family measures its noise bed with 0.2 s windows (46 ms cannot
+    /// resolve non-harmonic bins between low-string harmonics).
+    pub fn with_windows(sr: usize, win_s: f64, hop_s: f64) -> Self {
+        let nper = (win_s * sr as f64) as usize;
+        let hop = (hop_s * sr as f64) as usize;
         // periodic hann (scipy get_window default, fftbins=True)
         let window: Vec<f64> = (0..nper)
             .map(|i| 0.5 - 0.5 * (2.0 * std::f64::consts::PI * i as f64 / nper as f64).cos())

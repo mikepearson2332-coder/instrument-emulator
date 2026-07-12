@@ -63,8 +63,12 @@ impl Piano {
         to_bytes(py, &y)
     }
 
-    /// Interpolated synthesis parameters as JSON (for parity tests vs Python).
+    /// Interpolated synthesis parameters as JSON (for parity tests vs
+    /// Python). Sustained-family tables return the family's own schema.
     fn note_params_json(&self, midi: i32, velocity: f64) -> String {
+        if let Some(j) = self.inner.sus_params_json(midi, velocity) {
+            return j;
+        }
         serde_json::to_string(&self.inner.note_params(midi, velocity)).unwrap()
     }
 
