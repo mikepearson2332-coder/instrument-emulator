@@ -1,0 +1,7 @@
+# build outputs (regenerate with scripts/build_wasm.ps1) — anchored to web/ so
+# the committed drop-in bundle under piano-rhodes-webaudio/ is NOT ignored.
+/node_modules/
+/dist/
+/public/instrument-worklet.js
+/public/instrument_wasm_bg.wasm
+/public/params/

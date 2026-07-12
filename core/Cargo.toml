@@ -1,5 +1,5 @@
 [workspace]
-members = ["engine", "io", "python"]
+members = ["engine", "io", "python", "wasm"]
 resolver = "2"
 
 [profile.release]
