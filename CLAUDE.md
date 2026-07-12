@@ -9,7 +9,14 @@ phased plan: `docs/ROADMAP.md`. Currently implemented: **piano** (calibrated
 modal synthesis, same family as Pianoteq, patent US7915515B2; benchmarked
 against Salamander Grand Piano V3, Yamaha C5), **woodblock** (VCSL),
 **vibraphone** (Iowa MIS), **koto-family long zither** (VCSL đàn tranh —
-see `instruments/koto/SOURCES.md` for the reference-substitution decision).
+see `instruments/koto/SOURCES.md` for the reference-substitution decision),
+**rhodes** (tine EP; MK8 target calibrated on jRhodes3d Mark I, CC BY-NC —
+substitution documented in `instruments/rhodes/SOURCES.md`), **jamblock**
+(plastic jam block, CC0 Freesound previews; single-dynamic reference,
+velocity layers modeled from woodblock deltas). **strings** (bowed section)
+is stopped at the engine-family gate — continuous excitation needs engine
+family 2; reference + research done, decision pending in
+`instruments/strings/DEVLOG.md`.
 Non-piano instruments run on the same Rust engine via the table `config`
 block (`fr` mode ratios, release styles, per-band click decay); their
 pipelines are `python -m instruments.<name>.{analyze,calibrate,evaluate}`.
