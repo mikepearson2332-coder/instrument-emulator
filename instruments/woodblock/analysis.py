@@ -47,7 +47,9 @@ SLOPE_LO_S, SLOPE_HI_S = 0.12, 0.35
 
 
 def find_modes(x: np.ndarray, sr: int, fmin: float = 200.0,
-               fmax: float = 12000.0) -> list[dict]:
+               fmax: float = 12000.0, min_sep_rel: float = MIN_SEP_REL,
+               min_sep_hz: float = MIN_SEP_HZ,
+               max_modes: int = MAX_MODES) -> list[dict]:
     """Spectral peaks of a struck idiophone: greedy strongest-first picking
     with SNR + relative-level gates and a minimum separation.
 
@@ -69,15 +71,15 @@ def find_modes(x: np.ndarray, sr: int, fmin: float = 200.0,
     s[(fax < fmin) | (fax > fmax)] = 0
     smax = s.max()
     modes = []
-    for _ in range(MAX_MODES * 3):
-        if len(modes) >= MAX_MODES:
+    for _ in range(max_modes * 3):
+        if len(modes) >= max_modes:
             break
         k = int(np.argmax(s))
         if s[k] <= 0 or s[k] < smax * 10 ** (REL_FLOOR_DB / 20):
             break
         d, pk = parabolic_peak(spec, k)
         f = (k + d) * binw
-        sep = max(MIN_SEP_HZ, MIN_SEP_REL * f)
+        sep = max(min_sep_hz, min_sep_rel * f)
         lo, hi = max(0, int((f - sep) / binw)), int((f + sep) / binw)
         s[lo:hi] = 0
         if pk < noise_floor(f) * 10 ** (SNR_DB / 20):
@@ -165,14 +167,20 @@ def bed_thump_profile(x: np.ndarray, sr: int,
             "bed_anchor_s": round(0.5 * (BED_LO_S + BED_HI_S), 2)}
 
 
-def analyze_note(path: str, note: str) -> dict:
-    """Full parametric analysis of one woodblock hit."""
+def analyze_note(path: str, note: str, unmask_rel: float = 0.999,
+                 **mode_kw) -> dict:
+    """Full parametric analysis of one woodblock hit.
+
+    unmask_rel: modes within this relative amplitude of the dominant are
+    never SNR-masked (the noise probe midway to a close sibling sits in
+    both skirts and inflates; jam block passes 0.5, woodblock default
+    keeps the historical dominant-only behavior)."""
     x, sr = load_mono(path)
     onset = find_onset(x, sr)
     xo = x[onset:]
     peak_abs = float(np.max(np.abs(x)) + 1e-20)
 
-    modes = find_modes(xo, sr)
+    modes = find_modes(xo, sr, **mode_kw)
     results = []
     for i, m in enumerate(modes):
         freq = m["freq"]
@@ -191,8 +199,8 @@ def analyze_note(path: str, note: str) -> dict:
         noise_med = float(np.median(env_noise))
         entry = {"n": i + 1, "freq": freq, "amp": m["amp"]}
         valid = env > 1.8 * env_noise
-        # dominant mode: never mask (it defines the note)
-        if m["amp"] >= 0.999:
+        # dominant / near-dominant modes: never mask (they define the note)
+        if m["amp"] >= unmask_rel:
             valid = np.ones(len(env), bool)
         if valid.sum() >= 10:
             fit = fit_double_decay(t[valid], env[valid], floor_db=-55.0)
@@ -249,8 +257,9 @@ def analyze_note(path: str, note: str) -> dict:
     }
 
 
-def analyze_to_json(path: str, note: str, out_path: str) -> dict:
-    res = analyze_note(path, note)
+def analyze_to_json(path: str, note: str, out_path: str,
+                    unmask_rel: float = 0.999, **mode_kw) -> dict:
+    res = analyze_note(path, note, unmask_rel=unmask_rel, **mode_kw)
     with open(out_path, "w") as f:
         json.dump(res, f)
     return res
