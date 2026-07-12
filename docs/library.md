@@ -25,7 +25,8 @@ reference/<name>/samples (gitignored; provenance in instruments/<name>/SOURCES.m
 
 | module | contents |
 |---|---|
-| `params` | serde schema for parameter tables (`Table::from_json`). Optional `config` block switches piano semantics → generic modal family: per-partial `fr` frequency ratios (freq = fr·f0, for bar/block mode series), `thump_tau_bands` (per-band click decay), `attack_s` onset ramp, `release_fade_s`/`release_remnant`/`undamped_above` damper behavior (`null` fade = no dampers). Absent config = exact piano behavior |
+| `params` | serde schema for parameter tables (`Table::from_json`). Optional `config` block switches piano semantics → generic modal family: per-partial `fr` frequency ratios (freq = fr·f0, for bar/block mode series), `thump_tau_bands` (per-band click decay), `attack_s` onset ramp, `release_fade_s`/`release_remnant`/`undamped_above` damper behavior (`null` fade = no dampers), `gain_db` bank loudness normalization (see below), `engine: "sustained"` selects engine family 2 (see `sustained`). Absent config = exact piano behavior |
+| `sustained` | engine family 2 (continuous excitation): harmonic bank with shared vibrato LFO, per-harmonic slow stochastic FM/AM (64-sample-hop one-pole nodes, analytic stationary gain), 12-band steady noise bed with its own 0.2 s-window STFT calibration, smoothstep rise → undulating sustain → two-stage release on note-off. Reference implementation: `lab/sustained.py` |
 | `interp` | key/velocity interpolation → `NoteParams` (deterministic; float-exact vs the Python reference; `fr` log-interpolated like amplitudes) |
 | `voice` | `Voice`: streaming render of one note. All per-sample math is recurrences: complex rotators for oscillators, decay-factor states for envelopes. Piano tables get unison beating/split strings; config tables get one plain rotator per partial + shared onset ramp. Components below −140 dBFS are culled per buffer. `Quality {max_partials, noise, max_symp_lines}` prunes at note-on by A-weighted energy salience — tables are never modified |
 | `stream` | `StreamSynth`: `note_on/note_off/set_pedal/all_notes_off/render(buf)`, voice culling. The real-time API |
@@ -60,6 +61,20 @@ core/Cargo.toml -p engine`.
 Planned bindings (not yet built): C ABI, WASM/npm (`engine` is
 device-free specifically so it can compile to WASM and run in an
 AudioWorklet).
+
+## Bank loudness normalization
+
+Reference recordings arrive at arbitrary levels, so raw tables render
+at wildly different loudness (measured spread: 32 dB). `config.gain_db`
+normalizes each instrument to the piano's A-weighted RMS at velocity 96
+(median over three register points): applied at the parameter level
+(linear on amplitudes, additive on dB profiles) identically in both
+engines, so parity checks and per-instrument benchmarks (which
+gain-match per note) are unaffected. Measure with
+`scripts/measure_bank_loudness.py`; values live in each instrument's
+calibrate config so recalibration preserves them. The piano table has
+no config block (absent config IS the piano semantics switch) and is
+the 0 dB anchor.
 
 ## Quality / performance
 

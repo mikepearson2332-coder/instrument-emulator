@@ -199,6 +199,9 @@ def build_table(analysis_dir: str, out_path: str,
             "release_fade_s": round(damper_fade_s or 0.15, 3),
             "release_remnant": 0.0,
             "undamped_above": None,   # every bar is damped
+            # bank loudness normalization, piano-anchored
+            # (scripts/measure_bank_loudness.py)
+            "gain_db": 4.7,
         },
         "keys": keys,
     }

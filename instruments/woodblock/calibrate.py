@@ -135,6 +135,9 @@ def build_table(analysis_dir: str, out_path: str) -> dict:
             "release_fade_s": None,   # no dampers: note-off is a no-op
             "release_remnant": 0.0,
             "undamped_above": None,
+            # bank loudness normalization, piano-anchored
+            # (scripts/measure_bank_loudness.py)
+            "gain_db": 3.9,
         },
         "keys": keys,
     }

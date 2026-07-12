@@ -81,6 +81,8 @@ class SustainedSynth:
         self.drift_hz = float(cfg.get("drift_hz", 1.0))
         self.vib_cents = float(cfg.get("vib_cents", 7.0))
         self.harm_am_db = float(cfg.get("harm_am_db", 1.0))
+        # bank loudness normalization (dB), anchored to the piano
+        self.gain_db = float(cfg.get("gain_db", 0.0) or 0.0)
         self.rng = np.random.default_rng(seed)
         self.keys = sorted(self.table["keys"], key=lambda k: k["midi"])
         self.key_midis = [k["midi"] for k in self.keys]
@@ -164,18 +166,28 @@ class SustainedSynth:
         w = (velocity - vs[i]) / (vs[j] - vs[i])
         return self._merge_layers(state(layers[i]), state(layers[j]), w)
 
+    def _apply_gain(self, p: dict) -> dict:
+        """Bank loudness normalization (mirrors the Rust engine)."""
+        if self.gain_db == 0.0:
+            return p
+        g = 10.0 ** (self.gain_db / 20.0)
+        for h in p["harm"]:
+            h["a"] *= g
+        p["noise_db"] = [v + self.gain_db for v in p["noise_db"]]
+        return p
+
     def note_params(self, midi: int, velocity: float) -> dict:
         klo, khi, w = self._neighbor_keys(midi)
         slo = self._interp_layers(klo["layers"], velocity)
         if klo is khi:
             f0 = klo["f0"] * 2.0 ** ((midi - klo["midi"]) / 12.0)
-            return {"f0": f0, **slo}
+            return self._apply_gain({"f0": f0, **slo})
         shi = self._interp_layers(khi["layers"], velocity)
         dev_lo = 1200 * math.log2(klo["f0"] / midi_to_freq(klo["midi"]))
         dev_hi = 1200 * math.log2(khi["f0"] / midi_to_freq(khi["midi"]))
         dev = dev_lo + (dev_hi - dev_lo) * w
         f0 = midi_to_freq(midi) * 2 ** (dev / 1200)
-        return {"f0": f0, **self._merge_layers(slo, shi, w)}
+        return self._apply_gain({"f0": f0, **self._merge_layers(slo, shi, w)})
 
     # --------------------------------------------------------- generators
     def _lp_noise(self, n_samp: int, f_c: float, hop: int = 64) -> np.ndarray:

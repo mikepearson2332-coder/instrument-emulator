@@ -96,6 +96,9 @@ def build_table(analysis_dir: str, out_path: str) -> dict:
             "undamped_above": None,
             # pol_beat_* deliberately absent: dual-polarization beating
             # lost to the plain render on the benchmark (see DEVLOG)
+            # bank loudness normalization, piano-anchored
+            # (scripts/measure_bank_loudness.py)
+            "gain_db": 12.1,
         },
         "keys": keys,
     }

@@ -201,14 +201,42 @@ fn from_state(f0: f64, b: f64, s: LayerState) -> NoteParams {
     }
 }
 
+/// Bank loudness normalization: linear on amplitudes, additive on dB
+/// profiles. Everything downstream derives linearly, so this is an
+/// exact output gain.
+fn apply_gain(mut p: NoteParams, gain_db: f64) -> NoteParams {
+    if gain_db == 0.0 {
+        return p;
+    }
+    let g = 10f64.powf(gain_db / 20.0);
+    for prt in &mut p.partials {
+        prt.a1 *= g;
+        prt.a2 *= g;
+    }
+    for v in p
+        .thump_db
+        .iter_mut()
+        .chain(p.bed_db.iter_mut())
+        .chain(p.symp_db.iter_mut())
+    {
+        *v += gain_db;
+    }
+    p
+}
+
 /// Interpolated synthesis parameters for arbitrary key/velocity.
 pub fn note_params(table: &Table, midi: i32, velocity: f64) -> NoteParams {
+    let gain_db = table
+        .config
+        .as_ref()
+        .and_then(|c| c.gain_db)
+        .unwrap_or(0.0);
     let keys = &table.keys;
     let (lo, hi, w) = neighbor_keys(keys, midi);
     let slo = interp_layers(&keys[lo].layers, velocity);
     if lo == hi {
         let f0 = keys[lo].f0 * 2f64.powf((midi - keys[lo].midi) as f64 / 12.0);
-        return from_state(f0, keys[lo].b, slo);
+        return apply_gain(from_state(f0, keys[lo].b, slo), gain_db);
     }
     let shi = interp_layers(&keys[hi].layers, velocity);
     let (klo, khi) = (&keys[lo], &keys[hi]);
@@ -228,16 +256,19 @@ pub fn note_params(table: &Table, midi: i32, velocity: f64) -> NoteParams {
     let b = log_b.exp();
     let n_lines = slo.symp_db.len().max(shi.symp_db.len());
     let (plo, phi) = (pad_to(&slo.symp_db, n_lines), pad_to(&shi.symp_db, n_lines));
-    NoteParams {
-        f0,
-        b: if b <= 1e-11 { 0.0 } else { b },
-        partials: merge_partials(&slo.partials, &shi.partials, w),
-        thump_db: lerp_profile(&slo.thump_db, &shi.thump_db, w),
-        bed_db: lerp_profile(&slo.bed_db, &shi.bed_db, w),
-        bed_t60: lerp_profile(&slo.bed_t60, &shi.bed_t60, w),
-        bed_anchor_s: slo.bed_anchor_s * (1.0 - w) + shi.bed_anchor_s * w,
-        symp_db: plo.iter().zip(&phi).map(|(a, b)| a + (b - a) * w).collect(),
-    }
+    apply_gain(
+        NoteParams {
+            f0,
+            b: if b <= 1e-11 { 0.0 } else { b },
+            partials: merge_partials(&slo.partials, &shi.partials, w),
+            thump_db: lerp_profile(&slo.thump_db, &shi.thump_db, w),
+            bed_db: lerp_profile(&slo.bed_db, &shi.bed_db, w),
+            bed_t60: lerp_profile(&slo.bed_t60, &shi.bed_t60, w),
+            bed_anchor_s: slo.bed_anchor_s * (1.0 - w) + shi.bed_anchor_s * w,
+            symp_db: plo.iter().zip(&phi).map(|(a, b)| a + (b - a) * w).collect(),
+        },
+        gain_db,
+    )
 }
 
 // used by lerp_profile via zip: profiles are always N_BANDS long from clean_profile

@@ -73,6 +73,8 @@ class ModalSynth:
         self.release_fade_s = cfg.get("release_fade_s")  # None -> undamped
         self.release_remnant = float(cfg.get("release_remnant", 0.0) or 0.0)
         self.undamped_above = cfg.get("undamped_above")
+        # bank loudness normalization (dB), anchored to the piano
+        self.gain_db = float(cfg.get("gain_db", 0.0) or 0.0)
         self.rng = np.random.default_rng(seed)
         self.keys = sorted(self.table["keys"], key=lambda k: k["midi"])
         self.key_midis = [k["midi"] for k in self.keys]
@@ -193,12 +195,25 @@ class ModalSynth:
             "bed_anchor_s": lo["bed_anchor_s"] * (1 - w) + hi["bed_anchor_s"] * w,
         }
 
+    def _apply_gain(self, p: dict) -> dict:
+        """Bank loudness normalization: linear on amplitudes, additive on
+        dB profiles (mirrors the Rust engine exactly)."""
+        if self.gain_db == 0.0:
+            return p
+        g = 10.0 ** (self.gain_db / 20.0)
+        for prt in p["partials"]:
+            prt["a1"] *= g
+            prt["a2"] *= g
+        for k in ("thump_db", "bed_db"):
+            p[k] = [v + self.gain_db for v in p[k]]
+        return p
+
     def note_params(self, midi: int, velocity: float) -> dict:
         klo, khi, w = self._neighbor_keys(midi)
         slo = self._interp_layers(klo["layers"], velocity)
         if klo is khi:
             f0 = klo["f0"] * 2.0 ** ((midi - klo["midi"]) / 12.0)
-            return {"f0": f0, "B": klo.get("B", 0.0), **slo}
+            return self._apply_gain({"f0": f0, "B": klo.get("B", 0.0), **slo})
         shi = self._interp_layers(khi["layers"], velocity)
         dev_lo = 1200 * math.log2(klo["f0"] / midi_to_freq(klo["midi"]))
         dev_hi = 1200 * math.log2(khi["f0"] / midi_to_freq(khi["midi"]))
@@ -208,7 +223,7 @@ class ModalSynth:
         bhi = max(khi.get("B", 0.0), 1e-12)
         logB = math.log(blo) + (math.log(bhi) - math.log(blo)) * w
         B = math.exp(logB)
-        return {
+        return self._apply_gain({
             "f0": f0,
             "B": 0.0 if B <= 1e-11 else B,
             "partials": self._merge_partials(slo["partials"], shi["partials"], w),
@@ -216,7 +231,7 @@ class ModalSynth:
             "bed_db": _lerp(slo["bed_db"], shi["bed_db"], w),
             "bed_t60": _lerp(slo["bed_t60"], shi["bed_t60"], w),
             "bed_anchor_s": slo["bed_anchor_s"] * (1 - w) + shi["bed_anchor_s"] * w,
-        }
+        })
 
     # ------------------------------------------------------------ synthesis
 

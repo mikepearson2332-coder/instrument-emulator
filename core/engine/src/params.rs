@@ -24,6 +24,12 @@ pub struct Config {
     /// (continuous excitation: bowed strings etc., see sustained.rs).
     #[serde(default)]
     pub engine: Option<String>,
+    /// Bank loudness normalization (dB), applied to all rendered output.
+    /// Anchored to the piano (whose table has no config and stays at 0):
+    /// reference recordings arrive at arbitrary levels, so equal-loudness
+    /// across instruments is calibrated, not inherited.
+    #[serde(default)]
+    pub gain_db: Option<f64>,
     /// Sustained family: per-harmonic ensemble detune (rms, cents).
     #[serde(default)]
     pub drift_cents: Option<f64>,

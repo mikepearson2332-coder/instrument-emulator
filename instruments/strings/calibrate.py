@@ -34,6 +34,10 @@ CONFIG = {
     "harm_am_db": 1.0,
 }
 
+# bank loudness normalization per section, piano-anchored
+# (scripts/measure_bank_loudness.py)
+SECTION_GAIN_DB = {"vln": 5.6, "vla": 3.4, "vc": 1.0, "cb": 17.9}
+
 
 def build_section(analysis_dir: str, sec: str, out_path: str) -> dict | None:
     files = [f for f in os.listdir(analysis_dir)
@@ -90,7 +94,8 @@ def build_section(analysis_dir: str, sec: str, out_path: str) -> dict | None:
                          "layers": layers_out})
 
     table = {"version": 1, "instrument": f"strings-{sec}",
-             "config": dict(CONFIG), "keys": keys}
+             "config": {**CONFIG, "gain_db": SECTION_GAIN_DB.get(sec, 0.0)},
+             "keys": keys}
     with open(out_path, "w") as f:
         json.dump(table, f)
     return table

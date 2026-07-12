@@ -202,16 +202,37 @@ pub fn sus_note_params(table: &Table, midi: i32, velocity: f64) -> SusParams {
         }
     };
     let slo = interp_layers(&keys[lo].layers, velocity);
+    let gain_db = table
+        .config
+        .as_ref()
+        .and_then(|c| c.gain_db)
+        .unwrap_or(0.0);
     if lo == hi {
         let f0 = keys[lo].f0 * 2f64.powf((midi - keys[lo].midi) as f64 / 12.0);
-        return params_from(f0, slo);
+        return apply_gain(params_from(f0, slo), gain_db);
     }
     let shi = interp_layers(&keys[hi].layers, velocity);
     let dev_lo = 1200.0 * (keys[lo].f0 / midi_to_freq(keys[lo].midi as f64)).log2();
     let dev_hi = 1200.0 * (keys[hi].f0 / midi_to_freq(keys[hi].midi as f64)).log2();
     let dev = dev_lo + (dev_hi - dev_lo) * w;
     let f0 = midi_to_freq(midi as f64) * 2f64.powf(dev / 1200.0);
-    params_from(f0, merge_states(&slo, &shi, w))
+    apply_gain(params_from(f0, merge_states(&slo, &shi, w)), gain_db)
+}
+
+/// Bank loudness normalization (see interp.rs): linear on harmonic
+/// amplitudes, additive on the noise-bed dB.
+fn apply_gain(mut p: SusParams, gain_db: f64) -> SusParams {
+    if gain_db == 0.0 {
+        return p;
+    }
+    let g = 10f64.powf(gain_db / 20.0);
+    for (_, a) in &mut p.harm {
+        *a *= g;
+    }
+    for v in &mut p.noise_db {
+        *v += gain_db;
+    }
+    p
 }
 
 // ------------------------------------------------------------- voice
